@@ -9,7 +9,7 @@ It consists in programming a 3D video game in 4 weeks using ogre3d
 * **Code style**
   * Every developper participating to this project must apply this [coding convention](https://github.com/seb-saletes/bomberman/wiki/Code-Convention)
 * **IDE / Editor**
-  * We encouraged to use atom with the [dev package's](https://github.com/seb-saletes/bomberman/wiki/Atom-dev-package) list.
+  * We encouraged using atom with the [dev package's](https://github.com/seb-saletes/bomberman/wiki/Atom-dev-package) list.
 * **Repository access** 
   * Follow this [guide](https://help.github.com/articles/generating-an-ssh-key/) to add ssh access
 
