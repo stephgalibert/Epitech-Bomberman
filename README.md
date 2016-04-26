@@ -2,21 +2,21 @@
 
 ## Introduction
 
-This is the last c++ sophomore's project at Epitech
-It consists in programming a 3D video game using ogre3d
+This is the last C++ project for sophomore student at Epitech  
+It consists in programming a 3D video game using ogre3d in 4 weeks
 
 ## Configuration
 * **Code style**
-  * Every developper participating to this project must apply this [coding convention](docs/coding_convention)
+  * Every developper participating to this project must apply this [coding convention](https://github.com/seb-saletes/bomberman/wiki/Code-Convention)
 * **IDE / Editor**
-  * We encouraged to use atom with the [dev package's](docs/atom_dev_package_list) list.
+  * We encouraged to use atom with the [dev package's](https://github.com/seb-saletes/bomberman/wiki/Atom-dev-package) list.
 * **Repository access** 
   * Follow this [guide](https://help.github.com/articles/generating-an-ssh-key/) to add ssh access
 
 ## Installation
 * **Installing Ogre**
   * [Official documentation for ogre3d](http://www.ogre3d.org/docs/api/1.9/)
-  * [Quick install ogre3d ubuntu](docs/quick_install_ogre_ubuntu)
+  * [Quick install ogre3d ubuntu](https://github.com/seb-saletes/bomberman/wiki/Quick-install-ogre-3d-ubuntu)
 
 
 ## Credits
