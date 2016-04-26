@@ -3,7 +3,7 @@
 ## Introduction
 
 This is the last C++ project for sophomore student at Epitech  
-It consists in programming a 3D video game using ogre3d in 4 weeks
+It consists in programming a 3D video game in 4 weeks using ogre3d 
 
 ## Configuration
 * **Code style**
