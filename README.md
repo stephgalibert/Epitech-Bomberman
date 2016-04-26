@@ -15,7 +15,7 @@ It consists in programming a 3D video game using ogre3d
 
 ## Installation
 * **Installing Ogre**
-  * [Official documentation for ogre3d](http://www.ogre3d.org/)
+  * [Official documentation for ogre3d](http://www.ogre3d.org/docs/api/1.9/)
   * [Quick install ogre3d ubuntu](docs/quick_install_ogre_ubuntu)
 
 
