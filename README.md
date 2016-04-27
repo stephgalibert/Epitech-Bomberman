@@ -2,21 +2,21 @@
 
 ## Introduction
 
-This is the last C++ project for sophomore student at Epitech  
-It consists in programming a 3D video game in 4 weeks using ogre3d 
+This is the last C++ coding project for Epitech's sophomores, 
+the goal is to program a 3D video game in a 4 weeks deadline using the ogre3d library.
 
 ## Configuration
 * **Code style**
-  * Every developper participating to this project must apply this [coding convention](https://github.com/seb-saletes/bomberman/wiki/Code-Convention)
+  * Every developper participating to this project must apply this [coding convention](https://github.com/seb-saletes/bomberman/wiki/Code-Convention).
 * **IDE / Editor**
-  * We encouraged using atom with the [dev package's](https://github.com/seb-saletes/bomberman/wiki/Atom-dev-package) list.
-* **Repository access** 
-  * Follow this [guide](https://help.github.com/articles/generating-an-ssh-key/) to add ssh access
+  * We suggest using Atom with this [development packages](https://github.com/seb-saletes/bomberman/wiki/Atom-dev-package) list.
+* **Repository access**
+  * Follow this [guide](https://help.github.com/articles/generating-an-ssh-key/) to add ssh access on this repository.
 
 ## Installation
 * **Installing Ogre**
-  * [Official documentation for ogre3d](http://www.ogre3d.org/docs/api/1.9/)
-  * [Quick install ogre3d ubuntu](https://github.com/seb-saletes/bomberman/wiki/Quick-install-ogre-3d-ubuntu)
+  * [Official documentation on ogre3d.](http://www.ogre3d.org/docs/api/1.9/)
+  * [Ogre3d Quick installation on Ubuntu.](https://github.com/seb-saletes/bomberman/wiki/Quick-install-ogre-3d-ubuntu)
 
 
 ## Credits
@@ -33,7 +33,7 @@ It consists in programming a 3D video game in 4 weeks using ogre3d
 ## License
 MIT License
 
-Copyright (c) [year] [fullname]
+Copyright (c) 2016 Sebastien Saletes
 
 Permission is hereby granted, free of charge, to any person obtaining a copy
 of this software and associated documentation files (the "Software"), to deal
