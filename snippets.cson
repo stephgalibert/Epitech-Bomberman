@@ -1,0 +1,16 @@
+'.source.cpp':
+  'For loop':
+    'prefix': 'for'
+    'body': 'for (uint64_t i = 0; ${2:i < }; i++) {\n}'
+  'For auto loop':
+    'prefix': 'fa'
+    'body': 'for (auto const& it : ${2:}) {\n\n}'
+  'Display vector':
+    'prefix': 'fd'
+    'body': 'for (auto const& it : ${2:}) {\n  std::cout << it << std::endl;\n}'
+  'This':
+    'prefix': 't'
+    'body': 'this->${2:_}'
+  'Class':
+    'prefix': 'cl'
+    'body': 'class ${1:name_t} {\npublic:\n\t${0:/* data */}\nprivate:\n\t${1:name_t} (${2:});\n\t ~${1:name_t} ();\n\n};'
