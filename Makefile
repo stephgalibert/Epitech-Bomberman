@@ -1,36 +1,64 @@
-##
-## Makefile for  in core
-##
-## Made by sebastien saletes
-## Login   <salete_s@epitech.net>
-##
-## Started on  Wed Jan 21 03:29:00 2015 sebastien saletes
-## Last update Sun May 24 21:12:33 2015 sebastien saletes
-##
+# Makefile for Irrlicht Examples
+# It's usually sufficient to change just the target name and source file list
+# and be sure that CXX is set to a valid compiler
+Target = ./bin/bomberman
+Directory = ./source/
+Sources += $(Directory)main.cpp
+Sources += $(Directory)Application.cpp
+Sources += $(Directory)Game.cpp
+Sources += $(Directory)Board.cpp
+Sources += $(Directory)PowerUPs.cpp
+Sources += $(Directory)SpeedUPPowerUP.cpp
+Sources += $(Directory)SpeedUPEffect.cpp
+Sources += $(Directory)HumanPlayer.cpp
+Sources += $(Directory)IndestructibleBlock.cpp
+Sources += $(Directory)BombManager.cpp
+Sources += $(Directory)ExplodingBomb.cpp
+Sources += $(Directory)InputListener.cpp
+Sources += $(Directory)Irrlicht.cpp
+Sources += $(Directory)Chronometer.cpp
+Sources += $(Directory)Generator.cpp
 
-CXX = g++
+Objects = $(Sources:.cpp=.o)
 
-NAME_EXE = bomberman
-SRC_EXE = main.cpp
+# general compiler settings
+#CPPFLAGS = -I../include -I/usr/X11R6/include
+CXXFLAGS += -isystem ./lib/include -isystem /usr/X11R6/include
+CXXFLAGS += -O3 -ffast-math -std=c++11
+CXXFLAGS += -Wall -Werror -Wextra
 
-OBJ_EXE = $(SRC_EXE:.cpp=.o)
+#default target is Linux
+all: all_linux
 
-LIBDIR  = -Llib
-LDFLAGS = -lIrrlicht -lGL -lXxf86vm -lXext -lX11 -lXcursor
-CXXFLAGS += -W -Wall -Wextra  -std=c++11
-CXXFLAGS += -isystem lib/include
+ifeq ($(HOSTTYPE), x86_64)
+LIBSELECT=64
+endif
 
-all: $(NAME_EXE)
+# target specific settings
+all_linux: LDFLAGS = -L/usr/X11R6/lib$(LIBSELECT) -L./lib/lib/Linux -lIrrlicht -lGL -lXxf86vm -lXext -lX11 -lXcursor
+all_linux clean_linux: SYSTEM=Linux
+all_win32: LDFLAGS = -L./lib/lib/Win32-gcc -lIrrlicht -lopengl32 -lm
+all_win32: CPPFLAGS += -D__GNUWIN32__ -D_WIN32 -DWIN32 -D_WINDOWS -D_MBCS -D_USRDLL
+all_win32 clean_win32: SYSTEM=Win32-gcc
+all_win32 clean_win32: SUF=.exe
+# name of the binary - only valid for targets which set SYSTEM
+#DESTPATH = ../../bin/$(SYSTEM)/$(Target)$(SUF)
+DESTPATH = ./$(Target)$(SUF)
 
-$(NAME_EXE): $(OBJ_EXE)
-	$(CXX) -o $(NAME_EXE) $(OBJ_EXE) $(LIBDIR) $(LDFLAGS)
+all_linux all_win32: 	$(DESTPATH)
 
-clean:
-	rm -f $(OBJ_EXE)
+$(DESTPATH):		$(Objects)
+			$(CXX) $(CPPFLAGS) $(CXXFLAGS) $(Objects) -o $(DESTPATH) $(LDFLAGS)
 
-fclean: clean
-	rm -f $(NAME_EXE)
+clean: #clean_linux clean_win32
+			rm -f $(Objects)
 
-re: fclean all
+#clean_linux clean_win32:
+#@$(RM) $(DESTPATH)
 
-.PHONY: all clean fclean re
+re: 			fclean all
+
+fclean: 		clean_win32 clean
+			rm -f $(DESTPATH)
+
+.PHONY: all all_win32 clean clean_linux clean_win32
