@@ -7,23 +7,30 @@ Sources += $(Directory)main.cpp
 Sources += $(Directory)Application.cpp
 Sources += $(Directory)Game.cpp
 Sources += $(Directory)Board.cpp
-Sources += $(Directory)PowerUPs.cpp
-Sources += $(Directory)SpeedUPPowerUP.cpp
-Sources += $(Directory)SpeedUPEffect.cpp
-Sources += $(Directory)HumanPlayer.cpp
-Sources += $(Directory)IndestructibleBlock.cpp
+Sources += $(Directory)powerups/PowerUPs.cpp
+Sources += $(Directory)powerups/SpeedUPPowerUP.cpp
+Sources += $(Directory)effects/SpeedUPEffect.cpp
+Sources += $(Directory)players/HumanPlayer.cpp
+Sources += $(Directory)blocks/IndestructibleBlock.cpp
 Sources += $(Directory)BombManager.cpp
-Sources += $(Directory)ExplodingBomb.cpp
+Sources += $(Directory)bombs/ExplodingBomb.cpp
 Sources += $(Directory)InputListener.cpp
 Sources += $(Directory)Irrlicht.cpp
-Sources += $(Directory)Chronometer.cpp
-Sources += $(Directory)Generator.cpp
+Sources += $(Directory)utils/Chronometer.cpp
+Sources += $(Directory)utils/Generator.cpp
 
 Objects = $(Sources:.cpp=.o)
 
 # general compiler settings
 #CPPFLAGS = -I../include -I/usr/X11R6/include
 CXXFLAGS += -isystem ./lib/include -isystem /usr/X11R6/include
+CXXFLAGS += -I./source/
+CXXFLAGS += -I./source/powerups/
+CXXFLAGS += -I./source/utils/
+CXXFLAGS += -I./source/bombs/
+CXXFLAGS += -I./source/effects/
+CXXFLAGS += -I./source/players/
+CXXFLAGS += -I./source/blocks/
 CXXFLAGS += -O3 -ffast-math -std=c++11
 CXXFLAGS += -Wall -Werror -Wextra
 
