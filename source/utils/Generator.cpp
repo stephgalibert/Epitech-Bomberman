@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon Apr 11 02:56:43 2016 stephane galibert
-// Last update Sun May  8 17:40:01 2016 stephane galibert
+// Last update Thu May 12 16:07:04 2016 stephane galibert
 //
 
 #include "Generator.hpp"
@@ -17,8 +17,9 @@ tools::Generator::Generator(void)
 
 tools::Generator::~Generator(void)
 {
-  if (this->_generator)
+  if (this->_generator) {
     delete (this->_generator);
+  }
 }
 
 int tools::Generator::operator()(unsigned int min, unsigned int max)

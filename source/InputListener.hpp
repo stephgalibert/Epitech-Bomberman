@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May  3 18:39:36 2016 stephane galibert
-// Last update Wed May  4 19:11:21 2016 stephane galibert
+// Last update Thu May 12 15:57:47 2016 stephane galibert
 //
 
 #ifndef _INPUTLISTENER_HPP_
@@ -22,9 +22,8 @@ namespace bbman
     ~InputListener(void);
     virtual bool OnEvent(irr::SEvent const& event);
     virtual bool IsKeyDown(irr::EKEY_CODE keyCode) const;
-
   private:
-    bool KeyIsDown[irr::KEY_KEY_CODES_COUNT];
+    bool _keyIsDown[irr::KEY_KEY_CODES_COUNT];
   };
 }
 

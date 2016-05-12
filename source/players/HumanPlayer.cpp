@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Thu May 12 00:19:02 2016 stephane galibert
+// Last update Thu May 12 16:04:25 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -48,22 +48,24 @@ bbman::HumanPlayer::HumanPlayer(void)
 
 bbman::HumanPlayer::~HumanPlayer(void)
 {
-  if (this->_mesh)
+  if (this->_mesh) {
     this->_mesh->remove();
-  for (auto &it : this->_effects)
+  }
+  for (auto &it : this->_effects) {
     delete (it);
+  }
   --bbman::HumanPlayer::NumberOfPlayer;
 }
 
 void bbman::HumanPlayer::init(bbman::Irrlicht &irr)
 {
   try {
-    if (this->_inits.find(this->_playerNum) != std::end(this->_inits))
+    if (this->_inits.find(this->_playerNum) != std::end(this->_inits)) {
       this->_inits[this->_playerNum](irr);
+    }
     this->addBomb(new ExplodingBomb(this));
     this->_alive = true;
   } catch (std::runtime_error const& e) {
-    //std::cerr << e.what() << std::endl;
     throw (e);
   }
 }
@@ -127,8 +129,9 @@ bool bbman::HumanPlayer::input(bbman::InputListener &inputListener)
 {
   this->_direction = Direction::DIR_NONE;
   this->_action = Action::ACT_NONE;
-  if (this->_inputs.find(this->_playerNum) != std::end(this->_inputs))
+  if (this->_inputs.find(this->_playerNum) != std::end(this->_inputs)) {
     this->_inputs[this->_playerNum](inputListener);
+  }
   return (false);
 }
 
@@ -155,53 +158,48 @@ void bbman::HumanPlayer::addEffect(IEffect *effect)
 		       buff->restart();
 		       return (true);
 		     return (false);
-		   }) == std::end(this->_effects))
-    {
-      effect->enable();
-      this->_effects.push_back(effect);
-    }
-  else
+		   }) == std::end(this->_effects)) {
+    effect->enable();
+    this->_effects.push_back(effect);
+  }
+  else {
     delete (effect);
+  }
 }
 
 void bbman::HumanPlayer::updateEffets(irr::f32 delta)
 {
   for (std::list<IEffect *>::iterator it = std::begin(this->_effects);
-       it != std::end(this->_effects); )
-    {
-      if ((*it)->isFinished())
-	{
-	  delete (*it);
-	  it = this->_effects.erase(it);
-	}
-      else
-	{
-	  (*it)->update(delta);
-	  ++it;
-	}
+       it != std::end(this->_effects); ) {
+    if ((*it)->isFinished()) {
+      delete (*it);
+      it = this->_effects.erase(it);
     }
+    else {
+      (*it)->update(delta);
+      ++it;
+    }
+  }
 }
 
 void bbman::HumanPlayer::move(irr::f32 delta)
 {
-  if (this->_direction == Direction::DIR_NONE)
-    {
-      this->_mesh->setCurrentFrame(3);
-      this->_mesh->setAnimationSpeed(0);
-      this->_isRunning = false;
+  if (this->_direction == Direction::DIR_NONE) {
+    this->_mesh->setCurrentFrame(3);
+    this->_mesh->setAnimationSpeed(0);
+    this->_isRunning = false;
+  }
+  else {
+    if (!this->_isRunning) {
+      this->_mesh->setAnimationSpeed(15);
+      this->_mesh->setFrameLoop(0, 13);
+      this->_isRunning = true;
     }
-  else
-    {
-      if (!this->_isRunning)
-	{
-	  this->_mesh->setAnimationSpeed(15);
-	  this->_mesh->setFrameLoop(0, 13);
-	  this->_isRunning = true;
-	}
-      this->_prevPos = this->_mesh->getPosition();
-      if (this->_move.find(this->_direction) != this->_move.end())
-	this->_move[this->_direction](delta);
+    this->_prevPos = this->_mesh->getPosition();
+    if (this->_move.find(this->_direction) != this->_move.end()) {
+      this->_move[this->_direction](delta);
     }
+  }
 }
 
 void bbman::HumanPlayer::moveEast(irr::f32 delta)
@@ -274,72 +272,80 @@ void bbman::HumanPlayer::moveSouthWest(irr::f32 delta)
 
 void bbman::HumanPlayer::inputPlayer1(bbman::InputListener &inputListener)
 {
-  if(inputListener.IsKeyDown(irr::KEY_KEY_Z))
+  if(inputListener.IsKeyDown(irr::KEY_KEY_Z)) {
     this->_direction |= Direction::DIR_NORTH;
-  else if(inputListener.IsKeyDown(irr::KEY_KEY_S))
+  }
+  else if(inputListener.IsKeyDown(irr::KEY_KEY_S)) {
     this->_direction |= Direction::DIR_SOUTH;
+  }
 
-  if(inputListener.IsKeyDown(irr::KEY_KEY_Q))
+  if(inputListener.IsKeyDown(irr::KEY_KEY_Q)) {
     this->_direction |= Direction::DIR_WEST;
-  else if(inputListener.IsKeyDown(irr::KEY_KEY_D))
+  }
+  else if(inputListener.IsKeyDown(irr::KEY_KEY_D)) {
     this->_direction |= Direction::DIR_EAST;
+  }
 
-  if (inputListener.IsKeyDown(irr::KEY_SPACE))
+  if (inputListener.IsKeyDown(irr::KEY_SPACE)) {
     this->_action |= Action::ACT_BOMB;
+  }
 }
 
 void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &inputListener)
 {
-  if(inputListener.IsKeyDown(irr::KEY_UP))
+  if(inputListener.IsKeyDown(irr::KEY_UP)) {
     this->_direction |= Direction::DIR_NORTH;
-  else if(inputListener.IsKeyDown(irr::KEY_DOWN))
+  }
+  else if(inputListener.IsKeyDown(irr::KEY_DOWN)) {
     this->_direction |= Direction::DIR_SOUTH;
+  }
 
-  if(inputListener.IsKeyDown(irr::KEY_LEFT))
+  if(inputListener.IsKeyDown(irr::KEY_LEFT)) {
     this->_direction |= Direction::DIR_WEST;
-  else if(inputListener.IsKeyDown(irr::KEY_RIGHT))
+  }
+  else if(inputListener.IsKeyDown(irr::KEY_RIGHT)) {
     this->_direction |= Direction::DIR_EAST;
+  }
 
-  if (inputListener.IsKeyDown(irr::KEY_RETURN))
+  if (inputListener.IsKeyDown(irr::KEY_RETURN)) {
     this->_action |= Action::ACT_BOMB;
+  }
 }
 
 void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
 {
   std::string txt = "../media/ninja.b3d";
-  //std::string txt = "perso.3ds";
-  //std::string txt = "running.fbx";
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
-  if (this->_mesh)
-    {
-      this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-      this->_mesh->setAnimationSpeed(0);
-      this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
-      this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
-      this->_mesh->setPosition(irr::core::vector3df(10 * 10, 0, 9 * 10)); // !
-      this->_prevPos = this->_mesh->getPosition();
-    }
-  else
+  if (this->_mesh) {
+    this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    this->_mesh->setAnimationSpeed(0);
+    this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
+    this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
+    this->_mesh->setPosition(irr::core::vector3df(10 * 10, 0, 9 * 10)); // !
+    this->_prevPos = this->_mesh->getPosition();
+  }
+  else {
     throw (std::runtime_error("can not create player "
 			      + std::to_string(this->_playerNum)));
+  }
 }
 
 void bbman::HumanPlayer::initPlayer2(Irrlicht &irr)
 {
   std::string txt = "../media/ninja.b3d";
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
-  if (this->_mesh)
-    {
-      this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-      this->_mesh->setAnimationSpeed(0);
-      this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
-      this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
-      this->_mesh->setPosition(irr::core::vector3df(10 * 10, 0, 9 * 10)); // !
-      this->_prevPos = this->_mesh->getPosition();
-    }
-  else
+  if (this->_mesh) {
+    this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    this->_mesh->setAnimationSpeed(0);
+    this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
+    this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
+    this->_mesh->setPosition(irr::core::vector3df(10 * 10, 0, 9 * 10)); // !
+    this->_prevPos = this->_mesh->getPosition();
+  }
+  else {
     throw (std::runtime_error("can not create player "
 			      + std::to_string(this->_playerNum)));
+  }
 }
 
 size_t bbman::HumanPlayer::getPlayerNumber(void) const

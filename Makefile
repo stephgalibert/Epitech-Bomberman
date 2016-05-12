@@ -31,8 +31,9 @@ CXXFLAGS += -I./source/bombs/
 CXXFLAGS += -I./source/effects/
 CXXFLAGS += -I./source/players/
 CXXFLAGS += -I./source/blocks/
+CXXFLAGS += -I./source/thread/
 CXXFLAGS += -O3 -ffast-math -std=c++11
-CXXFLAGS += -Wall -Werror -Wextra
+CXXFLAGS += -Wall -Werror -Wextra -g
 
 #default target is Linux
 all: all_linux

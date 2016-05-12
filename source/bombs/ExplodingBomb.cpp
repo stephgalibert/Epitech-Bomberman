@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Wed May 11 16:03:43 2016 stephane galibert
+// Last update Thu May 12 16:01:31 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -21,8 +21,9 @@ bbman::ExplodingBomb::ExplodingBomb(bbman::IPlayer *owner)
 
 bbman::ExplodingBomb::~ExplodingBomb(void)
 {
-  if (this->_mesh)
+  if (this->_mesh) {
     this->_mesh->remove();
+  }
 }
 
 void bbman::ExplodingBomb::init(bbman::Irrlicht &irr)
@@ -37,17 +38,16 @@ void bbman::ExplodingBomb::init(bbman::Irrlicht &irr)
 void bbman::ExplodingBomb::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
   (void)irr;
-  if (this->_delta <= DELAY_TO_EXPLOSE)
-    {
+  if (this->_delta <= DELAY_TO_EXPLOSE) {
+    this->_delta += delta;
+    this->_explosing = (this->_delta > DELAY_TO_EXPLOSE);
+  }
+  if (this->_explosing) {
+    this->_explosed = !(this->_delta < DELAY_TO_EXPLOSE + DELAY_EXPLOSING);
+    if (!this->_explosed) {
       this->_delta += delta;
-      this->_explosing = (this->_delta > DELAY_TO_EXPLOSE);
     }
-  if (this->_explosing)
-    {
-      this->_explosed = !(this->_delta < DELAY_TO_EXPLOSE + DELAY_EXPLOSING);
-      if (!this->_explosed)
-	this->_delta += delta;
-    }
+  }
 }
 
 bbman::IBomb *bbman::ExplodingBomb::clone(void) const
@@ -95,16 +95,16 @@ void bbman::ExplodingBomb::initMesh(bbman::Irrlicht &irr)
   std::string txt = "../media/ninja.b3d";
 
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
-  if (this->_mesh)
-    {
-      this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-      this->_mesh->setAnimationSpeed(0);
-      this->_mesh->setCurrentFrame(3);
-      this->_mesh->setScale(irr::core::vector3df(1.5f, 1.5f, 1.5f));
-      this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
-    }
-  else
+  if (this->_mesh) {
+    this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    this->_mesh->setAnimationSpeed(0);
+    this->_mesh->setCurrentFrame(3);
+    this->_mesh->setScale(irr::core::vector3df(1.5f, 1.5f, 1.5f));
+    this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
+  }
+  else {
     throw (std::runtime_error("can not create exploding bomb"));
+  }
 }
 
 irr::f32 bbman::ExplodingBomb::getDelay(void) const
