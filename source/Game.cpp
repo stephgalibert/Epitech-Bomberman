@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Thu May 12 00:20:17 2016 stephane galibert
+// Last update Thu May 12 15:57:11 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -18,12 +18,15 @@ bbman::Game::Game(void)
 
 bbman::Game::~Game(void)
 {
-  if (this->_board)
+  if (this->_board) {
     delete (this->_board);
-  for (auto &it : this->_bombs)
+  }
+  for (auto &it : this->_bombs) {
     delete (it);
-  for (auto &it : this->_players)
+  }
+  for (auto &it : this->_players) {
     delete (it);
+  }
 }
 
 void bbman::Game::init(Irrlicht &irr)
@@ -49,26 +52,26 @@ void bbman::Game::init(Irrlicht &irr)
 
 bool bbman::Game::input(InputListener &inputListener)
 {
-  if (inputListener.IsKeyDown(irr::KEY_ESCAPE))
-    {
-      this->_leaveGame = true;
-      return (true);
-    }
-  else
-    for (auto &it : this->_players)
+  if (inputListener.IsKeyDown(irr::KEY_ESCAPE)) {
+    this->_leaveGame = true;
+    return (true);
+  }
+  else {
+    for (auto &it : this->_players) {
       it->input(inputListener);
+    }
+  }
   return (false);
 }
 
 void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
-  for (auto &it : this->_players)
-    {
-      it->update(irr, delta);
-      this->checkCollision(it);
-      if (it->getAction() == Action::ACT_BOMB)
-	this->addBomb(it, irr);
-    }
+  for (auto &it : this->_players) {
+    it->update(irr, delta);
+    this->checkCollision(it);
+    if (it->getAction() == Action::ACT_BOMB)
+      this->addBomb(it, irr);
+  }
   this->_powerUPs.update(irr, delta, this->_board);
   this->updateBombs(irr, delta);
 }
@@ -104,37 +107,36 @@ void bbman::Game::addBomb(IPlayer *player, bbman::Irrlicht &irr)
 		       return (true);
 		     return (false);
 		   }) == std::end(_bombs)
-      && !this->_board->isOutside(pos))
+      && !this->_board->isOutside(pos)) {
     this->_bombs.push_back(newBomb);
-  else
+  }
+  else {
     delete (newBomb);
+  }
 }
 
 void bbman::Game::checkCollision(bbman::IPlayer *player)
 {
-  if (player->isRunning())
-    {
-      if (this->_board->isColliding(player->getBoundingBox())
-	  || this->_board->isOutside(player->getPosition()))
-	player->goToPrevPosition();
-      this->_powerUPs.checkCollision(player);
+  if (player->isRunning()) {
+    if (this->_board->isColliding(player->getBoundingBox())
+	|| this->_board->isOutside(player->getPosition())) {
+      player->goToPrevPosition();
     }
+    this->_powerUPs.checkCollision(player);
+  }
 }
 
 void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta)
 {
   for (std::list<IBomb *>::iterator it = std::begin(this->_bombs);
-       it != std::end(this->_bombs); )
-    {
-      if ((*it)->hasExplosed())
-	{
-	  delete (*it);
-	  it = this->_bombs.erase(it);
-	}
-      else
-	{
-	  (*it)->update(irr, delta);
-	  ++it;
-	}
+       it != std::end(this->_bombs); ) {
+    if ((*it)->hasExplosed()) {
+      delete (*it);
+      it = this->_bombs.erase(it);
     }
+    else {
+      (*it)->update(irr, delta);
+      ++it;
+    }
+  }
 }

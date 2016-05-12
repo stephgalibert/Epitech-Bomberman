@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:23:18 2016 stephane galibert
-// Last update Thu May 12 00:34:42 2016 stephane galibert
+// Last update Thu May 12 16:00:40 2016 stephane galibert
 //
 
 #include "IndestructibleBlock.hpp"
@@ -17,21 +17,22 @@ bbman::IndestructibleBlock::IndestructibleBlock(void)
 
 bbman::IndestructibleBlock::~IndestructibleBlock(void)
 {
-  if (this->_node)
+  if (this->_node) {
     this->_node->remove();
+  }
 }
 
 void bbman::IndestructibleBlock::init(Irrlicht &irr)
 {
   this->_node = irr.getSmgr()->addCubeSceneNode();
-  if (this->_node)
-    {
-      this->_node->setMaterialTexture(0, irr.getTexture("../media/t351sml.jpg"));
-      this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-      this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
-    }
-  else
+  if (this->_node) {
+    this->_node->setMaterialTexture(0, irr.getTexture("../media/t351sml.jpg"));
+    this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
+  }
+  else {
     throw (std::runtime_error("cannot add IndestructibleBlock"));
+  }
 }
 
 void bbman::IndestructibleBlock::setMaterialFlag(irr::video::E_MATERIAL_FLAG flag,

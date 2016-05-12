@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:45 2016 stephane galibert
-// Last update Wed May 11 16:02:57 2016 stephane galibert
+// Last update Thu May 12 16:05:51 2016 stephane galibert
 //
 
 #include "SpeedUPPowerUP.hpp"
@@ -18,8 +18,9 @@ bbman::SpeedUPPowerUP::SpeedUPPowerUP(void)
 
 bbman::SpeedUPPowerUP::~SpeedUPPowerUP(void)
 {
-  if (this->_node)
+  if (this->_node) {
     this->_node->remove();
+  }
 }
 
 void bbman::SpeedUPPowerUP::init(Irrlicht &irr)
@@ -27,20 +28,19 @@ void bbman::SpeedUPPowerUP::init(Irrlicht &irr)
   irr::scene::ISceneNodeAnimator *anms = NULL;
 
   this->_node = irr.getSmgr()->addCubeSceneNode();
-  if (this->_node)
-    {
-      this->_node->setMaterialTexture(0, irr.getTexture("../media/t351sml.jpg"));
-      this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-      this->_node->setScale(irr::core::vector3df(0.3f, 0.3f, 0.3f));
-      anms = irr.getSmgr()->createRotationAnimator(irr::core::vector3df(0, 1, 0));
-      if (anms)
-	{
-	  this->_node->addAnimator(anms);
-	  anms->drop();
-	}
+  if (this->_node) {
+    this->_node->setMaterialTexture(0, irr.getTexture("../media/t351sml.jpg"));
+    this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    this->_node->setScale(irr::core::vector3df(0.3f, 0.3f, 0.3f));
+    anms = irr.getSmgr()->createRotationAnimator(irr::core::vector3df(0, 1, 0));
+    if (anms) {
+      this->_node->addAnimator(anms);
+      anms->drop();
     }
-  else
+  }
+  else {
     throw (std::runtime_error("cannot add IndestructibleBlock"));
+  }
 }
 
 void bbman::SpeedUPPowerUP::update(Irrlicht &irr, irr::f32 delta)

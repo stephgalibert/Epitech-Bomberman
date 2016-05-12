@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Wed May 11 16:02:42 2016 stephane galibert
+// Last update Thu May 12 15:54:46 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -19,10 +19,12 @@ bbman::Board::Board(void)
 
 bbman::Board::~Board(void)
 {
-  if (_backgroundMesh)
+  if (_backgroundMesh) {
     _backgroundMesh->remove();
-  for (auto &it : _blocks)
+  }
+  for (auto &it : _blocks) {
     delete (it);
+  }
 }
 
 void bbman::Board::init(bbman::Irrlicht &irr)
@@ -62,9 +64,11 @@ bbman::Map<bbman::ItemID> const& bbman::Board::getMap(void) const
 
 bool bbman::Board::isColliding(irr::core::aabbox3df const& box) const
 {
-  for (auto &it : _blocks)
-    if (box.intersectsWithBox(it->getBoundingBox()))
+  for (auto &it : _blocks) {
+    if (box.intersectsWithBox(it->getBoundingBox())) {
       return (true);
+    }
+  }
   return (false);
 }
 
@@ -113,22 +117,23 @@ void bbman::Board::initMesh(Irrlicht &irr)
   IndestructibleBlock *block = NULL;
   irr::core::vector3df ext;
 
-  for (int i = -1 ; i <= this->_map.h ; ++i)
-    for (int j = -1 ; j <= this->_map.w ; ++j)
+  for (int i = -1 ; i <= this->_map.h ; ++i) {
+    for (int j = -1 ; j <= this->_map.w ; ++j) {
       if ((i == -1 || j == -1 || i == this->_map.h || j == this->_map.w)
-	  || this->_map.at(j, i) == ItemID::II_BLOCK_INBRKABLE)
-	{
-	  block = new IndestructibleBlock;
-	  try {
-	    block->init(irr);
-	    ext = block->getBoundingBox().getExtent();
-	    block->setPosition(irr::core::vector3df(j * 10 + (10 / 2), (ext.Y / 2),
-						    i * 10 + (10 / 2)));
-	    this->_blocks.push_back(block);
-	  } catch (std::runtime_error const& e) {
-	    if (block)
-	      delete (block);
-	    std::cerr << e.what() << std::endl;
-	  }
+	  || this->_map.at(j, i) == ItemID::II_BLOCK_INBRKABLE) {
+	block = new IndestructibleBlock;
+	try {
+	  block->init(irr);
+	  ext = block->getBoundingBox().getExtent();
+	  block->setPosition(irr::core::vector3df(j * 10 + (10 / 2), (ext.Y / 2),
+						  i * 10 + (10 / 2)));
+	  this->_blocks.push_back(block);
+	} catch (std::runtime_error const& e) {
+	  if (block)
+	    delete (block);
+	  std::cerr << e.what() << std::endl;
 	}
+      }
+    }
+  }
 }

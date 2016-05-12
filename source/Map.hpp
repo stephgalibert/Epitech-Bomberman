@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:41:02 2016 stephane galibert
-// Last update Tue May 10 10:33:24 2016 stephane galibert
+// Last update Thu May 12 15:59:12 2016 stephane galibert
 //
 
 
@@ -38,12 +38,12 @@ namespace bbman
   template<typename T>
   Map<T>::~Map(void)
   {
-    if (content)
-      {
-	for (size_t i = 0 ; i < h ; ++i)
-	  delete[] (content[i]);
-	delete[] content;
+    if (content) {
+      for (size_t i = 0 ; i < h ; ++i) {
+	delete[] (content[i]);
       }
+      delete[] content;
+    }
   }
 
   template<typename T>
@@ -52,12 +52,12 @@ namespace bbman
     this->w = w;
     this->h = h;
     content = new T*[h];
-    for (size_t i = 0 ; i < h ; ++i)
-      {
-	content[i] = new T[w];
-	for (size_t j = 0 ; j < w ; ++j)
-	  content[i][j] = vdef;
+    for (size_t i = 0 ; i < h ; ++i) {
+      content[i] = new T[w];
+      for (size_t j = 0 ; j < w ; ++j) {
+	content[i][j] = vdef;
       }
+    }
   }
 
   template<typename T>

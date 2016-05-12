@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 15:36:32 2016 stephane galibert
-// Last update Wed May 11 16:05:43 2016 stephane galibert
+// Last update Thu May 12 15:39:14 2016 stephane galibert
 //
 
 #ifndef _APPLICATION_HPP_
@@ -31,8 +31,7 @@ namespace bbman
     void update_menu(irr::f32 delta);
     void goToMenu(void);
     void goToGame(void);
-
-    Irrlicht _irr;
+    Irrlicht *_irr;
     //Menu *_menu;
     Game *_game;
     InputListener _inputListener;

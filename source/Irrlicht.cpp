@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:24:07 2016 stephane galibert
-// Last update Tue May 10 13:09:43 2016 stephane galibert
+// Last update Thu May 12 15:58:36 2016 stephane galibert
 //
 
 #include "Irrlicht.hpp"
@@ -20,16 +20,18 @@ bbman::Irrlicht::Irrlicht(void)
 
 bbman::Irrlicht::~Irrlicht(void)
 {
-  if (this->_irr.device)
+  if (this->_irr.device) {
     this->_irr.device->drop();
+  }
 }
 
 void bbman::Irrlicht::init(irr::video::E_DRIVER_TYPE dType,
 			   irr::core::dimension2d<irr::u32> const& dim,
 			   InputListener &inputListener)
 {
-  if (dType >= irr::video::EDT_COUNT)
+  if (dType >= irr::video::EDT_COUNT) {
     throw (std::runtime_error("video driver not found"));
+  }
   irr::SIrrlichtCreationParameters params;
   params.DriverType = dType;
   params.WindowSize = dim;
@@ -38,8 +40,9 @@ void bbman::Irrlicht::init(irr::video::E_DRIVER_TYPE dType,
   params.EventReceiver = &inputListener;
   params.Doublebuffer = true;
   this->_irr.device = createDeviceEx(params);
-  if (this->_irr.device == NULL)
+  if (this->_irr.device == NULL) {
     throw (std::runtime_error("could not create selected driver"));
+  }
   this->_irr.driver = this->_irr.device->getVideoDriver();
   this->_irr.smgr = this->_irr.device->getSceneManager();
   this->_irr.guienv = this->_irr.device->getGUIEnvironment();
