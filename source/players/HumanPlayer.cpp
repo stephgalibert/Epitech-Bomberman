@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Mon May 16 16:34:21 2016 stephane galibert
+// Last update Wed May 18 20:54:55 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -185,7 +185,7 @@ void bbman::HumanPlayer::updateEffets(irr::f32 delta)
 void bbman::HumanPlayer::move(irr::f32 delta)
 {
   if (this->_direction == Direction::DIR_NONE) {
-    this->_mesh->setCurrentFrame(3);
+    this->_mesh->setCurrentFrame(5);
     this->_mesh->setAnimationSpeed(0);
     this->_isRunning = false;
   }
@@ -207,7 +207,8 @@ void bbman::HumanPlayer::moveEast(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.X += this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 90, 0));
+  //this->_mesh->setRotation(irr::core::vector3df(0, 90, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, -90, 0));
 }
 
 void bbman::HumanPlayer::moveWest(irr::f32 delta)
@@ -215,7 +216,8 @@ void bbman::HumanPlayer::moveWest(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.X -= this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, -90, 0));
+  //this->_mesh->setRotation(irr::core::vector3df(0, -90, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 90, 0));
 }
 
 void bbman::HumanPlayer::moveNorth(irr::f32 delta)
@@ -223,7 +225,8 @@ void bbman::HumanPlayer::moveNorth(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.Z += this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
+  //this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
 }
 
 void bbman::HumanPlayer::moveSouth(irr::f32 delta)
@@ -231,7 +234,8 @@ void bbman::HumanPlayer::moveSouth(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.Z -= this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
+  //this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
 }
 
 void bbman::HumanPlayer::moveNorthEast(irr::f32 delta)
@@ -240,7 +244,8 @@ void bbman::HumanPlayer::moveNorthEast(irr::f32 delta)
   playerPos.Z += this->_speed * delta;
   playerPos.X += this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 45, 0));
+  //this->_mesh->setRotation(irr::core::vector3df(0, 45, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, -135, 0));
 }
 
 void bbman::HumanPlayer::moveNorthWest(irr::f32 delta)
@@ -249,7 +254,8 @@ void bbman::HumanPlayer::moveNorthWest(irr::f32 delta)
   playerPos.Z += this->_speed * delta;
   playerPos.X -= this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, -45, 0));
+  //this->_mesh->setRotation(irr::core::vector3df(0, -45, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 135, 0));
 }
 
 void bbman::HumanPlayer::moveSouthEast(irr::f32 delta)
@@ -258,7 +264,8 @@ void bbman::HumanPlayer::moveSouthEast(irr::f32 delta)
   playerPos.Z -= this->_speed * delta;
   playerPos.X += this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 135, 0));
+  //this->_mesh->setRotation(irr::core::vector3df(0, 135, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, -45, 0));
 }
 
 void bbman::HumanPlayer::moveSouthWest(irr::f32 delta)
@@ -267,7 +274,8 @@ void bbman::HumanPlayer::moveSouthWest(irr::f32 delta)
   playerPos.Z -= this->_speed * delta;
   playerPos.X -= this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, -135, 0));
+  //this->_mesh->setRotation(irr::core::vector3df(0, -135, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 45, 0));
 }
 
 void bbman::HumanPlayer::inputPlayer1(bbman::InputListener &inputListener)
@@ -314,7 +322,7 @@ void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &inputListener)
 
 void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
 {
-  std::string txt = "../media/ninja.b3d";
+  std::string txt = "./media/ninja.b3d";
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -331,13 +339,12 @@ void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
 
 void bbman::HumanPlayer::initPlayer2(Irrlicht &irr)
 {
-  std::string txt = "../media/ninja.b3d";
-  //std::string txt = "../media/running.obj";
+  std::string txt = "./media/ninja.b3d";
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setAnimationSpeed(0);
-    this->_mesh->setScale(irr::core::vector3df(0.15f, 0.2f, 0.15f));
+    this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
     this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
     this->_mesh->setPosition(irr::core::vector3df(10 * 10, 0, 9 * 10)); // !
     this->_prevPos = this->_mesh->getPosition();

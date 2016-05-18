@@ -302,10 +302,10 @@ irr::scene::IAnimatedMesh* IrrAssimpImport::createMesh(irr::io::IReadFile* file)
             core::matrix4 invBoneOffset;
             boneOffset.getInverse(invBoneOffset);
 
-            const core::vector3df nullVector = core::vector3df(0, 0, 0);
+            //const core::vector3df nullVector = core::vector3df(0, 0, 0);
 
             const core::vector3df translation = boneOffset.getTranslation();
-            core::vector3df translation2 = translation;
+            //core::vector3df translation2 = translation;
             //boneOffset.setInverseTranslation(translation);
             //invBoneOffset.rotateVect(translation2);
 
@@ -314,7 +314,7 @@ irr::scene::IAnimatedMesh* IrrAssimpImport::createMesh(irr::io::IReadFile* file)
 
             core::matrix4 translationMatrix;
             translationMatrix.setTranslation(translation);
-			
+
 			core::matrix4 scaleMatrix;
             scaleMatrix.setScale(invBoneOffset.getScale());
 
@@ -432,6 +432,6 @@ void IrrAssimpImport::computeLocal(scene::ISkinnedMesh* mesh, const aiScene* pSc
 
         joint->LocalMatrix = invGlobalParent * joint->GlobalMatrix;
     }
-    else
-        ;   //std::cout << "Root ?" << std::endl;
+    //else
+    //;   std::cout << "Root ?" << std::endl;
 }
