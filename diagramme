@@ -15,11 +15,11 @@ explications:
 ./utils:
 -Generator: functor that allow to generate an int in a range (min, max)
 -Chronometer: class encapsulate irr::core::ITimer and can be paused or restarted
-Action: action must be executed by players
-ApplicationState: application state
-Direction: players direction
-ItemID: item ID
-InputListener: manage input (keyboard/mouse/joystick/...)
+-Action: action must be executed by players
+-ApplicationState: application state
+-Direction: players direction
+-ItemID: item ID
+-InputListener: manage input (keyboard/mouse/joystick/...)
 
 ./
 BombManager: used by players to drop selected bomb

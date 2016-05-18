@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Thu May 12 15:54:46 2016 stephane galibert
+// Last update Wed May 18 17:40:42 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -94,7 +94,7 @@ void bbman::Board::initTerrain(Irrlicht &irr)
 {
   irr::scene::IMesh *mesh;
 
-  this->_texture.setTexture(0, irr.getTexture("../media/wall.jpg"));
+  this->_texture.setTexture(0, irr.getTexture("./media/wall.jpg"));
   this->_texture.setFlag(irr::video::EMF_LIGHTING, false);
   mesh = irr.getSmgr()->getGeometryCreator()->
     createHillPlaneMesh(irr::core::dimension2d<irr::f32>(10, 10),

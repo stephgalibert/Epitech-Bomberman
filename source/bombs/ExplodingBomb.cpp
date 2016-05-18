@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Thu May 12 16:01:31 2016 stephane galibert
+// Last update Wed May 18 17:39:51 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -92,7 +92,7 @@ bool bbman::ExplodingBomb::hasExplosed(void) const
 }
 void bbman::ExplodingBomb::initMesh(bbman::Irrlicht &irr)
 {
-  std::string txt = "../media/ninja.b3d";
+  std::string txt = "./media/ninja.b3d";
 
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {

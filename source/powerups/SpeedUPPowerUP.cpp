@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:45 2016 stephane galibert
-// Last update Thu May 12 16:05:51 2016 stephane galibert
+// Last update Wed May 18 17:39:36 2016 stephane galibert
 //
 
 #include "SpeedUPPowerUP.hpp"
@@ -29,7 +29,7 @@ void bbman::SpeedUPPowerUP::init(Irrlicht &irr)
 
   this->_node = irr.getSmgr()->addCubeSceneNode();
   if (this->_node) {
-    this->_node->setMaterialTexture(0, irr.getTexture("../media/t351sml.jpg"));
+    this->_node->setMaterialTexture(0, irr.getTexture("./media/t351sml.jpg"));
     this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_node->setScale(irr::core::vector3df(0.3f, 0.3f, 0.3f));
     anms = irr.getSmgr()->createRotationAnimator(irr::core::vector3df(0, 1, 0));

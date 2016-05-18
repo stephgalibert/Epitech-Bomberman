@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:24:07 2016 stephane galibert
-// Last update Thu May 12 15:58:36 2016 stephane galibert
+// Last update Wed May 18 20:36:06 2016 stephane galibert
 //
 
 #include "Irrlicht.hpp"
@@ -16,10 +16,14 @@ bbman::Irrlicht::Irrlicht(void)
   this->_irr.driver = NULL;
   this->_irr.smgr = NULL;
   this->_irr.guienv = NULL;
+  this->_loader = NULL;
 }
 
 bbman::Irrlicht::~Irrlicht(void)
 {
+  if (this->_loader) {
+    delete (this->_loader);
+  }
   if (this->_irr.device) {
     this->_irr.device->drop();
   }
@@ -47,6 +51,7 @@ void bbman::Irrlicht::init(irr::video::E_DRIVER_TYPE dType,
   this->_irr.smgr = this->_irr.device->getSceneManager();
   this->_irr.guienv = this->_irr.device->getGUIEnvironment();
   this->_timer = this->_irr.device->getTimer();
+  this->_loader = new IrrAssimp(this->_irr.smgr);
 }
 
 bool bbman::Irrlicht::isRunning(void)
@@ -74,14 +79,17 @@ void bbman::Irrlicht::endScene(void)
   this->_irr.driver->endScene();
 }
 
-irr::video::ITexture *bbman::Irrlicht::getTexture(irr::io::path const& filename) const
+irr::video::ITexture *bbman::Irrlicht::getTexture(irr::io::path const& path) const
 {
-  return (this->_irr.driver->getTexture(filename));
+  return (this->_irr.driver->getTexture(path));
 }
 
-irr::scene::IAnimatedMesh *bbman::Irrlicht::getMesh(irr::io::path const& filename) const
+irr::scene::IAnimatedMesh *bbman::Irrlicht::getMesh(irr::io::path const& path) const
 {
-  return (this->_irr.smgr->getMesh(filename));
+  if (this->_loader && this->_loader->isLoadable(path)) {
+    return (this->_loader->getMesh(path));
+  }
+  return (this->_irr.smgr->getMesh(path));
 }
 
 irr::IrrlichtDevice *bbman::Irrlicht::getDevice(void) const
