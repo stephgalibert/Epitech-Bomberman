@@ -3,24 +3,23 @@ Hyerarchie diagram:
 						IEntity
 Board      		IBlock			IPlayer			IBombs			IPowerUP
          	IndestructibleBlock		HumanPlayer		ExplodingBomb		SpeedUPPowerUpp
-
+____________________________________________________________________________________________________________________
 
 						IEffect
 						SpeedUPEffect
 
-						
-
+____________________________________________________________________________________________________________________
 
 explications:
 
 ./utils:
 -Generator: functor that allow to generate an int in a range (min, max)
 -Chronometer: class encapsulate irr::core::ITimer and can be paused or restarted
-
-./
 Action: action must be executed by players
 ApplicationState: application state
 Direction: players direction
 ItemID: item ID
 InputListener: manage input (keyboard/mouse/joystick/...)
-BombManager: used by players for drop selected bomb
+
+./
+BombManager: used by players to drop selected bomb
