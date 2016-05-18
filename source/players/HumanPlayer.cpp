@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Thu May 12 16:04:25 2016 stephane galibert
+// Last update Mon May 16 16:34:21 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -325,19 +325,19 @@ void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
     this->_prevPos = this->_mesh->getPosition();
   }
   else {
-    throw (std::runtime_error("can not create player "
-			      + std::to_string(this->_playerNum)));
+    throw (std::runtime_error("can not create player " + std::to_string(this->_playerNum)));
   }
 }
 
 void bbman::HumanPlayer::initPlayer2(Irrlicht &irr)
 {
   std::string txt = "../media/ninja.b3d";
+  //std::string txt = "../media/running.obj";
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setAnimationSpeed(0);
-    this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
+    this->_mesh->setScale(irr::core::vector3df(0.15f, 0.2f, 0.15f));
     this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
     this->_mesh->setPosition(irr::core::vector3df(10 * 10, 0, 9 * 10)); // !
     this->_prevPos = this->_mesh->getPosition();

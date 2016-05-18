@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:25:34 2016 stephane galibert
-// Last update Sun May  8 17:21:34 2016 stephane galibert
+// Last update Mon May 16 16:29:31 2016 stephane galibert
 //
 
 #ifndef _ITEMID_HPP_
@@ -17,7 +17,9 @@ namespace bbman
   {
     II_NONE = 0,
     II_BLOCK_INBRKABLE = 1,
-    II_BLOCK_BRKABLE = 2
+    II_BLOCK_BRKABLE = 2,
+    II_PLAYER = 3,
+    II_BOMBS = 4
   };
 }
 

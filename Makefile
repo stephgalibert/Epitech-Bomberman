@@ -14,8 +14,8 @@ Sources += $(Directory)players/HumanPlayer.cpp
 Sources += $(Directory)blocks/IndestructibleBlock.cpp
 Sources += $(Directory)BombManager.cpp
 Sources += $(Directory)bombs/ExplodingBomb.cpp
-Sources += $(Directory)InputListener.cpp
 Sources += $(Directory)Irrlicht.cpp
+Sources += $(Directory)utils/InputListener.cpp
 Sources += $(Directory)utils/Chronometer.cpp
 Sources += $(Directory)utils/Generator.cpp
 
@@ -23,7 +23,7 @@ Objects = $(Sources:.cpp=.o)
 
 # general compiler settings
 #CPPFLAGS = -I../include -I/usr/X11R6/include
-CXXFLAGS += -isystem ./lib/include -isystem /usr/X11R6/include
+CXXFLAGS += -isystem ./lib/irrlicht/include -isystem /usr/X11R6/include
 CXXFLAGS += -I./source/
 CXXFLAGS += -I./source/powerups/
 CXXFLAGS += -I./source/utils/
@@ -43,9 +43,9 @@ LIBSELECT=64
 endif
 
 # target specific settings
-all_linux: LDFLAGS = -L/usr/X11R6/lib$(LIBSELECT) -L./lib/lib/Linux -lIrrlicht -lGL -lXxf86vm -lXext -lX11 -lXcursor
+all_linux: LDFLAGS = -L/usr/X11R6/lib$(LIBSELECT) -L./lib/irrlicht/lib/Linux -lIrrlicht -lGL -lXxf86vm -lXext -lX11 -lXcursor #-L./lib/assimp/lib -lassimp
 all_linux clean_linux: SYSTEM=Linux
-all_win32: LDFLAGS = -L./lib/lib/Win32-gcc -lIrrlicht -lopengl32 -lm
+all_win32: LDFLAGS = -L./lib/irrlicht/lib/Win32-gcc -lIrrlicht -lopengl32 -lm
 all_win32: CPPFLAGS += -D__GNUWIN32__ -D_WIN32 -DWIN32 -D_WINDOWS -D_MBCS -D_USRDLL
 all_win32 clean_win32: SYSTEM=Win32-gcc
 all_win32 clean_win32: SUF=.exe

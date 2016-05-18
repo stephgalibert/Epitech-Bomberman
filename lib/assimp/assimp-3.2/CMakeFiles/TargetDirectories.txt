@@ -1,0 +1,3 @@
+/home/galibe_s/rendu/bomberman/lib/assimp/assimp-3.2/code/CMakeFiles/assimp.dir
+/home/galibe_s/rendu/bomberman/lib/assimp/assimp-3.2/tools/assimp_cmd/CMakeFiles/assimp_cmd.dir
+/home/galibe_s/rendu/bomberman/lib/assimp/assimp-3.2/CMakeFiles/uninstall.dir

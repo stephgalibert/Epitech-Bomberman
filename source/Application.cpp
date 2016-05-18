@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Thu May 12 15:53:46 2016 stephane galibert
+// Last update Mon May 16 16:31:16 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -41,8 +41,10 @@ void bbman::Application::init(void)
 		     _inputListener);
     this->_timer.setTimer(this->_irr->getTimer());
     this->_irr->getDevice()->getCursorControl()->setVisible(true);
+    //ExplodingBomb::init(this->_irr);
     // ! a delete quand y aura le menu
     goToGame();
+    // goToMenu();
   } catch (std::runtime_error const& e) {
     throw (e);
   }
@@ -56,7 +58,7 @@ int bbman::Application::play(void)
   while (this->_irr->isRunning())
     {
       delta = this->_timer.restart() / 1000.f;
-      if (_inputListener.IsKeyDown(irr::KEY_KEY_N)) {
+      if (this->_inputListener.IsKeyDown(irr::KEY_KEY_N)) {
 	return (0);
       }
       // in game ...

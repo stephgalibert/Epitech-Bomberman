@@ -1,0 +1,38 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v3.2.46434204)
+
+newmtl Material0
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+d 1
+illum 1
+map_Kd C:/work/ninja/enemyninja/nskinbl.jpg
+
+newmtl Material1
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+d 1
+illum 1
+map_Kd C:/work/ninja/enemyninja/nskinbr.jpg
+
+newmtl Material2
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+d 1
+illum 1
+map_Kd C:/work/ninja/enemyninja/nskingr.jpg
+
+newmtl Material3
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+d 1
+illum 1
+map_Kd C:/work/ninja/enemyninja/nskinwh.jpg
+
+newmtl Material4
+Kd 0.8 0.8 0.8
+Ks 0 0 0
+d 1
+illum 1
+map_Kd C:/work/ninja/enemyninja/nskinrd.jpg
+

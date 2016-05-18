@@ -1,0 +1,12 @@
+# File produced by Open Asset Import Library (http://www.assimp.sf.net)
+# (assimp v3.2.46434204)
+
+newmtl jill_rig:main_shader
+Kd 0.752 0.696403 0.64672
+Ka 0.083 0.0414703 0.026145
+Ks 0.17293 0.17293 0.17293
+Ke 0 0 0
+d 1
+Ns 22.9935
+illum 2
+
