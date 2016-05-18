@@ -5,16 +5,16 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon Apr 11 02:48:39 2016 stephane galibert
-// Last update Thu May 12 16:06:54 2016 stephane galibert
+// Last update Wed May 18 17:20:08 2016 stephane galibert
 //
 
 #include "Chronometer.hpp"
 
 tools::Chronometer::Chronometer(void)
 {
-  _timer = NULL;
-  _running = false;
-  _value = 0;
+  this->_timer = NULL;
+  this->_running = false;
+  this->_value = 0;
 }
 
 tools::Chronometer::~Chronometer(void)
@@ -24,7 +24,7 @@ tools::Chronometer::~Chronometer(void)
 
 void tools::Chronometer::setTimer(irr::ITimer *timer)
 {
-  _timer = timer;
+  this->_timer = timer;
 }
 
 irr::f32 tools::Chronometer::restart(void)
@@ -32,15 +32,15 @@ irr::f32 tools::Chronometer::restart(void)
   irr::f32 elapsed = 0.;
 
   elapsed = getElapsedTime();
-  _value = 0.;
-  _running = false;
+  this->_value = 0.;
+  this->_running = false;
   start();
   return (elapsed);
 }
 
 void tools::Chronometer::toggle(void)
 {
-  if (!_running) {
+  if (!this->_running) {
     start();
   }
   else {
@@ -50,25 +50,25 @@ void tools::Chronometer::toggle(void)
 
 void tools::Chronometer::start(void)
 {
-  if (!_running && _timer) {
-    _then = _timer->getTime();
-    _running = true;
+  if (!this->_running && this->_timer) {
+    this->_then = this->_timer->getTime();
+    this->_running = true;
   }
 }
 
 void tools::Chronometer::pause(void)
 {
-  if (_running) {
-    _value += getElapsedTime();
-    _running = false;
+  if (this->_running) {
+    this->_value += getElapsedTime();
+    this->_running = false;
   }
 }
 
 irr::f32 tools::Chronometer::getElapsedTime(void)
 {
-  if (_running && _timer) {
-    _now = _timer->getTime();
-    return (_now - _then + _value);
+  if (this->_running && this->_timer) {
+    this->_now = this->_timer->getTime();
+    return (this->_now - this->_then + this->_value);
   }
-  return (_value);
+  return (this->_value);
 }
