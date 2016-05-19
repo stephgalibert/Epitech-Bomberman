@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Thu May 12 15:57:11 2016 stephane galibert
+// Last update Thu May 19 15:52:05 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -45,6 +45,7 @@ void bbman::Game::init(Irrlicht &irr)
       p2->init(irr);
       this->_players.push_back(p2);
     }
+    initSound();
   } catch (std::runtime_error const& e) {
     throw (e);
   }
@@ -89,6 +90,20 @@ void bbman::Game::initCamera(bbman::Irrlicht &irr)
   this->_camera = irr.getSmgr()->addCameraSceneNode();
   this->_camera->setTarget(irr::core::vector3df(pos.X, pos.Y, pos.Z));
   this->_camera->setPosition(irr::core::vector3df(pos.X, pos.Y + 120, 0));
+}
+
+void bbman::Game::initSound(void)
+{
+  this->_musicBackground.filename = "./sample/TronLegacy.wav";
+  try {
+    this->_musicBackground.load();
+    this->_musics.addSample("mbackground", this->_musicBackground);
+    this->_musics.setLoop("mbackground", true);
+    this->_musics.setVolumeBySample("mbackground", 10.f);
+    this->_musics.play("mbackground");
+  } catch (std::runtime_error const& e) {
+    std::cerr << e.what() << std::endl;
+  }
 }
 
 void bbman::Game::addBomb(IPlayer *player, bbman::Irrlicht &irr)
