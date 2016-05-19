@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 15:15:50 2016 stephane galibert
-// Last update Thu May 19 14:30:19 2016 stephane galibert
+// Last update Thu May 19 15:25:55 2016 stephane galibert
 //
 
 #ifndef _BOMB_HPP_
@@ -26,7 +26,6 @@ namespace bbman
     virtual irr::core::vector3df const& getPosition(void) const = 0;
     virtual irr::core::aabbox3df const getBoundingBox(void) const = 0;
     virtual bool isColliding(irr::core::aabbox3df const& box) const = 0;
-    virtual void playSound(std::string const& sound) = 0;
     virtual std::string getName(void) const = 0;
     virtual bool isExplosing(void) const = 0;
     virtual bool hasExplosed(void) const = 0;

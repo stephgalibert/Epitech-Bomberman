@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Thu May 19 15:14:15 2016 stephane galibert
+// Last update Thu May 19 15:44:32 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -31,15 +31,8 @@ bbman::ExplodingBomb::~ExplodingBomb(void)
 void bbman::ExplodingBomb::init(bbman::Irrlicht &irr)
 {
   try {
-    this->initMesh(irr);
-
-    if (!SoundCache.find("explosion")) {
-      SoundCache.insert("explosion", MemoryFile("./sound/explosion.wav"));
-      SoundCache["explosion"].load();
-    }
-    this->_sounds.addSample("explosion", SoundCache["explosion"]);
-    this->_sounds.setVolumeBySample("explosion", 30.f);
-
+    initMesh(irr);
+    initSound();
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
   }
@@ -54,7 +47,11 @@ void bbman::ExplodingBomb::update(bbman::Irrlicht &irr, irr::f32 delta)
     if (this->_explosing)
       {
 	this->_mesh->setVisible(false);
-	this->_sounds.play("explosion");
+	try {
+	  this->_sounds.play("explosion");
+	} catch (std::runtime_error const& e) {
+	  std::cerr << e.what() << std::endl;
+	}
       }
   }
   if (this->_explosing) {
@@ -91,11 +88,6 @@ bool bbman::ExplodingBomb::isColliding(irr::core::aabbox3df const& box) const
   return (box.intersectsWithBox(this->getBoundingBox()));
 }
 
-void bbman::ExplodingBomb::playSound(std::string const& sound)
-{
-  (void)sound;
-}
-
 std::string bbman::ExplodingBomb::getName(void) const
 {
   return ("Exploding bomb");
@@ -124,6 +116,20 @@ void bbman::ExplodingBomb::initMesh(bbman::Irrlicht &irr)
   }
   else {
     throw (std::runtime_error("can not create exploding bomb"));
+  }
+}
+
+void bbman::ExplodingBomb::initSound(void)
+{
+  try {
+    if (!SoundCache.find("explosion")) {
+      SoundCache.insert("explosion", MemoryFile("./sound/explosion.wav"));
+      SoundCache["explosion"].load();
+    }
+  this->_sounds.addSample("explosion", SoundCache["explosion"]);
+  this->_sounds.setVolumeBySample("explosion", 10.f);
+  } catch (std::runtime_error const& e) {
+    std::cerr << e.what() << std::endl;
   }
 }
 
