@@ -5,10 +5,12 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Wed May 18 17:39:51 2016 stephane galibert
+// Last update Thu May 19 15:14:15 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
+
+bbman::CacheManager<std::string, bbman::MemoryFile> bbman::ExplodingBomb::SoundCache;
 
 bbman::ExplodingBomb::ExplodingBomb(bbman::IPlayer *owner)
 {
@@ -30,6 +32,14 @@ void bbman::ExplodingBomb::init(bbman::Irrlicht &irr)
 {
   try {
     this->initMesh(irr);
+
+    if (!SoundCache.find("explosion")) {
+      SoundCache.insert("explosion", MemoryFile("./sound/explosion.wav"));
+      SoundCache["explosion"].load();
+    }
+    this->_sounds.addSample("explosion", SoundCache["explosion"]);
+    this->_sounds.setVolumeBySample("explosion", 30.f);
+
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
   }
@@ -41,6 +51,11 @@ void bbman::ExplodingBomb::update(bbman::Irrlicht &irr, irr::f32 delta)
   if (this->_delta <= DELAY_TO_EXPLOSE) {
     this->_delta += delta;
     this->_explosing = (this->_delta > DELAY_TO_EXPLOSE);
+    if (this->_explosing)
+      {
+	this->_mesh->setVisible(false);
+	this->_sounds.play("explosion");
+      }
   }
   if (this->_explosing) {
     this->_explosed = !(this->_delta < DELAY_TO_EXPLOSE + DELAY_EXPLOSING);
@@ -74,6 +89,11 @@ irr::core::aabbox3df const bbman::ExplodingBomb::getBoundingBox(void) const
 bool bbman::ExplodingBomb::isColliding(irr::core::aabbox3df const& box) const
 {
   return (box.intersectsWithBox(this->getBoundingBox()));
+}
+
+void bbman::ExplodingBomb::playSound(std::string const& sound)
+{
+  (void)sound;
 }
 
 std::string bbman::ExplodingBomb::getName(void) const

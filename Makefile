@@ -18,6 +18,9 @@ Sources += $(Directory)Irrlicht.cpp
 Sources += $(Directory)utils/InputListener.cpp
 Sources += $(Directory)utils/Chronometer.cpp
 Sources += $(Directory)utils/Generator.cpp
+Sources += $(Directory)utils/MemoryFile.cpp
+Sources += $(Directory)music/MusicBox.cpp
+Sources += $(Directory)music/SoundBox.cpp
 Sources += $(Directory)irrassimp/IrrAssimp.cpp
 Sources += $(Directory)irrassimp/IrrAssimpExport.cpp
 Sources += $(Directory)irrassimp/IrrAssimpImport.cpp
@@ -37,6 +40,7 @@ CXXFLAGS += -I./source/effects/
 CXXFLAGS += -I./source/players/
 CXXFLAGS += -I./source/blocks/
 CXXFLAGS += -I./source/irrassimp/
+CXXFLAGS += -I./source/music/
 CXXFLAGS += -O3 -ffast-math -std=c++11
 CXXFLAGS += -Wall -Werror -Wextra -g
 
@@ -48,7 +52,7 @@ LIBSELECT=64
 endif
 
 # target specific settings
-all_linux: LDFLAGS = -L/usr/X11R6/lib$(LIBSELECT) -L./lib/irrlicht/lib/Linux -lIrrlicht -lGL -lXxf86vm -lXext -lX11 -lXcursor -L./lib/assimp/assimp-3.2/lib/ -lassimp -Wl,-rpath,../lib/assimp/assimp-3.2/lib/
+all_linux: LDFLAGS = -L/usr/X11R6/lib$(LIBSELECT) -L./lib/irrlicht/lib/Linux -lIrrlicht -lGL -lXxf86vm -lXext -lX11 -lXcursor -L./lib/assimp/assimp-3.2/lib/ -lassimp -Wl,-rpath,../lib/assimp/assimp-3.2/lib/ -lsfml-audio
 all_linux clean_linux: SYSTEM=Linux
 all_win32: LDFLAGS = -L./lib/irrlicht/lib/Win32-gcc -lIrrlicht -lopengl32 -lm
 all_win32: CPPFLAGS += -D__GNUWIN32__ -D_WIN32 -DWIN32 -D_WINDOWS -D_MBCS -D_USRDLL
