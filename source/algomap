@@ -10,4 +10,3 @@ puis à chaque case indestructible posé, on interdit les cases voisine de venir
 
 
 on peut tourner une fois que la direction est autorisé et qu'on dans le centre de la case
-(avec une tolérance de "+- getBoundingBox().getExtent() / 2"
