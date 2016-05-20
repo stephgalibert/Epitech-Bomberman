@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Wed May 18 20:54:55 2016 stephane galibert
+// Last update Fri May 20 17:32:31 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -22,14 +22,6 @@ bbman::HumanPlayer::HumanPlayer(void)
     std::bind(&bbman::HumanPlayer::moveNorth, this, std::placeholders::_1);
   this->_move[Direction::DIR_SOUTH] =
     std::bind(&bbman::HumanPlayer::moveSouth, this, std::placeholders::_1);
-  this->_move[Direction::DIR_NORTH | Direction::DIR_EAST] =
-    std::bind(&bbman::HumanPlayer::moveNorthEast, this, std::placeholders::_1);
-  this->_move[Direction::DIR_NORTH | Direction::DIR_WEST] =
-    std::bind(&bbman::HumanPlayer::moveNorthWest, this, std::placeholders::_1);
-  this->_move[Direction::DIR_SOUTH | Direction::DIR_EAST] =
-    std::bind(&bbman::HumanPlayer::moveSouthEast, this, std::placeholders::_1);
-  this->_move[Direction::DIR_SOUTH | Direction::DIR_WEST] =
-    std::bind(&bbman::HumanPlayer::moveSouthWest, this, std::placeholders::_1);
   this->_inputs[0] =
     std::bind(&bbman::HumanPlayer::inputPlayer1, this, std::placeholders::_1);
   this->_inputs[1] =
@@ -44,6 +36,14 @@ bbman::HumanPlayer::HumanPlayer(void)
   this->_speed = INITIAL_SPEED;
   this->_playerNum = bbman::HumanPlayer::NumberOfPlayer;
   ++bbman::HumanPlayer::NumberOfPlayer;
+  this->_prevDirection = Direction::DIR_NONE;
+}
+
+bbman::HumanPlayer *bbman::HumanPlayer::create(void)
+{
+  if (bbman::HumanPlayer::NumberOfPlayer > 1)
+    throw (std::runtime_error("The number of human player can not be greater than 2"));
+  return (new HumanPlayer);
 }
 
 bbman::HumanPlayer::~HumanPlayer(void)
@@ -73,8 +73,68 @@ void bbman::HumanPlayer::init(bbman::Irrlicht &irr)
 void bbman::HumanPlayer::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
   (void)irr;
-  this->move(delta);
-  this->updateEffets(delta);
+  move(delta);
+  updateEffets(delta);
+}
+
+/*bool isInCenter(irr::core::vector3df const& pos, bbman::IPlayer *player)
+{
+  int x = (int)(pos.X / 10.f) * 10.f;
+  int y = (int)(pos.Z / 10.f) * 10.f;
+
+  x += (10.f / 2.f);
+  y += (10.f / 2.f);
+
+  return (player->getBoundingBox().isPointInside(irr::core::vector3df(x, 0.f, y)));
+  }*/
+
+void bbman::HumanPlayer::checkDirection(bbman::Board *board)
+{
+  if (!board->isInNode(getPosition(), getBoundingBox())) {
+    if ((this->_prevDirection == Direction::DIR_EAST
+	 || this->_prevDirection == Direction::DIR_WEST)
+	&&
+	(this->_direction == Direction::DIR_NORTH
+	 || this->_direction == Direction::DIR_SOUTH)) {
+      this->_direction = Direction::DIR_NONE;
+    }
+    else if ((this->_prevDirection == Direction::DIR_NORTH
+	      || this->_prevDirection == Direction::DIR_SOUTH)
+	     &&
+	     (this->_direction == Direction::DIR_EAST
+	      || this->_direction == Direction::DIR_WEST)) {
+      this->_direction = Direction::DIR_NONE;
+    }
+  }
+  else {
+    if (!board->isValidMove(getPosition(), this->_direction)) {
+      this->_direction = Direction::DIR_NONE;
+    }
+  }
+}
+
+void bbman::HumanPlayer::dropBomb(bbman::Irrlicht &irr, bbman::Board *board,
+				  std::list<IBomb *> &bombs)
+{
+  IBomb *newBomb = createBomb(irr);
+  irr::core::vector3df pos = getPosition();
+
+  pos.X = board->getScale().X / 2 + std::floor(pos.X)
+    - (int)(std::floor(pos.X)) % (int)board->getScale().X;
+  pos.Z = board->getScale().Z / 2 + std::floor(pos.Z)
+    - (int)(std::floor(pos.Z)) % (int)board->getScale().Z;
+  newBomb->setPosition(pos);
+  if (std::find_if(std::begin(bombs), std::end(bombs), [&newBomb](IBomb *bomb) {
+	if (newBomb->getPosition() == bomb->getPosition())
+	  return (true);
+	return (false);
+      }) == std::end(bombs)
+    && !board->isOutside(pos)) {
+    bombs.push_back(newBomb);
+  }
+  else {
+    delete (newBomb);
+  }
 }
 
 void bbman::HumanPlayer::addBomb(bbman::IBomb *bomb)
@@ -82,17 +142,22 @@ void bbman::HumanPlayer::addBomb(bbman::IBomb *bomb)
   this->_bombManager.addBomb(bomb);
 }
 
-bbman::IBomb *bbman::HumanPlayer::createBomb(bbman::Irrlicht &irr)
-{
-  IBomb *bomb = this->_bombManager.getSelectedBomb();
-  bomb->init(irr);
-  return (bomb);
-}
-
 void bbman::HumanPlayer::setPosition(irr::core::vector3df const& pos)
 {
-  this->_mesh->setPosition(pos);
+  int x = (int)(pos.X / 10.f) * 10.f;
+  int y = (int)(pos.Z / 10.f) * 10.f;
+
+  x += (10.f / 2.f);
+  y += (10.f / 2.f);
+  this->_mesh->setPosition(irr::core::vector3df(x, 0.f, y));
   this->_mesh->updateAbsolutePosition();
+
+  /*irr::core::vector3df ext = getBoundingBox().getExtent();
+  irr::core::vector3df newPos = pos;
+  newPos.X += ext.X / 2 + 1;
+  newPos.Z += ext.Z / 2 + 1;
+  this->_mesh->setPosition(newPos);
+  this->_mesh->updateAbsolutePosition();*/
 }
 
 irr::core::vector3df const& bbman::HumanPlayer::getPosition(void) const
@@ -129,15 +194,9 @@ bool bbman::HumanPlayer::input(bbman::InputListener &inputListener)
 {
   this->_direction = Direction::DIR_NONE;
   this->_action = Action::ACT_NONE;
-  if (this->_inputs.find(this->_playerNum) != std::end(this->_inputs)) {
-    this->_inputs[this->_playerNum](inputListener);
-  }
+  if (_inputs.find(_playerNum) != _inputs.cend())
+    this->_inputs.at(this->_playerNum)(inputListener);
   return (false);
-}
-
-void bbman::HumanPlayer::goToPrevPosition(void)
-{
-  this->_mesh->setPosition(this->_prevPos);
 }
 
 size_t bbman::HumanPlayer::getSpeed(void) const
@@ -195,15 +254,13 @@ void bbman::HumanPlayer::move(irr::f32 delta)
       this->_mesh->setFrameLoop(0, 13);
       this->_isRunning = true;
     }
-    this->_prevPos = this->_mesh->getPosition();
-    if (this->_move.find(this->_direction) != this->_move.end()) {
-      this->_move[this->_direction](delta);
-    }
+    this->_move.at(this->_direction)(delta);
   }
 }
 
 void bbman::HumanPlayer::moveEast(irr::f32 delta)
 {
+  this->_prevDirection = Direction::DIR_EAST;
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.X += this->_speed * delta;
   this->_mesh->setPosition(playerPos);
@@ -213,6 +270,7 @@ void bbman::HumanPlayer::moveEast(irr::f32 delta)
 
 void bbman::HumanPlayer::moveWest(irr::f32 delta)
 {
+  this->_prevDirection = Direction::DIR_WEST;
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.X -= this->_speed * delta;
   this->_mesh->setPosition(playerPos);
@@ -222,6 +280,7 @@ void bbman::HumanPlayer::moveWest(irr::f32 delta)
 
 void bbman::HumanPlayer::moveNorth(irr::f32 delta)
 {
+  this->_prevDirection = Direction::DIR_NORTH;
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.Z += this->_speed * delta;
   this->_mesh->setPosition(playerPos);
@@ -231,6 +290,7 @@ void bbman::HumanPlayer::moveNorth(irr::f32 delta)
 
 void bbman::HumanPlayer::moveSouth(irr::f32 delta)
 {
+  this->_prevDirection = Direction::DIR_SOUTH;
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.Z -= this->_speed * delta;
   this->_mesh->setPosition(playerPos);
@@ -238,60 +298,19 @@ void bbman::HumanPlayer::moveSouth(irr::f32 delta)
   this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
 }
 
-void bbman::HumanPlayer::moveNorthEast(irr::f32 delta)
-{
-  irr::core::vector3df playerPos = this->_mesh->getPosition();
-  playerPos.Z += this->_speed * delta;
-  playerPos.X += this->_speed * delta;
-  this->_mesh->setPosition(playerPos);
-  //this->_mesh->setRotation(irr::core::vector3df(0, 45, 0));
-  this->_mesh->setRotation(irr::core::vector3df(0, -135, 0));
-}
-
-void bbman::HumanPlayer::moveNorthWest(irr::f32 delta)
-{
-  irr::core::vector3df playerPos = this->_mesh->getPosition();
-  playerPos.Z += this->_speed * delta;
-  playerPos.X -= this->_speed * delta;
-  this->_mesh->setPosition(playerPos);
-  //this->_mesh->setRotation(irr::core::vector3df(0, -45, 0));
-  this->_mesh->setRotation(irr::core::vector3df(0, 135, 0));
-}
-
-void bbman::HumanPlayer::moveSouthEast(irr::f32 delta)
-{
-  irr::core::vector3df playerPos = this->_mesh->getPosition();
-  playerPos.Z -= this->_speed * delta;
-  playerPos.X += this->_speed * delta;
-  this->_mesh->setPosition(playerPos);
-  //this->_mesh->setRotation(irr::core::vector3df(0, 135, 0));
-  this->_mesh->setRotation(irr::core::vector3df(0, -45, 0));
-}
-
-void bbman::HumanPlayer::moveSouthWest(irr::f32 delta)
-{
-  irr::core::vector3df playerPos = this->_mesh->getPosition();
-  playerPos.Z -= this->_speed * delta;
-  playerPos.X -= this->_speed * delta;
-  this->_mesh->setPosition(playerPos);
-  //this->_mesh->setRotation(irr::core::vector3df(0, -135, 0));
-  this->_mesh->setRotation(irr::core::vector3df(0, 45, 0));
-}
-
 void bbman::HumanPlayer::inputPlayer1(bbman::InputListener &inputListener)
-{
+{ // !
   if(inputListener.IsKeyDown(irr::KEY_KEY_Z)) {
-    this->_direction |= Direction::DIR_NORTH;
+    this->_direction = Direction::DIR_NORTH;
   }
   else if(inputListener.IsKeyDown(irr::KEY_KEY_S)) {
-    this->_direction |= Direction::DIR_SOUTH;
+    this->_direction = Direction::DIR_SOUTH;
   }
-
-  if(inputListener.IsKeyDown(irr::KEY_KEY_Q)) {
-    this->_direction |= Direction::DIR_WEST;
+  else if(inputListener.IsKeyDown(irr::KEY_KEY_Q)) {
+    this->_direction = Direction::DIR_WEST;
   }
   else if(inputListener.IsKeyDown(irr::KEY_KEY_D)) {
-    this->_direction |= Direction::DIR_EAST;
+    this->_direction = Direction::DIR_EAST;
   }
 
   if (inputListener.IsKeyDown(irr::KEY_SPACE)) {
@@ -300,19 +319,18 @@ void bbman::HumanPlayer::inputPlayer1(bbman::InputListener &inputListener)
 }
 
 void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &inputListener)
-{
+{ // !
   if(inputListener.IsKeyDown(irr::KEY_UP)) {
-    this->_direction |= Direction::DIR_NORTH;
+    this->_direction = Direction::DIR_NORTH;
   }
   else if(inputListener.IsKeyDown(irr::KEY_DOWN)) {
-    this->_direction |= Direction::DIR_SOUTH;
+    this->_direction = Direction::DIR_SOUTH;
   }
-
-  if(inputListener.IsKeyDown(irr::KEY_LEFT)) {
-    this->_direction |= Direction::DIR_WEST;
+  else if(inputListener.IsKeyDown(irr::KEY_LEFT)) {
+    this->_direction = Direction::DIR_WEST;
   }
   else if(inputListener.IsKeyDown(irr::KEY_RIGHT)) {
-    this->_direction |= Direction::DIR_EAST;
+    this->_direction = Direction::DIR_EAST;
   }
 
   if (inputListener.IsKeyDown(irr::KEY_RETURN)) {
@@ -327,10 +345,8 @@ void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setAnimationSpeed(0);
-    this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
-    this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
-    this->_mesh->setPosition(irr::core::vector3df(10 * 10, 0, 9 * 10)); // !
-    this->_prevPos = this->_mesh->getPosition();
+    this->_mesh->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
+    this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
   }
   else {
     throw (std::runtime_error("can not create player " + std::to_string(this->_playerNum)));
@@ -346,8 +362,6 @@ void bbman::HumanPlayer::initPlayer2(Irrlicht &irr)
     this->_mesh->setAnimationSpeed(0);
     this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
     this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
-    this->_mesh->setPosition(irr::core::vector3df(10 * 10, 0, 9 * 10)); // !
-    this->_prevPos = this->_mesh->getPosition();
   }
   else {
     throw (std::runtime_error("can not create player "
@@ -358,4 +372,11 @@ void bbman::HumanPlayer::initPlayer2(Irrlicht &irr)
 size_t bbman::HumanPlayer::getPlayerNumber(void) const
 {
   return (this->_playerNum);
+}
+
+bbman::IBomb *bbman::HumanPlayer::createBomb(bbman::Irrlicht &irr)
+{
+  IBomb *bomb = this->_bombManager.getSelectedBomb();
+  bomb->init(irr);
+  return (bomb);
 }

@@ -5,9 +5,8 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:41:02 2016 stephane galibert
-// Last update Thu May 12 15:59:12 2016 stephane galibert
+// Last update Thu May 19 20:21:48 2016 stephane galibert
 //
-
 
 #ifndef _MAP_HPP_
 # define _MAP_HPP_
@@ -19,12 +18,12 @@ namespace bbman
   {
     Map(void);
     ~Map(void);
-    void load(size_t w, size_t h, T const& vdef);
+    void load(size_t w, size_t h, T const& vdef = T());
     T const& at(size_t x, size_t y) const;
     T &at(size_t x, size_t y);
     T **content;
-    int w;
-    int h;
+    size_t w;
+    size_t h;
   };
 
   template<typename T>

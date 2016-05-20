@@ -1,1 +1,1 @@
-cd .. ; make ; cd bin/ ; ./bomberman
+clear && cd .. && make && cd bin/ && ./bomberman

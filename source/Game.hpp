@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Thu May 19 15:52:07 2016 stephane galibert
+// Last update Thu May 19 20:39:42 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -40,9 +40,9 @@ namespace bbman
   private:
     void initCamera(Irrlicht &irr);
     void initSound(void);
-    void addBomb(IPlayer *player, Irrlicht &irr);
     void checkCollision(IPlayer *player);
     void updateBombs(Irrlicht &irr, irr::f32 delta);
+    void updatePlayers(Irrlicht &irr, irr::f32 delta);
     Board *_board;
     bool _leaveGame;
     irr::scene::ICameraSceneNode *_camera;

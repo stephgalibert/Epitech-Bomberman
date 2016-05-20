@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Tue May 10 05:12:38 2016 stephane galibert
+// Last update Fri May 20 17:33:04 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -16,9 +16,10 @@
 # include <stdexcept>
 # include <vector>
 
+# include "Direction.hpp"
 # include "IEntity.hpp"
 # include "Map.hpp"
-# include "ItemID.hpp"
+# include "Cell.hpp"
 # include "IBlock.hpp"
 # include "IndestructibleBlock.hpp"
 
@@ -38,7 +39,11 @@ namespace bbman
     bool isOutside(irr::core::vector3df const& pos);
     irr::core::vector3df const& getSize(void) const;
     irr::core::vector3df const& getScale(void) const;
-    Map<ItemID> const& getMap(void) const;
+    Map<bbman::Cell> const& getMap(void) const;
+    irr::core::vector3df const& getSpawnPosition(size_t num) const;
+    bool isValidMove(irr::core::vector3df const& pos, t_direction dir) const;
+    bool isInNode(irr::core::vector3df const& pos,
+		  irr::core::aabbox3df const& box) const;
   private:
     void initTerrain(Irrlicht &irr);
     void initMap(void);
@@ -46,9 +51,10 @@ namespace bbman
     irr::scene::IMeshSceneNode *_backgroundMesh;
     irr::video::SMaterial _texture;
     std::vector<IBlock *> _blocks;
-    Map<ItemID> _map;
+    Map<bbman::Cell> _map;
     irr::core::vector3df _size;
     irr::core::vector3df _scale;
+    irr::core::vector3df _spawn[4];
   };
 }
 
