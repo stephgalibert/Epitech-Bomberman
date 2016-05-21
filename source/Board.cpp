@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Fri May 20 17:33:08 2016 stephane galibert
+// Last update Sat May 21 02:04:20 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -77,15 +77,13 @@ bool bbman::Board::isValidMove(irr::core::vector3df const& pos,
   return (cell.node & dir);
 }
 
-bool bbman::Board::isInNode(irr::core::vector3df const& pos,
-			    irr::core::aabbox3df const& box) const
+bool bbman::Board::isInNode(irr::core::vector3df const& pos) const
 {
-  int x = (int)(pos.X / 10.f) * 10.f;
-  int y = (int)(pos.Z / 10.f) * 10.f;
+  irr::f32 x = (int)(pos.X / 10.f) * 10.f;
+  irr::f32 y = (int)(pos.Z / 10.f) * 10.f;
 
-  x += (10.f / 2.f);
-  y += (10.f / 2.f);
-  return (box.isPointInside(irr::core::vector3df(x, 0.f, y)));
+  return (pos.X > x + 2.f && pos.Z > y + 2.f
+	  && pos.X < x + 6.f && pos.Z < y + 6.f);
 }
 
 bool bbman::Board::isColliding(irr::core::aabbox3df const& box) const
@@ -131,7 +129,8 @@ void bbman::Board::initTerrain(Irrlicht &irr)
 			irr::core::dimension2d<irr::f32>(this->_map.w * 2,
 							 this->_map.h * 2));
   this->_backgroundMesh = irr.getSmgr()->addMeshSceneNode(mesh);
-  this->_backgroundMesh->setPosition(irr::core::vector3df(this->_map.w * this->_scale.X / 2, 0, this->_map.h * this->_scale.Z / 2));
+  this->_backgroundMesh->setPosition(irr::core::vector3df(this->_map.w * this->_scale.X / 2, 0,
+							  this->_map.h * this->_scale.Z / 2));
 }
 
 void bbman::Board::initMap(void)
@@ -191,7 +190,8 @@ void bbman::Board::initMesh(Irrlicht &irr)
 	try {
 	  block->init(irr);
 	  ext = block->getBoundingBox().getExtent();
-	  block->setPosition(irr::core::vector3df(j * this->_scale.X + (this->_scale.X / 2), (ext.Y / 2), i * this->_scale.Z + (this->_scale.Z / 2)));
+	  block->setPosition(irr::core::vector3df(j * this->_scale.X + (this->_scale.X / 2), (ext.Y / 2),
+						  i * this->_scale.Z + (this->_scale.Z / 2)));
 	  this->_blocks.push_back(block);
 	} catch (std::runtime_error const& e) {
 	  if (block)
