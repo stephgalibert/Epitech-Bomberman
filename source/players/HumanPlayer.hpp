@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Fri May 20 14:55:57 2016 stephane galibert
+// Last update Sat May 21 02:05:16 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -43,7 +43,6 @@ namespace bbman
     virtual irr::s32 getScore(void) const;
     virtual bool isRunning(void) const;
     virtual bool input(InputListener &inputListener);
-    //virtual void goToPrevPosition(void);
     virtual size_t getSpeed(void) const;
     virtual void setSpeed(size_t speed);
     virtual void addEffect(IEffect *effect);

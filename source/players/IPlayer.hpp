@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:32:16 2016 stephane galibert
-// Last update Thu May 19 23:44:56 2016 stephane galibert
+// Last update Sat May 21 02:08:11 2016 stephane galibert
 //
 
 #ifndef _IPLAYER_HPP_
@@ -24,7 +24,7 @@ namespace bbman
   class IPlayer : public IEntity
   {
   public:
-    static const constexpr float INITIAL_SPEED = 20.0f;
+    static const constexpr float INITIAL_SPEED = 40.0f;
   public:
     virtual ~IPlayer(void) {}
     virtual void init(Irrlicht &irr) = 0;

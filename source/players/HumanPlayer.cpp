@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Fri May 20 17:32:31 2016 stephane galibert
+// Last update Sat May 21 02:03:05 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -77,20 +77,9 @@ void bbman::HumanPlayer::update(bbman::Irrlicht &irr, irr::f32 delta)
   updateEffets(delta);
 }
 
-/*bool isInCenter(irr::core::vector3df const& pos, bbman::IPlayer *player)
-{
-  int x = (int)(pos.X / 10.f) * 10.f;
-  int y = (int)(pos.Z / 10.f) * 10.f;
-
-  x += (10.f / 2.f);
-  y += (10.f / 2.f);
-
-  return (player->getBoundingBox().isPointInside(irr::core::vector3df(x, 0.f, y)));
-  }*/
-
 void bbman::HumanPlayer::checkDirection(bbman::Board *board)
 {
-  if (!board->isInNode(getPosition(), getBoundingBox())) {
+  if (!board->isInNode(getPosition())) {
     if ((this->_prevDirection == Direction::DIR_EAST
 	 || this->_prevDirection == Direction::DIR_WEST)
 	&&
@@ -345,7 +334,7 @@ void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setAnimationSpeed(0);
-    this->_mesh->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
+    this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
     this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
   }
   else {
