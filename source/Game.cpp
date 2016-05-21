@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Thu May 19 21:51:54 2016 stephane galibert
+// Last update Sat May 21 04:47:47 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -40,10 +40,10 @@ void bbman::Game::init(Irrlicht &irr)
     p1->init(irr);
     p1->setPosition(this->_board->getSpawnPosition(0));
     this->_players.push_back(p1);
-    /*HumanPlayer *p2 = bbman::HumanPlayer::create();
+    HumanPlayer *p2 = bbman::HumanPlayer::create();
     p2->init(irr);
     p2->setPosition(this->_board->getSpawnPosition(1));
-    this->_players.push_back(p2);*/
+    this->_players.push_back(p2);
     // END todel
     initSound();
   } catch (std::runtime_error const& e) {
@@ -101,19 +101,6 @@ void bbman::Game::initSound(void)
   }
 }
 
-void bbman::Game::checkCollision(bbman::IPlayer *player)
-{
-  if (player->isRunning()) {
-    /*std::cerr << "colliding: " << this->_board->isColliding(player->getBoundingBox()) << std::endl;
-    std::cerr << "out: " << this->_board->isOutside(player->getPosition()) << std::endl;
-    if (this->_board->isColliding(player->getBoundingBox())
-	|| this->_board->isOutside(player->getPosition())) {
-      player->goToPrevPosition();
-      }*/
-    this->_powerUPs.checkCollision(player);
-  }
-}
-
 void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta)
 {
   for (std::list<IBomb *>::iterator it = std::begin(this->_bombs);
@@ -134,7 +121,9 @@ void bbman::Game::updatePlayers(bbman::Irrlicht &irr, irr::f32 delta)
   for (auto &it : this->_players) {
     it->checkDirection(this->_board);
     it->update(irr, delta);
-    checkCollision(it);
+    if (it->isRunning()) {
+      this->_powerUPs.checkCollision(it);
+    }
     if (it->getAction() == Action::ACT_BOMB)
       it->dropBomb(irr, this->_board, this->_bombs);
   }
