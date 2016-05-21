@@ -5,14 +5,14 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 20:29:19 2016 stephane galibert
-// Last update Thu May 12 15:55:39 2016 stephane galibert
+// Last update Sat May 21 04:50:16 2016 stephane galibert
 //
 
 #include "BombManager.hpp"
 
 bbman::BombManager::BombManager(void)
 {
-  this->_selectedBomb = std::end(_bombs);
+  this->_selectedBomb = std::end(this->_bombs);
 }
 
 bbman::BombManager::~BombManager(void)

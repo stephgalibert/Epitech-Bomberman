@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 17:37:21 2016 stephane galibert
-// Last update Thu May 12 16:05:26 2016 stephane galibert
+// Last update Sat May 21 04:49:03 2016 stephane galibert
 //
 
 #include "PowerUPs.hpp"
@@ -30,7 +30,7 @@ void bbman::PowerUPs::update(bbman::Irrlicht &irr, float delta, Board *board)
     it->update(irr, delta);
   }
 
-  if (this->_delta > DELAY / 10 && this->_powerUPs.size() < 10) {
+  if (this->_delta > DELAY && this->_powerUPs.size() < 5) {
     this->generate(irr, board);
     this->_delta = 0;
   }

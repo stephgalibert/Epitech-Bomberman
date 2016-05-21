@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Sat May 21 02:04:20 2016 stephane galibert
+// Last update Sat May 21 03:50:24 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -65,8 +65,9 @@ bbman::Map<bbman::Cell> const& bbman::Board::getMap(void) const
 
 irr::core::vector3df const& bbman::Board::getSpawnPosition(size_t num) const
 {
-  if (num < 4)
+  if (num < 4) {
     return (this->_spawn[num]);
+  }
   return (this->_spawn[0]);
 }
 
@@ -79,8 +80,8 @@ bool bbman::Board::isValidMove(irr::core::vector3df const& pos,
 
 bool bbman::Board::isInNode(irr::core::vector3df const& pos) const
 {
-  irr::f32 x = (int)(pos.X / 10.f) * 10.f;
-  irr::f32 y = (int)(pos.Z / 10.f) * 10.f;
+  irr::f32 x = (int)(pos.X / this->_scale.X) * this->_scale.X;
+  irr::f32 y = (int)(pos.Z / this->_scale.Z) * this->_scale.Z;
 
   return (pos.X > x + 2.f && pos.Z > y + 2.f
 	  && pos.X < x + 6.f && pos.Z < y + 6.f);
@@ -137,10 +138,8 @@ void bbman::Board::initMap(void)
 {
   for (size_t i = 0 ; i < this->_map.h; ++i) {
     for (size_t j = 0 ; j < this->_map.w; ++j) {
-      if (i == 0 || j == 0 || i == this->_map.h - 1 || j == this->_map.w - 1) {
-	this->_map.at(j, i).id = ItemID::II_BLOCK_INBRKABLE;
-      }
-      else if (!(i % 2) && !(j % 2)) {
+      if ((!(i % 2) && !(j % 2))
+	  || (i == 0 || j == 0 || i == this->_map.h - 1 || j == this->_map.w - 1)) {
 	this->_map.at(j, i).id = ItemID::II_BLOCK_INBRKABLE;
       }
     }
@@ -149,33 +148,21 @@ void bbman::Board::initMap(void)
   for (size_t i = 0 ; i < this->_map.h; ++i) {
     for (size_t j = 0 ; j < this->_map.w; ++j) {
       if (this->_map.at(j, i).id == ItemID::II_BLOCK_INBRKABLE) {
-	if (i == 0 || j == 0 || i == this->_map.h - 1 || j == this->_map.w - 1) {
-	  if (i == 0)
-	    this->_map.at(j, i + 1).node &= ~(this->_map.at(j, i + 1).node & ((size_t)Direction::DIR_SOUTH));
-	  if (j == 0)
-	    this->_map.at(j + 1, i).node &= ~(this->_map.at(j + 1, i).node & ((size_t)Direction::DIR_WEST));
-	  if (i == this->_map.h - 1)
-	    this->_map.at(j, i - 1).node &= ~(this->_map.at(j, i - 1).node & ((size_t)Direction::DIR_NORTH));
-	  if (j == this->_map.w - 1)
-	    this->_map.at(j - 1, i).node &= ~(this->_map.at(j - 1, i).node & ((size_t)Direction::DIR_EAST));
-	}
-	else {
-	  if (i > 0)
-	    this->_map.at(j, i - 1).node &= ~(this->_map.at(j, i - 1).node & ((size_t)Direction::DIR_NORTH));
-	  if (i < this->_map.h - 1)
-	    this->_map.at(j, i + 1).node &= ~(this->_map.at(j, i + 1).node & ((size_t)Direction::DIR_SOUTH));
-	  if (j > 0)
-	    this->_map.at(j - 1, i).node &= ~(this->_map.at(j - 1, i).node & ((size_t)Direction::DIR_EAST));
-	  if (j < this->_map.w - 1)
-	    this->_map.at(j + 1, i).node &= ~(this->_map.at(j + 1, i).node & ((size_t)Direction::DIR_WEST));
-	}
+	if (i > 0)
+	  this->_map.at(j, i - 1).node &= ~(this->_map.at(j, i - 1).node & ((size_t)Direction::DIR_NORTH));
+	if (i < this->_map.h - 1)
+	  this->_map.at(j, i + 1).node &= ~(this->_map.at(j, i + 1).node & ((size_t)Direction::DIR_SOUTH));
+	if (j > 0)
+	  this->_map.at(j - 1, i).node &= ~(this->_map.at(j - 1, i).node & ((size_t)Direction::DIR_EAST));
+	if (j < this->_map.w - 1)
+	  this->_map.at(j + 1, i).node &= ~(this->_map.at(j + 1, i).node & ((size_t)Direction::DIR_WEST));
       }
     }
   }
-  _spawn[0] = irr::core::vector3df(10.f, 0.f, 10.f);
-  _spawn[1] = irr::core::vector3df(170.f, 0.f, 10.f);
-  _spawn[2] = irr::core::vector3df(170.f, 0.f, 110.f);
-  _spawn[3] = irr::core::vector3df(10.f, 0.f, 110.f);
+  this->_spawn[0] = irr::core::vector3df(10.f, 0.f, 10.f);
+  this->_spawn[1] = irr::core::vector3df(170.f, 0.f, 10.f);
+  this->_spawn[2] = irr::core::vector3df(170.f, 0.f, 110.f);
+  this->_spawn[3] = irr::core::vector3df(10.f, 0.f, 110.f);
 }
 
 void bbman::Board::initMesh(Irrlicht &irr)
@@ -194,8 +181,9 @@ void bbman::Board::initMesh(Irrlicht &irr)
 						  i * this->_scale.Z + (this->_scale.Z / 2)));
 	  this->_blocks.push_back(block);
 	} catch (std::runtime_error const& e) {
-	  if (block)
+	  if (block) {
 	    delete (block);
+	  }
 	  std::cerr << e.what() << std::endl;
 	}
       }
