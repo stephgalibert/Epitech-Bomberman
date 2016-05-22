@@ -1,2 +1,15 @@
--I../lib/lua/LuaInterpreter/include
--Ilib/lua/LuaBridge/
+-I/lib/assimp/include
+-I/lib/assimp/include/assimp
+-I/lib/google_test/include
+-I/lib/google_test/include/gtest
+-I/lib/irrlicht/include
+-I/lib/lua/LuaBridge/
+-I/lib/lua/LuaBridge/detail
+-I/lib/lua/LuaInterpreter/include
+-I/lib/SFML/include/
+-I/lib/SFML/include/Audio
+-I/lib/SFML/include/System
+
+# Temporary path for test
+-I../../lib/google_test/include/gtest
+-I../../lib/google_test/include

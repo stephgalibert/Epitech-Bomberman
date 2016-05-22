@@ -1,2 +1,5 @@
 *.o
 *~
+bomberman
+build
+bin

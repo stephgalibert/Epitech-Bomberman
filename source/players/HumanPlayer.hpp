@@ -46,6 +46,7 @@ namespace bbman
     virtual void addEffect(IEffect *effect);
     virtual size_t getPlayerNumber(void) const;
     virtual bool isRunning(void) const;
+    virtual bool hasExplosed(void) const;
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual BombManager const& getBombManager(void) const;
     virtual std::list<IEffect *> const& getEffects(void) const;

@@ -39,18 +39,18 @@ public:
 #include <iostream>
 #include <thread>
 
-int main()
-{
-  ThreadPool tpool(NB_THREAD);
-
-  srand(time(NULL));
-  tpool.init();
-
-  for (uint64_t i = 0; i < NB_TASK; i++) {
-    std::cout << "Core add action " << i << std::endl;
-    tpool.addTask(new Action(i));
-  }
-
-  while (true);
-  return 0;
-}
+// int main()
+// {
+//   ThreadPool tpool(NB_THREAD);
+//
+//   srand(time(NULL));
+//   tpool.init();
+//
+//   for (uint64_t i = 0; i < NB_TASK; i++) {
+//     std::cout << "Core add action " << i << std::endl;
+//     tpool.addTask(new Action(i));
+//   }
+//
+//   while (true);
+//   return 0;
+// }

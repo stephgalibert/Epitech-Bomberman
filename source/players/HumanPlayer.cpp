@@ -198,6 +198,11 @@ bool bbman::HumanPlayer::isRunning(void) const
   return (this->_isRunning);
 }
 
+bool bbman::HumanPlayer::hasExplosed(void) const
+{
+  return (!this->_alive);
+}
+
 irr::core::vector3d<irr::s32> const& bbman::HumanPlayer::getPosInMap(irr::core::vector3df const& scale)
 {
   this->_posInMap.X = getPosition().X / scale.X;
@@ -400,7 +405,7 @@ void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &listener)
 
 void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
 {
-  std::string txt = "./media/ninja.b3d";
+  std::string txt = "./asset/media/ninja.b3d";
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -415,7 +420,7 @@ void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
 
 void bbman::HumanPlayer::initPlayer2(Irrlicht &irr)
 {
-  std::string txt = "./media/ninja.b3d";
+  std::string txt = "./asset/media/ninja.b3d";
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);

@@ -125,7 +125,7 @@ bool bbman::ExplodingBomb::isExploding(void) const
 
 void bbman::ExplodingBomb::initMesh(bbman::Irrlicht &irr)
 {
-  std::string txt = "./media/ninja.b3d";
+  std::string txt = "./asset/media/ninja.b3d";
 
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
@@ -144,7 +144,7 @@ void bbman::ExplodingBomb::initSound(void)
 {
   try {
     if (!SoundCache.find("explosion")) {
-      SoundCache.insert("explosion", MemoryFile("./sound/explosion.wav"));
+      SoundCache.insert("explosion", MemoryFile("./asset/sound/explosion.wav"));
       SoundCache["explosion"].load();
     }
   this->_sounds.addSample("explosion", SoundCache["explosion"]);
