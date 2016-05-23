@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 15:15:50 2016 stephane galibert
-// Last update Thu May 19 15:25:55 2016 stephane galibert
+// Last update Mon May 23 20:34:09 2016 stephane galibert
 //
 
 #ifndef _BOMB_HPP_
@@ -21,6 +21,8 @@ namespace bbman
     virtual ~IBomb(void) {}
     virtual void init(Irrlicht &irr) = 0;
     virtual void update(Irrlicht &irr, irr::f32 delta) = 0;
+    virtual bool isInExplosion(IEntity *entity, irr::core::vector3df const& scale) = 0;
+    virtual bool isInDeflagration(IEntity *entity, irr::core::vector3df const& scale) = 0;
     virtual IBomb *clone(void) const = 0;
     virtual void setPosition(irr::core::vector3df const& pos) = 0;
     virtual irr::core::vector3df const& getPosition(void) const = 0;
@@ -31,6 +33,8 @@ namespace bbman
     virtual bool hasExplosed(void) const = 0;
     virtual irr::f32 getDelay(void) const = 0;
     virtual irr::f32 getDelta(void) const = 0;
+    virtual void explode(void) = 0;
+    virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale) = 0;
   };
 }
 

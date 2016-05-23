@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 03:11:29 2016 stephane galibert
-// Last update Thu May 19 17:29:45 2016 stephane galibert
+// Last update Mon May 23 18:23:09 2016 stephane galibert
 //
 
 #ifndef _IENTITY_HPP_
@@ -27,7 +27,8 @@ namespace bbman
     virtual irr::core::vector3df const& getPosition(void) const = 0;
     virtual irr::core::aabbox3df const getBoundingBox(void) const = 0;
     virtual bool isColliding(irr::core::aabbox3df const& box) const = 0;
-    //virtual void dies(void); => explosed by a bomb
+    virtual void explode(void) = 0;
+    virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale) = 0;
   };
 }
 

@@ -5,13 +5,14 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Sat May 21 04:47:07 2016 stephane galibert
+// Last update Mon May 23 18:32:02 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
 # define _HUMANPLAYER_HPP_
 
 # include <irrlicht.h>
+# include <iostream>
 # include <functional>
 # include <unordered_map>
 # include <algorithm>
@@ -31,15 +32,14 @@ namespace bbman
     virtual ~HumanPlayer(void);
     virtual void init(Irrlicht &irr);
     virtual void update(Irrlicht &irr, irr::f32 delta);
-    virtual void checkDirection(Board *board);
+    virtual void play(Irrlicht &irr, Board *board,
+		      std::list<IBomb *> &bombs);
     virtual void addBomb(IBomb *bomb);
-    virtual void dropBomb(Irrlicht &irr, Board *board,
-			  std::list<IBomb *> &bombs);
     virtual void setPosition(irr::core::vector3df const& pos);
     virtual irr::core::vector3df const& getPosition(void) const;
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
-    virtual t_action getAction(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
+    virtual void explode(void);
     virtual irr::s32 getScore(void) const;
     virtual bool input(InputListener &inputListener);
     virtual size_t getSpeed(void) const;
@@ -47,12 +47,17 @@ namespace bbman
     virtual void addEffect(IEffect *effect);
     virtual size_t getPlayerNumber(void) const;
     virtual bool isRunning(void) const;
+    virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
+;
+    virtual bool hasExplosed(void) const;
   private:
     static size_t NumberOfPlayer;
   private:
     HumanPlayer(void);
+    void dropBomb(Irrlicht &irr, Board *board, std::list<IBomb *> &bombs);
     IBomb *createBomb(Irrlicht &irr);
     void updateEffets(irr::f32 delta);
+    void checkDirection(Board *board);
     void move(irr::f32 delta);
     void moveEast(irr::f32 delta);
     void moveWest(irr::f32 delta);
@@ -67,6 +72,7 @@ namespace bbman
     std::unordered_map<size_t, std::function<void(Irrlicht &)> > _inits;
     irr::scene::IAnimatedMeshSceneNode *_mesh;
     std::list<IEffect *> _effects;
+    irr::core::vector3d<irr::s32> _posInMap;
     BombManager _bombManager;
     t_direction _direction;
     t_direction _prevDirection;

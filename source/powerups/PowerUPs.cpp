@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 17:37:21 2016 stephane galibert
-// Last update Sat May 21 04:49:03 2016 stephane galibert
+// Last update Mon May 23 05:48:13 2016 stephane galibert
 //
 
 #include "PowerUPs.hpp"
@@ -30,7 +30,7 @@ void bbman::PowerUPs::update(bbman::Irrlicht &irr, float delta, Board *board)
     it->update(irr, delta);
   }
 
-  if (this->_delta > DELAY && this->_powerUPs.size() < 5) {
+  if (this->_delta > DELAY / 2 && this->_powerUPs.size() < 5) {
     this->generate(irr, board);
     this->_delta = 0;
   }
@@ -39,12 +39,14 @@ void bbman::PowerUPs::update(bbman::Irrlicht &irr, float delta, Board *board)
 void bbman::PowerUPs::checkCollision(IPlayer *player)
 {
   for (std::list<IPowerUP *>::iterator it = std::begin(this->_powerUPs);
-       it != std::end(this->_powerUPs);
-       ++it) {
+       it != std::end(this->_powerUPs); ) {
     if ((*it)->isColliding(player->getBoundingBox())) {
       (*it)->affectPlayer(player);
       delete (*it);
       it = this->_powerUPs.erase(it);
+    }
+    else {
+      ++it;
     }
   }
 }

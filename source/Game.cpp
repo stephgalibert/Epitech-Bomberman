@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Sat May 21 04:47:47 2016 stephane galibert
+// Last update Mon May 23 23:36:50 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -111,6 +111,18 @@ void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta)
     }
     else {
       (*it)->update(irr, delta);
+      if ((*it)->isExplosing()) {
+	for (auto &it2 : this->_players) {
+	  if (!it2->hasExplosed()) {
+	    if ((*it)->isInExplosion(it2, this->_board->getScale())
+		&& this->_board->isNotProtected(it2->getPosInMap(this->_board->getScale()),
+						(*it)->getPosInMap(this->_board->getScale()))) {
+	      it2->explode();
+	    }
+	  }
+	}
+	this->_board->explodeBlocks(*it);
+      }
       ++it;
     }
   }
@@ -119,12 +131,10 @@ void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta)
 void bbman::Game::updatePlayers(bbman::Irrlicht &irr, irr::f32 delta)
 {
   for (auto &it : this->_players) {
-    it->checkDirection(this->_board);
+    it->play(irr, this->_board, this->_bombs);
     it->update(irr, delta);
     if (it->isRunning()) {
       this->_powerUPs.checkCollision(it);
     }
-    if (it->getAction() == Action::ACT_BOMB)
-      it->dropBomb(irr, this->_board, this->_bombs);
   }
 }

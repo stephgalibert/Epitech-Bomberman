@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:02:45 2016 stephane galibert
-// Last update Sun May  8 20:15:37 2016 stephane galibert
+// Last update Mon May 23 17:24:20 2016 stephane galibert
 //
 
 #ifndef _IPOWERUP_HPP_
@@ -29,6 +29,8 @@ namespace bbman
     virtual irr::core::vector3df const& getPosition(void) const = 0;
     virtual irr::core::aabbox3df const getBoundingBox(void) const = 0;
     virtual bool isColliding(irr::core::aabbox3df const& box) const = 0;
+    virtual void explode(void) = 0;
+    virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale) = 0;
     virtual void affectPlayer(IPlayer *player) = 0;
   };
 }

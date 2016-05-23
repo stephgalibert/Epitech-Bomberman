@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:08:37 2016 stephane galibert
-// Last update Thu May 19 15:30:45 2016 stephane galibert
+// Last update Mon May 23 20:34:27 2016 stephane galibert
 //
 
 #ifndef _EXPLODINGBOMB_HPP_
@@ -19,6 +19,7 @@
 # include "IPlayer.hpp"
 # include "CacheManager.hpp"
 # include "MemoryFile.hpp"
+# include "StaticTools.hpp"
 
 namespace bbman
 {
@@ -32,6 +33,8 @@ namespace bbman
     virtual ~ExplodingBomb(void);
     virtual void init(Irrlicht &irr);
     virtual void update(Irrlicht &irr, irr::f32 delta);
+    virtual bool isInExplosion(IEntity *entity, irr::core::vector3df const& scale);
+    virtual bool isInDeflagration(IEntity *entity, irr::core::vector3df const& scale);
     virtual IBomb *clone(void) const;
     virtual void setPosition(irr::core::vector3df const& pos);
     virtual irr::core::vector3df const& getPosition(void) const;
@@ -42,6 +45,8 @@ namespace bbman
     virtual bool hasExplosed(void) const;
     virtual irr::f32 getDelay(void) const;
     virtual irr::f32 getDelta(void) const;
+    virtual void explode(void);
+    virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
   private:
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:
@@ -54,6 +59,8 @@ namespace bbman
     bool _explosing;
     bool _explosed;
     SoundBox _sounds;
+    irr::core::vector3d<irr::s32> _posInMap;
+    irr::s32 _cpt;
   };
 }
 

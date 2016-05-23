@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May 19 20:10:50 2016 stephane galibert
-// Last update Fri May 20 15:06:28 2016 stephane galibert
+// Last update Mon May 23 06:05:28 2016 stephane galibert
 //
 
 #ifndef _CELL_HPP_
@@ -21,8 +21,7 @@ namespace bbman
     Cell(void)
     {
       this->id = ItemID::II_NONE;
-      this->node = 0;
-      this->node = ~(this->node & 0);
+      this->node = ~(0x0LU & 0);
     }
     ItemID id;
     irr::core::aabbox3df nodeBox;
