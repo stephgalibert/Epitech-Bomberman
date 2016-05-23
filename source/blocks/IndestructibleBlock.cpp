@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:23:18 2016 stephane galibert
-// Last update Wed May 18 17:40:04 2016 stephane galibert
+// Last update Mon May 23 20:46:09 2016 stephane galibert
 //
 
 #include "IndestructibleBlock.hpp"
@@ -49,7 +49,9 @@ void bbman::IndestructibleBlock::update(Irrlicht &irr, irr::f32 delta)
 
 void bbman::IndestructibleBlock::setPosition(irr::core::vector3df const& pos)
 {
-  this->_node->setPosition(pos);
+  irr::core::vector3df ext = getBoundingBox().getExtent();
+
+  this->_node->setPosition(irr::core::vector3df(pos.X, ext.Y / 2, pos.Z));
   this->_node->updateAbsolutePosition();
 }
 
@@ -66,4 +68,21 @@ irr::core::aabbox3df const bbman::IndestructibleBlock::getBoundingBox(void) cons
 bool bbman::IndestructibleBlock::isColliding(irr::core::aabbox3df const& box) const
 {
   return (box.intersectsWithBox(this->getBoundingBox()));
+}
+
+void bbman::IndestructibleBlock::explode(void)
+{
+  std::cerr << "tring to explode an indestructible block" << std::endl;
+}
+
+irr::core::vector3d<irr::s32> const& bbman::IndestructibleBlock::getPosInMap(irr::core::vector3df const& scale)
+{
+  this->_posInMap.X = getPosition().X / scale.X;
+  this->_posInMap.Z = getPosition().Z / scale.Z;
+  return (this->_posInMap);
+}
+
+bool bbman::IndestructibleBlock::hasExplosed(void) const
+{
+  return (true);
 }

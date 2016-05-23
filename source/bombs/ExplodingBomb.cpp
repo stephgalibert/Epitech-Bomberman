@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Thu May 19 15:44:32 2016 stephane galibert
+// Last update Tue May 24 00:25:45 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -19,6 +19,7 @@ bbman::ExplodingBomb::ExplodingBomb(bbman::IPlayer *owner)
   this->_delta = 0;
   this->_explosing = false;
   this->_explosed = false;
+  this->_cpt = 0;
 }
 
 bbman::ExplodingBomb::~ExplodingBomb(void)
@@ -59,7 +60,24 @@ void bbman::ExplodingBomb::update(bbman::Irrlicht &irr, irr::f32 delta)
     if (!this->_explosed) {
       this->_delta += delta;
     }
+    ++this->_cpt;
   }
+}
+
+bool bbman::ExplodingBomb::isInExplosion(IEntity *entity, irr::core::vector3df const& scale)
+{
+  irr::core::vector3d<irr::s32> const& pos = entity->getPosInMap(scale);
+  irr::core::vector3d<irr::s32> const& mypos = getPosInMap(scale);
+  irr::s32 dist = tools::StaticTools::getDistance2D(pos, mypos);
+  return (this->_cpt == 1 && dist < 4 && (pos.X == mypos.X || pos.Z == mypos.Z));
+}
+
+bool bbman::ExplodingBomb::isInDeflagration(IEntity *entity, irr::core::vector3df const& scale)
+{
+  irr::core::vector3d<irr::s32> const& pos = entity->getPosInMap(scale);
+  irr::core::vector3d<irr::s32> const& mypos = getPosInMap(scale);
+  irr::s32 dist = tools::StaticTools::getDistance2D(pos, mypos);
+  return (this->_cpt > 1 && dist < 4 && (pos.X == mypos.X || pos.Z == mypos.Z));
 }
 
 bbman::IBomb *bbman::ExplodingBomb::clone(void) const
@@ -141,4 +159,16 @@ irr::f32 bbman::ExplodingBomb::getDelay(void) const
 irr::f32 bbman::ExplodingBomb::getDelta(void) const
 {
   return (this->_delta);
+}
+
+void bbman::ExplodingBomb::explode(void)
+{
+  std::cerr << "trying to explode exploding bomb" << std::endl;
+}
+
+irr::core::vector3d<irr::s32> const& bbman::ExplodingBomb::getPosInMap(irr::core::vector3df const& scale)
+{
+  this->_posInMap.X = getPosition().X / scale.X;
+  this->_posInMap.Z = getPosition().Z / scale.Z;
+  return (this->_posInMap);
 }

@@ -1,42 +1,42 @@
 //
-// SpeedUPPowerUP.hpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// DestructibleBlock.hpp for indie in /home/galibe_s/rendu/bomberman/source
 //
 // Made by stephane galibert
 // Login   <galibe_s@epitech.net>
 //
-// Started on  Sun May  8 18:34:04 2016 stephane galibert
-// Last update Mon May 23 17:24:15 2016 stephane galibert
+// Started on  Mon May 23 19:11:32 2016 stephane galibert
+// Last update Mon May 23 19:13:27 2016 stephane galibert
 //
 
-#ifndef _SPEEDUPPOWERUP_HPP_
-# define _SPEEDUPPOWERUP_HPP_
+#ifndef _DESTRUCTIBLEBLOCK_HPP_
+# define _DESTRUCTIBLEBLOCK_HPP_
 
 # include <iostream>
 
-# include "IPowerUP.hpp"
-# include "SpeedUPEffect.hpp"
+# include "IBlock.hpp"
 
 namespace bbman
 {
-  class SpeedUPPowerUP : public IPowerUP
+  class DestructibleBlock : public IBlock
   {
   public:
-    SpeedUPPowerUP(void);
-    virtual ~SpeedUPPowerUP(void);
+    DestructibleBlock(void);
+    virtual ~DestructibleBlock(void);
     virtual void init(Irrlicht &irr);
     virtual void update(Irrlicht &irr, irr::f32 delta);
+    virtual void setMaterialFlag(irr::video::E_MATERIAL_FLAG flag, bool value);
     virtual void setPosition(irr::core::vector3df const& pos);
     virtual irr::core::vector3df const& getPosition(void) const;
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
     virtual void explode(void);
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
-    virtual void affectPlayer(IPlayer *player);
+    virtual bool hasExplosed(void) const;
   private:
     irr::scene::ISceneNode *_node;
-    irr::f32 _delta;
     irr::core::vector3d<irr::s32> _posInMap;
+    bool _explosed;
   };
 }
 
-#endif /* !_SPEEDUPPOWERUP_HPP_ */
+#endif /* !_DESTRUCTIBLEBLOCK_HPP_ */

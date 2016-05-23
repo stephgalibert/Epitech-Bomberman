@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Sat May 21 04:43:24 2016 stephane galibert
+// Last update Mon May 23 18:27:55 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -63,7 +63,7 @@ void bbman::HumanPlayer::init(bbman::Irrlicht &irr)
     if (this->_inits.find(this->_playerNum) != std::end(this->_inits)) {
       this->_inits[this->_playerNum](irr);
     }
-    this->addBomb(new ExplodingBomb(this));
+    addBomb(new ExplodingBomb(this));
     this->_alive = true;
   } catch (std::runtime_error const& e) {
     throw (e);
@@ -73,30 +73,43 @@ void bbman::HumanPlayer::init(bbman::Irrlicht &irr)
 void bbman::HumanPlayer::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
   (void)irr;
-  move(delta);
-  updateEffets(delta);
+  if (this->_alive) {
+    move(delta);
+    updateEffets(delta);
+  }
+}
+
+void bbman::HumanPlayer::play(bbman::Irrlicht &irr, bbman::Board *board,
+					 std::list<bbman::IBomb *> &bombs)
+{
+  if (this->_alive) {
+    checkDirection(board);
+    if (this->_action == bbman::ACT_BOMB) {
+      dropBomb(irr, board, bombs);
+    }
+  }
 }
 
 void bbman::HumanPlayer::checkDirection(bbman::Board *board)
 {
-  if (!board->isInNode(getPosition())) {
-    if ((this->_prevDirection == Direction::DIR_EAST
-	 || this->_prevDirection == Direction::DIR_WEST)
-	&&
-	(this->_direction == Direction::DIR_NORTH
+  if (this->_alive) {
+    if (!board->isInNode(getPosition())) {
+      if ((this->_prevDirection == Direction::DIR_EAST
+	   || this->_prevDirection == Direction::DIR_WEST)
+	  &&
+	  (this->_direction == Direction::DIR_NORTH
 	 || this->_direction == Direction::DIR_SOUTH)) {
-      this->_direction = Direction::DIR_NONE;
+	this->_direction = Direction::DIR_NONE;
+      }
+      else if ((this->_prevDirection == Direction::DIR_NORTH
+		|| this->_prevDirection == Direction::DIR_SOUTH)
+	       &&
+	       (this->_direction == Direction::DIR_EAST
+		|| this->_direction == Direction::DIR_WEST)) {
+	this->_direction = Direction::DIR_NONE;
+      }
     }
-    else if ((this->_prevDirection == Direction::DIR_NORTH
-	      || this->_prevDirection == Direction::DIR_SOUTH)
-	     &&
-	     (this->_direction == Direction::DIR_EAST
-	      || this->_direction == Direction::DIR_WEST)) {
-      this->_direction = Direction::DIR_NONE;
-    }
-  }
-  else {
-    if (!board->isValidMove(getPosition(), this->_direction)) {
+    else if (!board->isValidMove(getPosition(), this->_direction)) {
       this->_direction = Direction::DIR_NONE;
     }
   }
@@ -149,17 +162,28 @@ irr::core::vector3df const& bbman::HumanPlayer::getPosition(void) const
 
 irr::core::aabbox3df const bbman::HumanPlayer::getBoundingBox(void) const
 {
-  return (this->_mesh->getTransformedBoundingBox());
-}
-
-bbman::t_action bbman::HumanPlayer::getAction(void) const
-{
-  return (this->_action);
+  if (this->_alive) {
+    return (this->_mesh->getTransformedBoundingBox());
+  }
+  return (irr::core::aabbox3df());
 }
 
 bool bbman::HumanPlayer::isColliding(irr::core::aabbox3df const& box) const
 {
-  return (box.intersectsWithBox(this->getBoundingBox()));
+  if (this->_alive) {
+    return (box.intersectsWithBox(this->getBoundingBox()));
+  }
+  return (false);
+}
+
+void bbman::HumanPlayer::explode(void)
+{
+  if (this->_alive) {
+    this->_alive = false;
+    this->_mesh->remove();
+    this->_mesh = NULL;
+    std::cerr << "player " + std::to_string(_playerNum) + " died" << std::endl;
+  }
 }
 
 irr::s32 bbman::HumanPlayer::getScore(void) const
@@ -172,12 +196,25 @@ bool bbman::HumanPlayer::isRunning(void) const
   return (this->_isRunning);
 }
 
+bool bbman::HumanPlayer::hasExplosed(void) const
+{
+  return (!this->_alive);
+}
+
+irr::core::vector3d<irr::s32> const& bbman::HumanPlayer::getPosInMap(irr::core::vector3df const& scale)
+{
+  this->_posInMap.X = getPosition().X / scale.X;
+  this->_posInMap.Z = getPosition().Z / scale.Z;
+  return (this->_posInMap);
+}
+
 bool bbman::HumanPlayer::input(bbman::InputListener &inputListener)
 {
   this->_direction = Direction::DIR_NONE;
   this->_action = Action::ACT_NONE;
-  if (_inputs.find(_playerNum) != _inputs.cend())
+  if (this->_inputs.find(this->_playerNum) != this->_inputs.cend()) {
     this->_inputs.at(this->_playerNum)(inputListener);
+  }
   return (false);
 }
 
@@ -193,18 +230,20 @@ void bbman::HumanPlayer::setSpeed(size_t speed)
 
 void bbman::HumanPlayer::addEffect(IEffect *effect)
 {
-  if (std::find_if(std::begin(this->_effects), std::end(this->_effects),
-		   [&effect](IEffect *buff) {
-		     if (effect->getEffectID() == buff->getEffectID())
-		       buff->restart();
+  if (this->_alive) {
+    if (std::find_if(std::begin(this->_effects), std::end(this->_effects),
+		     [&effect](IEffect *buff) {
+		       if (effect->getEffectID() == buff->getEffectID())
+			 buff->restart();
 		       return (true);
-		     return (false);
+		       return (false);
 		   }) == std::end(this->_effects)) {
-    effect->enable();
-    this->_effects.push_back(effect);
-  }
-  else {
-    delete (effect);
+      effect->enable();
+      this->_effects.push_back(effect);
+    }
+    else {
+      delete (effect);
+    }
   }
 }
 
@@ -278,41 +317,45 @@ void bbman::HumanPlayer::moveSouth(irr::f32 delta)
 
 void bbman::HumanPlayer::inputPlayer1(bbman::InputListener &inputListener)
 {
-  if(inputListener.IsKeyDown(irr::KEY_KEY_Z)) {
-    this->_direction = Direction::DIR_NORTH;
-  }
-  else if(inputListener.IsKeyDown(irr::KEY_KEY_S)) {
-    this->_direction = Direction::DIR_SOUTH;
-  }
-  else if(inputListener.IsKeyDown(irr::KEY_KEY_Q)) {
-    this->_direction = Direction::DIR_WEST;
-  }
-  else if(inputListener.IsKeyDown(irr::KEY_KEY_D)) {
-    this->_direction = Direction::DIR_EAST;
-  }
+  if (this->_alive) {
+    if(inputListener.IsKeyDown(irr::KEY_KEY_Z)) {
+      this->_direction = Direction::DIR_NORTH;
+    }
+    else if(inputListener.IsKeyDown(irr::KEY_KEY_S)) {
+      this->_direction = Direction::DIR_SOUTH;
+    }
+    else if(inputListener.IsKeyDown(irr::KEY_KEY_Q)) {
+      this->_direction = Direction::DIR_WEST;
+    }
+    else if(inputListener.IsKeyDown(irr::KEY_KEY_D)) {
+      this->_direction = Direction::DIR_EAST;
+    }
 
-  if (inputListener.IsKeyDown(irr::KEY_SPACE)) {
-    this->_action |= Action::ACT_BOMB;
+    if (inputListener.IsKeyDown(irr::KEY_SPACE)) {
+      this->_action |= Action::ACT_BOMB;
+    }
   }
 }
 
 void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &inputListener)
 {
-  if(inputListener.IsKeyDown(irr::KEY_UP)) {
-    this->_direction = Direction::DIR_NORTH;
-  }
-  else if(inputListener.IsKeyDown(irr::KEY_DOWN)) {
-    this->_direction = Direction::DIR_SOUTH;
-  }
-  else if(inputListener.IsKeyDown(irr::KEY_LEFT)) {
-    this->_direction = Direction::DIR_WEST;
-  }
-  else if(inputListener.IsKeyDown(irr::KEY_RIGHT)) {
-    this->_direction = Direction::DIR_EAST;
-  }
+  if (this->_alive) {
+    if(inputListener.IsKeyDown(irr::KEY_UP)) {
+      this->_direction = Direction::DIR_NORTH;
+    }
+    else if(inputListener.IsKeyDown(irr::KEY_DOWN)) {
+      this->_direction = Direction::DIR_SOUTH;
+    }
+    else if(inputListener.IsKeyDown(irr::KEY_LEFT)) {
+      this->_direction = Direction::DIR_WEST;
+    }
+    else if(inputListener.IsKeyDown(irr::KEY_RIGHT)) {
+      this->_direction = Direction::DIR_EAST;
+    }
 
-  if (inputListener.IsKeyDown(irr::KEY_RETURN)) {
-    this->_action |= Action::ACT_BOMB;
+    if (inputListener.IsKeyDown(irr::KEY_RETURN)) {
+      this->_action |= Action::ACT_BOMB;
+    }
   }
 }
 

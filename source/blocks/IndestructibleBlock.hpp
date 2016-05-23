@@ -5,11 +5,13 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:22:34 2016 stephane galibert
-// Last update Sun May  8 18:13:42 2016 stephane galibert
+// Last update Mon May 23 19:13:48 2016 stephane galibert
 //
 
 #ifndef _INDESTRUCTIBLEBLOCK_HPP_
 # define _INDESTRUCTIBLEBLOCK_HPP_
+
+# include <iostream>
 
 # include "IBlock.hpp"
 
@@ -27,8 +29,12 @@ namespace bbman
     virtual irr::core::vector3df const& getPosition(void) const;
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
+    virtual void explode(void);
+    virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
+    virtual bool hasExplosed(void) const;
   private:
     irr::scene::ISceneNode *_node;
+    irr::core::vector3d<irr::s32> _posInMap;
   };
 }
 
