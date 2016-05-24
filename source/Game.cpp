@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Mon May 23 23:36:50 2016 stephane galibert
+// Last update Tue May 24 19:14:20 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -57,6 +57,10 @@ bool bbman::Game::input(InputListener &inputListener)
     this->_leaveGame = true;
     return (true);
   }
+  else if (inputListener.IsKeyDown(irr::KEY_KEY_P)) {
+    save();
+    return (true);
+  }
   else {
     for (auto &it : this->_players) {
       it->input(inputListener);
@@ -98,6 +102,17 @@ void bbman::Game::initSound(void)
     this->_musics.play("mbackground");
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
+  }
+}
+
+void bbman::Game::save(void)
+{
+  std::ofstream ofs("./save.txt");
+  if (ofs) {
+    ofs << *this->_board;
+  }
+  else {
+    throw (std::runtime_error("can not create ./save.txt"));
   }
 }
 

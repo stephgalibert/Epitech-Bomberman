@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Tue May 24 00:53:51 2016 stephane galibert
+// Last update Tue May 24 19:08:37 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -47,6 +47,7 @@ namespace bbman
     irr::core::vector3df const& getSpawnPosition(size_t num) const;
     bool isValidMove(irr::core::vector3df const& pos, t_direction dir) const;
     bool isInNode(irr::core::vector3df const& pos) const;
+    Map<Cell> const& getMap(void) const;
   private:
     void initTerrain(Irrlicht &irr);
     void initMap(void);
@@ -65,6 +66,8 @@ namespace bbman
     irr::core::vector3df _scale;
     irr::core::vector3df _spawn[4];
   };
+
+  std::ostream &operator<<(std::ostream &flux, bbman::Board const& board);
 }
 
 #endif /* !_BOARD_HPP_ */
