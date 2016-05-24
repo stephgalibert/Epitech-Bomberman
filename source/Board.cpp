@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Tue May 24 00:52:07 2016 stephane galibert
+// Last update Tue May 24 19:30:26 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -78,7 +78,12 @@ bool bbman::Board::isInNode(irr::core::vector3df const& pos) const
   irr::f32 y = (int)(pos.Z / this->_scale.Z) * this->_scale.Z;
 
   return (pos.X > x + 2.f && pos.Z > y + 2.f
-	  && pos.X < x + 6.f && pos.Z < y + 6.f);
+	  && pos.X < x + 8.f && pos.Z < y + 8.f);
+}
+
+bbman::Map<bbman::Cell> const& bbman::Board::getMap(void) const
+{
+  return (this->_map);
 }
 
 bool bbman::Board::isColliding(irr::core::aabbox3df const& box) const
@@ -120,7 +125,9 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     if (bomb->isInExplosion(*it, getScale())
 	&& isNotProtected((*it)->getPosInMap(getScale()),
 			  bomb->getPosInMap(getScale()))) {
-      updateNode((*it)->getPosInMap(getScale()));
+      irr::core::vector3d<irr::s32> pos = (*it)->getPosInMap(getScale());
+      updateNode(pos);
+      this->_map.at(pos.X, pos.Z).id = ItemID::II_NONE;
       delete (*it);
       it = this->_dblocks.erase(it);
     }
@@ -295,4 +302,10 @@ void bbman::Board::buildBrkable(Irrlicht &irr, size_t x, size_t y)
     }
     std::cerr << e.what() << std::endl;
   }
+}
+
+std::ostream &bbman::operator<<(std::ostream &flux, bbman::Board const& board)
+{
+  flux << board.getMap();
+  return (flux);
 }

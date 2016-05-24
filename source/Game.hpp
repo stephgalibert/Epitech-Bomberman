@@ -5,12 +5,14 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Mon May 23 22:45:12 2016 stephane galibert
+// Last update Tue May 24 18:51:48 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
 # define _GAME_HPP_
 
+# include <iostream>
+# include <fstream>
 # include <vector>
 # include <cmath>
 # include <algorithm>
@@ -43,6 +45,7 @@ namespace bbman
     void checkCollision(IPlayer *player);
     void updateBombs(Irrlicht &irr, irr::f32 delta);
     void updatePlayers(Irrlicht &irr, irr::f32 delta);
+    void save(void);
     Board *_board;
     bool _leaveGame;
     irr::scene::ICameraSceneNode *_camera;
