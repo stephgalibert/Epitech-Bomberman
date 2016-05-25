@@ -1,0 +1,2 @@
+-I../lib/lua/LuaInterpreter/include
+-Ilib/lua/LuaBridge/
