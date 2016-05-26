@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 20:29:19 2016 stephane galibert
-// Last update Sat May 21 04:50:16 2016 stephane galibert
+// Last update Wed May 25 02:15:35 2016 stephane galibert
 //
 
 #include "BombManager.hpp"
@@ -52,4 +52,18 @@ void bbman::BombManager::operator--(void)
   else {
     --this->_selectedBomb;
   }
+}
+
+std::vector<bbman::IBomb *> const& bbman::BombManager::getBombs(void) const
+{
+  return (this->_bombs);
+}
+
+std::ostream &bbman::operator<<(std::ostream &flux, bbman::BombManager const& bm)
+{
+  std::vector<bbman::IBomb *> const& bombs = bm.getBombs();
+  for (auto it : bombs) {
+    flux << "bm.id:" << it->getBombID() << ";bm.n:-1;";
+  }
+  return (flux);
 }

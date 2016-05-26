@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:02:47 2016 stephane galibert
-// Last update Tue May 10 04:59:53 2016 stephane galibert
+// Last update Wed May 25 02:09:10 2016 stephane galibert
 //
 
 #ifndef _POWERUPS_HPP_
@@ -15,7 +15,7 @@
 # include <list>
 # include <algorithm>
 
-# include "IPlayer.hpp"
+# include "APlayer.hpp"
 # include "IPowerUP.hpp"
 # include "SpeedUPPowerUP.hpp"
 # include "Irrlicht.hpp"
@@ -32,8 +32,7 @@ namespace bbman
     PowerUPs(void);
     ~PowerUPs(void);
     void update(Irrlicht &irr, float delta, Board *board);
-    void checkCollision(IPlayer *player);
-    void setArea(irr::core::vector3df const& max);
+    void checkCollision(APlayer *player);
   private:
     void generate(Irrlicht &irr, Board *board);
     void generateSpeedUp(Irrlicht &irr, Board *board);
@@ -41,8 +40,6 @@ namespace bbman
     std::list<IPowerUP *> _powerUPs;
     tools::Generator _generator;
     irr::f32 _delta;
-    irr::core::vector3df _min;
-    irr::core::vector3df _max;
   };
 }
 

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Mon May 23 18:32:02 2016 stephane galibert
+// Last update Thu May 26 08:08:30 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -17,19 +17,19 @@
 # include <unordered_map>
 # include <algorithm>
 
-# include "BombManager.hpp"
-# include "IPlayer.hpp"
+# include "APlayer.hpp"
 # include "ExplodingBomb.hpp"
 # include "InputListener.hpp"
 # include "Direction.hpp"
 
 namespace bbman
 {
-  class HumanPlayer : public IPlayer
+  class HumanPlayer : public APlayer
   {
   public:
     static HumanPlayer *create(void);
     virtual ~HumanPlayer(void);
+    virtual size_t getAPlayerID(void) const;
     virtual void init(Irrlicht &irr);
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void play(Irrlicht &irr, Board *board,
@@ -40,7 +40,6 @@ namespace bbman
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
     virtual void explode(void);
-    virtual irr::s32 getScore(void) const;
     virtual bool input(InputListener &inputListener);
     virtual size_t getSpeed(void) const;
     virtual void setSpeed(size_t speed);
@@ -48,8 +47,10 @@ namespace bbman
     virtual size_t getPlayerNumber(void) const;
     virtual bool isRunning(void) const;
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
-;
-    virtual bool hasExplosed(void) const;
+    virtual BombManager const& getBombManager(void) const;
+    virtual std::list<IEffect *> const& getEffects(void) const;
+    virtual void setRotation(irr::s32 rotation);
+    virtual irr::s32 getRotation(void) const;
   private:
     static size_t NumberOfPlayer;
   private:
@@ -77,10 +78,8 @@ namespace bbman
     t_direction _direction;
     t_direction _prevDirection;
     t_action _action;
-    irr::s32 _score;
     size_t _speed;
     bool _isRunning;
-    bool _alive;
     size_t _playerNum;
   };
 }

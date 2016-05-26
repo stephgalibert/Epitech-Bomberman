@@ -1,7 +1,7 @@
 Hyerarchie diagram:
 
 	   					IEntity
-     		IBlock			IPlayer			IBombs			IPowerUP
+     		IBlock			APlayer			IBombs			IPowerUP
        	IndestructibleBlock		HumanPlayer		ExplodingBomb		SpeedUPPowerUpp
 ____________________________________________________________________________________________________________________
 

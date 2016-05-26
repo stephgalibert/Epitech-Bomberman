@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Tue May 24 18:51:48 2016 stephane galibert
+// Last update Thu May 26 10:34:56 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -17,9 +17,10 @@
 # include <cmath>
 # include <algorithm>
 # include <list>
+# include <map>
 
 # include "MusicBox.hpp"
-# include "IPlayer.hpp"
+# include "APlayer.hpp"
 # include "IBomb.hpp"
 # include "InputListener.hpp"
 # include "PowerUPs.hpp"
@@ -27,6 +28,7 @@
 # include "Board.hpp"
 # include "MemoryFile.hpp"
 # include "CacheManager.hpp"
+# include "Loader.hpp"
 
 namespace bbman
 {
@@ -35,22 +37,22 @@ namespace bbman
   public:
     Game(void);
     ~Game(void);
-    void init(Irrlicht &irr);
+    void init(Irrlicht &irr, std::string const& saves = "");
     bool input(InputListener &inputListener);
     void update(Irrlicht &irr, irr::f32 delta);
     bool leaveGame(void) const;
   private:
     void initCamera(Irrlicht &irr);
     void initSound(void);
-    void checkCollision(IPlayer *player);
     void updateBombs(Irrlicht &irr, irr::f32 delta);
     void updatePlayers(Irrlicht &irr, irr::f32 delta);
-    void save(void);
-    Board *_board;
+    void save(std::string const& fname);
     bool _leaveGame;
+    Loader _loader;
     irr::scene::ICameraSceneNode *_camera;
+    Board *_board;
     std::list<IBomb *> _bombs;
-    std::vector<IPlayer *> _players;
+    std::vector<APlayer *> _players;
     PowerUPs _powerUPs;
     MusicBox _musics;
     MemoryFile _musicBackground;

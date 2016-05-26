@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:08:37 2016 stephane galibert
-// Last update Mon May 23 20:34:27 2016 stephane galibert
+// Last update Thu May 26 12:06:49 2016 stephane galibert
 //
 
 #ifndef _EXPLODINGBOMB_HPP_
@@ -16,7 +16,7 @@
 
 # include "SoundBox.hpp"
 # include "IBomb.hpp"
-# include "IPlayer.hpp"
+# include "APlayer.hpp"
 # include "CacheManager.hpp"
 # include "MemoryFile.hpp"
 # include "StaticTools.hpp"
@@ -29,7 +29,7 @@ namespace bbman
     static const irr::f32 constexpr DELAY_TO_EXPLOSE = 3.f;
     static const irr::f32 constexpr DELAY_EXPLOSING = 1.f;
   public:
-    ExplodingBomb(IPlayer *owner);
+    ExplodingBomb(APlayer *owner);
     virtual ~ExplodingBomb(void);
     virtual void init(Irrlicht &irr);
     virtual void update(Irrlicht &irr, irr::f32 delta);
@@ -45,8 +45,12 @@ namespace bbman
     virtual bool hasExplosed(void) const;
     virtual irr::f32 getDelay(void) const;
     virtual irr::f32 getDelta(void) const;
+    virtual void setDelta(irr::f32 value);
     virtual void explode(void);
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
+    virtual size_t getOwnerID(void) const;
+    virtual size_t getBombID(void) const;
+    void setOwner(APlayer *owner);
   private:
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:
@@ -54,7 +58,7 @@ namespace bbman
     void initSound(void);
     void setExplosion(Irrlicht &irr);
     irr::scene::IAnimatedMeshSceneNode *_mesh;
-    IPlayer *_owner;
+    APlayer *_owner;
     irr::f32 _delta;
     bool _explosing;
     bool _explosed;
