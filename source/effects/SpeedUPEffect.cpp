@@ -5,12 +5,12 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 21:14:34 2016 stephane galibert
-// Last update Thu May 12 16:04:45 2016 stephane galibert
+// Last update Thu May 26 10:07:35 2016 stephane galibert
 //
 
 #include "SpeedUPEffect.hpp"
 
-bbman::SpeedUPEffect::SpeedUPEffect(bbman::IPlayer *player)
+bbman::SpeedUPEffect::SpeedUPEffect(bbman::APlayer *player)
 {
   this->_delta = 0;
   this->_target = player;
@@ -20,17 +20,18 @@ bbman::SpeedUPEffect::SpeedUPEffect(bbman::IPlayer *player)
 
 bbman::SpeedUPEffect::~SpeedUPEffect(void)
 {
-  if (this->_enabled) {
-    this->_target->setSpeed(bbman::IPlayer::INITIAL_SPEED);
-  }
+  /*if (this->_enabled) {
+    this->_target->setSpeed(bbman::APlayer::INITIAL_SPEED);
+    }*/
 }
 
 void bbman::SpeedUPEffect::update(irr::f32 delta)
 {
-  this->_delta += delta;
+  /*this->_delta += delta;
   if (this->_delta > DURATION) {
     this->_isFinished = true;
-  }
+    }*/
+  (void)delta;
 }
 
 bool bbman::SpeedUPEffect::isFinished(void) const
@@ -41,7 +42,7 @@ bool bbman::SpeedUPEffect::isFinished(void) const
 void bbman::SpeedUPEffect::enable(void)
 {
   this->_enabled = true;
-  this->_target->setSpeed(bbman::IPlayer::INITIAL_SPEED * 2.f);
+  this->_target->setSpeed(bbman::APlayer::INITIAL_SPEED * 1.5f);
 }
 
 void bbman::SpeedUPEffect::restart(void)
@@ -49,7 +50,17 @@ void bbman::SpeedUPEffect::restart(void)
   this->_delta = 0;
 }
 
+void bbman::SpeedUPEffect::setDelta(irr::f32 delta)
+{
+  this->_delta = delta;
+}
+
 size_t bbman::SpeedUPEffect::getEffectID(void) const
 {
   return (1);
+}
+
+irr::f32 bbman::SpeedUPEffect::getDelta(void) const
+{
+  return (this->_delta);
 }

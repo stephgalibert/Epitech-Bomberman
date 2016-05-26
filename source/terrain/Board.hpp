@@ -5,12 +5,13 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Tue May 24 19:08:37 2016 stephane galibert
+// Last update Wed May 25 15:13:31 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
 # define _BOARD_HPP_
 
+# include <fstream>
 # include <iostream>
 # include <unordered_map>
 # include <functional>
@@ -35,6 +36,8 @@ namespace bbman
     Board(void);
     ~Board(void);
     void init(Irrlicht &irr);
+    //void initFromStream(Irrlicht &irr, std::ifstream &ifs);
+    void init(Irrlicht &irr, Map<Cell> const& map);
     void setPosition(irr::core::vector3df const& pos);
     irr::core::vector3df const& getPosition(void) const;
     bool isColliding(irr::core::aabbox3df const& box) const;
@@ -51,6 +54,7 @@ namespace bbman
   private:
     void initTerrain(Irrlicht &irr);
     void initMap(void);
+    //void initMapFromStream(std::ifstream &ifs);
     void initNode(void);
     void initMesh(Irrlicht &irr);
     void updateNode(irr::core::vector3d<irr::s32> const& pos);
@@ -67,7 +71,11 @@ namespace bbman
     irr::core::vector3df _spawn[4];
   };
 
-  std::ostream &operator<<(std::ostream &flux, bbman::Board const& board);
+  inline std::ostream &operator<<(std::ostream &flux, bbman::Board const& board)
+  {
+    flux << board.getMap();
+    return (flux);
+  }
 }
 
 #endif /* !_BOARD_HPP_ */

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:41:02 2016 stephane galibert
-// Last update Tue May 24 19:34:45 2016 stephane galibert
+// Last update Wed May 25 15:22:29 2016 stephane galibert
 //
 
 #ifndef _MAP_HPP_
@@ -20,7 +20,9 @@ namespace bbman
   struct Map
   {
     Map(void);
+    Map(Map<T> const& map);
     ~Map(void);
+    Map<T> &operator=(Map<T> const& map);
     void load(size_t w, size_t h, T const& vdef = T());
     T const& at(size_t x, size_t y) const;
     T &at(size_t x, size_t y);
@@ -52,6 +54,12 @@ namespace bbman
   }
 
   template<typename T>
+  Map<T>::Map(bbman::Map<T> const& map)
+  {
+    *this = map;
+  }
+
+  template<typename T>
   Map<T>::~Map(void)
   {
     if (content) {
@@ -60,6 +68,21 @@ namespace bbman
       }
       delete[] content;
     }
+  }
+
+  template<typename T>
+  Map<T> &Map<T>::operator=(Map<T> const& map)
+  {
+    this->w = map.w;
+    this->h = map.h;
+    this->content = new T*[map.h];
+    for (size_t i = 0 ; i < h ; ++i) {
+      this->content[i] = new T[map.w];
+      for (size_t j = 0 ; j < w ; ++j) {
+	this->content[i][j] = map.at(j, i);
+      }
+    }
+    return (*this);
   }
 
   template<typename T>

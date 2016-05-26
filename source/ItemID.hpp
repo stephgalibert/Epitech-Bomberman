@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:25:34 2016 stephane galibert
-// Last update Thu May 19 22:01:18 2016 stephane galibert
+// Last update Tue May 24 19:58:57 2016 stephane galibert
 //
 
 #ifndef _ITEMID_HPP_
@@ -17,7 +17,9 @@ namespace bbman
   {
     II_NONE = 0,
     II_BLOCK_INBRKABLE = 1,
-    II_BLOCK_BRKABLE = 2
+    II_BLOCK_BRKABLE = 2,
+    II_WALL = 3,
+    II_CORNER = 4
   };
   typedef size_t t_item;
 }

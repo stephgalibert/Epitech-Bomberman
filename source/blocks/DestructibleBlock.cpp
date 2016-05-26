@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Mon May 23 20:50:41 2016 stephane galibert
+// Last update Tue May 24 20:47:57 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"
@@ -27,7 +27,8 @@ void bbman::DestructibleBlock::init(Irrlicht &irr)
 {
   this->_node = irr.getSmgr()->addCubeSceneNode();
   if (this->_node) {
-    this->_node->setMaterialTexture(0, irr.getTexture("./media/water.jpg"));
+    //this->_node->setMaterialTexture(0, irr.getTexture("./media/water.jpg"));
+    this->_node->setMaterialTexture(0, irr.getTexture("./asset/Texture/Texture_cube3.png"));
     this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
     this->_explosed = false;

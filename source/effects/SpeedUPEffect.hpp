@@ -5,13 +5,13 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 21:11:53 2016 stephane galibert
-// Last update Tue May 10 04:09:16 2016 stephane galibert
+// Last update Thu May 26 10:08:29 2016 stephane galibert
 //
 
 #ifndef _SPEEDUPEFFECT_HPP_
 # define _SPEEDUPEFFECT_HPP_
 
-# include "IPlayer.hpp"
+# include "APlayer.hpp"
 # include "IEffect.hpp"
 
 namespace bbman
@@ -21,16 +21,18 @@ namespace bbman
   public:
     static const size_t constexpr DURATION = 5.f;
   public:
-    SpeedUPEffect(IPlayer *target);
+    SpeedUPEffect(APlayer *target);
     virtual ~SpeedUPEffect(void);
     virtual void update(irr::f32 delta);
     virtual bool isFinished(void) const;
     virtual void enable(void);
     virtual void restart(void);
+    virtual void setDelta(irr::f32 delta);
     virtual size_t getEffectID(void) const;
+    virtual irr::f32 getDelta(void) const;
   private:
     irr::f32 _delta;
-    IPlayer *_target;
+    APlayer *_target;
     bool _isFinished;
     bool _enabled;
   };

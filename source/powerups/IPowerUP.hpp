@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:02:45 2016 stephane galibert
-// Last update Mon May 23 17:24:20 2016 stephane galibert
+// Last update Tue May 24 22:30:53 2016 stephane galibert
 //
 
 #ifndef _IPOWERUP_HPP_
@@ -13,7 +13,7 @@
 
 # include <irrlicht.h>
 
-# include "IPlayer.hpp"
+# include "APlayer.hpp"
 # include "IEntity.hpp"
 # include "Irrlicht.hpp"
 
@@ -31,7 +31,7 @@ namespace bbman
     virtual bool isColliding(irr::core::aabbox3df const& box) const = 0;
     virtual void explode(void) = 0;
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale) = 0;
-    virtual void affectPlayer(IPlayer *player) = 0;
+    virtual void affectPlayer(APlayer *player) = 0;
   };
 }
 

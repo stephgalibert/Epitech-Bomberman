@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 17:37:21 2016 stephane galibert
-// Last update Mon May 23 05:48:13 2016 stephane galibert
+// Last update Wed May 25 02:08:44 2016 stephane galibert
 //
 
 #include "PowerUPs.hpp"
@@ -36,7 +36,7 @@ void bbman::PowerUPs::update(bbman::Irrlicht &irr, float delta, Board *board)
   }
 }
 
-void bbman::PowerUPs::checkCollision(IPlayer *player)
+void bbman::PowerUPs::checkCollision(APlayer *player)
 {
   for (std::list<IPowerUP *>::iterator it = std::begin(this->_powerUPs);
        it != std::end(this->_powerUPs); ) {
@@ -49,11 +49,6 @@ void bbman::PowerUPs::checkCollision(IPlayer *player)
       ++it;
     }
   }
-}
-
-void bbman::PowerUPs::setArea(irr::core::vector3df const& max)
-{
-  this->_max = max;
 }
 
 void bbman::PowerUPs::generate(bbman::Irrlicht &irr, bbman::Board *board)
@@ -73,10 +68,10 @@ void bbman::PowerUPs::generateSpeedUp(bbman::Irrlicht &irr, bbman::Board *board)
 
   speedUP->init(irr);
   do {
-    pos.X = (this->_generator(0, this->_max.X) * board->getScale().X)
+    pos.X = (this->_generator(0, board->getSize().X) * board->getScale().X)
       - board->getScale().X / 2;
     pos.Y = 4.f;
-    pos.Z = (this->_generator(0, this->_max.Z) * board->getScale().Z)
+    pos.Z = (this->_generator(0, board->getSize().Z) * board->getScale().Z)
       - board->getScale().Z / 2;
     speedUP->setPosition(pos);
   } while (!isFree(speedUP, board));

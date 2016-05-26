@@ -5,14 +5,14 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Tue May 24 00:25:45 2016 stephane galibert
+// Last update Thu May 26 12:06:36 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
 
 bbman::CacheManager<std::string, bbman::MemoryFile> bbman::ExplodingBomb::SoundCache;
 
-bbman::ExplodingBomb::ExplodingBomb(bbman::IPlayer *owner)
+bbman::ExplodingBomb::ExplodingBomb(bbman::APlayer *owner)
 {
   this->_mesh = NULL;
   this->_owner = owner;
@@ -145,7 +145,7 @@ void bbman::ExplodingBomb::initSound(void)
       SoundCache["explosion"].load();
     }
   this->_sounds.addSample("explosion", SoundCache["explosion"]);
-  this->_sounds.setVolumeBySample("explosion", 10.f);
+  this->_sounds.setVolumeBySample("explosion", 50.f);
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
   }
@@ -161,9 +161,14 @@ irr::f32 bbman::ExplodingBomb::getDelta(void) const
   return (this->_delta);
 }
 
+void bbman::ExplodingBomb::setDelta(irr::f32 value)
+{
+  this->_delta = value;
+}
+
 void bbman::ExplodingBomb::explode(void)
 {
-  std::cerr << "trying to explode exploding bomb" << std::endl;
+  this->_delta = DELAY_TO_EXPLOSE;
 }
 
 irr::core::vector3d<irr::s32> const& bbman::ExplodingBomb::getPosInMap(irr::core::vector3df const& scale)
@@ -171,4 +176,19 @@ irr::core::vector3d<irr::s32> const& bbman::ExplodingBomb::getPosInMap(irr::core
   this->_posInMap.X = getPosition().X / scale.X;
   this->_posInMap.Z = getPosition().Z / scale.Z;
   return (this->_posInMap);
+}
+
+size_t bbman::ExplodingBomb::getOwnerID(void) const
+{
+  return (this->_owner->getID());
+}
+
+size_t bbman::ExplodingBomb::getBombID(void) const
+{
+  return (1);
+}
+
+void bbman::ExplodingBomb::setOwner(bbman::APlayer *owner)
+{
+  this->_owner = owner;
 }

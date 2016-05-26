@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Tue May 24 19:14:20 2016 stephane galibert
+// Last update Thu May 26 12:19:55 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -29,22 +29,29 @@ bbman::Game::~Game(void)
   }
 }
 
-void bbman::Game::init(Irrlicht &irr)
+void bbman::Game::init(Irrlicht &irr, std::string const& saves)
 {
   try {
-    this->_board->init(irr);
-    this->_powerUPs.setArea(this->_board->getSize());
+    if (!saves.empty()) {
+      this->_loader.load(irr, saves);
+      this->_board->init(irr, this->_loader.getMap());
+      this->_players = this->_loader.getPlayers();
+      this->_bombs = this->_loader.getBombs();
+    }
+    else {
+      this->_board->init(irr);
+      // BEGIN todel
+      HumanPlayer *p1 = bbman::HumanPlayer::create();
+      p1->init(irr);
+      p1->setPosition(this->_board->getSpawnPosition(0));
+      this->_players.push_back(p1);
+      HumanPlayer *p2 = bbman::HumanPlayer::create();
+      p2->init(irr);
+      p2->setPosition(this->_board->getSpawnPosition(1));
+      this->_players.push_back(p2);
+      // END todel
+    }
     initCamera(irr);
-    // BEGIN todel
-    HumanPlayer *p1 = bbman::HumanPlayer::create();
-    p1->init(irr);
-    p1->setPosition(this->_board->getSpawnPosition(0));
-    this->_players.push_back(p1);
-    HumanPlayer *p2 = bbman::HumanPlayer::create();
-    p2->init(irr);
-    p2->setPosition(this->_board->getSpawnPosition(1));
-    this->_players.push_back(p2);
-    // END todel
     initSound();
   } catch (std::runtime_error const& e) {
     throw (e);
@@ -58,7 +65,7 @@ bool bbman::Game::input(InputListener &inputListener)
     return (true);
   }
   else if (inputListener.IsKeyDown(irr::KEY_KEY_P)) {
-    save();
+    save("./save.txt");
     return (true);
   }
   else {
@@ -98,18 +105,28 @@ void bbman::Game::initSound(void)
     this->_musicBackground.load();
     this->_musics.addSample("mbackground", this->_musicBackground);
     this->_musics.setLoop("mbackground", true);
-    this->_musics.setVolumeBySample("mbackground", 5.f);
+    this->_musics.setVolumeBySample("mbackground", 50.f);
     this->_musics.play("mbackground");
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
   }
 }
 
-void bbman::Game::save(void)
+void bbman::Game::save(std::string const& fname)
 {
-  std::ofstream ofs("./save.txt");
+  std::ofstream ofs(fname.c_str(), std::ifstream::out);
   if (ofs) {
     ofs << *this->_board;
+    ofs << "PLAYERS_BEGIN" << std::endl;
+    for (auto it : this->_players) {
+      ofs << *it;
+    }
+    ofs << "PLAYERS_END" << std::endl;
+    ofs << "BOMBS_BEGIN" << std::endl;
+    for (auto it : this->_bombs) {
+      ofs << *it;
+    }
+    ofs << "BOMBS_END" << std::endl;
   }
   else {
     throw (std::runtime_error("can not create ./save.txt"));
@@ -130,13 +147,21 @@ void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta)
 	for (auto &it2 : this->_players) {
 	  if (!it2->hasExplosed()) {
 	    if ((*it)->isInExplosion(it2, this->_board->getScale())
-		&& this->_board->isNotProtected(it2->getPosInMap(this->_board->getScale()),
-						(*it)->getPosInMap(this->_board->getScale()))) {
+		&& this->_board->isNotProtected(it2->getPosInMap(this->_board->getScale()), (*it)->getPosInMap(this->_board->getScale()))) {
 	      it2->explode();
+	      std::cerr << " killed by " << (*it)->getOwnerID() << std::endl;
 	    }
 	  }
 	}
 	this->_board->explodeBlocks(*it);
+	for (auto &it2 : this->_bombs) {
+	  if (!it2->hasExplosed()) {
+	    if ((*it)->isInExplosion(it2, this->_board->getScale())
+		&& this->_board->isNotProtected(it2->getPosInMap(this->_board->getScale()), (*it)->getPosInMap(this->_board->getScale()))) {
+	      it2->explode();
+	    }
+	  }
+	}
       }
       ++it;
     }

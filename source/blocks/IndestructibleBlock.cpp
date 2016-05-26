@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:23:18 2016 stephane galibert
-// Last update Mon May 23 20:46:09 2016 stephane galibert
+// Last update Tue May 24 19:40:08 2016 stephane galibert
 //
 
 #include "IndestructibleBlock.hpp"
@@ -26,7 +26,8 @@ void bbman::IndestructibleBlock::init(Irrlicht &irr)
 {
   this->_node = irr.getSmgr()->addCubeSceneNode();
   if (this->_node) {
-    this->_node->setMaterialTexture(0, irr.getTexture("./media/t351sml.jpg"));
+    //this->_node->setMaterialTexture(0, irr.getTexture("./media/t351sml.jpg"));
+    this->_node->setMaterialTexture(0, irr.getTexture("./asset/Texture/Texture_cube1.png"));
     this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
   }

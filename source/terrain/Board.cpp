@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Tue May 24 19:30:26 2016 stephane galibert
+// Last update Thu May 26 11:24:32 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -44,6 +44,22 @@ void bbman::Board::init(bbman::Irrlicht &irr)
   initNode();
   initTerrain(irr);
   initMesh(irr);
+  this->_spawn[0] = irr::core::vector3df(10.f, 0.f, 10.f);
+  this->_spawn[1] = irr::core::vector3df(170.f, 0.f, 10.f);
+  this->_spawn[2] = irr::core::vector3df(170.f, 0.f, 110.f);
+  this->_spawn[3] = irr::core::vector3df(10.f, 0.f, 110.f);
+}
+
+void bbman::Board::init(bbman::Irrlicht &irr, bbman::Map<bbman::Cell> const& map)
+{
+  this->_map = map;
+  initNode();
+  initTerrain(irr);
+  initMesh(irr);
+  this->_spawn[0] = irr::core::vector3df(10.f, 0.f, 10.f);
+  this->_spawn[1] = irr::core::vector3df(170.f, 0.f, 10.f);
+  this->_spawn[2] = irr::core::vector3df(170.f, 0.f, 110.f);
+  this->_spawn[3] = irr::core::vector3df(10.f, 0.f, 110.f);
 }
 
 void bbman::Board::setPosition(irr::core::vector3df const& pos)
@@ -68,8 +84,7 @@ irr::core::vector3df const& bbman::Board::getSpawnPosition(size_t num) const
 bool bbman::Board::isValidMove(irr::core::vector3df const& pos,
 			       bbman::t_direction dir) const
 {
-  Cell const& cell = this->_map.at(pos.X / this->_scale.X, pos.Z / this->_scale.Z);
-  return (cell.node & dir);
+  return (this->_map.at(pos.X / this->_scale.X, pos.Z / this->_scale.Z).node & dir);
 }
 
 bool bbman::Board::isInNode(irr::core::vector3df const& pos) const
@@ -78,7 +93,7 @@ bool bbman::Board::isInNode(irr::core::vector3df const& pos) const
   irr::f32 y = (int)(pos.Z / this->_scale.Z) * this->_scale.Z;
 
   return (pos.X > x + 2.f && pos.Z > y + 2.f
-	  && pos.X < x + 8.f && pos.Z < y + 8.f);
+	  && pos.X < x + 6.f && pos.Z < y + 6.f);
 }
 
 bbman::Map<bbman::Cell> const& bbman::Board::getMap(void) const
@@ -163,12 +178,12 @@ void bbman::Board::initTerrain(Irrlicht &irr)
   this->_texture.setFlag(irr::video::EMF_LIGHTING, false);
   mesh = irr.getSmgr()->getGeometryCreator()->
     createHillPlaneMesh(irr::core::dimension2d<irr::f32>(10, 10),
-			irr::core::dimension2d<irr::u32>(this->_map.w * 2,
-							 this->_map.h * 2),
+			irr::core::dimension2d<irr::u32>(this->_map.w,
+							 this->_map.h),
 			&this->_texture, 0,
 			irr::core::dimension2d<irr::f32>(0, 0),
-			irr::core::dimension2d<irr::f32>(this->_map.w * 2,
-							 this->_map.h * 2));
+			irr::core::dimension2d<irr::f32>(this->_map.w,
+							 this->_map.h));
   this->_backgroundMesh = irr.getSmgr()->addMeshSceneNode(mesh);
   this->_backgroundMesh->setPosition(irr::core::vector3df(this->_map.w * this->_scale.X / 2, 0,
 							  this->_map.h * this->_scale.Z / 2));
@@ -207,10 +222,7 @@ void bbman::Board::initMap(void)
   this->_map.at(2, 11).id = ItemID::II_NONE;
   this->_map.at(3, 11).id = ItemID::II_NONE;
 
-  this->_spawn[0] = irr::core::vector3df(10.f, 0.f, 10.f);
-  this->_spawn[1] = irr::core::vector3df(170.f, 0.f, 10.f);
-  this->_spawn[2] = irr::core::vector3df(170.f, 0.f, 110.f);
-  this->_spawn[3] = irr::core::vector3df(10.f, 0.f, 110.f);
+
 }
 
 void bbman::Board::initNode(void)
@@ -302,10 +314,4 @@ void bbman::Board::buildBrkable(Irrlicht &irr, size_t x, size_t y)
     }
     std::cerr << e.what() << std::endl;
   }
-}
-
-std::ostream &bbman::operator<<(std::ostream &flux, bbman::Board const& board)
-{
-  flux << board.getMap();
-  return (flux);
 }

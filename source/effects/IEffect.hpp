@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 21:08:19 2016 stephane galibert
-// Last update Tue May 10 04:08:40 2016 stephane galibert
+// Last update Thu May 26 10:08:05 2016 stephane galibert
 //
 
 #ifndef _IEFFECT_HPP_
@@ -23,7 +23,9 @@ namespace bbman
     virtual bool isFinished(void) const = 0;
     virtual void enable(void) = 0;
     virtual void restart(void) = 0;
+    virtual void setDelta(irr::f32 delta) = 0;
     virtual size_t getEffectID(void) const = 0;
+    virtual irr::f32 getDelta(void) const = 0;
   };
 }
 

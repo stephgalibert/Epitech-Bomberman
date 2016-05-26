@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Wed May 18 20:16:19 2016 stephane galibert
+// Last update Thu May 26 12:29:41 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -130,7 +130,8 @@ void bbman::Application::goToGame(void)
       }*/
     this->_game = new Game;
     try {
-      this->_game->init(*this->_irr);
+      this->_game->init(*this->_irr, "./save.txt");
+      //this->_game->init(*this->_irr);
     } catch (std::runtime_error const& e) {
       delete (this->_game);
       this->_game = NULL;

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Mon May 23 18:27:55 2016 stephane galibert
+// Last update Thu May 26 10:14:36 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -31,7 +31,6 @@ bbman::HumanPlayer::HumanPlayer(void)
   this->_inits[1] =
     std::bind(&bbman::HumanPlayer::initPlayer2, this, std::placeholders::_1);
   this->_mesh = NULL;
-  this->_score = 0;
   this->_isRunning = false;
   this->_speed = INITIAL_SPEED;
   this->_playerNum = bbman::HumanPlayer::NumberOfPlayer;
@@ -44,6 +43,11 @@ bbman::HumanPlayer *bbman::HumanPlayer::create(void)
   if (bbman::HumanPlayer::NumberOfPlayer > 1)
     throw (std::runtime_error("The number of human player can not be greater than 2"));
   return (new HumanPlayer);
+}
+
+size_t bbman::HumanPlayer::getAPlayerID(void) const
+{
+  return (1);
 }
 
 bbman::HumanPlayer::~HumanPlayer(void)
@@ -182,13 +186,8 @@ void bbman::HumanPlayer::explode(void)
     this->_alive = false;
     this->_mesh->remove();
     this->_mesh = NULL;
-    std::cerr << "player " + std::to_string(_playerNum) + " died" << std::endl;
+    std::cerr << "player " + std::to_string(this->_playerNum) + " died" << std::endl;
   }
-}
-
-irr::s32 bbman::HumanPlayer::getScore(void) const
-{
-  return (this->_score);
 }
 
 bool bbman::HumanPlayer::isRunning(void) const
@@ -196,16 +195,33 @@ bool bbman::HumanPlayer::isRunning(void) const
   return (this->_isRunning);
 }
 
-bool bbman::HumanPlayer::hasExplosed(void) const
-{
-  return (!this->_alive);
-}
-
 irr::core::vector3d<irr::s32> const& bbman::HumanPlayer::getPosInMap(irr::core::vector3df const& scale)
 {
   this->_posInMap.X = getPosition().X / scale.X;
   this->_posInMap.Z = getPosition().Z / scale.Z;
   return (this->_posInMap);
+}
+
+bbman::BombManager const& bbman::HumanPlayer::getBombManager(void) const
+{
+  return (this->_bombManager);
+}
+
+std::list<bbman::IEffect *> const& bbman::HumanPlayer::getEffects(void) const
+{
+  return (this->_effects);
+}
+
+void bbman::HumanPlayer::setRotation(irr::s32 rotation)
+{
+  if (this->_mesh) {
+    this->_mesh->setRotation(irr::core::vector3df(0, rotation, 0));
+  }
+}
+
+irr::s32 bbman::HumanPlayer::getRotation(void) const
+{
+  return ((irr::s32)this->_mesh->getRotation().Y);
 }
 
 bool bbman::HumanPlayer::input(bbman::InputListener &inputListener)
