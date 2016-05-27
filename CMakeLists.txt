@@ -20,6 +20,7 @@ configure_file (
 include_directories(
   ${PROJECT_SOURCE_DIR}
   ${PROJECT_SOURCE_DIR}/source
+  ${PROJECT_SOURCE_DIR}/source/binding
   ${PROJECT_SOURCE_DIR}/source/blocks
   ${PROJECT_SOURCE_DIR}/source/bombs
   ${PROJECT_SOURCE_DIR}/source/effects
@@ -36,8 +37,8 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/lib/lua/LuaBridge/detail
   ${PROJECT_SOURCE_DIR}/lib/lua/LuaInterpreter/include
   ${PROJECT_SOURCE_DIR}/lib/SFML/include/
-  ${PROJECT_SOURCE_DIR}/lib/google_test/include/
-  ${PROJECT_SOURCE_DIR}/lib/google_test/include/gtest
+  # ${PROJECT_SOURCE_DIR}/lib/google_test/include/
+  # ${PROJECT_SOURCE_DIR}/lib/google_test/include/gtest
 )
 
 FILE(GLOB SRCS
@@ -60,7 +61,7 @@ if (UNIX)
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/assimp/lib/linux
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/google_test/lib
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux
-    ${PROJECT_SOURCE_DIR}/lib/google_test/lib/libgtest.so
+    # ${PROJECT_SOURCE_DIR}/lib/google_test/lib/libgtest.so
     ${PROJECT_SOURCE_DIR}/lib/assimp/lib/linux/libassimp.so
     ${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux/libsfml-audio.so
     ${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux/libsfml-system.so

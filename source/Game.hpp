@@ -29,6 +29,7 @@
 # include "MemoryFile.hpp"
 # include "CacheManager.hpp"
 # include "Loader.hpp"
+# include "AIFunctions.hpp"
 
 namespace bbman
 {

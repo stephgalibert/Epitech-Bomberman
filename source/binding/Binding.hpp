@@ -19,6 +19,7 @@ extern "C" {
 }
 
 #include "LuaBridge.h"
+#include "AIFunctions.hpp"
 
 struct Data {
   int pos;

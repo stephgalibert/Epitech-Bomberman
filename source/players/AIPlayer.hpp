@@ -1,15 +1,13 @@
-//
-// HumanPlayer.hpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
-//
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
-//
-// Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Thu May 26 08:08:30 2016 stephane galibert
-//
+/*
+** AIPlayer.hpp for bomberman in /home/care_j/work/bomberman/source/players
+**
+** Made by care_j
+** Login   <care_j@epitech.net>
+**
+*/
 
-#ifndef _HUMANPLAYER_HPP_
-# define _HUMANPLAYER_HPP_
+#ifndef _AIPLAYER_HPP_
+# define _AIPLAYER_HPP_
 
 # include <irrlicht.h>
 # include <iostream>
@@ -24,16 +22,16 @@
 
 namespace bbman
 {
-  class HumanPlayer : public APlayer
+  class AIPlayer : public APlayer
   {
   public:
-    static HumanPlayer *create(void);
-    virtual ~HumanPlayer(void);
+    static AIPlayer *create(void);
+    virtual ~AIPlayer(void);
     virtual size_t getAPlayerID(void) const;
     virtual void init(Irrlicht &irr);
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void play(Irrlicht &irr, Board *board,
-		      std::list<IBomb *> &bombs);
+          std::list<IBomb *> &bombs);
     virtual void addBomb(IBomb *bomb);
     virtual void setPosition(irr::core::vector3df const& pos);
     virtual irr::core::vector3df const& getPosition(void) const;
@@ -44,9 +42,8 @@ namespace bbman
     virtual size_t getSpeed(void) const;
     virtual void setSpeed(size_t speed);
     virtual void addEffect(IEffect *effect);
-    virtual size_t getPlayerNumber(void) const; // !
+    virtual size_t getPlayerNumber(void) const;
     virtual bool isRunning(void) const;
-    virtual bool hasExplosed(void) const;
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual BombManager const& getBombManager(void) const;
     virtual std::list<IEffect *> const& getEffects(void) const;
@@ -55,7 +52,7 @@ namespace bbman
   private:
     static size_t NumberOfPlayer;
   private:
-    HumanPlayer(void);
+    AIPlayer(void);
     void dropBomb(Irrlicht &irr, Board *board, std::list<IBomb *> &bombs);
     IBomb *createBomb(Irrlicht &irr);
     void updateEffets(irr::f32 delta);
@@ -85,4 +82,4 @@ namespace bbman
   };
 }
 
-#endif /* !_HUMANPLAYER_HPP_ */
+#endif /* !_AIPLAYER_HPP_ */

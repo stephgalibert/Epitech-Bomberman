@@ -45,6 +45,7 @@ void bbman::Game::init(Irrlicht &irr, std::string const& saves)
     }
     initCamera(irr);
     initSound();
+    boardBinding(this->_board);
   } catch (std::runtime_error const& e) {
     throw (e);
   }
