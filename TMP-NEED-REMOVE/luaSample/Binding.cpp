@@ -44,6 +44,7 @@ int  bbman::Binding::runAI(void)
 
 void bbman::Binding::init(const std::string &scriptName)
 {
+  (void)scriptName;
   try {
     this->luaState = luaL_newstate();
     luaL_openlibs(this->luaState);

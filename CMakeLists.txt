@@ -1,5 +1,6 @@
-cmake_minimum_required(VERSION 3.0)
-
+cmake_minimum_required(VERSION 2.8)
+SET(CMAKE_CXX_COMPILER  clang++)
+# SET ( CMAKE_CXX_FLAGS "-std=c++0x" CACHE STRING "compile flags" FORCE)
 project(Bomberman)
 
 # The version number.
@@ -7,7 +8,7 @@ set (Bomberman_VERSION_MAJOR 1)
 set (Bomberman_VERSION_MINOR 0)
 
 # Enable c++11 with CMake
-set (CMAKE_CXX_STANDARD 11)
+add_compile_options(-std=c++11)
 
 # configure a header file to pass some of the CMake settings to the source code
 configure_file (
@@ -31,6 +32,9 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/source/utils
   ${PROJECT_SOURCE_DIR}/lib/irrlicht/include
   ${PROJECT_SOURCE_DIR}/lib/assimp/include
+  ${PROJECT_SOURCE_DIR}/lib/lua/LuaBridge/
+  ${PROJECT_SOURCE_DIR}/lib/lua/LuaBridge/detail
+  ${PROJECT_SOURCE_DIR}/lib/lua/LuaInterpreter/include
   ${PROJECT_SOURCE_DIR}/lib/SFML/include/
   ${PROJECT_SOURCE_DIR}/lib/google_test/include/
   ${PROJECT_SOURCE_DIR}/lib/google_test/include/gtest
@@ -51,7 +55,8 @@ if (UNIX)
   # Irrlicht must be linked first
   target_link_libraries(bomberman
     ${PROJECT_SOURCE_DIR}/lib/irrlicht/lib/linux/libIrrlicht.a
-    -lGL -lXxf86vm -lXext -lX11 -lXcursor -lpthread
+    ${PROJECT_SOURCE_DIR}/lib/lua/LuaInterpreter/lib/linux/liblua.a
+    -lGL -lXxf86vm -lXext -lX11 -lXcursor -lpthread -ldl
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/assimp/lib/linux
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/google_test/lib
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux

@@ -16,16 +16,13 @@ SRC_EXE = Binding.cpp \
 
 OBJ_EXE = $(SRC_EXE:.cpp=.o)
 
-LDFLAGS= -llua
-LDIR= ../lib/lua/LuaInterpreter/lib
-CXXFLAGS += -W -Wall -Wextra -std=c++1y -std=c++11
-CXXFLAGS += -isystem ../../../lib/lua/LuaInterpreter/include
-CXXFLAGS += -isystem ../../../lib/lua/LuaBridge/
+CXXFLAGS += -W -Wall -Wextra -std=c++11
+CXXFLAGS += -I./include
 
 all: $(NAME_EXE)
 
 $(NAME_EXE): $(OBJ_EXE)
-	$(CXX) -o $(NAME_EXE) $(OBJ_EXE) -rpath $(LDIR) -L $(LDIR) $(LDFLAGS) -ldl
+	$(CXX) -o $(NAME_EXE) $(OBJ_EXE) -L./ -llua -ldl
 
 clean:
 	rm -f $(OBJ_EXE)
