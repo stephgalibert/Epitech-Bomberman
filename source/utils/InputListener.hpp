@@ -5,11 +5,14 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May  3 18:39:36 2016 stephane galibert
-// Last update Thu May 12 15:57:47 2016 stephane galibert
+// Last update Fri May 27 15:45:24 2016 stephane galibert
 //
 
 #ifndef _INPUTLISTENER_HPP_
 # define _INPUTLISTENER_HPP_
+
+# include <vector>
+# include <stdexcept>
 
 # include "irrlicht.h"
 
@@ -21,9 +24,11 @@ namespace bbman
     InputListener(void);
     ~InputListener(void);
     virtual bool OnEvent(irr::SEvent const& event);
-    virtual bool IsKeyDown(irr::EKEY_CODE keyCode) const;
+    bool IsKeyDown(irr::EKEY_CODE keyCode) const;
+    irr::SEvent::SJoystickEvent const& getJoystickState(size_t idx) const;
   private:
     bool _keyIsDown[irr::KEY_KEY_CODES_COUNT];
+    std::vector<irr::SEvent::SJoystickEvent> _joystickStates;
   };
 }
 

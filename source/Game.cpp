@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Fri May 27 08:47:01 2016 stephane galibert
+// Last update Fri May 27 16:34:46 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -21,13 +21,6 @@ bbman::Game::~Game(void)
   if (this->_board) {
     delete (this->_board);
   }
-  /*
-  for (auto &it : this->_bombs) {
-    delete (it);
-  }
-  for (auto &it : this->_players) {
-    delete (it);
-    }*/
 }
 
 void bbman::Game::init(Irrlicht &irr, std::string const& saves)
@@ -35,10 +28,7 @@ void bbman::Game::init(Irrlicht &irr, std::string const& saves)
   try {
     if (!saves.empty()) {
       this->_loader.load(irr, saves);
-      //this->_board->init(irr, this->_loader.getMap());
       this->_board->init(irr, this->_loader);
-      /*this->_players = this->_loader.getPlayers();
-	this->_bombs = this->_loader.getBombs();*/
     }
     else {
       this->_board->init(irr);
@@ -46,13 +36,11 @@ void bbman::Game::init(Irrlicht &irr, std::string const& saves)
       HumanPlayer *p1 = bbman::HumanPlayer::create();
       p1->init(irr);
       p1->setPosition(this->_board->getSpawnPosition(0));
-      //this->_players.push_back(p1);
-      this->_board->addPlayer(p1); //
+      this->_board->addPlayer(p1);
       HumanPlayer *p2 = bbman::HumanPlayer::create();
       p2->init(irr);
       p2->setPosition(this->_board->getSpawnPosition(1));
-      //this->_players.push_back(p2);
-      this->_board->addPlayer(p2); //
+      this->_board->addPlayer(p2);
       // END todel
     }
     initCamera(irr);
@@ -74,19 +62,12 @@ bool bbman::Game::input(InputListener &inputListener)
   }
   else {
     this->_board->input(inputListener);
-    /*for (auto &it : this->_players) {
-      it->input(inputListener);
-      }*/
   }
   return (false);
 }
 
 void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
-  /*updatePlayers(irr, delta); //
-  this->_powerUPs.update(irr, delta, this->_board); //
-  updateBombs(irr, delta); //*/
-
   this->_board->update(irr, delta);
 }
 
@@ -119,75 +100,13 @@ void bbman::Game::initSound(void)
   }
 }
 
-//
 void bbman::Game::save(std::string const& fname)
 {
   std::ofstream ofs(fname.c_str(), std::ifstream::out);
   if (ofs) {
     ofs << *this->_board;
-    /*ofs << "PLAYERS_BEGIN" << std::endl; //
-    for (auto it : this->_players) {
-      ofs << *it;
-    }
-    ofs << "PLAYERS_END" << std::endl;
-    ofs << "BOMBS_BEGIN" << std::endl;
-    for (auto it : this->_bombs) {
-    ofs << *it;
-    }
-    ofs << "BOMBS_END" << std::endl;*/
   }
   else {
     throw (std::runtime_error("can not create ./save.txt"));
   }
 }
-
-/*void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta) //
-{
-  for (std::list<IBomb *>::iterator it = std::begin(this->_bombs);
-       it != std::end(this->_bombs); ) {
-    if ((*it)->hasExplosed()) {
-      delete (*it);
-      it = this->_bombs.erase(it);
-    }
-    else {
-      (*it)->update(irr, delta);
-      if ((*it)->isExplosing()) {
-
-	for (auto &it2 : this->_players) {
-	  if (!it2->hasExplosed()) {
-	    if ((*it)->isInExplosion(it2, this->_board->getScale())
-		&& this->_board->isNotProtected(it2->getPosInMap(this->_board->getScale()), (*it)->getPosInMap(this->_board->getScale()))) {
-	      it2->explode();
-	      std::cerr << " killed by " << (*it)->getOwnerID() << std::endl;
-	    }
-	  }
-	}
-
-	this->_board->explodeBlocks(*it);
-	//this->_boar->exploseExplosable(*it, this->_explosable);
-
-	for (auto &it2 : this->_bombs) {
-	  if (!it2->hasExplosed()) {
-	    if ((*it)->isInExplosion(it2, this->_board->getScale())
-		&& this->_board->isNotProtected(it2->getPosInMap(this->_board->getScale()), (*it)->getPosInMap(this->_board->getScale()))) {
-	      it2->explode();
-	    }
-	  }
-	}
-
-      }
-      ++it;
-    }
-  }
-}
-
-void bbman::Game::updatePlayers(bbman::Irrlicht &irr, irr::f32 delta) //
-{
-  for (auto &it : this->_players) {
-    it->play(irr, this->_board, this->_bombs);
-    it->update(irr, delta);
-    if (it->isRunning()) {
-      this->_powerUPs.checkCollision(it);
-    }
-  }
-  }*/

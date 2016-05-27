@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Fri May 27 12:53:44 2016 stephane galibert
+// Last update Fri May 27 16:28:00 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -38,9 +38,11 @@ void bbman::Application::init(void)
     this->_irr = new Irrlicht;
     this->_irr->init(irr::video::EDT_OPENGL,
 		     irr::core::dimension2d<irr::u32>(1920, 1080),
-		     _inputListener);
+		     this->_inputListener);
     this->_timer.setTimer(this->_irr->getTimer());
     this->_irr->getDevice()->getCursorControl()->setVisible(true);
+    this->_irr->getDevice()->activateJoysticks(this->_joystickInfo);
+    this->_irr->getDevice()->setWindowCaption(L"Bomberman");
     goToGame(); // goToMenu();
   } catch (std::runtime_error const& e) {
     throw (e);
@@ -70,8 +72,8 @@ int bbman::Application::play(void)
 void bbman::Application::update_game(irr::f32 delta)
 {
   if (this->_game) {
-    this->_game->input(_inputListener);
-    this->_game->update(*_irr, delta);
+    this->_game->input(this->_inputListener);
+    this->_game->update(*this->_irr, delta);
     if (this->_game->leaveGame()) {
       goToMenu();
     }

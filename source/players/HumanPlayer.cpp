@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Fri May 27 11:54:46 2016 stephane galibert
+// Last update Fri May 27 16:31:50 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -334,45 +334,65 @@ void bbman::HumanPlayer::moveSouth(irr::f32 delta)
   this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
 }
 
-void bbman::HumanPlayer::inputPlayer1(bbman::InputListener &inputListener)
+void bbman::HumanPlayer::inputPlayer1(bbman::InputListener &listener)
 {
   if (this->_alive) {
-    if(inputListener.IsKeyDown(irr::KEY_KEY_Z)) {
+    irr::SEvent::SJoystickEvent const& joy = listener.getJoystickState(1);
+    irr::f32 moveH = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_X] / 32767.f;
+    irr::f32 moveV = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_Y] / 32767.f;
+    if (std::fabs(moveH) < 0.50f) {
+      moveH = 0;
+    }
+    if (std::fabs(moveV) < 0.50f) {
+      moveV = 0;
+    }
+
+    if(listener.IsKeyDown(irr::KEY_KEY_Z) || moveV < 0) {
       this->_direction = Direction::DIR_NORTH;
     }
-    else if(inputListener.IsKeyDown(irr::KEY_KEY_S)) {
+    else if(listener.IsKeyDown(irr::KEY_KEY_S) || moveV > 0) {
       this->_direction = Direction::DIR_SOUTH;
     }
-    else if(inputListener.IsKeyDown(irr::KEY_KEY_Q)) {
+    else if(listener.IsKeyDown(irr::KEY_KEY_Q) || moveH < 0) {
       this->_direction = Direction::DIR_WEST;
     }
-    else if(inputListener.IsKeyDown(irr::KEY_KEY_D)) {
+    else if(listener.IsKeyDown(irr::KEY_KEY_D) || moveH > 0) {
       this->_direction = Direction::DIR_EAST;
     }
 
-    if (inputListener.IsKeyDown(irr::KEY_SPACE)) {
+    if (listener.IsKeyDown(irr::KEY_SPACE) || joy.IsButtonPressed(1)) {
       this->_action |= Action::ACT_BOMB;
     }
   }
 }
 
-void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &inputListener)
+void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &listener)
 {
   if (this->_alive) {
-    if(inputListener.IsKeyDown(irr::KEY_UP)) {
+    irr::SEvent::SJoystickEvent const& joy = listener.getJoystickState(2);
+    irr::f32 moveH = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_X] / 32767.f;
+    irr::f32 moveV = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_Y] / 32767.f;
+    if (std::fabs(moveH) < 0.50f) {
+      moveH = 0.f;
+    }
+    if (std::fabs(moveV) < 0.50f) {
+      moveV = 0.f;
+    }
+
+    if(listener.IsKeyDown(irr::KEY_UP) || moveV < 0.f) {
       this->_direction = Direction::DIR_NORTH;
     }
-    else if(inputListener.IsKeyDown(irr::KEY_DOWN)) {
+    else if(listener.IsKeyDown(irr::KEY_DOWN) || moveV > 0.f) {
       this->_direction = Direction::DIR_SOUTH;
     }
-    else if(inputListener.IsKeyDown(irr::KEY_LEFT)) {
+    else if(listener.IsKeyDown(irr::KEY_LEFT) || moveH < 0.f) {
       this->_direction = Direction::DIR_WEST;
     }
-    else if(inputListener.IsKeyDown(irr::KEY_RIGHT)) {
+    else if(listener.IsKeyDown(irr::KEY_RIGHT) || moveH > 0.f) {
       this->_direction = Direction::DIR_EAST;
     }
 
-    if (inputListener.IsKeyDown(irr::KEY_RETURN)) {
+    if (listener.IsKeyDown(irr::KEY_RETURN) || joy.IsButtonPressed(1)) {
       this->_action |= Action::ACT_BOMB;
     }
   }

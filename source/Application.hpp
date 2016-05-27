@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 15:36:32 2016 stephane galibert
-// Last update Wed May 18 20:18:42 2016 stephane galibert
+// Last update Fri May 27 15:13:40 2016 stephane galibert
 //
 
 #ifndef _APPLICATION_HPP_
@@ -36,6 +36,7 @@ namespace bbman
     //Menu *_menu;
     Game *_game;
     InputListener _inputListener;
+    irr::core::array<irr::SJoystickInfo> _joystickInfo;
     tools::Chronometer _timer;
     bbman::ApplicationState _as;
   };

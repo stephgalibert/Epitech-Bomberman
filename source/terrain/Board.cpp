@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Fri May 27 13:03:29 2016 stephane galibert
+// Last update Fri May 27 16:07:02 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -213,7 +213,7 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
 
   if (!bomb->isExploding())
     return ;
-  for (size_t i = 1 ; i <= bombRange ; ++i) {
+  for (size_t i = 0 ; i <= bombRange ; ++i) {
     size_t x = bomb->getPosInMap(getScale()).X + i;
     size_t y = bomb->getPosInMap(getScale()).Z;
     if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))) {
@@ -230,7 +230,7 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
       break;
     }
   }
-  for (size_t i = 1 ; i <= bombRange ; ++i) {
+  for (size_t i = 0 ; i <= bombRange ; ++i) {
     size_t x = bomb->getPosInMap(this->_scale).X;
     size_t y = bomb->getPosInMap(this->_scale).Z + i;
     if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))) {
@@ -247,7 +247,7 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
       break;
     }
   }
-  for (size_t i = 1 ; i <= bombRange ; ++i) {
+  for (size_t i = 0 ; i <= bombRange ; ++i) {
     size_t x = bomb->getPosInMap(this->_scale).X - i;
     size_t y = bomb->getPosInMap(this->_scale).Z;
     if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))) {
@@ -264,7 +264,7 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
       break;
     }
   }
-  for (size_t i = 1 ; i <= bombRange ; ++i) {
+  for (size_t i = 0 ; i <= bombRange ; ++i) {
     size_t x = bomb->getPosInMap(this->_scale).X;
     size_t y = bomb->getPosInMap(this->_scale).Z - i;
     if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))) {
