@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:45 2016 stephane galibert
-// Last update Tue May 24 22:31:10 2016 stephane galibert
+// Last update Fri May 27 07:56:36 2016 stephane galibert
 //
 
 #include "SpeedUPPowerUP.hpp"
@@ -85,4 +85,9 @@ irr::core::vector3d<irr::s32> const& bbman::SpeedUPPowerUP::getPosInMap(irr::cor
 void bbman::SpeedUPPowerUP::affectPlayer(APlayer *player)
 {
   player->addEffect(new SpeedUPEffect(player));
+}
+
+bool bbman::SpeedUPPowerUP::hasExplosed(void) const
+{
+  return (true);
 }

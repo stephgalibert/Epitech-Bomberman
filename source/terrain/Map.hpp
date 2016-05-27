@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:41:02 2016 stephane galibert
-// Last update Wed May 25 15:22:29 2016 stephane galibert
+// Last update Fri May 27 08:47:30 2016 stephane galibert
 //
 
 #ifndef _MAP_HPP_
@@ -34,14 +34,12 @@ namespace bbman
   template<typename T>
   std::ostream &operator<<(std::ostream &flux, Map<T> const& map)
   {
-    flux << "MAP_BEGIN" << std::endl;
     for (size_t i = 0 ; i < map.h ; ++i) {
       for (size_t j = 0 ; j < map.w ; ++j) {
 	flux << static_cast<int>(map.at(j, i).id) << " ";
       }
       flux << std::endl;
     }
-    flux << "MAP_END" << std::endl;
     return (flux);
   }
 

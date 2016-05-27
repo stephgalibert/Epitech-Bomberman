@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Thu May 26 12:19:55 2016 stephane galibert
+// Last update Fri May 27 08:47:01 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -21,12 +21,13 @@ bbman::Game::~Game(void)
   if (this->_board) {
     delete (this->_board);
   }
+  /*
   for (auto &it : this->_bombs) {
     delete (it);
   }
   for (auto &it : this->_players) {
     delete (it);
-  }
+    }*/
 }
 
 void bbman::Game::init(Irrlicht &irr, std::string const& saves)
@@ -34,9 +35,10 @@ void bbman::Game::init(Irrlicht &irr, std::string const& saves)
   try {
     if (!saves.empty()) {
       this->_loader.load(irr, saves);
-      this->_board->init(irr, this->_loader.getMap());
-      this->_players = this->_loader.getPlayers();
-      this->_bombs = this->_loader.getBombs();
+      //this->_board->init(irr, this->_loader.getMap());
+      this->_board->init(irr, this->_loader);
+      /*this->_players = this->_loader.getPlayers();
+	this->_bombs = this->_loader.getBombs();*/
     }
     else {
       this->_board->init(irr);
@@ -44,11 +46,13 @@ void bbman::Game::init(Irrlicht &irr, std::string const& saves)
       HumanPlayer *p1 = bbman::HumanPlayer::create();
       p1->init(irr);
       p1->setPosition(this->_board->getSpawnPosition(0));
-      this->_players.push_back(p1);
+      //this->_players.push_back(p1);
+      this->_board->addPlayer(p1); //
       HumanPlayer *p2 = bbman::HumanPlayer::create();
       p2->init(irr);
       p2->setPosition(this->_board->getSpawnPosition(1));
-      this->_players.push_back(p2);
+      //this->_players.push_back(p2);
+      this->_board->addPlayer(p2); //
       // END todel
     }
     initCamera(irr);
@@ -69,18 +73,21 @@ bool bbman::Game::input(InputListener &inputListener)
     return (true);
   }
   else {
-    for (auto &it : this->_players) {
+    this->_board->input(inputListener);
+    /*for (auto &it : this->_players) {
       it->input(inputListener);
-    }
+      }*/
   }
   return (false);
 }
 
 void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
-  updatePlayers(irr, delta);
-  this->_powerUPs.update(irr, delta, this->_board);
-  updateBombs(irr, delta);
+  /*updatePlayers(irr, delta); //
+  this->_powerUPs.update(irr, delta, this->_board); //
+  updateBombs(irr, delta); //*/
+
+  this->_board->update(irr, delta);
 }
 
 bool bbman::Game::leaveGame(void) const
@@ -112,28 +119,29 @@ void bbman::Game::initSound(void)
   }
 }
 
+//
 void bbman::Game::save(std::string const& fname)
 {
   std::ofstream ofs(fname.c_str(), std::ifstream::out);
   if (ofs) {
     ofs << *this->_board;
-    ofs << "PLAYERS_BEGIN" << std::endl;
+    /*ofs << "PLAYERS_BEGIN" << std::endl; //
     for (auto it : this->_players) {
       ofs << *it;
     }
     ofs << "PLAYERS_END" << std::endl;
     ofs << "BOMBS_BEGIN" << std::endl;
     for (auto it : this->_bombs) {
-      ofs << *it;
+    ofs << *it;
     }
-    ofs << "BOMBS_END" << std::endl;
+    ofs << "BOMBS_END" << std::endl;*/
   }
   else {
     throw (std::runtime_error("can not create ./save.txt"));
   }
 }
 
-void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta)
+/*void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta) //
 {
   for (std::list<IBomb *>::iterator it = std::begin(this->_bombs);
        it != std::end(this->_bombs); ) {
@@ -144,6 +152,7 @@ void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta)
     else {
       (*it)->update(irr, delta);
       if ((*it)->isExplosing()) {
+
 	for (auto &it2 : this->_players) {
 	  if (!it2->hasExplosed()) {
 	    if ((*it)->isInExplosion(it2, this->_board->getScale())
@@ -153,7 +162,10 @@ void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta)
 	    }
 	  }
 	}
+
 	this->_board->explodeBlocks(*it);
+	//this->_boar->exploseExplosable(*it, this->_explosable);
+
 	for (auto &it2 : this->_bombs) {
 	  if (!it2->hasExplosed()) {
 	    if ((*it)->isInExplosion(it2, this->_board->getScale())
@@ -162,13 +174,14 @@ void bbman::Game::updateBombs(bbman::Irrlicht &irr, irr::f32 delta)
 	    }
 	  }
 	}
+
       }
       ++it;
     }
   }
 }
 
-void bbman::Game::updatePlayers(bbman::Irrlicht &irr, irr::f32 delta)
+void bbman::Game::updatePlayers(bbman::Irrlicht &irr, irr::f32 delta) //
 {
   for (auto &it : this->_players) {
     it->play(irr, this->_board, this->_bombs);
@@ -177,4 +190,4 @@ void bbman::Game::updatePlayers(bbman::Irrlicht &irr, irr::f32 delta)
       this->_powerUPs.checkCollision(it);
     }
   }
-}
+  }*/

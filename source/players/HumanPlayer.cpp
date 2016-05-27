@@ -5,10 +5,11 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Thu May 26 10:14:36 2016 stephane galibert
+// Last update Fri May 27 11:54:46 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
+#include "Board.hpp"
 
 size_t bbman::HumanPlayer::NumberOfPlayer = 0;
 
@@ -136,7 +137,9 @@ void bbman::HumanPlayer::dropBomb(bbman::Irrlicht &irr, bbman::Board *board,
 	return (false);
       }) == std::end(bombs)
     && !board->isOutside(pos)) {
-    bombs.push_back(newBomb);
+    board->addBomb(newBomb);
+    (void)bombs;
+    //bombs.push_back(newBomb);
   }
   else {
     delete (newBomb);

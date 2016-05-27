@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Thu May 26 11:24:32 2016 stephane galibert
+// Last update Fri May 27 13:03:29 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -35,6 +35,12 @@ bbman::Board::~Board(void)
   for (auto &it : this->_dblocks) {
     delete (it);
   }
+  for (auto &it : this->_bombs) {
+    delete (it);
+  }
+  for (auto &it : this->_players) {
+    delete (it);
+  }
 }
 
 void bbman::Board::init(bbman::Irrlicht &irr)
@@ -50,9 +56,14 @@ void bbman::Board::init(bbman::Irrlicht &irr)
   this->_spawn[3] = irr::core::vector3df(10.f, 0.f, 110.f);
 }
 
-void bbman::Board::init(bbman::Irrlicht &irr, bbman::Map<bbman::Cell> const& map)
+void bbman::Board::init(bbman::Irrlicht &irr, bbman::Loader const& loader)
 {
-  this->_map = map;
+  this->_map = loader.getMap();
+  for (auto &it : loader.getPlayers()) {
+    addPlayer(it);
+
+  }
+  this->_bombs = loader.getBombs();
   initNode();
   initTerrain(irr);
   initMesh(irr);
@@ -60,6 +71,32 @@ void bbman::Board::init(bbman::Irrlicht &irr, bbman::Map<bbman::Cell> const& map
   this->_spawn[1] = irr::core::vector3df(170.f, 0.f, 10.f);
   this->_spawn[2] = irr::core::vector3df(170.f, 0.f, 110.f);
   this->_spawn[3] = irr::core::vector3df(10.f, 0.f, 110.f);
+}
+
+void bbman::Board::input(bbman::InputListener &listener)
+{
+  for (auto &it : this->_players) {
+    it->input(listener);
+  }
+}
+
+void bbman::Board::update(Irrlicht &irr, irr::f32 delta)
+{
+  updatePlayers(irr, delta);
+  this->_powerUPs.update(irr, delta, this);
+  updateBombs(irr, delta);
+}
+
+void bbman::Board::addPlayer(APlayer *player)
+{
+  this->_players.push_back(player);
+  this->_explosable.push_back(player);
+}
+
+void bbman::Board::addBomb(IBomb *bomb)
+{
+  this->_bombs.push_back(bomb);
+  //this->_explosable.push_back(bomb); // !
 }
 
 void bbman::Board::setPosition(irr::core::vector3df const& pos)
@@ -101,6 +138,16 @@ bbman::Map<bbman::Cell> const& bbman::Board::getMap(void) const
   return (this->_map);
 }
 
+std::vector<bbman::APlayer *> const& bbman::Board::getPlayers(void) const
+{
+  return (this->_players);
+}
+
+std::list<bbman::IBomb *> const& bbman::Board::getBombs(void) const
+{
+  return (this->_bombs);
+}
+
 bool bbman::Board::isColliding(irr::core::aabbox3df const& box) const
 {
   for (auto &it : this->_blocks) {
@@ -112,7 +159,7 @@ bool bbman::Board::isColliding(irr::core::aabbox3df const& box) const
 }
 
 bool bbman::Board::isNotProtected(irr::core::vector3d<irr::s32> const& bomb,
-				  irr::core::vector3d<irr::s32> const& block)
+			       irr::core::vector3d<irr::s32> const& block)
 {
   if (block.X > bomb.X
       && this->_map.at(bomb.X + 1, bomb.Z).id == ItemID::II_BLOCK_INBRKABLE) {
@@ -133,21 +180,105 @@ bool bbman::Board::isNotProtected(irr::core::vector3d<irr::s32> const& bomb,
   return (true);
 }
 
+void bbman::Board::deleteBlock(IEntity *entity)
+{
+  irr::core::vector3d<irr::s32> const& pos = entity->getPosInMap(getScale());
+  updateNode(entity->getPosInMap(getScale()));
+  this->_map.at(pos.X, pos.Z).id = ItemID::II_NONE;
+  entity->explode();
+}
+
+void bbman::Board::deleteEntity(IEntity *entity)
+{
+  entity->explode();
+}
+
+bbman::IEntity *bbman::Board::getEntityByPosition(irr::core::vector3d<irr::s32> const& pos) const
+{
+  for (auto it : this->_explosable) {
+    if (!it->hasExplosed()) {
+      irr::core::vector3d<irr::s32> const& epos = it->getPosInMap(getScale());
+      if (epos == pos) {
+	return (it);
+      }
+    }
+  }
+  return (NULL);
+}
+
 void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
 {
-  for (std::list<IBlock *>::iterator it = std::begin(this->_dblocks);
-       it != std::end(this->_dblocks);) {
-    if (bomb->isInExplosion(*it, getScale())
-	&& isNotProtected((*it)->getPosInMap(getScale()),
-			  bomb->getPosInMap(getScale()))) {
-      irr::core::vector3d<irr::s32> pos = (*it)->getPosInMap(getScale());
-      updateNode(pos);
-      this->_map.at(pos.X, pos.Z).id = ItemID::II_NONE;
-      delete (*it);
-      it = this->_dblocks.erase(it);
+  size_t bombRange = bomb->getRange();
+  IEntity *entity = NULL;
+
+  if (!bomb->isExploding())
+    return ;
+  for (size_t i = 1 ; i <= bombRange ; ++i) {
+    size_t x = bomb->getPosInMap(getScale()).X + i;
+    size_t y = bomb->getPosInMap(getScale()).Z;
+    if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))) {
+      IBlock *block = dynamic_cast<IBlock *>(entity);
+      if (block) {
+	deleteBlock(entity);
+      }
+      else {
+	deleteEntity(entity);
+      }
+      break;
     }
-    else {
-      ++it;
+    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
+      break;
+    }
+  }
+  for (size_t i = 1 ; i <= bombRange ; ++i) {
+    size_t x = bomb->getPosInMap(this->_scale).X;
+    size_t y = bomb->getPosInMap(this->_scale).Z + i;
+    if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))) {
+      IBlock *block = dynamic_cast<IBlock *>(entity);
+      if (block) {
+	deleteBlock(entity);
+      }
+      else {
+	deleteEntity(entity);
+      }
+      break;
+    }
+    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
+      break;
+    }
+  }
+  for (size_t i = 1 ; i <= bombRange ; ++i) {
+    size_t x = bomb->getPosInMap(this->_scale).X - i;
+    size_t y = bomb->getPosInMap(this->_scale).Z;
+    if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))) {
+      IBlock *block = dynamic_cast<IBlock *>(entity);
+      if (block) {
+	deleteBlock(entity);
+      }
+      else {
+	deleteEntity(entity);
+      }
+      break;
+    }
+    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
+      break;
+    }
+  }
+  for (size_t i = 1 ; i <= bombRange ; ++i) {
+    size_t x = bomb->getPosInMap(this->_scale).X;
+    size_t y = bomb->getPosInMap(this->_scale).Z - i;
+    if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))) {
+      IBlock *block = dynamic_cast<IBlock *>(entity);
+      if (block) {
+	deleteBlock(entity);
+      }
+      else {
+	deleteEntity(entity);
+      }
+      break;
+    }
+    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
+      break;
     }
   }
 }
@@ -308,10 +439,49 @@ void bbman::Board::buildBrkable(Irrlicht &irr, size_t x, size_t y)
     block->init(irr);
     block->setPosition(pos);
     this->_dblocks.push_back(block);
+    this->_explosable.push_back(block);
   } catch (std::runtime_error const& e) {
     if (block) {
       delete (block);
     }
     std::cerr << e.what() << std::endl;
+  }
+}
+
+void bbman::Board::updateBombs(bbman::Irrlicht &irr, irr::f32 delta)
+{
+  for (std::list<IBomb *>::iterator it = std::begin(this->_bombs);
+       it != std::end(this->_bombs); ) {
+    if ((*it)->hasExplosed()) {
+      delete (*it);
+      it = this->_bombs.erase(it);
+    }
+    else {
+      (*it)->update(irr, delta);
+      if ((*it)->isExplosing()) {
+	explodeBlocks(*it);
+	for (auto &it2 : this->_bombs) {
+	  if (!it2->hasExplosed()) {
+	    if ((*it)->isInExplosion(it2, getScale())
+		&& isNotProtected(it2->getPosInMap(getScale()),
+				  (*it)->getPosInMap(getScale()))) {
+	      it2->explode();
+	    }
+	  }
+	}
+      }
+      ++it;
+    }
+  }
+}
+
+void bbman::Board::updatePlayers(bbman::Irrlicht &irr, irr::f32 delta)
+{
+  for (auto &it : this->_players) {
+    it->play(irr, this, this->_bombs);
+    it->update(irr, delta);
+    if (it->isRunning()) {
+      this->_powerUPs.checkCollision(it);
+    }
   }
 }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Wed May 25 15:13:31 2016 stephane galibert
+// Last update Fri May 27 12:34:30 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -21,12 +21,17 @@
 # include <list>
 
 # include "IBomb.hpp"
+# include "APlayer.hpp"
 # include "Direction.hpp"
 # include "Map.hpp"
 # include "Cell.hpp"
 # include "IBlock.hpp"
 # include "IndestructibleBlock.hpp"
 # include "DestructibleBlock.hpp"
+# include "PowerUPs.hpp"
+# include "Loader.hpp"
+# include "InputListener.hpp"
+# include "PowerUPs.hpp"
 
 namespace bbman
 {
@@ -36,12 +41,19 @@ namespace bbman
     Board(void);
     ~Board(void);
     void init(Irrlicht &irr);
-    //void initFromStream(Irrlicht &irr, std::ifstream &ifs);
-    void init(Irrlicht &irr, Map<Cell> const& map);
+    void init(Irrlicht &irr, Loader const& loader);
+    void input(InputListener &listener);
+    void update(Irrlicht &irr, irr::f32 delta);
+    void addPlayer(APlayer *player);
+    void addBomb(IBomb *bomb);
     void setPosition(irr::core::vector3df const& pos);
     irr::core::vector3df const& getPosition(void) const;
     bool isColliding(irr::core::aabbox3df const& box) const;
-    void explodeBlocks(bbman::IBomb *bomb);
+    void deleteBlock(IEntity *entity);
+    void deleteEntity(IEntity *entity);
+    IEntity *getEntityByPosition(irr::core::vector3d<irr::s32> const& pos) const;
+    void eraseEntityByPosition(irr::core::vector3d<irr::s32> const& pos);
+    void explodeBlocks(IBomb *bomb);
     bool isNotProtected(irr::core::vector3d<irr::s32> const& bomb,
 			irr::core::vector3d<irr::s32> const& block);
     bool isOutside(irr::core::vector3df const& pos);
@@ -51,20 +63,27 @@ namespace bbman
     bool isValidMove(irr::core::vector3df const& pos, t_direction dir) const;
     bool isInNode(irr::core::vector3df const& pos) const;
     Map<Cell> const& getMap(void) const;
+    std::vector<APlayer *> const& getPlayers(void) const;
+    std::list<IBomb *> const& getBombs(void) const;
   private:
     void initTerrain(Irrlicht &irr);
     void initMap(void);
-    //void initMapFromStream(std::ifstream &ifs);
     void initNode(void);
     void initMesh(Irrlicht &irr);
     void updateNode(irr::core::vector3d<irr::s32> const& pos);
     void buildInbrkable(Irrlicht &irr, size_t x, size_t y);
     void buildBrkable(Irrlicht &irr, size_t x, size_t y);
+    void updateBombs(Irrlicht &irr, irr::f32 delta);
+    void updatePlayers(bbman::Irrlicht &irr, irr::f32 delta);
     std::unordered_map<int, std::function<void(Irrlicht &, size_t, size_t)> > _ctor;
     irr::scene::IMeshSceneNode *_backgroundMesh;
     irr::video::SMaterial _texture;
     std::vector<IBlock *> _blocks;
     std::list<IBlock *> _dblocks;
+    std::vector<APlayer *> _players;
+    std::list<IBomb *> _bombs;
+    std::list<IEntity *> _explosable;
+    PowerUPs _powerUPs;
     Map<bbman::Cell> _map;
     irr::core::vector3df _size;
     irr::core::vector3df _scale;
@@ -73,7 +92,22 @@ namespace bbman
 
   inline std::ostream &operator<<(std::ostream &flux, bbman::Board const& board)
   {
+    flux << "MAP_BEGIN" << std::endl;
     flux << board.getMap();
+    flux << "MAP_END" << std::endl;
+    flux << "PLAYERS_BEGIN" << std::endl;
+    for (auto it : board.getPlayers()) {
+      flux << *it;
+    }
+    flux << "PLAYERS_END" << std::endl;
+    flux << "BOMBS_BEGIN" << std::endl;
+    for (auto it : board.getBombs()) {
+      flux << *it;
+    }
+    flux << "BOMBS_END" << std::endl;
+    flux << "POWERUPS_BEGIN" << std::endl;
+    // powerups
+    flux << "POWERUPS_END" << std::endl;
     return (flux);
   }
 }

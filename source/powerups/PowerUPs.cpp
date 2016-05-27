@@ -5,10 +5,11 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 17:37:21 2016 stephane galibert
-// Last update Wed May 25 02:08:44 2016 stephane galibert
+// Last update Fri May 27 08:44:24 2016 stephane galibert
 //
 
 #include "PowerUPs.hpp"
+#include "Board.hpp"
 
 bbman::PowerUPs::PowerUPs(void)
 {
