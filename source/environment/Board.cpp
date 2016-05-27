@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Fri May 27 16:07:02 2016 stephane galibert
+// Last update Fri May 27 19:44:29 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -16,8 +16,8 @@ bbman::Board::Board(void)
   this->_backgroundMesh = NULL;
 
   // la taille de la map doit être impaire
-  this->_size                                  = irr::core::vector3df(19, 0, 13);
-  this->_scale                                 = irr::core::vector3df(10, 10, 10);
+  this->_size = irr::core::vector3df(19, 0, 13);
+  this->_scale = irr::core::vector3df(10, 10, 10);
   this->_ctor[(int)ItemID::II_BLOCK_INBRKABLE] =
     std::bind(&bbman::Board::buildInbrkable, this, std::placeholders::_1,
               std::placeholders::_2, std::placeholders::_3);

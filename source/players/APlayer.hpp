@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:28:29 2016 stephane galibert
-// Last update Fri May 27 08:14:38 2016 stephane galibert
+// Last update Sat May 28 01:41:23 2016 stephane galibert
 //
 
 #ifndef _APLAYER_HPP_
@@ -14,7 +14,6 @@
 # include <iostream>
 # include <list>
 
-// # include "Board.hpp"
 # include "IEntity.hpp"
 # include "IBomb.hpp"
 # include "IEffect.hpp"

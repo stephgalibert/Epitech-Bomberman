@@ -12,10 +12,7 @@
 
 class ITask
 {
-private:
-
 public:
-
   virtual void start() = 0;
   virtual ~ITask() {}
 };

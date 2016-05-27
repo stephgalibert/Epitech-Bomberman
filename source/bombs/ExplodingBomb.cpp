@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Fri May 27 12:13:18 2016 stephane galibert
+// Last update Fri May 27 19:46:14 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -45,15 +45,17 @@ void bbman::ExplodingBomb::update(bbman::Irrlicht &irr, irr::f32 delta)
   if (this->_delta <= DELAY_TO_EXPLOSE) {
     this->_delta += delta;
     this->_explosing = (this->_delta > DELAY_TO_EXPLOSE);
+    if (this->_explosing) {
+      try {
+	this->_sounds.play("explosion");
+      } catch (std::runtime_error const& e) {
+	std::cerr << e.what() << std::endl;
+      }
+    }
   }
   if (this->_explosing) {
     this->_explosed = !(this->_delta < DELAY_TO_EXPLOSE + DELAY_EXPLOSING);
     this->_mesh->setVisible(false);
-    try {
-      this->_sounds.play("explosion");
-    } catch (std::runtime_error const& e) {
-      std::cerr << e.what() << std::endl;
-    }
     if (!this->_explosed) {
       this->_delta += delta;
     }

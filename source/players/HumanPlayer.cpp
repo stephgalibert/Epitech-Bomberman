@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Fri May 27 16:31:50 2016 stephane galibert
+// Last update Fri May 27 20:22:53 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -342,7 +342,7 @@ void bbman::HumanPlayer::moveSouth(irr::f32 delta)
 void bbman::HumanPlayer::inputPlayer1(bbman::InputListener &listener)
 {
   if (this->_alive) {
-    irr::SEvent::SJoystickEvent const& joy = listener.getJoystickState(1);
+    irr::SEvent::SJoystickEvent const& joy = listener.getJoystickState(0);
     irr::f32 moveH = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_X] / 32767.f;
     irr::f32 moveV = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_Y] / 32767.f;
     if (std::fabs(moveH) < 0.50f) {
@@ -374,7 +374,7 @@ void bbman::HumanPlayer::inputPlayer1(bbman::InputListener &listener)
 void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &listener)
 {
   if (this->_alive) {
-    irr::SEvent::SJoystickEvent const& joy = listener.getJoystickState(2);
+    irr::SEvent::SJoystickEvent const& joy = listener.getJoystickState(1);
     irr::f32 moveH = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_X] / 32767.f;
     irr::f32 moveV = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_Y] / 32767.f;
     if (std::fabs(moveH) < 0.50f) {
