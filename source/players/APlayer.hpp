@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:28:29 2016 stephane galibert
-// Last update Thu May 26 09:17:28 2016 stephane galibert
+// Last update Fri May 27 08:14:38 2016 stephane galibert
 //
 
 #ifndef _APLAYER_HPP_
@@ -14,7 +14,7 @@
 # include <iostream>
 # include <list>
 
-# include "Board.hpp"
+//# include "Board.hpp"
 # include "IEntity.hpp"
 # include "IBomb.hpp"
 # include "IEffect.hpp"
@@ -23,6 +23,8 @@
 
 namespace bbman
 {
+  class Board;
+
   class APlayer : public IEntity
   {
   public:
@@ -33,8 +35,7 @@ namespace bbman
     virtual size_t getAPlayerID(void) const = 0;
     virtual void init(Irrlicht &irr) = 0;
     virtual void update(Irrlicht &irr, irr::f32 delta) = 0;
-    virtual void play(Irrlicht &irr, Board *board,
-		      std::list<IBomb *> &bombs) = 0;
+    virtual void play(Irrlicht &irr, Board *board, std::list<IBomb *> &bombs) = 0;
     virtual void addBomb(IBomb *bomb) = 0;
     virtual void setPosition(irr::core::vector3df const& pos) = 0;
     virtual irr::core::vector3df const& getPosition(void) const = 0;

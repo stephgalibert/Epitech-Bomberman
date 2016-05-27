@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Thu May 26 10:34:56 2016 stephane galibert
+// Last update Fri May 27 08:45:59 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -51,9 +51,12 @@ namespace bbman
     Loader _loader;
     irr::scene::ICameraSceneNode *_camera;
     Board *_board;
-    std::list<IBomb *> _bombs;
-    std::vector<APlayer *> _players;
-    PowerUPs _powerUPs;
+
+    //std::list<IBomb *> _bombs;
+    //std::vector<APlayer *> _players;
+    //std::list<IEntity *> _explosable; // => players, bombs
+    //PowerUPs _powerUPs;
+
     MusicBox _musics;
     MemoryFile _musicBackground;
   };

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:02:45 2016 stephane galibert
-// Last update Tue May 24 22:30:53 2016 stephane galibert
+// Last update Fri May 27 07:56:01 2016 stephane galibert
 //
 
 #ifndef _IPOWERUP_HPP_
@@ -32,6 +32,7 @@ namespace bbman
     virtual void explode(void) = 0;
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale) = 0;
     virtual void affectPlayer(APlayer *player) = 0;
+    virtual bool hasExplosed(void) const = 0;
   };
 }
 

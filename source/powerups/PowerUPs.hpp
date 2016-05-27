@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:02:47 2016 stephane galibert
-// Last update Wed May 25 02:09:10 2016 stephane galibert
+// Last update Fri May 27 08:45:32 2016 stephane galibert
 //
 
 #ifndef _POWERUPS_HPP_
@@ -20,10 +20,12 @@
 # include "SpeedUPPowerUP.hpp"
 # include "Irrlicht.hpp"
 # include "Generator.hpp"
-# include "Board.hpp"
+//# include "Board.hpp"
 
 namespace bbman
 {
+  class Board;
+
   class PowerUPs
   {
   public:

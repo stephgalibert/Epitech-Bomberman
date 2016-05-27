@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:04 2016 stephane galibert
-// Last update Tue May 24 22:31:04 2016 stephane galibert
+// Last update Fri May 27 07:58:33 2016 stephane galibert
 //
 
 #ifndef _SPEEDUPPOWERUP_HPP_
@@ -32,6 +32,7 @@ namespace bbman
     virtual void explode(void);
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual void affectPlayer(APlayer *player);
+    virtual bool hasExplosed(void) const;
   private:
     irr::scene::ISceneNode *_node;
     irr::f32 _delta;

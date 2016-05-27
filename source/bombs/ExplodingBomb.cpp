@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Thu May 26 12:06:36 2016 stephane galibert
+// Last update Fri May 27 12:13:18 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -45,18 +45,15 @@ void bbman::ExplodingBomb::update(bbman::Irrlicht &irr, irr::f32 delta)
   if (this->_delta <= DELAY_TO_EXPLOSE) {
     this->_delta += delta;
     this->_explosing = (this->_delta > DELAY_TO_EXPLOSE);
-    if (this->_explosing)
-      {
-	this->_mesh->setVisible(false);
-	try {
-	  this->_sounds.play("explosion");
-	} catch (std::runtime_error const& e) {
-	  std::cerr << e.what() << std::endl;
-	}
-      }
   }
   if (this->_explosing) {
     this->_explosed = !(this->_delta < DELAY_TO_EXPLOSE + DELAY_EXPLOSING);
+    this->_mesh->setVisible(false);
+    try {
+      this->_sounds.play("explosion");
+    } catch (std::runtime_error const& e) {
+      std::cerr << e.what() << std::endl;
+    }
     if (!this->_explosed) {
       this->_delta += delta;
     }
@@ -120,6 +117,12 @@ bool bbman::ExplodingBomb::hasExplosed(void) const
 {
   return (this->_explosed);
 }
+
+bool bbman::ExplodingBomb::isExploding(void) const
+{
+  return (this->_cpt == 1);
+}
+
 void bbman::ExplodingBomb::initMesh(bbman::Irrlicht &irr)
 {
   std::string txt = "./media/ninja.b3d";
@@ -186,6 +189,11 @@ size_t bbman::ExplodingBomb::getOwnerID(void) const
 size_t bbman::ExplodingBomb::getBombID(void) const
 {
   return (1);
+}
+
+size_t bbman::ExplodingBomb::getRange(void) const
+{
+  return (3);
 }
 
 void bbman::ExplodingBomb::setOwner(bbman::APlayer *owner)
