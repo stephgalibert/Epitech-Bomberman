@@ -75,7 +75,7 @@ endif (UNIX)
 # add window libraries to the executable
 if (MSVC)
   target_link_libraries(bomberman
-    ${PROJECT_SOURCE_DIR}/lib/assimp/lib/window/assimp-vc130-mtd.lib
+    ${PROJECT_SOURCE_DIR}/lib/assimp/lib/window/assimp-vc130-mt.lib
     ${PROJECT_SOURCE_DIR}/lib/irrlicht/lib/window/irrlicht.lib
     ${PROJECT_SOURCE_DIR}/lib/lua/LuaInterpreter/lib/window/lua5.3.0.lib
     ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-audio.lib
@@ -84,7 +84,7 @@ if (MSVC)
 
   file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build)
   file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
-  file(COPY ${PROJECT_SOURCE_DIR}/lib/assimp/lib/window/assimp-vc130-mtd.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/assimp/lib/window/assimp-vc130-mt.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
   file(COPY ${PROJECT_SOURCE_DIR}/lib/irrlicht/lib/window/irrlicht.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
   file(COPY ${PROJECT_SOURCE_DIR}/lib/lua/LuaInterpreter/lib/window/lua5.3.0.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
   file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/openal32.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)

@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
+	<Bundle Name="BombermanSetup" Version="1.0.0.0" Manufacturer="Indeed Studio" UpgradeCode="202b251a-fc45-4e7e-8ffa-a1dd5dcc5bf0">
+    <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" >
+      <bal:WixStandardBootstrapperApplication
+            LicenseFile="../asset/installer/license.rtf"
+            LogoFile="../asset/installer/bomberman-logo.jpg"
+            />
+      
+    </BootstrapperApplicationRef>
+    <Variable Name="InstallFolder" Type="string"
+              Value="[ProgramFilesFolder]The Application"/>
+    <!--<Variable Name="BurnVariable" 
+              bal:Overridable="yes"/>-->
+    
+		<Chain>
+			<!-- TODO: Define the list of chained packages. -->
+      <ExePackage
+                SourceFile="../windowInstaller/vcredist_x86.exe"
+                DetectCondition="ExeDetectedVariable"
+                InstallCommand="/q /ACTION=Install"
+                RepairCommand="/q ACTION=Repair /hideconsole"
+                UninstallCommand="/q ACTION=Uninstall /hideconsole" />
+      <MsiPackage SourceFile="game-installer/bin/release/gameInstaller.msi" >
+        <MsiProperty Name="INSTALLFOLDER" Value="[InstallFolder]" />
+      </MsiPackage> 
+		</Chain>
+	</Bundle>
+</Wix>
