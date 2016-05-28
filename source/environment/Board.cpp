@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Fri May 27 19:44:29 2016 stephane galibert
+// Last update Sat May 28 02:47:29 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -374,24 +374,23 @@ void bbman::Board::initNode(void)
   for (size_t i = 0; i < this->_map.h; ++i) {
     for (size_t j = 0; j < this->_map.w; ++j) {
       if (this->_map.at(j, i).id != ItemID::II_NONE) {
-        Cell& north = this->_map.at(j, i - 1);
-        Cell& south = this->_map.at(j, i + 1);
-        Cell& east  = this->_map.at(j - 1, i);
-        Cell& west  = this->_map.at(j + 1, i);
-
         if (i > 0) {
+	  Cell& north = this->_map.at(j, i - 1);
           north.node &= ~(north.node & ((size_t)DIR_NORTH));
         }
 
         if (i < this->_map.h - 1) {
+	  Cell& south = this->_map.at(j, i + 1);
           south.node &= ~(south.node & ((size_t)DIR_SOUTH));
         }
 
         if (j > 0) {
+	  Cell& east  = this->_map.at(j - 1, i);
           east.node &= ~(east.node & ((size_t)DIR_EAST));
         }
 
         if (j < this->_map.w - 1) {
+	  Cell& west  = this->_map.at(j + 1, i);
           west.node &= ~(west.node & ((size_t)DIR_WEST));
         }
       }
