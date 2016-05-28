@@ -8,7 +8,7 @@
 ** Last update Fri May 27 10:51:48 2016 sebperso
 */
 
-#include <unistd.h>
+//#include <unistd.h>
 #include "ThreadPool.hpp"
 #define NB_TASK 100
 #define NB_THREAD 8
@@ -30,7 +30,7 @@ public:
 
     std::cout << "Thread start working on action " << id <<
     " delay is " << delay << " sec" << std::endl;
-    sleep(delay);
+  //  sleep(delay);
   }
 
   int id;

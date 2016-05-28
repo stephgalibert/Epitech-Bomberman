@@ -27,12 +27,8 @@ bbman::Binding::~Binding(void)
 
 int  bbman::Binding::runAI(void)
 {
-  std::cout << "AVANT GETGLOBAL" << std::endl;
   luabridge::LuaRef aiFct = luabridge::getGlobal(this->luaState, "test");
-  if (!aiFct)
-  std::cout << "C EST NULL " << std::endl;
   luabridge::LuaRef ret = aiFct();
-  std::cout << "APRES GETGLOBAL" << std::endl;
   int move = ret.cast<int>();
   if (move == 3)
     move = 8;

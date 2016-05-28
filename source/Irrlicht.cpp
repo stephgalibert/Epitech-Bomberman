@@ -56,8 +56,13 @@ void bbman::Irrlicht::init(irr::video::E_DRIVER_TYPE dType,
 
 bool bbman::Irrlicht::isRunning(void)
 {
-  return (this->_irr.device->run());
+	bool isRunning = false;
+	if (this->_irr.device)
+		isRunning = this->_irr.device->run();
+  return (isRunning);
+
 }
+
 
 void bbman::Irrlicht::beginScene(void)
 {

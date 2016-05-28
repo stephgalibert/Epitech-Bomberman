@@ -66,23 +66,33 @@ if (UNIX)
     ${PROJECT_SOURCE_DIR}/lib/assimp/lib/linux/libassimp.so
     ${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux/libsfml-audio.so
     ${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux/libsfml-system.so
-    )
+  )
   file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build)
+  # override install path if it has not been explicitly specified
+  set (CMAKE_INSTALL_PREFIX "../")
 endif (UNIX)
 
 # add window libraries to the executable
 if (MSVC)
-  #TODO: Copy all dll with exe
   target_link_libraries(bomberman
+    ${PROJECT_SOURCE_DIR}/lib/assimp/lib/window/assimp-vc130-mtd.lib
     ${PROJECT_SOURCE_DIR}/lib/irrlicht/lib/window/irrlicht.lib
-    ${PROJECT_SOURCE_DIR}/lib/assimp/lib/lib/assimp-vc130-mtd.lib
-    ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-audio-d.lib
-    ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-system-d.lib
+    ${PROJECT_SOURCE_DIR}/lib/lua/LuaInterpreter/lib/window/lua5.3.0.lib
+    ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-audio.lib
+    ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-system.lib
   )
+
+  file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build)
+  file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/assimp/lib/window/assimp-vc130-mtd.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/irrlicht/lib/window/irrlicht.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/lua/LuaInterpreter/lib/window/lua5.3.0.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/openal32.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/libsndfile-1.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-audio-2.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-system-2.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
 endif (MSVC)
 
-# override install path if it has not been explicitly specified
-set (CMAKE_INSTALL_PREFIX "../")
 
 # add the install targets in bin directory
 install (TARGETS bomberman DESTINATION bin)
