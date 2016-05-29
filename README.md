@@ -3,7 +3,7 @@
 ## Introduction
 
 This is the last C++ coding project for Epitech's sophomores, 
-the goal is to program a 3D video game in a 4 weeks deadline using the ogre3d library.
+the goal is to program a 3D video game in a 4 weeks deadline using the Irlicht3D library.
 
 ## Configuration
 * **Code style**
@@ -14,9 +14,10 @@ the goal is to program a 3D video game in a 4 weeks deadline using the ogre3d li
   * Follow this [guide](https://help.github.com/articles/generating-an-ssh-key/) to add ssh access on this repository.
 
 ## Installation
-* **Installing Ogre**
-  * [Official documentation on ogre3d.](http://www.ogre3d.org/docs/api/1.9/)
-  * [Ogre3d Quick installation on Ubuntu.](https://github.com/seb-saletes/bomberman/wiki/Quick-install-ogre-3d-ubuntu)
+* **Linux**
+  * mkdir build && cd build && cmake .. && make install && cd ../bin && ./bomberman
+* **Window**
+  * Go to windowInstaller folder, click on BombermanSetup.exe Enjoy ! 
 
 
 ## Credits
