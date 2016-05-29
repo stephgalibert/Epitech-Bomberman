@@ -7,6 +7,9 @@ project(Bomberman)
 set (Bomberman_VERSION_MAJOR 1)
 set (Bomberman_VERSION_MINOR 0)
 
+# should we use our own math functions?
+option (START_GTEST "Launch test instead of start the program" ON)
+
 # Enable c++11 with CMake
 add_compile_options(-std=c++11)
 add_compile_options(-g)
@@ -14,7 +17,7 @@ add_compile_options(-g)
 # configure a header file to pass some of the CMake settings to the source code
 configure_file (
   "${PROJECT_SOURCE_DIR}/build_config.h.in"
-  "${PROJECT_BINARY_DIR}/build_config.h"
+  "${PROJECT_SOURCE_DIR}/source/build_config.h"
   )
 
 # add search path for include files
@@ -39,8 +42,8 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/lib/lua/LuaBridge/detail
   ${PROJECT_SOURCE_DIR}/lib/lua/LuaInterpreter/include
   ${PROJECT_SOURCE_DIR}/lib/SFML/include/
-  # ${PROJECT_SOURCE_DIR}/lib/google_test/include/
-  # ${PROJECT_SOURCE_DIR}/lib/google_test/include/gtest
+  ${PROJECT_SOURCE_DIR}/lib/google-test/include/
+  ${PROJECT_SOURCE_DIR}/lib/google-test/include/gtest
 )
 
 FILE(GLOB SRCS
@@ -50,9 +53,14 @@ FILE(GLOB SRCS
     source/**/*.hpp
   )
 
+# call the CMakeList to build gtest.a
+add_subdirectory(lib/google-test)
+
 # add the executable
 add_executable(bomberman ${SRCS})
 
+# build static gtest library before target
+add_dependencies(bomberman gtest)
 # add unix libraries to the executable
 if (UNIX)
   # Irrlicht must be linked first
@@ -63,7 +71,7 @@ if (UNIX)
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/assimp/lib/linux
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/google_test/lib
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux
-    # ${PROJECT_SOURCE_DIR}/lib/google_test/lib/libgtest.so
+    ${PROJECT_SOURCE_DIR}/lib/google-test/libgtest.a
     ${PROJECT_SOURCE_DIR}/lib/assimp/lib/linux/libassimp.so
     ${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux/libsfml-audio.so
     ${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux/libsfml-system.so

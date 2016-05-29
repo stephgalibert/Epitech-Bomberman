@@ -1,3 +1,4 @@
 // the configured options and settings for Tutorial
 #define Bomberman_VERSION_MAJOR @Bomberman_VERSION_MAJOR@
 #define Bomberman_VERSION_MINOR @Bomberman_VERSION_MINOR@
+#cmakedefine START_GTEST

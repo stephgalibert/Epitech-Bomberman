@@ -1,4 +1,5 @@
 //
+
 // main.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
 //
 // Made by stephane galibert
@@ -11,18 +12,27 @@
 #include <string>
 #include <iostream>
 #include <stdexcept>
-
 #include "Application.hpp"
+#include "build_config.h"
+#ifdef START_GTEST
+  #include "gtest.h"
+#endif
 
-int main(void)
+int main(int argc, char *argv[])
 {
   bbman::Application appli;
 
+  #ifdef START_GTEST
+
+  ::testing::InitGoogleTest(&argc, argv);
+  return RUN_ALL_TESTS();
+
+  #endif // ifdef LAUNCH_GTEST
   try {
     appli.init();
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
-    return (1);
+    return 1;
   }
-  return (appli.play());
+  return appli.play();
 }

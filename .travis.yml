@@ -1,0 +1,23 @@
+language:
+  - cpp
+
+sudo: required
+dist: trusty
+
+install:
+  - sudo pip install cpp-coveralls
+  - sudo apt-get -y install libxcursor-dev
+  - sudo apt-get -y install libopenal1
+
+script:
+  - mkdir build
+  - cd build
+  - cmake -DSTART_GTEST=ON ..
+  - make
+  - ./bomberman
+
+after_success:
+  - coveralls --root .. -E ".*external.*" -E ".*CMakeFiles.*" -E ".*test/.*.cpp.*"
+
+notifications:
+  email: false

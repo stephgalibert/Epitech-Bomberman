@@ -1,5 +1,12 @@
+# useless files
 *.o
 *~
+build_config.h
+
+# directories
 bomberman
 build
 bin
+
+#libraries
+libgtest.a
