@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Sat May 28 17:14:44 2016 stephane galibert
+// Last update Sun May 29 09:40:54 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -43,7 +43,7 @@ namespace bbman
     virtual size_t getSpeed(void) const;
     virtual void setSpeed(size_t speed);
     virtual void addEffect(IEffect *effect);
-    virtual size_t getPlayerNumber(void) const; // !
+    virtual size_t getPlayerNumber(void) const;
     virtual bool isRunning(void) const;
     virtual bool hasExplosed(void) const;
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);

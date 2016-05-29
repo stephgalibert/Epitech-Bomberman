@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Sat May 28 17:37:03 2016 stephane galibert
+// Last update Sun May 29 10:42:55 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -98,13 +98,23 @@ bool bbman::Board::hasWinners(void) const
   return (nbAlive < 2);
 }
 
+bbman::APlayer *bbman::Board::getPlayerByID(size_t id) const
+{
+  for (auto it : this->_players) {
+    if (it->getID() == id) {
+      return (it);
+    }
+  }
+  return (NULL);
+}
+
 void bbman::Board::addPlayer(APlayer *player)
 {
   this->_players.push_back(player);
   this->_explosable.push_back(player);
 }
 
-void bbman::Board::addBomb(IBomb *newBomb)
+bool bbman::Board::addBomb(IBomb *newBomb)
 {
   if (std::find_if(std::begin(this->_bombs), std::end(this->_bombs),
 		   [&newBomb](IBomb *bomb) {
@@ -114,12 +124,10 @@ void bbman::Board::addBomb(IBomb *newBomb)
 		   }) == std::end(this->_bombs)
       && !isOutside(newBomb->getPosition())) {
     this->_bombs.push_back(newBomb);
-    this->_explosable.push_back(newBomb); // !
-    //board->addBomb(newBomb);
+    this->_explosable.push_back(newBomb);
+    return (true);
   }
-  else {
-    delete (newBomb);
-  }
+  return (false);
 }
 
 void bbman::Board::setPosition(irr::core::vector3df const& pos)
@@ -193,6 +201,15 @@ void bbman::Board::deleteEntity(IEntity *entity)
   entity->explode();
 }
 
+void bbman::Board::deleteBomb(IBomb *bomb)
+{
+  APlayer *owner = getPlayerByID(bomb->getOwnerID());
+  bomb->explode();
+  if (owner) {
+    owner->addBomb(bomb->clone());
+  }
+}
+
 bbman::IEntity *bbman::Board::getEntityByPosition(irr::core::vector3d<irr::s32>const& pos) const
 {
   for (auto it : this->_explosable) {
@@ -218,18 +235,20 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
   for (size_t i = 0; i <= bombRange; ++i) {
     size_t x = bomb->getPosInMap(getScale()).X + i;
     size_t y = bomb->getPosInMap(getScale()).Z;
-
     if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))
 	&& entity != bomb) {
       IBlock *block = dynamic_cast<IBlock *>(entity);
-
       if (block) {
         deleteBlock(entity);
       } else {
-        deleteEntity(entity);
+	deleteEntity(entity);
       }
       break;
-    } else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
+    }
+    else if (entity == bomb) {
+      deleteBomb(bomb);
+    }
+    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
       break;
     }
   }
@@ -243,10 +262,11 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
       if (block) {
         deleteBlock(entity);
       } else {
-        deleteEntity(entity);
+	deleteEntity(entity);
       }
       break;
-    } else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
+    }
+    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
       break;
     }
   }
@@ -260,10 +280,11 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
       if (block) {
         deleteBlock(entity);
       } else {
-        deleteEntity(entity);
+	deleteEntity(entity);
       }
       break;
-    } else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
+    }
+    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
       break;
     }
   }
@@ -274,14 +295,14 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))
 	&& entity != bomb) {
       IBlock *block = dynamic_cast<IBlock *>(entity);
-
       if (block) {
         deleteBlock(entity);
       } else {
-        deleteEntity(entity);
+	deleteEntity(entity);
       }
       break;
-    } else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
+    }
+    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
       break;
     }
   }
@@ -484,6 +505,10 @@ void bbman::Board::updateBombs(bbman::Irrlicht& irr, irr::f32 delta)
 	  ++it2;
 	}
       }
+      /*APlayer *owner = getPlayerByID((*it)->getOwnerID());
+      if (owner) {
+	owner->addBomb((*it)->clone());
+	}*/
       delete (*it);
       it = this->_bombs.erase(it);
     } else {

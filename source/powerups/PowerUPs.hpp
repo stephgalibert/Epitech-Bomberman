@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:02:47 2016 stephane galibert
-// Last update Fri May 27 08:45:32 2016 stephane galibert
+// Last update Sun May 29 10:19:43 2016 stephane galibert
 //
 
 #ifndef _POWERUPS_HPP_
@@ -18,9 +18,9 @@
 # include "APlayer.hpp"
 # include "IPowerUP.hpp"
 # include "SpeedUPPowerUP.hpp"
+# include "AddExplosingBombPowerUP.hpp"
 # include "Irrlicht.hpp"
 # include "Generator.hpp"
-//# include "Board.hpp"
 
 namespace bbman
 {
@@ -38,6 +38,7 @@ namespace bbman
   private:
     void generate(Irrlicht &irr, Board *board);
     void generateSpeedUp(Irrlicht &irr, Board *board);
+    void generateAddExplosingBomb(Irrlicht &irr, Board *board);
     bool isFree(IPowerUP *powerUP, Board *board) const;
     std::list<IPowerUP *> _powerUPs;
     tools::Generator _generator;

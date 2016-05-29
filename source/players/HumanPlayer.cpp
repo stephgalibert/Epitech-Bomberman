@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Sat May 28 17:14:17 2016 stephane galibert
+// Last update Sun May 29 10:52:29 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -122,24 +122,18 @@ void bbman::HumanPlayer::checkDirection(bbman::Board *board)
 void bbman::HumanPlayer::dropBomb(bbman::Irrlicht &irr, bbman::Board *board)
 {
   IBomb *newBomb = createBomb(irr);
-  irr::core::vector3df pos = getPosition();
+  if (newBomb) {
+    irr::core::vector3df pos = getPosition();
 
-  pos.X = board->getScale().X / 2 + std::floor(pos.X)
-    - (int)(std::floor(pos.X)) % (int)board->getScale().X;
-  pos.Z = board->getScale().Z / 2 + std::floor(pos.Z)
-    - (int)(std::floor(pos.Z)) % (int)board->getScale().Z;
-  newBomb->setPosition(pos);
-  /*if (std::find_if(std::begin(bombs), std::end(bombs), [&newBomb](IBomb *bomb) {
-	if (newBomb->getPosition() == bomb->getPosition())
-	  return (true);
-	return (false);
-      }) == std::end(bombs)
-      && !board->isOutside(pos)) {*/
-    board->addBomb(newBomb);
-    /*}
-  else {
-    delete (newBomb);
-    }*/
+    pos.X = board->getScale().X / 2 + std::floor(pos.X)
+      - (int)(std::floor(pos.X)) % (int)board->getScale().X;
+    pos.Z = board->getScale().Z / 2 + std::floor(pos.Z)
+      - (int)(std::floor(pos.Z)) % (int)board->getScale().Z;
+    newBomb->setPosition(pos);
+    if (!board->addBomb(newBomb)) {
+      addBomb(newBomb);
+    }
+  }
 }
 
 void bbman::HumanPlayer::addBomb(bbman::IBomb *bomb)
@@ -252,19 +246,20 @@ void bbman::HumanPlayer::setSpeed(size_t speed)
 void bbman::HumanPlayer::addEffect(IEffect *effect)
 {
   if (this->_alive) {
-    if (std::find_if(std::begin(this->_effects), std::end(this->_effects),
+    /*if (std::find_if(std::begin(this->_effects), std::end(this->_effects),
 		     [&effect](IEffect *buff) {
 		       if (effect->getEffectID() == buff->getEffectID())
 			 buff->restart();
 		       return (true);
 		       return (false);
 		   }) == std::end(this->_effects)) {
-      effect->enable();
-      this->_effects.push_back(effect);
-    }
+		   effect->enable();*/
+    effect->enable();
+    this->_effects.push_back(effect);
+      /*}
     else {
       delete (effect);
-    }
+      }*/
   }
 }
 
@@ -438,6 +433,8 @@ size_t bbman::HumanPlayer::getPlayerNumber(void) const
 bbman::IBomb *bbman::HumanPlayer::createBomb(bbman::Irrlicht &irr)
 {
   IBomb *bomb = this->_bombManager.getSelectedBomb();
-  bomb->init(irr);
+  if (bomb) {
+    bomb->init(irr);
+  }
   return (bomb);
 }

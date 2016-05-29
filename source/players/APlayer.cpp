@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:09:16 2016 stephane galibert
-// Last update Wed May 25 22:15:59 2016 stephane galibert
+// Last update Sun May 29 08:40:47 2016 stephane galibert
 //
 
 #include "APlayer.hpp"
@@ -16,6 +16,7 @@ bbman::APlayer::APlayer(void)
 {
   this->_id = NumberOfPlayer;
   this->_score = 0;
+  this->_username = "Player" + std::to_string(NumberOfPlayer);
   ++NumberOfPlayer;
 }
 
@@ -47,4 +48,14 @@ bool bbman::APlayer::hasExplosed(void) const
 void bbman::APlayer::setAlive(bool value)
 {
   this->_alive = value;
+}
+
+std::string const& bbman::APlayer::getUsername(void) const
+{
+  return (this->_username);
+}
+
+void bbman::APlayer::setUsername(std::string const& username)
+{
+  this->_username = username;
 }

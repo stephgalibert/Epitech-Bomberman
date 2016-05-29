@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Sat May 28 17:04:31 2016 stephane galibert
+// Last update Sun May 29 10:28:36 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -45,12 +45,13 @@ namespace bbman
     void input(InputListener &listener);
     void update(Irrlicht &irr, irr::f32 delta);
     void addPlayer(APlayer *player);
-    void addBomb(IBomb *bomb);
+    bool addBomb(IBomb *bomb);
     void setPosition(irr::core::vector3df const& pos);
     irr::core::vector3df const& getPosition(void) const;
     bool isColliding(irr::core::aabbox3df const& box) const;
     void deleteBlock(IEntity *entity);
     void deleteEntity(IEntity *entity);
+    void deleteBomb(IBomb *bomb);
     IEntity *getEntityByPosition(irr::core::vector3d<irr::s32> const& pos) const;
     void eraseEntityByPosition(irr::core::vector3d<irr::s32> const& pos);
     void explodeBlocks(IBomb *bomb);
@@ -67,6 +68,7 @@ namespace bbman
     void buildInbrkable(Irrlicht &irr, size_t x, size_t y);
     void buildBrkable(Irrlicht &irr, size_t x, size_t y);
   private:
+    APlayer *getPlayerByID(size_t id) const;
     void initTerrain(Irrlicht &irr);
     void initMap(void);
     void initNode(void);

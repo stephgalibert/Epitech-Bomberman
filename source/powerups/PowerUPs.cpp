@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 17:37:21 2016 stephane galibert
-// Last update Fri May 27 08:44:24 2016 stephane galibert
+// Last update Sun May 29 11:15:27 2016 stephane galibert
 //
 
 #include "PowerUPs.hpp"
@@ -58,7 +58,10 @@ void bbman::PowerUPs::generate(bbman::Irrlicht &irr, bbman::Board *board)
 
   random = this->_generator(0, 100);
   if (random > 70) {
-    this->generateSpeedUp(irr, board);
+    generateSpeedUp(irr, board);
+  }
+  else if (random > 40) {
+    generateAddExplosingBomb(irr, board);
   }
 }
 
@@ -77,6 +80,24 @@ void bbman::PowerUPs::generateSpeedUp(bbman::Irrlicht &irr, bbman::Board *board)
     speedUP->setPosition(pos);
   } while (!isFree(speedUP, board));
   this->_powerUPs.push_back(speedUP);
+}
+
+void bbman::PowerUPs::generateAddExplosingBomb(bbman::Irrlicht &irr,
+					       bbman::Board *board)
+{
+  irr::core::vector3df pos;
+  AddExplosingBombPowerUP *add = new AddExplosingBombPowerUP;
+
+  add->init(irr);
+  do {
+    pos.X = (this->_generator(0, board->getSize().X) * board->getScale().X)
+      - board->getScale().X / 2;
+    pos.Y = 4.f;
+    pos.Z = (this->_generator(0, board->getSize().Z) * board->getScale().Z)
+      - board->getScale().Z / 2;
+    add->setPosition(pos);
+  } while (!isFree(add, board));
+  this->_powerUPs.push_back(add);
 }
 
 bool bbman::PowerUPs::isFree(bbman::IPowerUP *powerUP, bbman::Board *board) const

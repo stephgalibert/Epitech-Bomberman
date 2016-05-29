@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:23:18 2016 stephane galibert
-// Last update Tue May 24 19:40:08 2016 stephane galibert
+// Last update Sun May 29 08:23:24 2016 stephane galibert
 //
 
 #include "IndestructibleBlock.hpp"
@@ -25,8 +25,11 @@ bbman::IndestructibleBlock::~IndestructibleBlock(void)
 void bbman::IndestructibleBlock::init(Irrlicht &irr)
 {
   this->_node = irr.getSmgr()->addCubeSceneNode();
+  //std::string txt = "./asset/Ind_Cube.obj";
+  //this->_node = irr.getSmgr()->addMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_node) {
     this->_node->setMaterialTexture(0, irr.getTexture("./asset/Texture/Texture_cube1.png"));
+    //this->_node->setMaterialTexture(0, irr.getTexture("./asset/Texture/Texture_Ind_Cube.png"));
     this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
   }

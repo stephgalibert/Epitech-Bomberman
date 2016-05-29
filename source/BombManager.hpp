@@ -5,14 +5,14 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 20:29:11 2016 stephane galibert
-// Last update Wed May 25 01:26:34 2016 stephane galibert
+// Last update Sun May 29 09:28:46 2016 stephane galibert
 //
 
 #ifndef _BOMBMANAGER_HPP_
 # define _BOMBMANAGER_HPP_
 
 # include <iostream>
-# include <vector>
+# include <map>
 
 # include "IBomb.hpp"
 
@@ -24,13 +24,16 @@ namespace bbman
     BombManager(void);
     ~BombManager(void);
     void addBomb(IBomb *type);
-    IBomb *getSelectedBomb(void) const;
+    IBomb *getSelectedBomb(void);
     void operator++(void);
     void operator--(void);
-    std::vector<IBomb *> const& getBombs(void) const;
+    std::map<size_t, std::pair<size_t, IBomb *> > const& getBombs(void) const;
+    std::map<size_t, std::pair<size_t, IBomb *> >::iterator const& getCurrent(void) const;
+    // add
   private:
-    std::vector<IBomb *> _bombs;
-    std::vector<IBomb *>::const_iterator _selectedBomb;
+    // <nb, bomb>
+    std::map<size_t, std::pair<size_t, IBomb *> > _bombs;
+    std::map<size_t, std::pair<size_t, IBomb *> >::iterator _selectedBomb;
   };
 
   std::ostream &operator<<(std::ostream &flux, BombManager const& bm);

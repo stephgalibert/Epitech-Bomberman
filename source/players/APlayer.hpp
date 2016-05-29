@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:28:29 2016 stephane galibert
-// Last update Sat May 28 17:14:32 2016 stephane galibert
+// Last update Sun May 29 08:39:01 2016 stephane galibert
 //
 
 #ifndef _APLAYER_HPP_
@@ -13,6 +13,7 @@
 
 # include <iostream>
 # include <list>
+# include <string>
 
 # include "IEntity.hpp"
 # include "IBomb.hpp"
@@ -52,6 +53,8 @@ namespace bbman
     virtual std::list<IEffect *> const& getEffects(void) const = 0;
     virtual void setRotation(irr::s32 rotation) = 0;
     virtual irr::s32 getRotation(void) const = 0;
+    std::string const& getUsername(void) const;
+    void setUsername(std::string const& username);
     bool hasExplosed(void) const;
     void setAlive(bool value);
     size_t getID(void) const;
@@ -61,6 +64,7 @@ namespace bbman
     static size_t NumberOfPlayer;
     size_t _id;
   protected:
+    std::string _username;
     irr::s32 _score;
     bool _alive;
   };
@@ -73,6 +77,7 @@ namespace bbman
     std::string rotation;
     std::string score = std::to_string(player.getScore());
     std::string alive = (player.hasExplosed()) ? "false" : "true";
+    std::string username = player.getUsername();
 
     if (!player.hasExplosed()) {
       irr::core::vector3df const& pos = player.getPosition();
@@ -81,7 +86,8 @@ namespace bbman
 	+ std::to_string((int)pos.Z);
       rotation = std::to_string(player.getRotation());
     }
-    flux << "PID:" << player.getAPlayerID() << ";id:" << id << ";pos:"
+    flux << "PID:" << player.getAPlayerID() << ";name:" << username
+	 << ";id:" << id << ";pos:"
 	 << position << ";score:" << score << ";alive:" << alive << ";"
 	 << "rot:" << rotation << ";";
     for (auto it : effects) {

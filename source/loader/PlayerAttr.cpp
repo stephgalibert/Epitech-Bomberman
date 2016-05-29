@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:06:55 2016 stephane galibert
-// Last update Thu May 26 12:25:51 2016 stephane galibert
+// Last update Sun May 29 11:18:29 2016 stephane galibert
 //
 
 #include "PlayerAttr.hpp"
@@ -16,6 +16,9 @@ bbman::PlayerAttr::PlayerAttr(void)
   this->_attrs["PID"] = std::bind(&bbman::PlayerAttr::setPlayerID, this,
 				  std::placeholders::_1, std::placeholders::_2,
 				  std::placeholders::_3);
+  this->_attrs["name"] = std::bind(&bbman::PlayerAttr::setPlayerName, this,
+				   std::placeholders::_1, std::placeholders::_2,
+				   std::placeholders::_3);
   this->_attrs["pos"] = std::bind(&bbman::PlayerAttr::setPosition, this,
 				  std::placeholders::_1, std::placeholders::_2,
 				  std::placeholders::_3);
@@ -52,6 +55,15 @@ void bbman::PlayerAttr::setPlayerID(APlayer **player, Irrlicht &irr,
   if (value == "1") {
     *player = HumanPlayer::create();
     (*player)->init(irr);
+  }
+}
+
+void bbman::PlayerAttr::setPlayerName(APlayer **player, Irrlicht &irr,
+				      std::string const& value)
+{
+  (void)irr;
+  if (player && *player) {
+    (*player)->setUsername(value);
   }
 }
 
@@ -120,7 +132,11 @@ void bbman::PlayerAttr::addEffect(APlayer **player, Irrlicht &irr,
     if (tokens.size() == 2) {
       if (tokens[0] == "1") {
 	effect = new SpeedUPEffect(*player);
-	effect->enable();
+	effect->setDelta(std::atof(tokens[1].data()));
+	(*player)->addEffect(effect);
+      }
+      else if (tokens[0] == "2") {
+	effect = new AddExplosingBombEffect(*player);
 	effect->setDelta(std::atof(tokens[1].data()));
 	(*player)->addEffect(effect);
       }

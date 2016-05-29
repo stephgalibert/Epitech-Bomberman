@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:03:57 2016 stephane galibert
-// Last update Thu May 26 11:31:57 2016 stephane galibert
+// Last update Sun May 29 10:48:21 2016 stephane galibert
 //
 
 #ifndef _PLAYERATTR_HPP_
@@ -23,6 +23,7 @@
 # include "APlayer.hpp"
 # include "HumanPlayer.hpp"
 # include "SpeedUPEffect.hpp"
+# include "AddExplosingBombEffect.hpp"
 
 namespace bbman
 {
@@ -35,6 +36,7 @@ namespace bbman
 	     std::string const& value);
   private:
     void setPlayerID(APlayer **player, Irrlicht &irr, std::string const& value);
+    void setPlayerName(APlayer **player, Irrlicht &irr, std::string const& value);
     void setPosition(APlayer **player, Irrlicht &irr, std::string const& value);
     void setScore(APlayer **player, Irrlicht &irr, std::string const& value);
     void setAlive(APlayer **player, Irrlicht &irr, std::string const& value);
