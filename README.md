@@ -1,5 +1,7 @@
 # Bomberman
 
+![alt tag](https://travis-ci.com/seb-saletes/bomberman.svg?token=Ev3BczWayfeCiErN1hjX&branch=master)  
+
 ## Introduction
 
 This is the last C++ coding project for Epitech's sophomores, 
