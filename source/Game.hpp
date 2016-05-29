@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Mon May 23 22:45:12 2016 stephane galibert
+// Last update Sat May 28 08:33:55 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -13,15 +13,10 @@
 
 # include <iostream>
 # include <fstream>
-# include <vector>
 # include <cmath>
 # include <algorithm>
-# include <list>
-# include <map>
 
 # include "MusicBox.hpp"
-# include "APlayer.hpp"
-# include "IBomb.hpp"
 # include "InputListener.hpp"
 # include "PowerUPs.hpp"
 # include "HumanPlayer.hpp"
@@ -30,6 +25,8 @@
 # include "CacheManager.hpp"
 # include "Loader.hpp"
 # include "AIFunctions.hpp"
+# include "ThreadPool.hpp"
+# include "TimeOut.hpp"
 
 namespace bbman
 {
@@ -50,16 +47,12 @@ namespace bbman
     void save(std::string const& fname);
     bool _leaveGame;
     Loader _loader;
-    irr::scene::ICameraSceneNode *_camera;
+    ThreadPool *_threadPool;
     Board *_board;
-
-    //std::list<IBomb *> _bombs;
-    //std::vector<APlayer *> _players;
-    //std::list<IEntity *> _explosable; // => players, bombs
-    //PowerUPs _powerUPs;
-
+    TimeOut *_timeout;
     MusicBox _musics;
     MemoryFile _musicBackground;
+    irr::scene::ICameraSceneNode *_camera;
   };
 }
 

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Thu May 26 08:08:30 2016 stephane galibert
+// Last update Sat May 28 17:14:44 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -32,8 +32,7 @@ namespace bbman
     virtual size_t getAPlayerID(void) const;
     virtual void init(Irrlicht &irr);
     virtual void update(Irrlicht &irr, irr::f32 delta);
-    virtual void play(Irrlicht &irr, Board *board,
-		      std::list<IBomb *> &bombs);
+    virtual void play(Irrlicht &irr, Board *board);
     virtual void addBomb(IBomb *bomb);
     virtual void setPosition(irr::core::vector3df const& pos);
     virtual irr::core::vector3df const& getPosition(void) const;
@@ -56,7 +55,7 @@ namespace bbman
     static size_t NumberOfPlayer;
   private:
     HumanPlayer(void);
-    void dropBomb(Irrlicht &irr, Board *board, std::list<IBomb *> &bombs);
+    void dropBomb(Irrlicht &irr, Board *board);
     IBomb *createBomb(Irrlicht &irr);
     void updateEffets(irr::f32 delta);
     void checkDirection(Board *board);

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Fri May 27 20:22:53 2016 stephane galibert
+// Last update Sat May 28 17:14:17 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -84,13 +84,12 @@ void bbman::HumanPlayer::update(bbman::Irrlicht &irr, irr::f32 delta)
   }
 }
 
-void bbman::HumanPlayer::play(bbman::Irrlicht &irr, bbman::Board *board,
-					 std::list<bbman::IBomb *> &bombs)
+void bbman::HumanPlayer::play(bbman::Irrlicht &irr, bbman::Board *board)
 {
   if (this->_alive) {
     checkDirection(board);
     if (this->_action == bbman::ACT_BOMB) {
-      dropBomb(irr, board, bombs);
+      dropBomb(irr, board);
     }
   }
 }
@@ -120,8 +119,7 @@ void bbman::HumanPlayer::checkDirection(bbman::Board *board)
   }
 }
 
-void bbman::HumanPlayer::dropBomb(bbman::Irrlicht &irr, bbman::Board *board,
-				  std::list<IBomb *> &bombs)
+void bbman::HumanPlayer::dropBomb(bbman::Irrlicht &irr, bbman::Board *board)
 {
   IBomb *newBomb = createBomb(irr);
   irr::core::vector3df pos = getPosition();
@@ -131,19 +129,17 @@ void bbman::HumanPlayer::dropBomb(bbman::Irrlicht &irr, bbman::Board *board,
   pos.Z = board->getScale().Z / 2 + std::floor(pos.Z)
     - (int)(std::floor(pos.Z)) % (int)board->getScale().Z;
   newBomb->setPosition(pos);
-  if (std::find_if(std::begin(bombs), std::end(bombs), [&newBomb](IBomb *bomb) {
+  /*if (std::find_if(std::begin(bombs), std::end(bombs), [&newBomb](IBomb *bomb) {
 	if (newBomb->getPosition() == bomb->getPosition())
 	  return (true);
 	return (false);
       }) == std::end(bombs)
-    && !board->isOutside(pos)) {
+      && !board->isOutside(pos)) {*/
     board->addBomb(newBomb);
-    (void)bombs;
-    //bombs.push_back(newBomb);
-  }
+    /*}
   else {
     delete (newBomb);
-  }
+    }*/
 }
 
 void bbman::HumanPlayer::addBomb(bbman::IBomb *bomb)
@@ -187,8 +183,9 @@ void bbman::HumanPlayer::explode(void)
 {
   if (this->_alive) {
     this->_alive = false;
-    this->_mesh->remove();
-    this->_mesh = NULL;
+    /*this->_mesh->remove();
+      this->_mesh = NULL;*/
+    this->_mesh->setVisible(false);
     std::cerr << "player " + std::to_string(this->_playerNum) + " died" << std::endl;
   }
 }

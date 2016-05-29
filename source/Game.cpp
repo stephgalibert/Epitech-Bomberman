@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Mon May 23 23:36:50 2016 stephane galibert
+// Last update Sat May 28 19:08:52 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -13,11 +13,19 @@
 bbman::Game::Game(void)
 {
   this->_leaveGame = false;
+  this->_threadPool = new ThreadPool(4);
   this->_board = new Board;
+  this->_timeout = new TimeOut;
 }
 
 bbman::Game::~Game(void)
 {
+  if (this->_timeout) {
+    delete (this->_timeout);
+  }
+  if (this->_threadPool) {
+    delete (this->_threadPool);
+  }
   if (this->_board) {
     delete (this->_board);
   }
@@ -26,12 +34,15 @@ bbman::Game::~Game(void)
 void bbman::Game::init(Irrlicht &irr, std::string const& saves)
 {
   try {
+    this->_threadPool->init();
     if (!saves.empty()) {
       this->_loader.load(irr, saves);
       this->_board->init(irr, this->_loader);
+      this->_timeout->init(irr, this->_board, this->_loader);
     }
     else {
       this->_board->init(irr);
+      this->_timeout->init(irr, this->_board);
       // BEGIN todel
       HumanPlayer *p1 = bbman::HumanPlayer::create();
       p1->init(irr);
@@ -70,6 +81,7 @@ bool bbman::Game::input(InputListener &inputListener)
 void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
   this->_board->update(irr, delta);
+  this->_timeout->update(this->_threadPool, irr, delta);
 }
 
 bool bbman::Game::leaveGame(void) const
@@ -105,6 +117,7 @@ void bbman::Game::save(std::string const& fname)
 {
   std::ofstream ofs(fname.c_str(), std::ifstream::out);
   if (ofs) {
+
     ofs << *this->_board;
   }
   else {

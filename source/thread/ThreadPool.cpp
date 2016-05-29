@@ -9,41 +9,44 @@
 
 #include "ThreadPool.hpp"
 
-ThreadPool::ThreadPool(int newNbThread)
+bbman::ThreadPool::ThreadPool(int newNbThread)
 {
   this->_nbThread  = newNbThread;
   this->_taskQueue = NULL;
 }
 
-ThreadPool::~ThreadPool()
+bbman::ThreadPool::~ThreadPool()
 {
-  delete this->_taskQueue;
-  // delete this->_threads;
+  if (this->_taskQueue) {
+    delete this->_taskQueue;
+  }
+  delete[] (this->_threads);
 }
 
-void ThreadPool::pool()
+void bbman::ThreadPool::pool()
 {
   ITask *newOrder = NULL;
 
   while (true) {
     newOrder = this->_taskQueue->pop();
     newOrder->start();
-    delete newOrder;
+    newOrder->setFinished(true);
+    //delete newOrder;
   }
 }
 
-void ThreadPool::addTask(ITask *t)
+void bbman::ThreadPool::addTask(ITask *t)
 {
   this->_taskQueue->push(t);
 }
 
-void ThreadPool::init()
+void bbman::ThreadPool::init()
 {
   this->_threads   = new std::thread[this->_nbThread];
   this->_taskQueue = new SafeQueue<ITask *>;
 
   for (int i = 0; i < this->_nbThread; i++) {
-    this->_threads[i] = std::thread(&ThreadPool::pool, this);
+    this->_threads[i] = std::thread(&bbman::ThreadPool::pool, this);
   }
 
   for (int i = 0; i < this->_nbThread; i++) {

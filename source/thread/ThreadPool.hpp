@@ -14,25 +14,23 @@
 #include "SafeQueue.hpp"
 #include "ITask.hpp"
 
-
-class ThreadPool
+namespace bbman
 {
-public:
+  class ThreadPool
+  {
+  public:
+    ThreadPool(int newNbThread);
+    ~ThreadPool();
 
-  ThreadPool(int newNbThread);
-  ~ThreadPool();
+    void pool();
+    void addTask(ITask *t);
 
-  void pool();
-  void addTask(ITask *t);
-
-  void init();
-
-private:
-
-  std::thread *_threads;
-  int _nbThread;
-
-  SafeQueue<ITask *> *_taskQueue;
-};
+    void init();
+  private:
+    std::thread *_threads;
+    int _nbThread;
+    SafeQueue<ITask *> *_taskQueue;
+  };
+}
 
 #endif // ifndef THREADPOOL__HPP__

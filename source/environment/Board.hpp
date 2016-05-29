@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Fri May 27 12:34:30 2016 stephane galibert
+// Last update Sat May 28 17:04:31 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -54,8 +54,6 @@ namespace bbman
     IEntity *getEntityByPosition(irr::core::vector3d<irr::s32> const& pos) const;
     void eraseEntityByPosition(irr::core::vector3d<irr::s32> const& pos);
     void explodeBlocks(IBomb *bomb);
-    bool isNotProtected(irr::core::vector3d<irr::s32> const& bomb,
-			irr::core::vector3d<irr::s32> const& block);
     bool isOutside(irr::core::vector3df const& pos);
     irr::core::vector3df const& getSize(void) const;
     irr::core::vector3df const& getScale(void) const;
@@ -65,14 +63,15 @@ namespace bbman
     Map<Cell> const& getMap(void) const;
     std::vector<APlayer *> const& getPlayers(void) const;
     std::list<IBomb *> const& getBombs(void) const;
+    bool hasWinners(void) const;
+    void buildInbrkable(Irrlicht &irr, size_t x, size_t y);
+    void buildBrkable(Irrlicht &irr, size_t x, size_t y);
   private:
     void initTerrain(Irrlicht &irr);
     void initMap(void);
     void initNode(void);
     void initMesh(Irrlicht &irr);
     void updateNode(irr::core::vector3d<irr::s32> const& pos);
-    void buildInbrkable(Irrlicht &irr, size_t x, size_t y);
-    void buildBrkable(Irrlicht &irr, size_t x, size_t y);
     void updateBombs(Irrlicht &irr, irr::f32 delta);
     void updatePlayers(bbman::Irrlicht &irr, irr::f32 delta);
     std::unordered_map<int, std::function<void(Irrlicht &, size_t, size_t)> > _ctor;

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Fri May 27 07:38:08 2016 stephane galibert
+// Last update Sat May 28 13:44:09 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"
@@ -76,8 +76,9 @@ void bbman::DestructibleBlock::explode(void)
 {
   if (!this->_explosed) {
     this->_explosed = true;
-    this->_node->remove();
-    this->_node = NULL;
+    this->_node->setVisible(false);
+    /*this->_node->remove();
+      this->_node = NULL;*/
   }
 }
 
