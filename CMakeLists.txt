@@ -3,12 +3,20 @@ SET(CMAKE_CXX_COMPILER  clang++)
 # SET ( CMAKE_CXX_FLAGS "-std=c++0x" CACHE STRING "compile flags" FORCE)
 project(Bomberman)
 
+# Enable testing for current directory and below.
+enable_testing()
+
 # The version number.
 set (Bomberman_VERSION_MAJOR 1)
 set (Bomberman_VERSION_MINOR 0)
 
 # should we use our own math functions?
 option (START_GTEST "Launch test instead of start the program" OFF)
+
+if (START_GTEST)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0") # debug, no optimisation
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage") # enabling coverage
+ENDif (START_GTEST)
 
 # Enable c++11 with CMake
 add_compile_options(-std=c++11)
@@ -109,6 +117,8 @@ endif (MSVC)
 # add the install targets in bin directory
 install (TARGETS bomberman DESTINATION bin)
 install (DIRECTORY asset DESTINATION bin)
+
+add_test(FullTest bomberman)
 
 # build a CPack driven installer package
 include (InstallRequiredSystemLibraries)
