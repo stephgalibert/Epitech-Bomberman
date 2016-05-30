@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Mon May 30 21:04:26 2016 stephane galibert
+// Last update Mon May 30 21:10:32 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -106,7 +106,7 @@ void bbman::Application::update_menu(irr::f32 delta)
 {
   (void)delta;
   if (this->_menu) {
-    this->_menu->input(_inputListener);
+    this->_menu->input(this->_inputListener);
     //_menu->update(delta);
     //if (_menu->startGame()) {
       /*delete (_menu);
