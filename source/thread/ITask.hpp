@@ -15,12 +15,12 @@ namespace bbman
   class ITask
   {
   public:
-    virtual ~ITask() {}
-    virtual void start() = 0;
-    virtual void stop() = 0;
+    virtual ~ITask(void) {}
+    virtual void start(void) = 0;
+    virtual void stop(void) = 0;
     virtual void setFinished(bool v) = 0;
-    virtual bool isFinished() const = 0;
-    virtual bool isRunning() const = 0;
+    virtual bool isFinished(void) const = 0;
+    virtual bool isRunning(void) const = 0;
   };
 }
 

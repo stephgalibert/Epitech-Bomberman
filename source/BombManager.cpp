@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 20:29:19 2016 stephane galibert
-// Last update Sun May 29 11:18:47 2016 stephane galibert
+// Last update Mon May 30 17:44:29 2016 stephane galibert
 //
 
 #include "BombManager.hpp"

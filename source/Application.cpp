@@ -5,10 +5,12 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Mon May 30 10:48:33 2016 stephane galibert
+// Last update Mon May 30 16:06:28 2016 stephane galibert
 //
 
 #include "Application.hpp"
+
+bbman::ThreadPool *bbman::Application::threadPool = NULL;
 
 bbman::Application::Application(void)
 {
@@ -16,6 +18,10 @@ bbman::Application::Application(void)
   this->_game = NULL;
   //this->_menu = NULL;
   this->_as = bbman::ApplicationState::AS_NONE;
+  if (threadPool == NULL) {
+    threadPool = new ThreadPool(8);
+    threadPool->init();
+  }
 }
 
 bbman::Application::~Application(void)
@@ -29,6 +35,9 @@ bbman::Application::~Application(void)
   */
   if (this->_irr) {
     delete (this->_irr);
+  }
+  if (threadPool) {
+    delete (threadPool);
   }
 }
 

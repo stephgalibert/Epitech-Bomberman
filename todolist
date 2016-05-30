@@ -1,7 +1,8 @@
-game finished when left only 1 player
-faire la fonction de care_j
-les blocks destructibles qui explode ont une chance de générer un powerups
-shaders
+game finished when left only 1 player //  30 mai
+les blocks destructibles qui explode ont une chance de générer un powerups // 30 mai
 
 integrate .obj
-passer un Board* à l'entity qui explose pour libérer la case de la map si c'est un block => fait (peut être à débuger)
+
+shaders // 30 mai
+faire la fonction de care_j // 30 mai
+passer un Board* à l'entity qui explose pour libérer la case de la map si c'est un block => fait (peut être à débuger) // 30 mai

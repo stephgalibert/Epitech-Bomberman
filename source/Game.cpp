@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Mon May 30 07:25:52 2016 stephane galibert
+// Last update Mon May 30 15:59:12 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -13,7 +13,6 @@
 bbman::Game::Game(void)
 {
   this->_leaveGame = false;
-  this->_threadPool = new ThreadPool(4);
   this->_board = new Board;
   //this->_timeout = new TimeOut;
   this->_timeout = NULL;
@@ -24,9 +23,6 @@ bbman::Game::~Game(void)
   if (this->_timeout) {
     delete (this->_timeout);
   }
-  if (this->_threadPool) {
-    delete (this->_threadPool);
-  }
   if (this->_board) {
     delete (this->_board);
   }
@@ -35,7 +31,6 @@ bbman::Game::~Game(void)
 void bbman::Game::init(Irrlicht &irr, std::string const& saves)
 {
   try {
-    this->_threadPool->init();
     if (!saves.empty()) {
       this->_loader.load(irr, saves);
       this->_board->init(irr, this->_loader);

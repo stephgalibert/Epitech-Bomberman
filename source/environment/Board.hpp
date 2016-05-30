@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Mon May 30 09:24:59 2016 stephane galibert
+// Last update Mon May 30 17:52:51 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -35,6 +35,7 @@
 namespace bbman
 {
   class Loader;
+
   class Board
   {
   public:
@@ -65,13 +66,19 @@ namespace bbman
     Map<Cell> &getMap(void);
     std::vector<APlayer *> const& getPlayers(void) const;
     std::list<IBomb *> const& getBombs(void) const;
+    PowerUPs const& getPowerUPs(void) const;
+    PowerUPs &getPowerUPs(void);
+    Irrlicht *getIrrlicht(void);
     bool hasWinners(void) const;
     IBlock *createInbrkable(Irrlicht &irr, size_t x, size_t y);
     void registerBlock(IBlock *block);
     void disableDirection(size_t x, size_t y);
     void updateNode(irr::core::vector3d<irr::s32> const& pos);
     APlayer *getPlayerByID(size_t id) const;
+    bool isInExplosion(irr::core::vector3d<irr::s32> const& pos);
   private:
+    bool isNotProtected(IBomb *bombs, irr::core::vector3d<irr::s32> const& bomb,
+			irr::core::vector3d<irr::s32> const& block);
     void buildInbrkable(Irrlicht &irr, size_t x, size_t y);
     void buildBrkable(Irrlicht &irr, size_t x, size_t y);
     void initTerrain(Irrlicht &irr);
@@ -93,6 +100,7 @@ namespace bbman
     irr::core::vector3df _size;
     irr::core::vector3df _scale;
     irr::core::vector3df _spawn[4];
+    Irrlicht *_irr;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, bbman::Board const& board)
@@ -111,7 +119,7 @@ namespace bbman
     }
     flux << "BOMBS_END" << std::endl;
     flux << "POWERUPS_BEGIN" << std::endl;
-    // powerups
+    //flux << board.getPowerUPs();
     flux << "POWERUPS_END" << std::endl;
     return (flux);
   }

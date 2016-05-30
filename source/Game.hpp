@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Sat May 28 08:33:55 2016 stephane galibert
+// Last update Mon May 30 15:57:58 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -25,7 +25,6 @@
 # include "CacheManager.hpp"
 # include "Loader.hpp"
 # include "AIFunctions.hpp"
-# include "ThreadPool.hpp"
 # include "TimeOut.hpp"
 
 namespace bbman
@@ -47,7 +46,6 @@ namespace bbman
     void save(std::string const& fname);
     bool _leaveGame;
     Loader _loader;
-    ThreadPool *_threadPool;
     Board *_board;
     TimeOut *_timeout;
     MusicBox _musics;

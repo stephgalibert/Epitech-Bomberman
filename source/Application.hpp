@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 15:36:32 2016 stephane galibert
-// Last update Sat May 28 08:53:43 2016 stephane galibert
+// Last update Mon May 30 16:02:30 2016 stephane galibert
 //
 
 #ifndef _APPLICATION_HPP_
@@ -16,11 +16,14 @@
 # include "Game.hpp"
 # include "InputListener.hpp"
 # include "ApplicationState.hpp"
+# include "ThreadPool.hpp"
 
 namespace bbman
 {
   class Application
   {
+  public:
+    static ThreadPool *threadPool;
   public:
     Application(void);
     ~Application(void);

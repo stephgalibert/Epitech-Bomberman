@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:02:47 2016 stephane galibert
-// Last update Sun May 29 10:19:43 2016 stephane galibert
+// Last update Mon May 30 17:46:49 2016 stephane galibert
 //
 
 #ifndef _POWERUPS_HPP_
@@ -33,13 +33,14 @@ namespace bbman
   public:
     PowerUPs(void);
     ~PowerUPs(void);
-    void update(Irrlicht &irr, float delta, Board *board);
+    void add(Irrlicht &irr, Board *board, irr::core::vector3df const& pos);
     void checkCollision(APlayer *player);
   private:
-    void generate(Irrlicht &irr, Board *board);
-    void generateSpeedUp(Irrlicht &irr, Board *board);
-    void generateAddExplosingBomb(Irrlicht &irr, Board *board);
-    bool isFree(IPowerUP *powerUP, Board *board) const;
+    void generate(Irrlicht &irr, Board *board, irr::core::vector3df const& pos);
+    void generateSpeedUp(Irrlicht &irr, Board *board,
+			 irr::core::vector3df const& pos);
+    void generateAddExplosingBomb(Irrlicht &irr, Board *board,
+				  irr::core::vector3df const& pos);
     std::list<IPowerUP *> _powerUPs;
     tools::Generator _generator;
     irr::f32 _delta;

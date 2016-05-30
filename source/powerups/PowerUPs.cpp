@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 17:37:21 2016 stephane galibert
-// Last update Sun May 29 11:15:27 2016 stephane galibert
+// Last update Mon May 30 17:45:03 2016 stephane galibert
 //
 
 #include "PowerUPs.hpp"
@@ -23,7 +23,7 @@ bbman::PowerUPs::~PowerUPs(void)
   }
 }
 
-void bbman::PowerUPs::update(bbman::Irrlicht &irr, float delta, Board *board)
+/*void bbman::PowerUPs::update(bbman::Irrlicht &irr, float delta, Board *board)
 {
   this->_delta += delta;
 
@@ -35,6 +35,12 @@ void bbman::PowerUPs::update(bbman::Irrlicht &irr, float delta, Board *board)
     this->generate(irr, board);
     this->_delta = 0;
   }
+}*/
+
+void bbman::PowerUPs::add(bbman::Irrlicht &irr, bbman::Board *board,
+			  irr::core::vector3df const& pos)
+{
+  generate(irr, board, pos);
 }
 
 void bbman::PowerUPs::checkCollision(APlayer *player)
@@ -52,55 +58,41 @@ void bbman::PowerUPs::checkCollision(APlayer *player)
   }
 }
 
-void bbman::PowerUPs::generate(bbman::Irrlicht &irr, bbman::Board *board)
+void bbman::PowerUPs::generate(bbman::Irrlicht &irr, bbman::Board *board,
+			       irr::core::vector3df const& pos)
 {
   size_t random;
 
   random = this->_generator(0, 100);
-  if (random > 70) {
-    generateSpeedUp(irr, board);
+  if (random > 90) {
+    generateSpeedUp(irr, board, pos);
   }
-  else if (random > 40) {
-    generateAddExplosingBomb(irr, board);
+  else if (random > 80) {
+    generateAddExplosingBomb(irr, board, pos);
   }
 }
 
-void bbman::PowerUPs::generateSpeedUp(bbman::Irrlicht &irr, bbman::Board *board)
+void bbman::PowerUPs::generateSpeedUp(bbman::Irrlicht &irr, bbman::Board *board,
+				      irr::core::vector3df const& pos)
 {
-  irr::core::vector3df pos;
   SpeedUPPowerUP *speedUP = new SpeedUPPowerUP;
 
   speedUP->init(irr);
-  do {
-    pos.X = (this->_generator(0, board->getSize().X) * board->getScale().X)
-      - board->getScale().X / 2;
-    pos.Y = 4.f;
-    pos.Z = (this->_generator(0, board->getSize().Z) * board->getScale().Z)
-      - board->getScale().Z / 2;
-    speedUP->setPosition(pos);
-  } while (!isFree(speedUP, board));
+  speedUP->setPosition(pos);
   this->_powerUPs.push_back(speedUP);
 }
 
-void bbman::PowerUPs::generateAddExplosingBomb(bbman::Irrlicht &irr,
-					       bbman::Board *board)
+void bbman::PowerUPs::generateAddExplosingBomb(bbman::Irrlicht &irr, Board *board,
+					       irr::core::vector3df const& pos)
 {
-  irr::core::vector3df pos;
   AddExplosingBombPowerUP *add = new AddExplosingBombPowerUP;
 
   add->init(irr);
-  do {
-    pos.X = (this->_generator(0, board->getSize().X) * board->getScale().X)
-      - board->getScale().X / 2;
-    pos.Y = 4.f;
-    pos.Z = (this->_generator(0, board->getSize().Z) * board->getScale().Z)
-      - board->getScale().Z / 2;
-    add->setPosition(pos);
-  } while (!isFree(add, board));
+  add->setPosition(pos);
   this->_powerUPs.push_back(add);
 }
 
-bool bbman::PowerUPs::isFree(bbman::IPowerUP *powerUP, bbman::Board *board) const
+/*bool bbman::PowerUPs::isFree(bbman::IPowerUP *powerUP, bbman::Board *board) const
 {
   if (board->isColliding(powerUP->getBoundingBox())) {
     return (false);
@@ -112,4 +104,4 @@ bool bbman::PowerUPs::isFree(bbman::IPowerUP *powerUP, bbman::Board *board) cons
 		       [&powerUP](IPowerUP *up) {
 			 return (up->getPosition() == powerUP->getPosition());
 		       }) == std::end(this->_powerUPs));
-}
+}*/
