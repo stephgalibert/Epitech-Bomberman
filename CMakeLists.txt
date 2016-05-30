@@ -14,7 +14,7 @@ set (Bomberman_VERSION_MINOR 0)
 option (START_GTEST "Launch test instead of start the program" OFF)
 
 IF (START_GTEST)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -ftest-coverage") # debug, no optimisation
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0") # debug, no optimisation
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage") # enabling coverage
 ENDIF (START_GTEST)
 
