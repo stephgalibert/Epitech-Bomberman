@@ -24,7 +24,6 @@ script:
   - cmake -DSTART_GTEST=ON ..
   - make
   - ctest --verbose
-  - ./bomberman
 
 after_success:
   - cd ${TRAVIS_BUILD_DIR}
@@ -32,3 +31,6 @@ after_success:
   - lcov --remove coverage.info 'tests/*' '/usr/*' --output-file coverage.info # filter out system and test code
   - lcov --list coverage.info # debug before upload
   - coveralls-lcov --repo-token ${COVERALLS_TOKEN} coverage.info # uploads to coveralls
+
+notifications:
+  webhooks: https://coveralls.io/webhook?repo_token=ynwVDcF3jHLyA47sbBdjhDuk3Z7EGS9IL
