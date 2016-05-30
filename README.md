@@ -1,5 +1,5 @@
 # Bomberman
-
+* Master  
 ![alt tag](https://travis-ci.com/seb-saletes/bomberman.svg?token=Ev3BczWayfeCiErN1hjX&branch=master)  
 
 ## Introduction

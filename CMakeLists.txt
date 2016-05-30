@@ -8,7 +8,7 @@ set (Bomberman_VERSION_MAJOR 1)
 set (Bomberman_VERSION_MINOR 0)
 
 # should we use our own math functions?
-option (START_GTEST "Launch test instead of start the program" ON)
+option (START_GTEST "Launch test instead of start the program" OFF)
 
 # Enable c++11 with CMake
 add_compile_options(-std=c++11)
@@ -62,19 +62,23 @@ add_executable(bomberman ${SRCS})
 # build static gtest library before target
 add_dependencies(bomberman gtest)
 # add unix libraries to the executable
+
 if (UNIX)
   # Irrlicht must be linked first
   target_link_libraries(bomberman
     ${PROJECT_SOURCE_DIR}/lib/irrlicht/lib/linux/libIrrlicht.a
     ${PROJECT_SOURCE_DIR}/lib/lua/LuaInterpreter/lib/linux/liblua.a
-    -lGL -lXxf86vm -lXext -lX11 -lXcursor -lpthread -ldl
+    ${PROJECT_SOURCE_DIR}/lib/google-test/libgtest.a
+    -lGL -lXxf86vm -lXext -lX11 -lpthread -ldl
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/assimp/lib/linux
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/google_test/lib
     -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux
-    ${PROJECT_SOURCE_DIR}/lib/google-test/libgtest.a
+    -Wl,-rpath,${PROJECT_SOURCE_DIR}/lib/irrlicht/lib/linux/
+    ${PROJECT_SOURCE_DIR}/lib/irrlicht/lib/linux/libXcursor.so
     ${PROJECT_SOURCE_DIR}/lib/assimp/lib/linux/libassimp.so
     ${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux/libsfml-audio.so
     ${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux/libsfml-system.so
+    ${PROJECT_SOURCE_DIR}/lib/SFML/lib/linux/libopenal.so.1
   )
   file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build)
   # override install path if it has not been explicitly specified
@@ -101,7 +105,6 @@ if (MSVC)
   file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-audio-2.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
   file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-system-2.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
 endif (MSVC)
-
 
 # add the install targets in bin directory
 install (TARGETS bomberman DESTINATION bin)

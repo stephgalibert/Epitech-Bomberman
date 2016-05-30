@@ -6,8 +6,6 @@ dist: trusty
 
 install:
   - sudo pip install cpp-coveralls
-  - sudo apt-get -y install libxcursor-dev
-  - sudo apt-get -y install libopenal1
 
 script:
   - mkdir build
