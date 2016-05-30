@@ -5,13 +5,14 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 15:36:32 2016 stephane galibert
-// Last update Mon May 30 16:02:30 2016 stephane galibert
+// Last update Mon May 30 19:05:29 2016 stephane galibert
 //
 
 #ifndef _APPLICATION_HPP_
 # define _APPLICATION_HPP_
 
 # include "Irrlicht.hpp"
+# include "layout.hpp"
 # include "Chronometer.hpp"
 # include "Game.hpp"
 # include "InputListener.hpp"
@@ -36,6 +37,7 @@ namespace bbman
     void goToGame(void);
     Irrlicht *_irr;
     //Menu *_menu;
+    layout *_menu;
     Game *_game;
     InputListener _inputListener;
     irr::core::array<irr::SJoystickInfo> _joystickInfo;

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:24:07 2016 stephane galibert
-// Last update Fri May 27 15:11:50 2016 stephane galibert
+// Last update Mon May 30 20:25:14 2016 stephane galibert
 //
 
 #include "Irrlicht.hpp"
@@ -41,6 +41,7 @@ void bbman::Irrlicht::init(irr::video::E_DRIVER_TYPE dType,
   params.WindowSize = dim;
   params.AntiAlias = 16;
   params.Vsync = true;
+  //params.Fullscreen = true;
   params.EventReceiver = &inputListener;
   params.Doublebuffer = true;
   this->_irr.device = createDeviceEx(params);
@@ -56,9 +57,9 @@ void bbman::Irrlicht::init(irr::video::E_DRIVER_TYPE dType,
 
 bool bbman::Irrlicht::isRunning(void)
 {
-	bool isRunning = false;
-	if (this->_irr.device)
-		isRunning = this->_irr.device->run();
+  bool isRunning = false;
+  if (this->_irr.device)
+    isRunning = this->_irr.device->run();
   return (isRunning);
 
 }

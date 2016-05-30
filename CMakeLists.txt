@@ -44,6 +44,7 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/source/powerups
   ${PROJECT_SOURCE_DIR}/source/utils
   ${PROJECT_SOURCE_DIR}/source/thread
+  ${PROJECT_SOURCE_DIR}/source/ui
   ${PROJECT_SOURCE_DIR}/lib/irrlicht/include
   ${PROJECT_SOURCE_DIR}/lib/assimp/include
   ${PROJECT_SOURCE_DIR}/lib/lua/LuaBridge/

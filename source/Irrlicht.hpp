@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May  3 03:29:01 2016 stephane galibert
-// Last update Wed May 18 20:30:28 2016 stephane galibert
+// Last update Mon May 30 19:01:53 2016 stephane galibert
 //
 
 #ifndef _IRRLICHT_HPP_

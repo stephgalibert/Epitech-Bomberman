@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Mon May 30 16:06:28 2016 stephane galibert
+// Last update Mon May 30 21:04:26 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -16,7 +16,7 @@ bbman::Application::Application(void)
 {
   this->_irr = NULL;
   this->_game = NULL;
-  //this->_menu = NULL;
+  this->_menu = NULL;
   this->_as = bbman::ApplicationState::AS_NONE;
   if (threadPool == NULL) {
     threadPool = new ThreadPool(8);
@@ -29,10 +29,9 @@ bbman::Application::~Application(void)
   if (this->_game) {
     delete (this->_game);
   }
-  /* if (this->_menu) {
-     delete (this->_menu);
-     }
-  */
+  if (this->_menu) {
+    delete (this->_menu);
+  }
   if (this->_irr) {
     delete (this->_irr);
   }
@@ -52,7 +51,8 @@ void bbman::Application::init(void)
     this->_irr->getDevice()->getCursorControl()->setVisible(true);
     this->_irr->getDevice()->activateJoysticks(this->_joystickInfo);
     this->_irr->getDevice()->setWindowCaption(L"Bomberman");
-    goToGame(); // goToMenu();
+    //goToGame();
+    goToMenu();
   } catch (std::runtime_error const& e) {
     throw (e);
   }
@@ -73,7 +73,12 @@ int bbman::Application::play(void)
 	return (0);
       }
       // in game ...
-      update_game(delta);
+      if (this->_as == ApplicationState::AS_GAME) {
+	update_game(delta);
+      }
+      else if (this->_as == ApplicationState::AS_MENU) {
+	update_menu(delta);
+      }
       // or in menu
       /*update_menu(delta);*/
       //std::cerr << "compute time : " << delta * 1000 << std::endl;
@@ -86,37 +91,40 @@ void bbman::Application::update_game(irr::f32 delta)
   if (this->_game) {
     this->_game->input(this->_inputListener);
     this->_game->update(*this->_irr, delta);
-    if (this->_game->leaveGame()) {
-      goToMenu();
-    }
     this->_irr->beginScene();
     this->_irr->drawScene();
     this->_irr->drawGUI();
+    //this->_irr->getLayout()->display();
     this->_irr->endScene();
+    if (this->_game->leaveGame()) {
+      goToMenu();
+    }
   }
 }
 
 void bbman::Application::update_menu(irr::f32 delta)
 {
   (void)delta;
-  /*if (_menu) {
-    _menu->input(_inputListener);
-    _menu->update(delta);
-    if (_menu->startGame()) {
-    delete (_menu);
-    _menu = NULL;
+  if (this->_menu) {
+    this->_menu->input(_inputListener);
+    //_menu->update(delta);
+    //if (_menu->startGame()) {
+      /*delete (_menu);
+      _menu = NULL;
 
     // ! a delete quand y aura le menu
-    this->_irr.beginScene();
-    this->_irr.endScene();
-    // go to menu
-    }
-    else {
-    this->_irr.beginScene();
-    _menu->draw(this->_irr);
-    this->_irr.endScene();
-    }
-    }*/
+      this->_irr.beginScene();
+      this->_irr.endScene();
+      // go to menu*/
+    // }
+    //else
+      this->_irr->beginScene();
+      this->_menu->display();
+      this->_irr->endScene();
+      if (this->_menu->isGameStarted()) {
+	goToGame();
+      }
+  }
 }
 
 void bbman::Application::goToMenu(void)
@@ -127,7 +135,7 @@ void bbman::Application::goToMenu(void)
       delete (this->_game);
       this->_game = NULL;
     }
-    // _menu = new Menu;
+    this->_menu = new layout(this->_irr->getDevice());
     // try
     // _menu->init(*this->_irr);
     // catch

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May  3 18:39:36 2016 stephane galibert
-// Last update Fri May 27 15:45:24 2016 stephane galibert
+// Last update Mon May 30 19:11:40 2016 stephane galibert
 //
 
 #ifndef _INPUTLISTENER_HPP_
@@ -26,9 +26,14 @@ namespace bbman
     virtual bool OnEvent(irr::SEvent const& event);
     bool IsKeyDown(irr::EKEY_CODE keyCode) const;
     irr::SEvent::SJoystickEvent const& getJoystickState(size_t idx) const;
+    const irr::core::position2d<irr::s32> &getPosition(void);
+    bool getState(void);
   private:
     bool _keyIsDown[irr::KEY_KEY_CODES_COUNT];
     std::vector<irr::SEvent::SJoystickEvent> _joystickStates;
+    irr::core::position2d<irr::s32> _position;
+    bool  _leftButtonDown;
+    int   _currentEvent;
   };
 }
 
