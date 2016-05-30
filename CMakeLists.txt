@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
-SET(CMAKE_CXX_COMPILER  clang++)
+SET(CMAKE_CXX_COMPILER  g++)
 # SET ( CMAKE_CXX_FLAGS "-std=c++0x" CACHE STRING "compile flags" FORCE)
 project(Bomberman)
 
@@ -13,10 +13,10 @@ set (Bomberman_VERSION_MINOR 0)
 # should we use our own math functions?
 option (START_GTEST "Launch test instead of start the program" OFF)
 
-if (START_GTEST)
-  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0") # debug, no optimisation
+IF (START_GTEST)
+  set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -g -O0 -ftest-coverage") # debug, no optimisation
   set(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} --coverage") # enabling coverage
-ENDif (START_GTEST)
+ENDIF (START_GTEST)
 
 # Enable c++11 with CMake
 add_compile_options(-std=c++11)

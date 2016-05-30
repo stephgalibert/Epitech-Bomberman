@@ -1,12 +1,8 @@
-language:
-  - cpp
-
-sudo: required
-dist: trusty
+language: cpp
 
 install:
-  # install latest LCOV (1.9 was failing for me) [1]
   - cd ${TRAVIS_BUILD_DIR}
+  # install latest LCOV (1.9 was failing for me) [1]
   - wget http://ftp.de.debian.org/debian/pool/main/l/lcov/lcov_1.11.orig.tar.gz
   - tar xf lcov_1.11.orig.tar.gz
   - sudo make -C lcov-1.11/ install
@@ -15,12 +11,12 @@ install:
 
 before_script:
   - cd ${TRAVIS_BUILD_DIR}
-  # init coverage to 0 (optional)
+  - mkdir build
+  - cd build
   - lcov --directory . --zerocounters
 
 script:
-  - mkdir build
-  - cd build
+  - cd ${TRAVIS_BUILD_DIR}
   - cmake -DSTART_GTEST=ON ..
   - make
   - ctest --verbose
@@ -31,6 +27,3 @@ after_success:
   - lcov --remove coverage.info 'tests/*' '/usr/*' --output-file coverage.info # filter out system and test code
   - lcov --list coverage.info # debug before upload
   - coveralls-lcov --repo-token ${COVERALLS_TOKEN} coverage.info # uploads to coveralls
-
-notifications:
-  webhooks: https://coveralls.io/webhook?repo_token=ynwVDcF3jHLyA47sbBdjhDuk3Z7EGS9IL
