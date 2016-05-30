@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Sun May 29 10:28:36 2016 stephane galibert
+// Last update Mon May 30 09:24:59 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -29,12 +29,12 @@
 # include "IndestructibleBlock.hpp"
 # include "DestructibleBlock.hpp"
 # include "PowerUPs.hpp"
-# include "Loader.hpp"
 # include "InputListener.hpp"
 # include "PowerUPs.hpp"
 
 namespace bbman
 {
+  class Loader;
   class Board
   {
   public:
@@ -49,9 +49,9 @@ namespace bbman
     void setPosition(irr::core::vector3df const& pos);
     irr::core::vector3df const& getPosition(void) const;
     bool isColliding(irr::core::aabbox3df const& box) const;
-    void deleteBlock(IEntity *entity);
+    /*void deleteBlock(IEntity *entity);
     void deleteEntity(IEntity *entity);
-    void deleteBomb(IBomb *bomb);
+    void deleteBomb(IBomb *bomb);*/
     IEntity *getEntityByPosition(irr::core::vector3d<irr::s32> const& pos) const;
     void eraseEntityByPosition(irr::core::vector3d<irr::s32> const& pos);
     void explodeBlocks(IBomb *bomb);
@@ -62,18 +62,22 @@ namespace bbman
     bool isValidMove(irr::core::vector3df const& pos, t_direction dir) const;
     bool isInNode(irr::core::vector3df const& pos) const;
     Map<Cell> const& getMap(void) const;
+    Map<Cell> &getMap(void);
     std::vector<APlayer *> const& getPlayers(void) const;
     std::list<IBomb *> const& getBombs(void) const;
     bool hasWinners(void) const;
+    IBlock *createInbrkable(Irrlicht &irr, size_t x, size_t y);
+    void registerBlock(IBlock *block);
+    void disableDirection(size_t x, size_t y);
+    void updateNode(irr::core::vector3d<irr::s32> const& pos);
+    APlayer *getPlayerByID(size_t id) const;
+  private:
     void buildInbrkable(Irrlicht &irr, size_t x, size_t y);
     void buildBrkable(Irrlicht &irr, size_t x, size_t y);
-  private:
-    APlayer *getPlayerByID(size_t id) const;
     void initTerrain(Irrlicht &irr);
     void initMap(void);
     void initNode(void);
     void initMesh(Irrlicht &irr);
-    void updateNode(irr::core::vector3d<irr::s32> const& pos);
     void updateBombs(Irrlicht &irr, irr::f32 delta);
     void updatePlayers(bbman::Irrlicht &irr, irr::f32 delta);
     std::unordered_map<int, std::function<void(Irrlicht &, size_t, size_t)> > _ctor;

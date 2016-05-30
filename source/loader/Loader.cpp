@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 14:22:45 2016 stephane galibert
-// Last update Thu May 26 12:20:13 2016 stephane galibert
+// Last update Mon May 30 07:04:24 2016 stephane galibert
 //
 
 #include "Loader.hpp"
@@ -21,6 +21,10 @@ bbman::Loader::Loader(void)
   this->_loads["BOMBS_BEGIN"] =
     std::bind(&bbman::Loader::loadBombs, this, std::placeholders::_1,
 	      std::placeholders::_2);
+  this->_loads["TIMEOUT_BEGIN"] =
+    std::bind(&bbman::Loader::loadTimeOut, this, std::placeholders::_1,
+	      std::placeholders::_2);
+
 }
 
 bbman::Loader::~Loader(void)
@@ -54,6 +58,11 @@ std::vector<bbman::APlayer *> const& bbman::Loader::getPlayers(void) const
 std::list<bbman::IBomb *> const& bbman::Loader::getBombs(void) const
 {
   return (this->_bombs);
+}
+
+bbman::TimeOut *bbman::Loader::getTimeOut(void) const
+{
+  return (this->_timeout);
 }
 
 void bbman::Loader::loadMap(Irrlicht &irr, std::ifstream &ifs)
@@ -140,5 +149,33 @@ void bbman::Loader::loadBombs(Irrlicht &irr, std::ifstream &ifs)
       if (bomb) {
 	this->_bombs.push_back(bomb);
       }
+    }
+}
+
+void bbman::Loader::loadTimeOut(Irrlicht &irr, std::ifstream &ifs)
+{
+  TimeOutAttr attr;
+  std::string name;
+  std::string value;
+  std::string line;
+  size_t pos = 0;
+  size_t pos1 = 0;
+  size_t pos2 = 0;
+
+  this->_timeout = new TimeOut;
+  while (std::getline(ifs, line) && line != "TIMEOUT_END")
+    {
+      pos = 0;
+      pos1 = line.find_first_of(":");
+      pos2 = line.find_first_of(";");
+      while (pos1 != std::string::npos && pos2 != std::string::npos)
+	{
+	  name = line.substr(pos, pos1 - pos);
+	  value = line.substr(pos1 + 1, pos2 - pos1 - 1);
+	  attr.set(this->_timeout, irr, name, value);
+	  pos = pos2 + 1;
+	  pos1 = line.find_first_of(":", pos2);
+	  pos2 = line.find_first_of(";", pos2 + 1);
+	}
     }
 }

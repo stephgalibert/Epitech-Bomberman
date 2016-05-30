@@ -5,10 +5,11 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Sat May 28 17:55:30 2016 stephane galibert
+// Last update Mon May 30 09:17:47 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
+#include "Board.hpp"
 
 bbman::CacheManager<std::string, bbman::MemoryFile> bbman::ExplodingBomb::SoundCache;
 
@@ -171,9 +172,14 @@ void bbman::ExplodingBomb::setDelta(irr::f32 value)
   this->_delta = value;
 }
 
-void bbman::ExplodingBomb::explode(void)
+void bbman::ExplodingBomb::explode(Board *board)
 {
   this->_delta = DELAY_TO_EXPLOSE;
+  APlayer *owner = board->getPlayerByID(getOwnerID());
+  //explode(this);
+  if (owner) {
+    owner->addBomb(clone());
+  }
 }
 
 irr::core::vector3d<irr::s32> const& bbman::ExplodingBomb::getPosInMap(irr::core::vector3df const& scale)

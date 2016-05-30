@@ -9,7 +9,6 @@
 #include "AIPlayer.hpp"
 #include "Board.hpp"
 
-
 bbman::AIPlayer::AIPlayer(void)
 {
   this->_move[Direction::DIR_EAST] =
@@ -147,7 +146,7 @@ bool bbman::AIPlayer::isColliding(irr::core::aabbox3df const& box) const
   return false;
 }
 
-void bbman::AIPlayer::explode(void)
+void bbman::AIPlayer::explode(Board *board)
 {
   if (this->_alive) {
     this->_alive = false;
@@ -189,6 +188,19 @@ void bbman::AIPlayer::setRotation(irr::s32 rotation)
 irr::s32 bbman::AIPlayer::getRotation(void) const
 {
   return (irr::s32)this->_mesh->getRotation().Y;
+}
+
+void bbman::AIPlayer::setAlive(bool v)
+{
+  this->_alive = v;
+  if (!this->_alive && this->_mesh) {
+    this->_mesh->setVisible(false);
+  }
+}
+
+bool bbman::AIPlayer::hasExplosed(void) const
+{
+  return (!this->_alive);
 }
 
 bool bbman::AIPlayer::input(bbman::InputListener& inputListener)

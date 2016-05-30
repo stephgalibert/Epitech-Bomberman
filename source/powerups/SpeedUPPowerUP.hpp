@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:04 2016 stephane galibert
-// Last update Fri May 27 07:58:33 2016 stephane galibert
+// Last update Mon May 30 08:56:22 2016 stephane galibert
 //
 
 #ifndef _SPEEDUPPOWERUP_HPP_
@@ -29,7 +29,7 @@ namespace bbman
     virtual irr::core::vector3df const& getPosition(void) const;
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
-    virtual void explode(void);
+    virtual void explode(Board *board);
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual void affectPlayer(APlayer *player);
     virtual bool hasExplosed(void) const;

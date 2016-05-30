@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:06:55 2016 stephane galibert
-// Last update Sun May 29 11:18:29 2016 stephane galibert
+// Last update Mon May 30 09:01:00 2016 stephane galibert
 //
 
 #include "PlayerAttr.hpp"
@@ -102,8 +102,8 @@ void bbman::PlayerAttr::setAlive(APlayer **player, Irrlicht &irr,
 {
   (void)irr;
   if (player && *player) {
-    if (value == "false")
-      (*player)->explode();
+    /*if (value == "false")
+      (*player)->explode();*/
     (*player)->setAlive((value == "true") ? true : false);
   }
 }

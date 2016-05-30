@@ -37,7 +37,7 @@ namespace bbman
     virtual irr::core::vector3df const& getPosition(void) const;
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
-    virtual void explode(void);
+    virtual void explode(Board *board);
     virtual bool input(InputListener &inputListener);
     virtual size_t getSpeed(void) const;
     virtual void setSpeed(size_t speed);
@@ -49,6 +49,8 @@ namespace bbman
     virtual std::list<IEffect *> const& getEffects(void) const;
     virtual void setRotation(irr::s32 rotation);
     virtual irr::s32 getRotation(void) const;
+    virtual void setAlive(bool value);
+    virtual bool hasExplosed(void) const;
   private:
     static size_t NumberOfPlayer;
   private:
@@ -79,6 +81,7 @@ namespace bbman
     size_t _speed;
     bool _isRunning;
     size_t _playerNum;
+    bool _alive;
   };
 }
 

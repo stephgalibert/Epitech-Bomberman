@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Sun May 29 11:19:40 2016 stephane galibert
+// Last update Mon May 30 10:48:33 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -57,8 +57,8 @@ int bbman::Application::play(void)
   while (this->_irr->isRunning())
     {
       delta = this->_timer.restart() / 1000.f;
-      if (delta > 0.03000) {
-	delta = 0.030;
+      if (delta > 0.06000) {
+	delta = 0.060;
       }
       if (this->_inputListener.IsKeyDown(irr::KEY_KEY_N)) {
 	return (0);

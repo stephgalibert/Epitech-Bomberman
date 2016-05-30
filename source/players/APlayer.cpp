@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:09:16 2016 stephane galibert
-// Last update Sun May 29 08:40:47 2016 stephane galibert
+// Last update Mon May 30 09:08:04 2016 stephane galibert
 //
 
 #include "APlayer.hpp"
@@ -40,7 +40,7 @@ void bbman::APlayer::setScore(irr::s32 score)
   this->_score = score;
 }
 
-bool bbman::APlayer::hasExplosed(void) const
+/*bool bbman::APlayer::hasExplosed(void) const
 {
   return (!this->_alive);
 }
@@ -48,7 +48,7 @@ bool bbman::APlayer::hasExplosed(void) const
 void bbman::APlayer::setAlive(bool value)
 {
   this->_alive = value;
-}
+  }*/
 
 std::string const& bbman::APlayer::getUsername(void) const
 {

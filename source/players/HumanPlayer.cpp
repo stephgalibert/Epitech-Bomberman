@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Sun May 29 10:52:29 2016 stephane galibert
+// Last update Mon May 30 09:09:18 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -173,8 +173,9 @@ bool bbman::HumanPlayer::isColliding(irr::core::aabbox3df const& box) const
   return (false);
 }
 
-void bbman::HumanPlayer::explode(void)
+void bbman::HumanPlayer::explode(Board *board)
 {
+  (void)board;
   if (this->_alive) {
     this->_alive = false;
     /*this->_mesh->remove();
@@ -221,6 +222,14 @@ void bbman::HumanPlayer::setRotation(irr::s32 rotation)
 irr::s32 bbman::HumanPlayer::getRotation(void) const
 {
   return ((irr::s32)this->_mesh->getRotation().Y);
+}
+
+void bbman::HumanPlayer::setAlive(bool v)
+{
+  this->_alive = v;
+  if (!this->_alive && this->_mesh) {
+    this->_mesh->setVisible(false);
+  }
 }
 
 bool bbman::HumanPlayer::input(bbman::InputListener &inputListener)

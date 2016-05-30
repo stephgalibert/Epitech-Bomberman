@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:22:34 2016 stephane galibert
-// Last update Sun May 29 08:20:17 2016 stephane galibert
+// Last update Mon May 30 08:48:15 2016 stephane galibert
 //
 
 #ifndef _INDESTRUCTIBLEBLOCK_HPP_
@@ -25,13 +25,15 @@ namespace bbman
     virtual void init(Irrlicht &irr);
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void setMaterialFlag(irr::video::E_MATERIAL_FLAG flag, bool value);
+    virtual void addAnimation(irr::scene::ISceneNodeAnimator *anim);
     virtual void setPosition(irr::core::vector3df const& pos);
     virtual irr::core::vector3df const& getPosition(void) const;
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
-    virtual void explode(void);
+    virtual void explode(Board *board);
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual bool hasExplosed(void) const;
+    virtual ItemID getID(void) const;
   private:
     irr::scene::ISceneNode *_node;
     //irr::scene::IMeshSceneNode *_node;

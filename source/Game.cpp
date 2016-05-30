@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Sat May 28 19:08:52 2016 stephane galibert
+// Last update Mon May 30 07:25:52 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -15,7 +15,8 @@ bbman::Game::Game(void)
   this->_leaveGame = false;
   this->_threadPool = new ThreadPool(4);
   this->_board = new Board;
-  this->_timeout = new TimeOut;
+  //this->_timeout = new TimeOut;
+  this->_timeout = NULL;
 }
 
 bbman::Game::~Game(void)
@@ -38,9 +39,11 @@ void bbman::Game::init(Irrlicht &irr, std::string const& saves)
     if (!saves.empty()) {
       this->_loader.load(irr, saves);
       this->_board->init(irr, this->_loader);
-      this->_timeout->init(irr, this->_board, this->_loader);
+      this->_timeout = this->_loader.getTimeOut();
+      this->_timeout->init(irr, this->_board);
     }
     else {
+      this->_timeout = new TimeOut;
       this->_board->init(irr);
       this->_timeout->init(irr, this->_board);
       // BEGIN todel
@@ -81,7 +84,7 @@ bool bbman::Game::input(InputListener &inputListener)
 void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
   this->_board->update(irr, delta);
-  this->_timeout->update(this->_threadPool, irr, delta);
+  this->_timeout->update(irr, delta);
 }
 
 bool bbman::Game::leaveGame(void) const
@@ -117,8 +120,10 @@ void bbman::Game::save(std::string const& fname)
 {
   std::ofstream ofs(fname.c_str(), std::ifstream::out);
   if (ofs) {
-
     ofs << *this->_board;
+    ofs << "TIMEOUT_BEGIN" << std::endl;
+    ofs << *this->_timeout;
+    ofs << "TIMEOUT_END" << std::endl;
   }
   else {
     throw (std::runtime_error("can not create ./save.txt"));

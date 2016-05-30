@@ -5,10 +5,11 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Sat May 28 13:44:09 2016 stephane galibert
+// Last update Mon May 30 10:37:34 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"
+#include "Board.hpp"
 
 bbman::DestructibleBlock::DestructibleBlock(void)
 {
@@ -49,11 +50,15 @@ void bbman::DestructibleBlock::update(Irrlicht &irr, irr::f32 delta)
   (void)delta;
 }
 
+void bbman::DestructibleBlock::addAnimation(irr::scene::ISceneNodeAnimator *anim)
+{
+  this->_node->addAnimator(anim);
+  anim->drop();
+}
+
 void bbman::DestructibleBlock::setPosition(irr::core::vector3df const& pos)
 {
-  irr::core::vector3df ext = getBoundingBox().getExtent();
-
-  this->_node->setPosition(irr::core::vector3df(pos.X, ext.Y / 2, pos.Z));
+  this->_node->setPosition(pos);
   this->_node->updateAbsolutePosition();
 }
 
@@ -72,9 +77,16 @@ bool bbman::DestructibleBlock::isColliding(irr::core::aabbox3df const& box) cons
   return (box.intersectsWithBox(this->getBoundingBox()));
 }
 
-void bbman::DestructibleBlock::explode(void)
+void bbman::DestructibleBlock::explode(Board *board)
 {
   if (!this->_explosed) {
+    irr::core::vector3d<irr::s32>const& pos = getPosInMap(board->getScale());
+    board->updateNode(pos);
+
+    if (board->getMap().at(pos.X, pos.Z).id == getID()) {
+      board->getMap().at(pos.X, pos.Z).id = ItemID::II_NONE;
+    }
+
     this->_explosed = true;
     this->_node->setVisible(false);
     /*this->_node->remove();
@@ -92,4 +104,9 @@ irr::core::vector3d<irr::s32> const& bbman::DestructibleBlock::getPosInMap(irr::
 bool bbman::DestructibleBlock::hasExplosed(void) const
 {
   return (this->_explosed);
+}
+
+bbman::ItemID bbman::DestructibleBlock::getID(void) const
+{
+  return (ItemID::II_BLOCK_BRKABLE);
 }

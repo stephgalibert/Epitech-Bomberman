@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:45 2016 stephane galibert
-// Last update Fri May 27 07:56:36 2016 stephane galibert
+// Last update Mon May 30 08:57:12 2016 stephane galibert
 //
 
 #include "SpeedUPPowerUP.hpp"
@@ -70,9 +70,9 @@ bool bbman::SpeedUPPowerUP::isColliding(irr::core::aabbox3df const& box) const
   return (box.intersectsWithBox(this->getBoundingBox()));
 }
 
-void bbman::SpeedUPPowerUP::explode(void)
+void bbman::SpeedUPPowerUP::explode(Board *board)
 {
-  std::cerr << "trying to explode a speeduppowerup" << std::endl;
+
 }
 
 irr::core::vector3d<irr::s32> const& bbman::SpeedUPPowerUP::getPosInMap(irr::core::vector3df const& scale)

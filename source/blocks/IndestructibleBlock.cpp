@@ -5,10 +5,11 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:23:18 2016 stephane galibert
-// Last update Sun May 29 08:23:24 2016 stephane galibert
+// Last update Mon May 30 08:57:51 2016 stephane galibert
 //
 
 #include "IndestructibleBlock.hpp"
+#include "Board.hpp"
 
 bbman::IndestructibleBlock::IndestructibleBlock(void)
 {
@@ -50,11 +51,16 @@ void bbman::IndestructibleBlock::update(Irrlicht &irr, irr::f32 delta)
   static_cast<void>(delta);
 }
 
+void bbman::IndestructibleBlock::addAnimation(irr::scene::ISceneNodeAnimator *anim)
+{
+  this->_node->addAnimator(anim);
+  anim->drop();
+}
+
 void bbman::IndestructibleBlock::setPosition(irr::core::vector3df const& pos)
 {
-  irr::core::vector3df ext = getBoundingBox().getExtent();
-
-  this->_node->setPosition(irr::core::vector3df(pos.X, ext.Y / 2, pos.Z));
+  //this->_node->setPosition(irr::core::vector3df(pos.X, ext.Y / 2, pos.Z));
+  this->_node->setPosition(pos);
   this->_node->updateAbsolutePosition();
 }
 
@@ -73,9 +79,9 @@ bool bbman::IndestructibleBlock::isColliding(irr::core::aabbox3df const& box) co
   return (box.intersectsWithBox(this->getBoundingBox()));
 }
 
-void bbman::IndestructibleBlock::explode(void)
+void bbman::IndestructibleBlock::explode(Board *board)
 {
-  std::cerr << "tring to explode an indestructible block" << std::endl;
+  (void)board;
 }
 
 irr::core::vector3d<irr::s32> const& bbman::IndestructibleBlock::getPosInMap(irr::core::vector3df const& scale)
@@ -88,4 +94,9 @@ irr::core::vector3d<irr::s32> const& bbman::IndestructibleBlock::getPosInMap(irr
 bool bbman::IndestructibleBlock::hasExplosed(void) const
 {
   return (true);
+}
+
+bbman::ItemID bbman::IndestructibleBlock::getID(void) const
+{
+  return (ItemID::II_BLOCK_INBRKABLE);
 }

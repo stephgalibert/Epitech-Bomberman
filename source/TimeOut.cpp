@@ -5,11 +5,12 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 28 08:20:16 2016 stephane galibert
-// Last update Sun May 29 10:21:48 2016 stephane galibert
+// Last update Mon May 30 10:24:11 2016 stephane galibert
 //
 
 #include "TimeOut.hpp"
 
+//# include "ThreadPool.hpp"
 //# include "TimeOutAsyncTask.hpp"
 //TimeOutAsyncTask *_asynctask;
 //this->_asynctask = NULL;
@@ -27,14 +28,13 @@
   }
   }*/
 
-bbman::CacheManager<std::string, bbman::MemoryFile> bbman::TimeOut::SoundCache;
-
 bbman::TimeOut::TimeOut(void)
 {
   this->_delta = 0;
   this->_deltaAnim = 0;
   this->_step = 0;
   this->_board = NULL;
+  this->_direction = Direction::DIR_NONE;
 }
 
 bbman::TimeOut::~TimeOut(void)
@@ -45,46 +45,23 @@ bbman::TimeOut::~TimeOut(void)
 void bbman::TimeOut::init(Irrlicht &irr, Board *board)
 {
   (void)irr;
-  try {
-    if (!SoundCache.find("explosion")) {
-      SoundCache.insert("explosion", MemoryFile("./asset/sound/explosion.wav"));
-      SoundCache["explosion"].load();
-    }
-    this->_sounds.addSample("explosion", SoundCache["explosion"]);
-    this->_sounds.setVolumeBySample("explosion", 70.f);
-  } catch (std::runtime_error const& e) {
-    std::cerr << e.what() << std::endl;
-  }
   this->_board = board;
 }
 
-void bbman::TimeOut::init(Irrlicht &irr, Board *board, Loader const& loader)
+void bbman::TimeOut::update(Irrlicht &irr, irr::f32 delta)
 {
-  (void)loader;
-  (void)irr;
-  try {
-    if (!SoundCache.find("explosion")) {
-      SoundCache.insert("explosion", MemoryFile("./asset/sound/explosion.wav"));
-      SoundCache["explosion"].load();
+  if (this->_delta >= 20.0000f) {
+    //this->_delta = 0.f;
+    this->_deltaAnim += delta;
+    if (this->_deltaAnim >= 5.0000f) {
+      narrowBoard(irr);
+      //this->_deltaAnim = 0;
     }
-    this->_sounds.addSample("explosion", SoundCache["explosion"]);
-    this->_sounds.setVolumeBySample("explosion", 50.f);
-  } catch (std::runtime_error const& e) {
-    std::cerr << e.what() << std::endl;
   }
-
-  this->_board = board;
-  //TimeOut const& out = loader.getTimeOut();
-  //setDelta(out.getDelta());
-}
-
-void bbman::TimeOut::update(ThreadPool *pool, Irrlicht &irr, irr::f32 delta)
-{
-  this->_delta += delta;
-  if (this->_delta >= 120.0000f) {
-    narrowBoard(irr);
-    this->_delta = 0.f;
+  else {
+    this->_delta += delta;
   }
+  updateAnim();
 }
 
 irr::f32 bbman::TimeOut::getDelta(void) const
@@ -97,64 +74,157 @@ void bbman::TimeOut::setDelta(irr::f32 delta)
   this->_delta = delta;
 }
 
-void bbman::TimeOut::north(Irrlicht &irr)
+void bbman::TimeOut::setDeltaAnim(irr::f32 delta)
 {
-  while (this->_current.Z < this->_board->getMap().h - 2 - this->_step) {
-    putBlock(irr);
-    ++this->_current.Z;
-  }
+  this->_deltaAnim = delta;
 }
 
-void bbman::TimeOut::south(Irrlicht &irr)
+irr::f32 bbman::TimeOut::getDeltaAnim(void) const
 {
-  while (this->_current.Z > this->_begin.Z) {
-    putBlock(irr);
-    --this->_current.Z;
-  }
+  return (this->_deltaAnim);
 }
 
-void bbman::TimeOut::east(Irrlicht &irr)
+void bbman::TimeOut::setStep(int step)
 {
-  while (this->_current.X < this->_board->getMap().w - 2 - this->_step) {
-    putBlock(irr);
-    ++this->_current.X;
-  }
+  this->_step = step;
 }
 
-void bbman::TimeOut::west(Irrlicht &irr)
+int bbman::TimeOut::getStep(void) const
 {
-  while (this->_current.X >= this->_begin.X) {
-    putBlock(irr);
-    --this->_current.X;
+  return (this->_step);
+}
+
+void bbman::TimeOut::setDirection(Direction dir)
+{
+  this->_direction = dir;
+}
+
+bbman::Direction bbman::TimeOut::getDirection(void) const
+{
+  return (this->_direction);
+}
+
+void bbman::TimeOut::setBegin(irr::core::vector3d<irr::s32> const& v)
+{
+  this->_begin = v;
+}
+
+irr::core::vector3d<irr::s32> const& bbman::TimeOut::getBegin(void) const
+{
+  return (this->_begin);
+}
+
+void bbman::TimeOut::setCurrent(irr::core::vector3d<irr::s32> const& v)
+{
+  this->_current = v;
+}
+
+irr::core::vector3d<irr::s32> const& bbman::TimeOut::getCurrent(void) const
+{
+  return (this->_current);
+}
+
+void bbman::TimeOut::updateAnim(void)
+{
+  IEntity *entity = NULL;
+
+  for (std::list<std::pair<IBlock *, irr::scene::ISceneNodeAnimator *> >::iterator
+	 it = this->_anims.begin() ; it != this->_anims.end();) {
+    if ((*it).second->hasFinished()) {
+      irr::core::vector3d<irr::s32> const& pos = (*it).first->getPosInMap(_board->getScale());
+      this->_board->disableDirection(pos.X, pos.Z);
+      entity = _board->getEntityByPosition(pos);
+      if (entity) {
+	entity->explode(this->_board);
+      }
+      it = this->_anims.erase(it);
+    }
+    else {
+      ++it;
+    }
   }
 }
 
 void bbman::TimeOut::narrowBoard(Irrlicht &irr)
 {
-  this->_begin.X = this->_step + 1;
-  this->_begin.Z = this->_step + 1;
-  this->_current = this->_begin;
-
-  if (this->_step < 3)
+  if (this->_step < 4)
     {
-      try {
-	this->_sounds.play("explosion");
-      } catch (std::runtime_error const& e) {
-	std::cerr << e.what() << std::endl;
+      if (this->_direction == Direction::DIR_NORTH) {
+	north(irr);
       }
-      north(irr);
-      east(irr);
-      south(irr);
-      west(irr);
-      ++this->_step;
+      else if (this->_direction == Direction::DIR_EAST) {
+	east(irr);
+      }
+      else if (this->_direction == Direction::DIR_SOUTH) {
+	south(irr);
+      }
+      else if (this->_direction == Direction::DIR_WEST) {
+	west(irr);
+      }
+      if (this->_direction == Direction::DIR_NONE) {
+	this->_direction = Direction::DIR_NORTH;
+	this->_begin.X = this->_step + 1;
+	this->_begin.Z = this->_step + 1;
+	this->_current = this->_begin;
+	++this->_step;
+      }
     }
 }
-#include <unistd.h>
+
+void bbman::TimeOut::north(Irrlicht &irr)
+{
+  if (this->_current.Z < this->_board->getMap().h - 1 - this->_step) {
+    putBlock(irr);
+    ++this->_current.Z;
+  }
+  if (this->_current.Z >= this->_board->getMap().h - 1 - this->_step) {
+    this->_direction = Direction::DIR_EAST;
+  }
+}
+
+void bbman::TimeOut::south(Irrlicht &irr)
+{
+  if (this->_current.Z > this->_begin.Z) {
+    putBlock(irr);
+    --this->_current.Z;
+  }
+  if (this->_current.Z <= this->_begin.Z) {
+    this->_direction = Direction::DIR_WEST;
+  }
+}
+
+void bbman::TimeOut::east(Irrlicht &irr)
+{
+  if (this->_current.X < this->_board->getMap().w - 1 - this->_step) {
+    putBlock(irr);
+    ++this->_current.X;
+  }
+  if (this->_current.X >= this->_board->getMap().w - 1 - this->_step) {
+    this->_direction = Direction::DIR_SOUTH;
+  }
+}
+
+void bbman::TimeOut::west(Irrlicht &irr)
+{
+  if (this->_current.X > this->_begin.X) {
+    putBlock(irr);
+    --this->_current.X;
+  }
+  if (this->_current.X <= this->_begin.X) {
+    this->_direction = Direction::DIR_NONE;
+    this->_deltaAnim = 0.f;
+  }
+}
+
 void bbman::TimeOut::putBlock(Irrlicht &irr)
 {
-  IEntity *entity = this->_board->getEntityByPosition(this->_current);
-  if (entity) {
-    entity->explode();
+  IBlock *block = this->_board->createInbrkable(irr, this->_current.X, _current.Z);
+  if (block) {
+    irr::core::vector3df const& pos = block->getPosition();
+    irr::scene::ISceneNodeAnimator *anim =
+      irr.getSmgr()->createFlyStraightAnimator(irr::core::vector3df(pos.X, pos.Y + 60, pos.Z), pos, 500, false);
+    block->addAnimation(anim);
+    this->_board->registerBlock(block);
+    this->_anims.push_back(std::make_pair(block, anim));
   }
-  this->_board->buildInbrkable(irr, this->_current.X, this->_current.Z);
 }

@@ -1,3 +1,7 @@
-ne peut poser que n bombe et les regagne quand celles ci explose
-integrate .obj
+game finished when left only 1 player
+faire la fonction de care_j
+les blocks destructibles qui explode ont une chance de générer un powerups
 shaders
+
+integrate .obj
+passer un Board* à l'entity qui explose pour libérer la case de la map si c'est un block => fait (peut être à débuger)

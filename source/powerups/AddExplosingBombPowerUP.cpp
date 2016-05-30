@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May 29 10:09:35 2016 stephane galibert
-// Last update Sun May 29 10:12:14 2016 stephane galibert
+// Last update Mon May 30 08:57:00 2016 stephane galibert
 //
 
 #include "AddExplosingBombPowerUP.hpp"
@@ -71,9 +71,9 @@ bool bbman::AddExplosingBombPowerUP::isColliding(irr::core::aabbox3df const& box
   return (box.intersectsWithBox(this->getBoundingBox()));
 }
 
-void bbman::AddExplosingBombPowerUP::explode(void)
+void bbman::AddExplosingBombPowerUP::explode(Board *board)
 {
-  std::cerr << "trying to explode a explos" << std::endl;
+  (void)board;
 }
 
 irr::core::vector3d<irr::s32> const& bbman::AddExplosingBombPowerUP::getPosInMap(irr::core::vector3df const& scale)
