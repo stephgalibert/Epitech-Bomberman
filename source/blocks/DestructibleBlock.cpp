@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Mon May 30 22:57:22 2016 stephane galibert
+// Last update Tue May 31 12:32:27 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"
@@ -15,7 +15,7 @@ bbman::DestructibleBlock::DestructibleBlock(void)
 {
   this->_node = NULL;
   this->_explosed = true;
-  //this->_task = NULL;
+  this->_task = NULL;
 }
 
 bbman::DestructibleBlock::~DestructibleBlock(void)
@@ -23,35 +23,18 @@ bbman::DestructibleBlock::~DestructibleBlock(void)
   if (this->_node) {
     this->_node->remove();
   }
-  /*if (this->_task) {
-    if (this->_task->isRunning()) {
-      this->_task->stop();
-      while (!this->_task->isFinished());
-    }
+  if (this->_task && this->_task->isRunning()) {
+    this->_task->stop();
+    while (!this->_task->isFinished());
     delete (this->_task);
-    }*/
+  }
 }
 
 void bbman::DestructibleBlock::init(Irrlicht &irr)
 {
   this->_node = irr.getSmgr()->addCubeSceneNode();
   if (this->_node) {
-    //this->_task = new ExplosionTask(irr);
-    this->_ps = irr.getSmgr()->addParticleSystemSceneNode(false);
-    /* this->_ps->setVisible(false);
-      this->_ps->setMaterialTexture(0, irr.getTexture("./asset/media/fire.bmp"));
-      this->_ps->setScale(irr::core::vector3df(1,1,1));
-      this->_ps->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-      this->_ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
-      this->_ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);*/
-
-    this->_ps->setMaterialTexture(0, irr.getTexture("./asset/media/fire.bmp"));
-    this->_ps->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
-    this->_ps->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-    this->_ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
-    this->_ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
-
-    // !
+    this->_task = new ExplosionTask(irr);
     this->_node->setMaterialTexture(0, irr.getTexture("./asset/Texture/Texture_cube3.png"));
     this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
@@ -72,6 +55,10 @@ void bbman::DestructibleBlock::update(Irrlicht &irr, irr::f32 delta)
 {
   (void)irr;
   (void)delta;
+  if (this->_task && this->_task->isRunning() && this->_task->isFinished()) {
+    delete (this->_task);
+    this->_task = NULL;
+  }
 }
 
 void bbman::DestructibleBlock::addAnimation(irr::scene::ISceneNodeAnimator *anim)
@@ -101,6 +88,14 @@ bool bbman::DestructibleBlock::isColliding(irr::core::aabbox3df const& box) cons
   return (box.intersectsWithBox(this->getBoundingBox()));
 }
 
+void bbman::DestructibleBlock::playExplosion(void)
+{
+  if (this->_task && this->_task->isFinished()) {
+    this->_task->setPosition(getPosition());
+    tools::StaticTools::ThreadPool->addTask(this->_task);
+  }
+}
+
 void bbman::DestructibleBlock::explode(Board *board)
 {
   if (!this->_explosed) {
@@ -116,45 +111,6 @@ void bbman::DestructibleBlock::explode(Board *board)
     PowerUPs &powerups = board->getPowerUPs();
     Irrlicht *irr = board->getIrrlicht();
     powerups.add(*irr, board, getPosition());
-
-    this->_ps->setPosition(getPosition());
-    irr::scene::IParticleEmitter* emitter =
-      this->_ps->createSphereEmitter(irr::core::vector3df(0.0f,0.0f,0.0f),
-				     0.5f,
-				     irr::core::vector3df(0.0f,0.1f,0.0f),
-				     120,150,
-				     irr::video::SColor(0,127,127,127),
-				     irr::video::SColor(0,255,255,255),
-				     150,150,360,
-				     irr::core::dimension2df(1.f,1.f),
-				     irr::core::dimension2df(10.f,10.f));
-
-    this->_ps->setEmitter(emitter);
-    emitter->drop();
-
-    irr::scene::IParticleAffector* gravityAffector =
-      this->_ps->createGravityAffector(irr::core::vector3df(0.0f,-0.03f, 0.0f), 300);
-    this->_ps->addAffector(gravityAffector);
-    gravityAffector->drop();
-    irr::scene::IParticleAffector* fadeOutAffector =
-      this->_ps->createFadeOutParticleAffector(irr::video::SColor(0, 0, 0, 0), 100);
-    this->_ps->addAffector(fadeOutAffector);
-    fadeOutAffector->drop();
-
-    /*irr::scene::IParticleEmitter* em =
-    this->_ps->createBoxEmitter(irr::core::aabbox3d<irr::f32>(1,1,1,1,1,1),
-    irr::core::vector3df(0.0f, 0.03f, 0.0f),
-    100,100,
-    irr::video::SColor(0,255,255,255),
-    irr::video::SColor(0,255,255,255),
-    300,500,180,
-    irr::core::dimension2df(10.f,10.f),
-    irr::core::dimension2df(10.f,10.f));
-    this->_ps->setEmitter(em);
-    em->drop();
-    irr::scene::IParticleAffector* paf = this->_ps->createFadeOutParticleAffector();
-    this->_ps->addAffector(paf);
-    paf->drop();*/
   }
 }
 

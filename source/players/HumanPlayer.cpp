@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Mon May 30 09:09:18 2016 stephane galibert
+// Last update Tue May 31 12:57:52 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -185,6 +185,11 @@ void bbman::HumanPlayer::explode(Board *board)
   }
 }
 
+void bbman::HumanPlayer::playExplosion(void)
+{
+
+}
+
 bool bbman::HumanPlayer::isRunning(void) const
 {
   return (this->_isRunning);
@@ -230,6 +235,11 @@ void bbman::HumanPlayer::setAlive(bool v)
   if (!this->_alive && this->_mesh) {
     this->_mesh->setVisible(false);
   }
+}
+
+bool bbman::HumanPlayer::isAlive(void) const
+{
+  return (this->_alive);
 }
 
 bool bbman::HumanPlayer::input(bbman::InputListener &inputListener)

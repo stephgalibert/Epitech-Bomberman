@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May 29 10:09:35 2016 stephane galibert
-// Last update Mon May 30 08:57:00 2016 stephane galibert
+// Last update Tue May 31 13:03:37 2016 stephane galibert
 //
 
 #include "AddExplosingBombPowerUP.hpp"
@@ -29,7 +29,6 @@ void bbman::AddExplosingBombPowerUP::init(Irrlicht &irr)
 
   this->_node = irr.getSmgr()->addCubeSceneNode();
   if (this->_node) {
-    //this->_node->setMaterialTexture(0, irr.getTexture("./asset/media/t351sml.jpg"));
     this->_node->setMaterialTexture(0, irr.getTexture("./asset/media/water.jpg"));
     this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_node->setScale(irr::core::vector3df(0.3f, 0.3f, 0.3f));
@@ -74,6 +73,11 @@ bool bbman::AddExplosingBombPowerUP::isColliding(irr::core::aabbox3df const& box
 void bbman::AddExplosingBombPowerUP::explode(Board *board)
 {
   (void)board;
+}
+
+void bbman::AddExplosingBombPowerUP::playExplosion(void)
+{
+
 }
 
 irr::core::vector3d<irr::s32> const& bbman::AddExplosingBombPowerUP::getPosInMap(irr::core::vector3df const& scale)

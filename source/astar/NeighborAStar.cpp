@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 21 16:44:05 2016 stephane galibert
-// Last update Sat May 21 16:49:53 2016 stephane galibert
+// Last update Tue May 31 11:50:41 2016 stephane galibert
 //
 
 #include "NeighborAStar.hpp"
@@ -190,6 +190,7 @@ bbman::NeighborAStar::Node & bbman::NeighborAStar::getNode(irr::core::vector3d<i
       return it;
     }
   }
+  //std::cerr << p.X << " " << p.Y << " " << p.Z << std::endl;
   throw std::runtime_error("Node not found");
 }
 
@@ -210,17 +211,21 @@ bbman::NeighborAStar::Node bbman::NeighborAStar::getBestNode(std::vector<bbman::
 
 void bbman::NeighborAStar::retrievePath(irr::core::vector3d<irr::s32>const& begin)
 {
-  Node& node = getNode(_end.pos, _listClose);
+  try {
+    Node& node = getNode(_end.pos, _listClose);
 
-  irr::core::vector3d<irr::s32> prev = node.parent;
-  irr::core::vector3d<irr::s32> pos  = node.pos;
-  _path.push_front(pos);
+    irr::core::vector3d<irr::s32> prev = node.parent;
+    irr::core::vector3d<irr::s32> pos  = node.pos;
+    _path.push_front(pos);
 
-  while (prev != begin) {
-    pos = prev;
-    _path.push_front(prev);
-    node = getNode(node.parent, _listClose);
-    prev = node.parent;
+    while (prev != begin) {
+      pos = prev;
+      _path.push_front(prev);
+      node = getNode(node.parent, _listClose);
+      prev = node.parent;
+    }
+  } catch (std::runtime_error const& e) {
+    std::cerr << e.what() << std::endl;
   }
 }
 

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:08:37 2016 stephane galibert
-// Last update Mon May 30 08:50:00 2016 stephane galibert
+// Last update Tue May 31 13:01:23 2016 stephane galibert
 //
 
 #ifndef _EXPLODINGBOMB_HPP_
@@ -48,6 +48,7 @@ namespace bbman
     virtual irr::f32 getDelta(void) const;
     virtual void setDelta(irr::f32 value);
     virtual void explode(Board *board);
+    virtual void playExplosion(void);
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual size_t getOwnerID(void) const;
     virtual size_t getBombID(void) const;

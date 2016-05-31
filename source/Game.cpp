@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Mon May 30 15:59:12 2016 stephane galibert
+// Last update Tue May 31 11:14:17 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -42,11 +42,12 @@ void bbman::Game::init(Irrlicht &irr, std::string const& saves)
       this->_board->init(irr);
       this->_timeout->init(irr, this->_board);
       // BEGIN todel
+
       AIPlayer *ai1 = new AIPlayer;
       ai1->init(irr);
       ai1->setPosition(this->_board->getSpawnPosition(2));
-      irr::core::vector3df const& pos = ai1->getPosition();
       this->_board->addPlayer(ai1);
+
       HumanPlayer *p1 = bbman::HumanPlayer::create();
       p1->init(irr);
       p1->setPosition(this->_board->getSpawnPosition(0));

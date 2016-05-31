@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:22:34 2016 stephane galibert
-// Last update Mon May 30 08:48:15 2016 stephane galibert
+// Last update Tue May 31 11:58:11 2016 stephane galibert
 //
 
 #ifndef _INDESTRUCTIBLEBLOCK_HPP_
@@ -31,6 +31,7 @@ namespace bbman
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
     virtual void explode(Board *board);
+    virtual void playExplosion(void);
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual bool hasExplosed(void) const;
     virtual ItemID getID(void) const;

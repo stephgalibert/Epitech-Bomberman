@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Mon May 30 17:42:06 2016 stephane galibert
+// Last update Tue May 31 13:14:11 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -87,6 +87,9 @@ void bbman::Board::update(Irrlicht& irr, irr::f32 delta)
 {
   updatePlayers(irr, delta);
   updateBombs(irr, delta);
+  for (auto &it : this->_dblocks) {
+    it->update(irr, delta);
+  }
   //this->_powerUPs.update(irr, delta, this);
 }
 
@@ -368,21 +371,16 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))
 	&& entity != bomb) {
       entity->explode(this);
-      /*IBlock *block = dynamic_cast<IBlock *>(entity);
-      if (block) {
-        deleteBlock(entity);
-      } else {
-	deleteEntity(entity);
-	}*/
+      entity->playExplosion();
       break;
     }
     else if (entity == bomb) {
       bomb->explode(this);
+      bomb->playExplosion();
       APlayer *owner = getPlayerByID(bomb->getOwnerID());
       if (owner) {
 	owner->addBomb(bomb->clone());
       }
-      //deleteBomb(bomb);
     }
     else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
       break;
@@ -395,12 +393,7 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))
 	&& entity != bomb) {
       entity->explode(this);
-      /*IBlock *block = dynamic_cast<IBlock *>(entity);
-      if (block) {
-        deleteBlock(entity);
-      } else {
-	deleteEntity(entity);
-	}*/
+      entity->playExplosion();
       break;
     }
     else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
@@ -414,12 +407,7 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))
 	&& entity != bomb) {
       entity->explode(this);
-      /*IBlock *block = dynamic_cast<IBlock *>(entity);
-	if (block) {
-        deleteBlock(entity);
-      } else {
-	deleteEntity(entity);
-	}*/
+      entity->playExplosion();
       break;
     }
     else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
@@ -433,12 +421,7 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))
 	&& entity != bomb) {
       entity->explode(this);
-      /*IBlock *block = dynamic_cast<IBlock *>(entity);
-      if (block) {
-        deleteBlock(entity);
-      } else {
-	deleteEntity(entity);
-	}*/
+      entity->playExplosion();
       break;
     }
     else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
@@ -469,7 +452,7 @@ void bbman::Board::initTerrain(Irrlicht& irr)
 {
   irr::scene::IMesh *mesh;
 
-  this->_texture.setTexture(0, irr.getTexture("./asset//media/wall.jpg"));
+  this->_texture.setTexture(0, irr.getTexture("./asset/media/wall.jpg"));
   this->_texture.setFlag(irr::video::EMF_LIGHTING, false);
   mesh = irr.getSmgr()->getGeometryCreator()->
          createHillPlaneMesh(irr::core::dimension2d<irr::f32>(10, 10),

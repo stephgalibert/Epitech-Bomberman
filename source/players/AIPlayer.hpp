@@ -38,6 +38,7 @@ namespace bbman
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
     virtual void explode(Board *board);
+    virtual void playExplosion(void);
     virtual bool input(InputListener &inputListener);
     virtual size_t getSpeed(void) const;
     virtual void setSpeed(size_t speed);
@@ -50,6 +51,7 @@ namespace bbman
     virtual void setRotation(irr::s32 rotation);
     virtual irr::s32 getRotation(void) const;
     virtual void setAlive(bool value);
+    virtual bool isAlive(void) const;
     virtual bool hasExplosed(void) const;
   private:
     static size_t NumberOfPlayer;
@@ -57,7 +59,7 @@ namespace bbman
     void dropBomb(Irrlicht &irr, Board *board);
     IBomb *createBomb(Irrlicht &irr);
     void updateEffets(irr::f32 delta);
-    void checkDirection(Board *board);
+    //void checkDirection(Board *board);
     void move(irr::f32 delta);
     void moveEast(irr::f32 delta);
     void moveWest(irr::f32 delta);

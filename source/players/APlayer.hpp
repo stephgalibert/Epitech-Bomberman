@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:28:29 2016 stephane galibert
-// Last update Mon May 30 09:06:34 2016 stephane galibert
+// Last update Tue May 31 12:56:41 2016 stephane galibert
 //
 
 #ifndef _APLAYER_HPP_
@@ -42,6 +42,7 @@ namespace bbman
     virtual irr::core::aabbox3df const getBoundingBox(void) const = 0;
     virtual bool isColliding(irr::core::aabbox3df const& box) const = 0;
     virtual void explode(Board *board) = 0;
+    virtual void playExplosion(void) = 0;
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale) = 0;
     virtual bool input(InputListener &inputListener) = 0;
     virtual size_t getSpeed(void) const = 0;
@@ -54,6 +55,7 @@ namespace bbman
     virtual void setRotation(irr::s32 rotation) = 0;
     virtual irr::s32 getRotation(void) const = 0;
     virtual void setAlive(bool value) = 0;
+    virtual bool isAlive(void) const = 0;
     virtual bool hasExplosed(void) const = 0;
     void setMood(int Mood);
     int getMood() const;

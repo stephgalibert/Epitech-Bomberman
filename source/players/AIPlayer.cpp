@@ -22,6 +22,8 @@ bbman::AIPlayer::AIPlayer(void)
   this->_mesh      = NULL;
   this->_isRunning = false;
   this->_speed     = INITIAL_SPEED;
+  this->_direction = Direction::DIR_NONE;
+  this->_action = Action::ACT_NONE;
 }
 
 size_t bbman::AIPlayer::getAPlayerID(void) const
@@ -67,20 +69,20 @@ void bbman::AIPlayer::update(bbman::Irrlicht& irr, irr::f32 delta)
   int retAI;
   (void)irr;
 
-  retAI = this->_binding.runAI(this->getID());
-  if (retAI == 1) {
-    this->_direction = Direction::DIR_NORTH;
-  }
-  else if (retAI == 2) {
-    this->_direction = Direction::DIR_SOUTH;
-  }
-  else if (retAI == 4) {
-    this->_direction = Direction::DIR_WEST;
-  }
-  else if (retAI == 8) {
-    this->_direction = Direction::DIR_EAST;
-  }
   if (this->_alive) {
+    retAI = this->_binding.runAI(this->getID());
+    if (retAI == 1) {
+      this->_direction = Direction::DIR_NORTH;
+    }
+    else if (retAI == 2) {
+      this->_direction = Direction::DIR_SOUTH;
+    }
+    else if (retAI == 4) {
+      this->_direction = Direction::DIR_WEST;
+    }
+    else if (retAI == 8) {
+      this->_direction = Direction::DIR_EAST;
+    }
     move(delta);
     updateEffets(delta);
   }
@@ -89,7 +91,7 @@ void bbman::AIPlayer::update(bbman::Irrlicht& irr, irr::f32 delta)
 void bbman::AIPlayer::play(bbman::Irrlicht& irr, bbman::Board *board)
 {
   if (this->_alive) {
-    checkDirection(board);
+    //checkDirection(board);
     if (this->_action == bbman::ACT_BOMB) {
       dropBomb(irr, board);
     }
@@ -156,10 +158,16 @@ void bbman::AIPlayer::explode(Board *board)
 {
   if (this->_alive) {
     this->_alive = false;
-    this->_mesh->remove();
-    this->_mesh = NULL;
+    //this->_mesh->remove();
+    //this->_mesh = NULL;
+    this->_mesh->setVisible(false);
     std::cerr << "ia" << getID() << "died" << std::endl;
   }
+}
+
+void bbman::AIPlayer::playExplosion(void)
+{
+
 }
 
 bool bbman::AIPlayer::isRunning(void) const
@@ -202,6 +210,11 @@ void bbman::AIPlayer::setAlive(bool v)
   if (!this->_alive && this->_mesh) {
     this->_mesh->setVisible(false);
   }
+}
+
+bool bbman::AIPlayer::isAlive(void) const
+{
+  return (this->_alive);
 }
 
 bool bbman::AIPlayer::hasExplosed(void) const
@@ -259,7 +272,7 @@ void bbman::AIPlayer::updateEffets(irr::f32 delta)
   }
 }
 
-void bbman::AIPlayer::checkDirection(bbman::Board *board)
+/*void bbman::AIPlayer::checkDirection(bbman::Board *board)
 {
   if (this->_alive) {
     if (!board->isInNode(getPosition())) {
@@ -282,7 +295,7 @@ void bbman::AIPlayer::checkDirection(bbman::Board *board)
       this->_direction = Direction::DIR_NONE;
     }
   }
-}
+  }*/
 
 void bbman::AIPlayer::move(irr::f32 delta)
 {

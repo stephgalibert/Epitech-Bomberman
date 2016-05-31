@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 21 16:44:05 2016 stephane galibert
-// Last update Sat May 21 16:49:53 2016 stephane galibert
+// Last update Tue May 31 11:50:24 2016 stephane galibert
 //
 
 #include "TrueAStar.hpp"
@@ -169,6 +169,7 @@ bbman::TrueAStar::Node& bbman::TrueAStar::getNode(irr::core::vector3d<irr::s32>c
       return it;
     }
   }
+  std::cerr << p.X << " " << p.Y << " " << p.Z << std::endl;
   throw std::runtime_error("Node not found");
 }
 

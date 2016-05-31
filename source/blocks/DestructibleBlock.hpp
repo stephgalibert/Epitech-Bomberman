@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:11:32 2016 stephane galibert
-// Last update Mon May 30 16:11:31 2016 stephane galibert
+// Last update Tue May 31 11:58:10 2016 stephane galibert
 //
 
 #ifndef _DESTRUCTIBLEBLOCK_HPP_
@@ -13,7 +13,8 @@
 
 # include <iostream>
 
-# include "ThreadPool.hpp"
+# include "ExplosionTask.hpp"
+# include "StaticTools.hpp"
 # include "IBlock.hpp"
 
 namespace bbman
@@ -32,13 +33,14 @@ namespace bbman
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
     virtual void explode(Board *board);
+    virtual void playExplosion(void);
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual bool hasExplosed(void) const;
     virtual ItemID getID(void) const;
   private:
-    // ExplosionTask *_task;
+    ExplosionTask *_task;
     irr::scene::ISceneNode *_node;
-    irr::scene::IParticleSystemSceneNode *_ps;
+    //irr::scene::IParticleSystemSceneNode *_ps;
     irr::core::vector3d<irr::s32> _posInMap;
     bool _explosed;
   };

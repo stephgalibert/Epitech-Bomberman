@@ -123,5 +123,9 @@ bbman::APlayer * bbman::Research::getAI(int numplayer)
       ia = it;
     }
   }
+  if (ia && !ia->isAlive()) {
+    ia = NULL;
+    std::cerr << "ai not alive" << std::endl;
+  }
   return ia;
 }

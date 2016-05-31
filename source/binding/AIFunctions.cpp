@@ -51,6 +51,9 @@ int getMood(int numplayer, lua_State *L)
   r.setL(L);
   luabridge::LuaRef table = luabridge::newTable(L);
   bbman::APlayer *ai = r.getAI(numplayer);
+  if (!ai) {
+    return (-1);
+  }
   return ai->getMood();
 }
 
@@ -61,7 +64,9 @@ void setMood(int numplayer, int mood, lua_State *L)
   r.setL(L);
   luabridge::LuaRef table = luabridge::newTable(L);
   bbman::APlayer *ai = r.getAI(numplayer);
-  ai->setMood(mood);
+  if (ai) {
+    ai->setMood(mood);
+  }
 }
 
 luabridge::LuaRef findPath(int numplayer, int type, lua_State *L)
@@ -78,6 +83,7 @@ luabridge::LuaRef findPath(int numplayer, int type, lua_State *L)
 
   int distmin;
   int ret;
+  bbman::APlayer *aiPlayer = r.getAI(numplayer);
 
   r.setL(L);
   if (!TrueA) {
@@ -89,28 +95,30 @@ luabridge::LuaRef findPath(int numplayer, int type, lua_State *L)
     NeighA->addBlockType(bbman::ItemID::II_BLOCK_BRKABLE);
   }
 
-  table["success"] = 1;
-  ia = r.getAIPos(numplayer);
-  if (type == BOX) {
-    near = r.getNearDBox(ia);
-    NeighA->compute(board->getMap(), ia, near);
-    table["size"]   = NeighA->getSize();
-    table["dir"]    = r.vecToTable(NeighA->getNextResult());
+  if (aiPlayer) {
+    table["success"] = 1;
+    ia = r.getAIPos(numplayer);
+    if (type == BOX) {
+      near = r.getNearDBox(ia);
+      NeighA->compute(board->getMap(), ia, near);
+      table["size"]   = NeighA->getSize();
+      table["dir"]    = r.vecToTable(NeighA->getNextResult());
+      table["target"] = r.vecToTable(near);
+    } else if (type == UNBREAKB) {
+      near = r.getNearBox(ia);
+      NeighA->compute(board->getMap(), ia, near);
+      table["size"]   = NeighA->getSize();
+      table["dir"]    = r.vecToTable(NeighA->getNextResult());
     table["target"] = r.vecToTable(near);
-  } else if (type == UNBREAKB) {
-    near = r.getNearBox(ia);
-    NeighA->compute(board->getMap(), ia, near);
-    table["size"]   = NeighA->getSize();
-    table["dir"]    = r.vecToTable(NeighA->getNextResult());
-    table["target"] = r.vecToTable(near);
-  } else if (type == PLAYER) {
-    near = r.getNearPlayer(ia);
-    TrueA->compute(board->getMap(), ia, near);
-    table["size"]   = TrueA->getSize();
-    table["dir"]    = r.vecToTable(TrueA->getNextResult());
-    table["target"] = r.vecToTable(near);
-  } else {
-    table["success"] = 0;
+    } else if (type == PLAYER) {
+      near = r.getNearPlayer(ia);
+      TrueA->compute(board->getMap(), ia, near);
+      table["size"]   = TrueA->getSize();
+      table["dir"]    = r.vecToTable(TrueA->getNextResult());
+      table["target"] = r.vecToTable(near);
+    } else {
+      table["success"] = 0;
+    }
   }
   return table;
 }

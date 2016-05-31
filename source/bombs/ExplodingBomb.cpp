@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Mon May 30 17:41:57 2016 stephane galibert
+// Last update Tue May 31 13:01:45 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -176,6 +176,11 @@ void bbman::ExplodingBomb::explode(Board *board)
 {
   (void)board;
   this->_delta = DELAY_TO_EXPLOSE;
+}
+
+void bbman::ExplodingBomb::playExplosion(void)
+{
+
 }
 
 irr::core::vector3d<irr::s32> const& bbman::ExplodingBomb::getPosInMap(irr::core::vector3df const& scale)

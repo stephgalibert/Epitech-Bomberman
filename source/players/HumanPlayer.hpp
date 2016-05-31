@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Mon May 30 09:08:18 2016 stephane galibert
+// Last update Tue May 31 12:57:13 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -39,19 +39,20 @@ namespace bbman
     virtual irr::core::aabbox3df const getBoundingBox(void) const;
     virtual bool isColliding(irr::core::aabbox3df const& box) const;
     virtual void explode(Board *board);
+    virtual void playExplosion(void);
     virtual bool input(InputListener &inputListener);
     virtual size_t getSpeed(void) const;
     virtual void setSpeed(size_t speed);
     virtual void addEffect(IEffect *effect);
     virtual size_t getPlayerNumber(void) const;
     virtual bool isRunning(void) const;
-    //virtual bool hasExplosed(void) const;
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual BombManager const& getBombManager(void) const;
     virtual std::list<IEffect *> const& getEffects(void) const;
     virtual void setRotation(irr::s32 rotation);
     virtual irr::s32 getRotation(void) const;
     virtual void setAlive(bool value);
+    virtual bool isAlive(void) const;
     virtual bool hasExplosed(void) const;
   private:
     static size_t NumberOfPlayer;

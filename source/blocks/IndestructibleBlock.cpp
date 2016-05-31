@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:23:18 2016 stephane galibert
-// Last update Mon May 30 08:57:51 2016 stephane galibert
+// Last update Tue May 31 11:58:07 2016 stephane galibert
 //
 
 #include "IndestructibleBlock.hpp"
@@ -82,6 +82,11 @@ bool bbman::IndestructibleBlock::isColliding(irr::core::aabbox3df const& box) co
 void bbman::IndestructibleBlock::explode(Board *board)
 {
   (void)board;
+}
+
+void bbman::IndestructibleBlock::playExplosion(void)
+{
+
 }
 
 irr::core::vector3d<irr::s32> const& bbman::IndestructibleBlock::getPosInMap(irr::core::vector3df const& scale)

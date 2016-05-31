@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:45 2016 stephane galibert
-// Last update Mon May 30 08:57:12 2016 stephane galibert
+// Last update Tue May 31 12:59:49 2016 stephane galibert
 //
 
 #include "SpeedUPPowerUP.hpp"
@@ -71,6 +71,11 @@ bool bbman::SpeedUPPowerUP::isColliding(irr::core::aabbox3df const& box) const
 }
 
 void bbman::SpeedUPPowerUP::explode(Board *board)
+{
+  (void)board;
+}
+
+void bbman::SpeedUPPowerUP::playExplosion(void)
 {
 
 }
