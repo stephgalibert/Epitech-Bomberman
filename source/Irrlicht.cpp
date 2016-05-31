@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:24:07 2016 stephane galibert
-// Last update Mon May 30 20:25:14 2016 stephane galibert
+// Last update Mon May 30 22:11:27 2016 stephane galibert
 //
 
 #include "Irrlicht.hpp"
@@ -83,6 +83,12 @@ void bbman::Irrlicht::drawGUI(void)
 void bbman::Irrlicht::endScene(void)
 {
   this->_irr.driver->endScene();
+}
+
+void bbman::Irrlicht::close(void)
+{
+  this->_irr.device->drop();
+  this->_irr.device = NULL;
 }
 
 irr::video::ITexture *bbman::Irrlicht::getTexture(irr::io::path const& path) const

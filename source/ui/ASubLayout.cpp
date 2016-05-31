@@ -11,6 +11,7 @@
 
 ASubLayout::ASubLayout(ui& ui, std::string name) : _ui(ui), _name(name), _nextScene(name) {
   this->_startGame = false;
+  this->_closed = false;
 }
 
 ASubLayout::~ASubLayout() {}
@@ -37,6 +38,7 @@ const std::string &ASubLayout::display()
   this->_ui.display();
   if (this->_nextScene != this->_ui.getScene()) {
     this->_ui.changeScene(this->_nextScene);
+    this->_nextScene = this->_name;
   }
   return this->_returnMsg;
 }
@@ -44,4 +46,14 @@ const std::string &ASubLayout::display()
 bool ASubLayout::isGameStarted(void) const
 {
   return this->_startGame;
+}
+
+bool ASubLayout::isClosed(void) const
+{
+  return this->_closed;
+}
+
+void ASubLayout::setStartGame(bool value)
+{
+  this->_startGame = value;
 }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:07:45 2016 stephane galibert
-// Last update Mon May 30 20:16:42 2016 stephane galibert
+// Last update Mon May 30 22:18:22 2016 stephane galibert
 //
 
 #include "InputListener.hpp"
@@ -18,6 +18,8 @@ bbman::InputListener::InputListener(void)
   this->_joystickStates.push_back(irr::SEvent::SJoystickEvent());
   this->_joystickStates.push_back(irr::SEvent::SJoystickEvent());
   this->_joystickStates.push_back(irr::SEvent::SJoystickEvent());
+  this->_leftButtonDown = false;
+  this->_currentEvent = 0;
 }
 
 bbman::InputListener::~InputListener(void)

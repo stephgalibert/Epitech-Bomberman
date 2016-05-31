@@ -12,7 +12,7 @@
 ui::ui(irr::IrrlichtDevice *device)
 {
   this->_device = device;
-
+  this->_driver = NULL;
   if (this->_device) {
     this->_driver = this->_device->getVideoDriver();
   }

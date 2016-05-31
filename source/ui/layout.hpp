@@ -25,6 +25,8 @@ public:
   const std::string & display();
   void  input(bbman::InputListener &listener);
   bool isGameStarted(void) const;
+  void backToMenu(void);
+  bool isClosed(void);
 private:
 
   void loadScene();

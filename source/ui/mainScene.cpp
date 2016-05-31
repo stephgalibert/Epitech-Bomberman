@@ -91,9 +91,13 @@ void mainScene::createAlveole(int x, int y, const std::string &name)
 
 void mainScene::loadScene()
 {
+  this->_ui.create<rect>("0backgroundColor")
+    .color(0, 22, 30)
+    .accros(1920, 1080);
+
   this->_ui.create<image>("Abackground")
-  .texture(this->_ui.getTexture("background"))
-  .alpha(15);
+    .texture(this->_ui.getTexture("background"))
+    .alpha(15);
 
   this->createAlveole(700, 400, "Play");
   this->createAlveole(480, 520, "Controls");
@@ -105,7 +109,7 @@ void mainScene::loadScene()
 
   this->_ui.create<image>("exit")
   .texture(this->_ui.getTexture("exit"))
-  .at(1750, 0);
+    .at(1810, 0); // !
 
   this->_ui["exit"].in("hover")
   .color(0, 250, 250)
@@ -119,8 +123,10 @@ void mainScene::manageEvent(bbman::InputListener &listener)
 {
   this->_mousePosition = listener.getPosition();
   if (listener.getState()){
-    if (this->_ui["exit"].collision(this->_mousePosition))
+    if (this->_ui["exit"].collision(this->_mousePosition)) {
       this->setReturnMsg("EXIT");
+      this->_closed = true;
+    }
 
     if (this->_ui["logoSettings"].collision(this->_mousePosition)) {
       this->_nextScene = "settings";

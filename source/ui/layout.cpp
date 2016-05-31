@@ -50,3 +50,17 @@ bool layout::isGameStarted(void) const
   }
   return false;
 }
+
+void layout::backToMenu(void)
+{
+  this->_scene.at("default")->setStartGame(false);
+  this->_ui->changeScene("default");
+}
+
+bool layout::isClosed(void)
+{
+  if (this->_scene.find(this->_currentScene) != this->_scene.cend()) {
+    return this->_scene.at(this->_currentScene)->isClosed();
+  }
+  return false;
+}

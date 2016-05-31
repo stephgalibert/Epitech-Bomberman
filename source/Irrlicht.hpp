@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May  3 03:29:01 2016 stephane galibert
-// Last update Mon May 30 19:01:53 2016 stephane galibert
+// Last update Mon May 30 22:12:26 2016 stephane galibert
 //
 
 #ifndef _IRRLICHT_HPP_
@@ -39,6 +39,7 @@ namespace bbman
     void drawScene(void);
     void drawGUI(void);
     void endScene(void);
+    void close(void);
     irr::video::ITexture *getTexture(irr::io::path const& path) const;
     irr::scene::IAnimatedMesh *getMesh(irr::io::path const& path) const;
     irr::IrrlichtDevice *getDevice(void) const;

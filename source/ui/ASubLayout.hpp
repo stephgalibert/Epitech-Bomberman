@@ -36,7 +36,8 @@ public:
   virtual void       manageEvent(bbman::InputListener &listener)   = 0;
   const std::string& display(void);
   bool isGameStarted(void) const;
-
+  bool isClosed(void) const;
+  void setStartGame(bool value);
 protected:
 
   ui& _ui;
@@ -45,6 +46,7 @@ protected:
   std::string _returnMsg;
   irr::core::position2d<irr::s32> _mousePosition;
   bool _startGame;
+  bool _closed;
 };
 
 #endif // ifndef ASUBLAYOUT_HPP_
