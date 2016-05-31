@@ -16,6 +16,7 @@ bbman::APlayer::APlayer(void)
 {
   this->_id = NumberOfPlayer;
   this->_score = 0;
+  this->_mood = 0;
   this->_username = "Player" + std::to_string(NumberOfPlayer);
   ++NumberOfPlayer;
 }
@@ -33,6 +34,16 @@ size_t bbman::APlayer::getID(void) const
 irr::s32 bbman::APlayer::getScore(void) const
 {
   return (this->_score);
+}
+
+int bbman::APlayer::getMood(void) const
+{
+  return (this->_mood);
+}
+
+void bbman::APlayer::setMood(int mood)
+{
+  this->_mood = mood;
 }
 
 void bbman::APlayer::setScore(irr::s32 score)

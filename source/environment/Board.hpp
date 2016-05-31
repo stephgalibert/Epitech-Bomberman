@@ -65,6 +65,8 @@ namespace bbman
     Map<Cell> const& getMap(void) const;
     Map<Cell> &getMap(void);
     std::vector<APlayer *> const& getPlayers(void) const;
+    std::vector<IBlock *> const& getBlocks(void) const;
+    std::list<IBlock *> const& getDBlocks(void) const;
     std::list<IBomb *> const& getBombs(void) const;
     PowerUPs const& getPowerUPs(void) const;
     PowerUPs &getPowerUPs(void);

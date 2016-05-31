@@ -26,6 +26,8 @@
 # include "Loader.hpp"
 # include "AIFunctions.hpp"
 # include "TimeOut.hpp"
+# include "AIPlayer.hpp"
+# include "Binding.hpp"
 
 namespace bbman
 {

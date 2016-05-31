@@ -19,19 +19,19 @@
 # include "ExplodingBomb.hpp"
 # include "InputListener.hpp"
 # include "Direction.hpp"
+# include "Binding.hpp"
 
 namespace bbman
 {
   class AIPlayer : public APlayer
   {
   public:
-    static AIPlayer *create(void);
+    AIPlayer(void);
     virtual ~AIPlayer(void);
     virtual size_t getAPlayerID(void) const;
     virtual void init(Irrlicht &irr);
     virtual void update(Irrlicht &irr, irr::f32 delta);
-    virtual void play(Irrlicht &irr, Board *board,
-          std::list<IBomb *> &bombs);
+    virtual void play(Irrlicht &irr, Board *board);
     virtual void addBomb(IBomb *bomb);
     virtual void setPosition(irr::core::vector3df const& pos);
     virtual irr::core::vector3df const& getPosition(void) const;
@@ -54,8 +54,7 @@ namespace bbman
   private:
     static size_t NumberOfPlayer;
   private:
-    AIPlayer(void);
-    void dropBomb(Irrlicht &irr, Board *board, std::list<IBomb *> &bombs);
+    void dropBomb(Irrlicht &irr, Board *board);
     IBomb *createBomb(Irrlicht &irr);
     void updateEffets(irr::f32 delta);
     void checkDirection(Board *board);
@@ -65,11 +64,7 @@ namespace bbman
     void moveNorth(irr::f32 delta);
     void moveSouth(irr::f32 delta);
     std::unordered_map<int, std::function<void(irr::f32 delta)> > _move;
-    void inputPlayer1(InputListener &inputListener);
-    void inputPlayer2(InputListener &inputListener);
     std::unordered_map<size_t, std::function<void(InputListener &)> > _inputs;
-    void initPlayer1(Irrlicht &irr);
-    void initPlayer2(Irrlicht &irr);
     std::unordered_map<size_t, std::function<void(Irrlicht &)> > _inits;
     irr::scene::IAnimatedMeshSceneNode *_mesh;
     std::list<IEffect *> _effects;
@@ -82,6 +77,7 @@ namespace bbman
     bool _isRunning;
     size_t _playerNum;
     bool _alive;
+    bbman::Binding _binding;
   };
 }
 

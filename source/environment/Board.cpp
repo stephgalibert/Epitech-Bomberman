@@ -225,6 +225,16 @@ std::vector<bbman::APlayer *>const& bbman::Board::getPlayers(void) const
   return this->_players;
 }
 
+std::vector<bbman::IBlock *>const& bbman::Board::getBlocks(void) const
+{
+  return this->_blocks;
+}
+
+std::list<bbman::IBlock *>const& bbman::Board::getDBlocks(void) const
+{
+  return this->_dblocks;
+}
+
 std::list<bbman::IBomb *>const& bbman::Board::getBombs(void) const
 {
   return this->_bombs;

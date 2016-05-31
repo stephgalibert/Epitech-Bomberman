@@ -43,9 +43,10 @@ bbman::AIPlayer::~AIPlayer(void)
 void bbman::AIPlayer::init(bbman::Irrlicht& irr)
 {
   try {
-    std::string txt = "./media/ninja.b3d";
+    std::string txt = "./asset/media/ninja.b3d";
     this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
 
+    this->_binding.init("../source/binding/script.lua");
     if (this->_mesh) {
       this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
       this->_mesh->setAnimationSpeed(0);
@@ -63,49 +64,54 @@ void bbman::AIPlayer::init(bbman::Irrlicht& irr)
 
 void bbman::AIPlayer::update(bbman::Irrlicht& irr, irr::f32 delta)
 {
+  int retAI;
   (void)irr;
 
+  retAI = this->_binding.runAI(this->getID());
+  if (retAI == 1) {
+    this->_direction = Direction::DIR_NORTH;
+  }
+  else if (retAI == 2) {
+    this->_direction = Direction::DIR_SOUTH;
+  }
+  else if (retAI == 4) {
+    this->_direction = Direction::DIR_WEST;
+  }
+  else if (retAI == 8) {
+    this->_direction = Direction::DIR_EAST;
+  }
   if (this->_alive) {
     move(delta);
     updateEffets(delta);
   }
 }
 
-void bbman::AIPlayer::play(bbman::Irrlicht& irr, bbman::Board *board,
-                           std::list<bbman::IBomb *>& bombs)
+void bbman::AIPlayer::play(bbman::Irrlicht& irr, bbman::Board *board)
 {
   if (this->_alive) {
+    checkDirection(board);
     if (this->_action == bbman::ACT_BOMB) {
-      dropBomb(irr, board, bombs);
+      dropBomb(irr, board);
     }
   }
 }
 
-void bbman::AIPlayer::dropBomb(bbman::Irrlicht& irr, bbman::Board *board,
-                               std::list<IBomb *>& bombs)
+
+
+void bbman::AIPlayer::dropBomb(bbman::Irrlicht& irr, bbman::Board *board)
 {
-  IBomb *newBomb           = createBomb(irr);
-  irr::core::vector3df pos = getPosition();
+  IBomb *newBomb = createBomb(irr);
+  if (newBomb) {
+    irr::core::vector3df pos = getPosition();
 
-  pos.X = board->getScale().X / 2 + std::floor(pos.X)
-          - (int)(std::floor(pos.X)) % (int)board->getScale().X;
-  pos.Z = board->getScale().Z / 2 + std::floor(pos.Z)
-          - (int)(std::floor(pos.Z)) % (int)board->getScale().Z;
-  newBomb->setPosition(pos);
-
-  if (std::find_if(std::begin(bombs), std::end(bombs), [&newBomb](IBomb * bomb) {
-                     if (newBomb->getPosition() == bomb->getPosition()) {
-                       return true;
-                     }
-                     return false;
-                   }) == std::end(bombs)
-      && !board->isOutside(pos)) {
-    board->addBomb(newBomb);
-    (void)bombs;
-
-    // bombs.push_back(newBomb);
-  } else {
-    delete (newBomb);
+    pos.X = board->getScale().X / 2 + std::floor(pos.X)
+      - (int)(std::floor(pos.X)) % (int)board->getScale().X;
+    pos.Z = board->getScale().Z / 2 + std::floor(pos.Z)
+      - (int)(std::floor(pos.Z)) % (int)board->getScale().Z;
+    newBomb->setPosition(pos);
+    if (!board->addBomb(newBomb)) {
+      addBomb(newBomb);
+    }
   }
 }
 
@@ -249,6 +255,31 @@ void bbman::AIPlayer::updateEffets(irr::f32 delta)
     } else {
       (*it)->update(delta);
       ++it;
+    }
+  }
+}
+
+void bbman::AIPlayer::checkDirection(bbman::Board *board)
+{
+  if (this->_alive) {
+    if (!board->isInNode(getPosition())) {
+      if ((this->_prevDirection == Direction::DIR_EAST
+	   || this->_prevDirection == Direction::DIR_WEST)
+	  &&
+	  (this->_direction == Direction::DIR_NORTH
+	 || this->_direction == Direction::DIR_SOUTH)) {
+	this->_direction = Direction::DIR_NONE;
+      }
+      else if ((this->_prevDirection == Direction::DIR_NORTH
+		|| this->_prevDirection == Direction::DIR_SOUTH)
+	       &&
+	       (this->_direction == Direction::DIR_EAST
+		|| this->_direction == Direction::DIR_WEST)) {
+	this->_direction = Direction::DIR_NONE;
+      }
+    }
+    else if (!board->isValidMove(getPosition(), this->_direction)) {
+      this->_direction = Direction::DIR_NONE;
     }
   }
 }

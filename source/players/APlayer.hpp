@@ -55,6 +55,8 @@ namespace bbman
     virtual irr::s32 getRotation(void) const = 0;
     virtual void setAlive(bool value) = 0;
     virtual bool hasExplosed(void) const = 0;
+    void setMood(int Mood);
+    int getMood() const;
     std::string const& getUsername(void) const;
     void setUsername(std::string const& username);
     size_t getID(void) const;
@@ -63,6 +65,7 @@ namespace bbman
   private:
     static size_t NumberOfPlayer;
     size_t _id;
+    int _mood;
   protected:
     std::string _username;
     irr::s32 _score;

@@ -32,8 +32,9 @@ namespace bbman
   public:
     Binding(void);
     ~Binding(void);
+    void sendPosToLua(irr::core::vector3d<irr::s32> pos);
     void init(const std::string &scriptName);
-    int runAI(void);
+    int runAI(size_t id);
   private:
     lua_State* luaState;
   };

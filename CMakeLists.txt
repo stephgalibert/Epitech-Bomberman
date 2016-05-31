@@ -32,6 +32,7 @@ configure_file (
 include_directories(
   ${PROJECT_SOURCE_DIR}
   ${PROJECT_SOURCE_DIR}/source
+  ${PROJECT_SOURCE_DIR}/source/astar
   ${PROJECT_SOURCE_DIR}/source/binding
   ${PROJECT_SOURCE_DIR}/source/blocks
   ${PROJECT_SOURCE_DIR}/source/bombs

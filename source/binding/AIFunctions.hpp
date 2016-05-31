@@ -11,6 +11,11 @@
 
 #include "Board.hpp"
 #include "Binding.hpp"
+#include "Research.hpp"
+
+# define BOX 1
+# define UNBREAKB 2
+# define PLAYER 3
 
 /*
 **
@@ -26,6 +31,9 @@ bbman::Board      *boardBinding(bbman::Board *board);
 **
 */
 
-luabridge::LuaRef findPath(lua_State *L);
+luabridge::LuaRef findPath(int player ,int flag, lua_State *L);
+luabridge::LuaRef getPos(int numplayer, lua_State *L);
+int getMood(int numplayer, lua_State *L);
+void setMood(int numplayer, int mood, lua_State *L);
 
 #endif /* !_AIFUNCTIONS_HPP_ */
