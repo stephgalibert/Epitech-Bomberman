@@ -1,16 +1,32 @@
 //
-// ExplosionTask.cpp for indie in /home/galibe_s/rendu/bomberman/source/thread
+// Explosion.cpp for indie in /home/galibe_s/rendu/bomberman/source/thread
 //
 // Made by stephane galibert
 // Login   <galibe_s@epitech.net>
 //
-// Started on  Mon May 30 16:29:33 2016 stephane galibert
-// Last update Tue May 31 14:28:05 2016 stephane galibert
+// Started on  Tue May 31 14:21:03 2016 stephane galibert
+// Last update Tue May 31 14:50:10 2016 stephane galibert
 //
 
-/*#include "ExplosionTask.hpp"
+#include "Explosion.hpp"
 
-bbman::ExplosionTask::ExplosionTask(Irrlicht &irr)
+bbman::Explosion::Explosion(void)
+{
+  this->_ps = NULL;
+  this->_delta = 0;
+  this->_hasFinished = false;
+  this->_played = false;
+}
+
+bbman::Explosion::~Explosion(void)
+{
+  if (this->_ps) {
+    this->_ps->remove();
+    this->_ps = NULL;
+  }
+}
+
+void bbman::Explosion::init(Irrlicht &irr)
 {
   this->_ps = irr.getSmgr()->addParticleSystemSceneNode(false);
   this->_ps->setMaterialTexture(0, irr.getTexture("./asset/media/fire.bmp"));
@@ -18,10 +34,20 @@ bbman::ExplosionTask::ExplosionTask(Irrlicht &irr)
   this->_ps->setMaterialFlag(irr::video::EMF_LIGHTING, false);
   this->_ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
   this->_ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
-  this->_isRunning = false;
-  this->_isFinished = true;
+}
 
-  this->_timer.setTimer(irr.getTimer());
+void bbman::Explosion::update(irr::f32 delta)
+{
+  if (this->_played) {
+    this->_delta += delta;
+    this->_hasFinished = (this->_delta > 0.1f);
+  }
+}
+
+void bbman::Explosion::play(irr::core::vector3df const& pos)
+{
+  this->_played = true;
+  this->_ps->setPosition(pos);
   irr::scene::IParticleEmitter* emitter =
     this->_ps->createSphereEmitter(irr::core::vector3df(0.0f,0.0f,0.0f),
 				   0.5f,
@@ -32,10 +58,8 @@ bbman::ExplosionTask::ExplosionTask(Irrlicht &irr)
 				   150,150,360,
 				   irr::core::dimension2df(1.f,1.f),
 				   irr::core::dimension2df(10.f,10.f));
-
   this->_ps->setEmitter(emitter);
   emitter->drop();
-
   irr::scene::IParticleAffector* gravityAffector =
     this->_ps->createGravityAffector(irr::core::vector3df(0.0f,-0.03f, 0.0f), 300);
   this->_ps->addAffector(gravityAffector);
@@ -44,52 +68,9 @@ bbman::ExplosionTask::ExplosionTask(Irrlicht &irr)
     this->_ps->createFadeOutParticleAffector(irr::video::SColor(0, 0, 0, 0), 100);
   this->_ps->addAffector(fadeOutAffector);
   fadeOutAffector->drop();
-
-  this->_ps->setVisible(false);
 }
 
-bbman::ExplosionTask::~ExplosionTask(void)
+bool bbman::Explosion::hasFinished(void) const
 {
-  this->_ps->remove();
-  this->_ps = NULL;
+  return (this->_hasFinished);
 }
-
-void bbman::ExplosionTask::start(void)
-{
-  this->_isRunning = true;
-  this->_isFinished = false;
-  this->_timer.start();
-  while (this->_isRunning && this->_timer.getElapsedTime() < 100.f);
-}
-
-void bbman::ExplosionTask::stop(void)
-{
-  this->_isRunning = false;
-}
-
-void bbman::ExplosionTask::setFinished(bool v)
-{
-  this->_isFinished = v;
-}
-
-void bbman::ExplosionTask::setVisible(bool v)
-{
-  this->_ps->setVisible(v);
-}
-
-bool bbman::ExplosionTask::isFinished(void) const
-{
-  return (this->_isFinished);
-}
-
-bool bbman::ExplosionTask::isRunning(void) const
-{
-  return (this->_isRunning);
-}
-
-void bbman::ExplosionTask::setPosition(irr::core::vector3df const& pos)
-{
-  this->_pos = pos;
-  this->_ps->setPosition(this->_pos);
-}
-*/

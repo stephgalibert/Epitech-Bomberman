@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Tue May 31 12:32:27 2016 stephane galibert
+// Last update Tue May 31 14:45:50 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"
@@ -15,7 +15,8 @@ bbman::DestructibleBlock::DestructibleBlock(void)
 {
   this->_node = NULL;
   this->_explosed = true;
-  this->_task = NULL;
+  this->_explosion = NULL;
+  //this->_task = NULL;
 }
 
 bbman::DestructibleBlock::~DestructibleBlock(void)
@@ -23,10 +24,13 @@ bbman::DestructibleBlock::~DestructibleBlock(void)
   if (this->_node) {
     this->_node->remove();
   }
-  if (this->_task && this->_task->isRunning()) {
-    this->_task->stop();
-    while (!this->_task->isFinished());
-    delete (this->_task);
+  /*if (//this->_task && //this->_task->isRunning()) {
+    //this->_task->stop();
+    while (!//this->_task->isFinished());
+    delete (//this->_task);
+    }*/
+  if (this->_explosion) {
+    delete (this->_explosion);
   }
 }
 
@@ -34,7 +38,9 @@ void bbman::DestructibleBlock::init(Irrlicht &irr)
 {
   this->_node = irr.getSmgr()->addCubeSceneNode();
   if (this->_node) {
-    this->_task = new ExplosionTask(irr);
+    //this->_task = new ExplosionTask(irr);
+    this->_explosion = new Explosion;
+    this->_explosion->init(irr);
     this->_node->setMaterialTexture(0, irr.getTexture("./asset/Texture/Texture_cube3.png"));
     this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
@@ -54,10 +60,16 @@ void bbman::DestructibleBlock::setMaterialFlag(irr::video::E_MATERIAL_FLAG flag,
 void bbman::DestructibleBlock::update(Irrlicht &irr, irr::f32 delta)
 {
   (void)irr;
-  (void)delta;
-  if (this->_task && this->_task->isRunning() && this->_task->isFinished()) {
-    delete (this->_task);
-    this->_task = NULL;
+  /*if (//this->_task && //this->_task->isRunning() && //this->_task->isFinished()) {
+    delete (//this->_task);
+    //this->_task = NULL;
+    }*/
+  if (this->_explosion) {
+    this->_explosion->update(delta);
+    if (this->_explosion->hasFinished()) {
+      delete (this->_explosion);
+      this->_explosion = NULL;
+    }
   }
 }
 
@@ -90,9 +102,13 @@ bool bbman::DestructibleBlock::isColliding(irr::core::aabbox3df const& box) cons
 
 void bbman::DestructibleBlock::playExplosion(void)
 {
-  if (this->_task && this->_task->isFinished()) {
-    this->_task->setPosition(getPosition());
-    tools::StaticTools::ThreadPool->addTask(this->_task);
+  //if (this->_task && this->_task->isFinished()) {
+    //this->_task->setPosition(getPosition());
+    //this->_task->setVisible(true);
+    //tools::StaticTools::ThreadPool->addTask(//this->_task);
+  //}
+  if (this->_explosion) {
+    this->_explosion->play(getPosition());
   }
 }
 

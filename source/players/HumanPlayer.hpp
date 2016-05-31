@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Tue May 31 12:57:13 2016 stephane galibert
+// Last update Tue May 31 14:53:01 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -18,9 +18,11 @@
 # include <algorithm>
 
 # include "APlayer.hpp"
+//# include "ExplosionTask.hpp"
 # include "ExplodingBomb.hpp"
 # include "InputListener.hpp"
 # include "Direction.hpp"
+# include "Explosion.hpp"
 
 namespace bbman
 {
@@ -77,6 +79,8 @@ namespace bbman
     irr::scene::IAnimatedMeshSceneNode *_mesh;
     std::list<IEffect *> _effects;
     irr::core::vector3d<irr::s32> _posInMap;
+    //ExplosionTask *_explosionTask;
+    Explosion *_explosion;
     BombManager _bombManager;
     t_direction _direction;
     t_direction _prevDirection;

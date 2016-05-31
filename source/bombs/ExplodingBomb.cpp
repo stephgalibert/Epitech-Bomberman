@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Tue May 31 13:01:45 2016 stephane galibert
+// Last update Tue May 31 14:48:57 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -21,6 +21,8 @@ bbman::ExplodingBomb::ExplodingBomb(bbman::APlayer *owner)
   this->_explosing = false;
   this->_explosed = false;
   this->_cpt = 0;
+  //this->_explosionTask = NULL;
+  this->_explosion = NULL;
 }
 
 bbman::ExplodingBomb::~ExplodingBomb(void)
@@ -28,6 +30,14 @@ bbman::ExplodingBomb::~ExplodingBomb(void)
   if (this->_mesh) {
     this->_mesh->remove();
   }
+  if (this->_explosion) {
+    delete (this->_explosion);
+  }
+  /*if (this->_explosionTask && this->_explosionTask->isRunning()) {
+    this->_explosionTask->stop();
+    while (!this->_explosionTask->isFinished());
+    delete (this->_explosionTask);
+    }*/
 }
 
 void bbman::ExplodingBomb::init(bbman::Irrlicht &irr)
@@ -35,6 +45,10 @@ void bbman::ExplodingBomb::init(bbman::Irrlicht &irr)
   try {
     initMesh(irr);
     initSound();
+    this->_explosion = new Explosion;
+    this->_explosion->init(irr);
+    //this->_explosionTask = new ExplosionTask(irr);
+    //this->_explosion.init(irr);
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
   }
@@ -61,6 +75,18 @@ void bbman::ExplodingBomb::update(bbman::Irrlicht &irr, irr::f32 delta)
       this->_delta += delta;
     }
     ++this->_cpt;
+  }
+  /*if (this->_explosionTask && this->_explosionTask->isRunning()
+      && this->_explosionTask->isFinished()) {
+    delete (this->_explosionTask);
+    this->_explosionTask = NULL;
+    }*/
+  if (this->_explosion) {
+    this->_explosion->update(delta);
+    if (this->_explosion->hasFinished()) {
+      delete (this->_explosion);
+      this->_explosion = NULL;
+    }
   }
 }
 
@@ -180,7 +206,14 @@ void bbman::ExplodingBomb::explode(Board *board)
 
 void bbman::ExplodingBomb::playExplosion(void)
 {
-
+  /*if (this->_explosionTask && this->_explosionTask->isFinished()) {
+    this->_explosionTask->setPosition(getPosition());
+    this->_explosionTask->setVisible(true);
+    tools::StaticTools::ThreadPool->addTask(this->_explosionTask);
+    }*/
+  if (this->_explosion) {
+    this->_explosion->play(getPosition());
+  }
 }
 
 irr::core::vector3d<irr::s32> const& bbman::ExplodingBomb::getPosInMap(irr::core::vector3df const& scale)

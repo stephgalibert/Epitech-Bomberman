@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Tue May 31 12:57:52 2016 stephane galibert
+// Last update Tue May 31 14:52:40 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -37,6 +37,7 @@ bbman::HumanPlayer::HumanPlayer(void)
   this->_playerNum = bbman::HumanPlayer::NumberOfPlayer;
   ++bbman::HumanPlayer::NumberOfPlayer;
   this->_prevDirection = Direction::DIR_NONE;
+  this->_explosion = NULL;
 }
 
 bbman::HumanPlayer *bbman::HumanPlayer::create(void)
@@ -59,6 +60,14 @@ bbman::HumanPlayer::~HumanPlayer(void)
   for (auto &it : this->_effects) {
     delete (it);
   }
+  /*if (this->_explosionTask && this->_explosionTask->isRunning()) {
+    this->_explosionTask->stop();
+    while (!this->_explosionTask->isFinished());
+    delete (this->_explosionTask);
+    }*/
+  if (this->_explosion) {
+    delete (this->_explosion);
+  }
   --bbman::HumanPlayer::NumberOfPlayer;
 }
 
@@ -68,6 +77,10 @@ void bbman::HumanPlayer::init(bbman::Irrlicht &irr)
     if (this->_inits.find(this->_playerNum) != std::end(this->_inits)) {
       this->_inits[this->_playerNum](irr);
     }
+    //this->_explosionTask = new ExplosionTask(irr);
+    //this->_explosion.init(irr);
+    this->_explosion = new Explosion;
+    this->_explosion->init(irr);
     addBomb(new ExplodingBomb(this));
     this->_alive = true;
   } catch (std::runtime_error const& e) {
@@ -81,6 +94,18 @@ void bbman::HumanPlayer::update(bbman::Irrlicht &irr, irr::f32 delta)
   if (this->_alive) {
     move(delta);
     updateEffets(delta);
+  }
+  /*if (this->_explosionTask && this->_explosionTask->isRunning()
+      && this->_explosionTask->isFinished()) {
+    delete (this->_explosionTask);
+    this->_explosionTask = NULL;
+    }*/
+  if (this->_explosion) {
+    this->_explosion->update(delta);
+    if (this->_explosion->hasFinished()) {
+      delete (this->_explosion);
+      this->_explosion = NULL;
+    }
   }
 }
 
@@ -187,7 +212,14 @@ void bbman::HumanPlayer::explode(Board *board)
 
 void bbman::HumanPlayer::playExplosion(void)
 {
-
+  /*if (this->_explosionTask && this->_explosionTask->isFinished()) {
+    this->_explosionTask->setPosition(getPosition());
+    this->_explosionTask->setVisible(true);
+    tools::StaticTools::ThreadPool->addTask(this->_explosionTask);
+    }*/
+  if (this->_explosion) {
+    this->_explosion->play(getPosition());
+  }
 }
 
 bool bbman::HumanPlayer::isRunning(void) const

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:11:32 2016 stephane galibert
-// Last update Tue May 31 11:58:10 2016 stephane galibert
+// Last update Tue May 31 14:38:05 2016 stephane galibert
 //
 
 #ifndef _DESTRUCTIBLEBLOCK_HPP_
@@ -13,8 +13,9 @@
 
 # include <iostream>
 
-# include "ExplosionTask.hpp"
-# include "StaticTools.hpp"
+//# include "ExplosionTask.hpp"
+//# include "StaticTools.hpp"
+# include "Explosion.hpp"
 # include "IBlock.hpp"
 
 namespace bbman
@@ -38,9 +39,10 @@ namespace bbman
     virtual bool hasExplosed(void) const;
     virtual ItemID getID(void) const;
   private:
-    ExplosionTask *_task;
+    //ExplosionTask *_task;
     irr::scene::ISceneNode *_node;
     //irr::scene::IParticleSystemSceneNode *_ps;
+    Explosion *_explosion;
     irr::core::vector3d<irr::s32> _posInMap;
     bool _explosed;
   };

@@ -20,6 +20,8 @@ ENDIF (START_GTEST)
 
 # Enable c++11 with CMake
 add_compile_options(-std=c++11)
+#add_compile_options(-Wall)
+#add_compile_options(-Werror)
 add_compile_options(-g)
 
 # configure a header file to pass some of the CMake settings to the source code
