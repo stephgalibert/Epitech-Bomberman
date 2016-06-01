@@ -5,42 +5,60 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:45 2016 stephane galibert
-// Last update Tue May 31 20:26:46 2016 stephane galibert
+// Last update Wed Jun  1 20:05:56 2016 stephane galibert
 //
 
 #include "SpeedUPPowerUP.hpp"
 
 bbman::SpeedUPPowerUP::SpeedUPPowerUP(void)
 {
-  this->_node = NULL;
+  //this->_node = NULL;
+  this->_mesh = NULL;
   this->_delta = 0;
 }
 
 bbman::SpeedUPPowerUP::~SpeedUPPowerUP(void)
 {
-  if (this->_node) {
-    this->_node->remove();
+  if (this->_mesh) {
+    this->_mesh->remove();
   }
 }
 
 void bbman::SpeedUPPowerUP::init(Irrlicht &irr, std::string const& color)
 {
   irr::scene::ISceneNodeAnimator *anms = NULL;
+  std::string obj = "./asset/powerup/powerUpSpeed.obj";
+  std::string txt = "./asset/Texture_pillier_green.png";
+  std::string txt1 = "./asset/Texture_pillier_Selfillum_green.png";
+  std::string txt2 = "./asset/Texture_pillier_alpha_green.png";
+  //std::string txt3 = "./asset/bomb2_normals.png";
 
   (void)color;
-  this->_node = irr.getSmgr()->addCubeSceneNode();
-  if (this->_node) {
-    this->_node->setMaterialTexture(0, irr.getTexture("./asset/media/t351sml.jpg"));
-    this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-    this->_node->setScale(irr::core::vector3df(0.3f, 0.3f, 0.3f));
+  //this->_mesh = irr.getSmgr()->addCubeSceneNode();
+  this->_mesh = irr.getSmgr()->addMeshSceneNode(irr.getMesh(obj.c_str()));
+  if (this->_mesh) {
+
+    this->_mesh->setMaterialTexture(0, irr.getTexture(txt1.data()));
+    this->_mesh->setMaterialTexture(1, irr.getTexture(txt2.data())); // 3
+    /*this->_mesh->setMaterialTexture(2, irr.getTexture(txt1.data()));
+      this->_mesh->setMaterialTexture(3, irr.getTexture(txt2.data()));*/
+
+
+    this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, true);
+    this->_mesh->setScale(irr::core::vector3df(0.5f, 0.5f, 0.5f));
+    this->_mesh->setRotation(irr::core::vector3df(-40, 0, 0));
+
+    this->_mesh->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
+    //this->_mesh->setMaterialType(irr::video::EMT_NORMAL_MAP_TRANSPARENT_ADD_COLOR);
+
     anms = irr.getSmgr()->createRotationAnimator(irr::core::vector3df(0, 1, 0));
     if (anms) {
-      this->_node->addAnimator(anms);
+      this->_mesh->addAnimator(anms);
       anms->drop();
     }
   }
   else {
-    throw (std::runtime_error("cannot add IndestructibleBlock"));
+    std::cerr << "cannot create speeduppowerup" << std::endl;
   }
 }
 
@@ -52,18 +70,18 @@ void bbman::SpeedUPPowerUP::update(Irrlicht &irr, irr::f32 delta)
 
 void bbman::SpeedUPPowerUP::setPosition(irr::core::vector3df const& pos)
 {
-  this->_node->setPosition(pos);
-  this->_node->updateAbsolutePosition();
+  this->_mesh->setPosition(pos);
+  this->_mesh->updateAbsolutePosition();
 }
 
 irr::core::vector3df const& bbman::SpeedUPPowerUP::getPosition(void) const
 {
-  return (this->_node->getPosition());
+  return (this->_mesh->getPosition());
 }
 
 irr::core::aabbox3df const bbman::SpeedUPPowerUP::getBoundingBox(void) const
 {
-  return (this->_node->getTransformedBoundingBox());
+  return (this->_mesh->getTransformedBoundingBox());
 }
 
 bool bbman::SpeedUPPowerUP::isColliding(irr::core::aabbox3df const& box) const

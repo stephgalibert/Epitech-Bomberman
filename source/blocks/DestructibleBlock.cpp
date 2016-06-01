@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Wed Jun  1 15:27:04 2016 stephane galibert
+// Last update Wed Jun  1 21:42:17 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"
@@ -35,8 +35,8 @@ void bbman::DestructibleBlock::init(Irrlicht &irr, std::string const& color)
   if (this->_node) {
     this->_explosion = new Explosion;
     this->_explosion->init(irr, "Orange");
-    this->_node->setMaterialTexture(0, irr.getTexture("./asset/Texture/Texture_cube3.png"));
-    this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+    this->_node->setMaterialTexture(0, irr.getTexture("./asset/cubeGreen.png"));
+    this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, true);
     //this->_node->getMaterial(0).FogEnable = false;
     //this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
     this->_node->setScale(irr::core::vector3df(0.8f, 1.f, 0.8));
@@ -113,7 +113,7 @@ void bbman::DestructibleBlock::explode(Board *board)
 
     PowerUPs &powerups = board->getPowerUPs();
     Irrlicht *irr = board->getIrrlicht();
-    powerups.add(*irr, board, getPosition());
+    powerups.add(*irr, getPosition());
   }
 }
 

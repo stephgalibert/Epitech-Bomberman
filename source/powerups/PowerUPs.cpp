@@ -5,11 +5,10 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 17:37:21 2016 stephane galibert
-// Last update Mon May 30 17:45:03 2016 stephane galibert
+// Last update Wed Jun  1 21:27:01 2016 stephane galibert
 //
 
 #include "PowerUPs.hpp"
-#include "Board.hpp"
 
 bbman::PowerUPs::PowerUPs(void)
 {
@@ -37,10 +36,9 @@ bbman::PowerUPs::~PowerUPs(void)
   }
 }*/
 
-void bbman::PowerUPs::add(bbman::Irrlicht &irr, bbman::Board *board,
-			  irr::core::vector3df const& pos)
+void bbman::PowerUPs::add(bbman::Irrlicht &irr, irr::core::vector3df const& pos)
 {
-  generate(irr, board, pos);
+  generate(irr, pos);
 }
 
 void bbman::PowerUPs::checkCollision(APlayer *player)
@@ -58,21 +56,23 @@ void bbman::PowerUPs::checkCollision(APlayer *player)
   }
 }
 
-void bbman::PowerUPs::generate(bbman::Irrlicht &irr, bbman::Board *board,
-			       irr::core::vector3df const& pos)
+void bbman::PowerUPs::generate(bbman::Irrlicht &irr, irr::core::vector3df const& pos)
 {
   size_t random;
 
   random = this->_generator(0, 100);
   if (random > 90) {
-    generateSpeedUp(irr, board, pos);
+    generateAddPower(irr, pos);
   }
   else if (random > 80) {
-    generateAddExplosingBomb(irr, board, pos);
+    generateSpeedUp(irr, pos);
+  }
+  else if (random > 70) {
+    generateAddExplosingBomb(irr, pos);
   }
 }
 
-void bbman::PowerUPs::generateSpeedUp(bbman::Irrlicht &irr, bbman::Board *board,
+void bbman::PowerUPs::generateSpeedUp(bbman::Irrlicht &irr,
 				      irr::core::vector3df const& pos)
 {
   SpeedUPPowerUP *speedUP = new SpeedUPPowerUP;
@@ -82,10 +82,20 @@ void bbman::PowerUPs::generateSpeedUp(bbman::Irrlicht &irr, bbman::Board *board,
   this->_powerUPs.push_back(speedUP);
 }
 
-void bbman::PowerUPs::generateAddExplosingBomb(bbman::Irrlicht &irr, Board *board,
+void bbman::PowerUPs::generateAddExplosingBomb(bbman::Irrlicht &irr,
 					       irr::core::vector3df const& pos)
 {
   AddExplosingBombPowerUP *add = new AddExplosingBombPowerUP;
+
+  add->init(irr);
+  add->setPosition(pos);
+  this->_powerUPs.push_back(add);
+}
+
+void bbman::PowerUPs::generateAddPower(bbman::Irrlicht &irr,
+				       irr::core::vector3df const& pos)
+{
+  AddPowerPowerUP *add = new AddPowerPowerUP;
 
   add->init(irr);
   add->setPosition(pos);

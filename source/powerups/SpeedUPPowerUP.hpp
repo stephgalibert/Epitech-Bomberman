@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:04 2016 stephane galibert
-// Last update Tue May 31 20:25:17 2016 stephane galibert
+// Last update Wed Jun  1 16:46:18 2016 stephane galibert
 //
 
 #ifndef _SPEEDUPPOWERUP_HPP_
@@ -37,7 +37,8 @@ namespace bbman
     virtual std::string const& getColor(void) const;
     virtual void setColor(std::string const& color);
   private:
-    irr::scene::ISceneNode *_node;
+    //irr::scene::ISceneNode *_mesh;
+    irr::scene::IMeshSceneNode *_mesh;
     irr::f32 _delta;
     irr::core::vector3d<irr::s32> _posInMap;
     std::string _color;

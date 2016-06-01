@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Wed Jun  1 15:29:22 2016 stephane galibert
+// Last update Wed Jun  1 21:19:53 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -315,15 +315,17 @@ void bbman::HumanPlayer::move(irr::f32 delta)
 {
   if (this->_direction == Direction::DIR_NONE) {
     this->_mesh->setCurrentFrame(5);
-    //this->_mesh->setCurrentFrame(0);
     this->_mesh->setAnimationSpeed(0);
+    /*this->_mesh->setFrameLoop(1, 51);
+      this->_mesh->setAnimationSpeed(15);*/
+
     this->_isRunning = false;
   }
   else {
     if (!this->_isRunning) {
       this->_mesh->setAnimationSpeed(15);
       this->_mesh->setFrameLoop(0, 13);
-      //this->_mesh->setFrameLoop(1, 45);
+      //this->_mesh->setFrameLoop(60, 105);
       this->_isRunning = true;
     }
     this->_move.at(this->_direction)(delta);
@@ -433,12 +435,12 @@ void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &listener)
 void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
 {
   std::string txt = "./asset/media/ninja.b3d";
-  //std::string txt = "./asset/Bomberman_iddle.fbx";
+  //std::string txt = "./asset/perso.fbx";
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setAnimationSpeed(0);
-    this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
+    this->_mesh->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
     this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
   }
   else {
@@ -470,6 +472,7 @@ bbman::IBomb *bbman::HumanPlayer::createBomb(bbman::Irrlicht &irr)
 {
   IBomb *bomb = this->_bombManager.getSelectedBomb();
   if (bomb) {
+    bomb->addRange(this->_power);
     bomb->init(irr, this->_color);
   }
   return (bomb);

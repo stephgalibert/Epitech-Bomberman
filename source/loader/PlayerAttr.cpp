@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:06:55 2016 stephane galibert
-// Last update Wed Jun  1 10:48:10 2016 stephane galibert
+// Last update Wed Jun  1 21:20:59 2016 stephane galibert
 //
 
 #include "PlayerAttr.hpp"
@@ -145,6 +145,11 @@ void bbman::PlayerAttr::addEffect(APlayer **player, Irrlicht &irr,
       }
       else if (tokens[0] == "2") {
 	effect = new AddExplosingBombEffect(*player);
+	effect->setDelta(std::atof(tokens[1].data()));
+	(*player)->addEffect(effect);
+      }
+      else if (tokens[0] == "3") {
+	effect = new AddPowerEffect(*player);
 	effect->setDelta(std::atof(tokens[1].data()));
 	(*player)->addEffect(effect);
       }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Wed Jun  1 13:34:00 2016 stephane galibert
+// Last update Wed Jun  1 21:05:55 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -430,24 +430,44 @@ void bbman::Board::initTerrain(Irrlicht& irr)
 {
   irr::scene::IMesh *mesh;
 
-  this->_texture.setTexture(0, irr.getTexture("./asset/Texture_ground.png"));
-  this->_texture.setTexture(1, irr.getTexture("./asset/Texture_ground_illum.png"));
-  //this->_light = irr.getSmgr()->addLightSceneNode(0, irr::core::vector3df(10, 10, -5), irr::video::SColorf(1.f,1.f,1.f), 10.0f, 1 );
+  //this->_texture.setTexture(0, irr.getTexture("
+  //this->_texture.setTexture(1, irr.getTexture("./asset/Texture_ground_illum.png"));
+
   //irr.getSmgr()->setAmbientLight(irr::video::SColor(255, 255, 255, 0));
 
-  this->_texture.MaterialType = irr::video::EMT_LIGHTMAP_ADD;
-  this->_texture.setFlag(irr::video::EMF_LIGHTING, true);
+  /*this->_texture.MaterialType = irr::video::EMT_LIGHTMAP_ADD;
+    this->_texture.setFlag(irr::video::EMF_LIGHTING, true);*/
   mesh = irr.getSmgr()->getGeometryCreator()->
     createHillPlaneMesh(irr::core::dimension2d<irr::f32>(10, 10),
 			irr::core::dimension2d<irr::u32>(this->_map.w,
 							 this->_map.h),
-			&this->_texture, 0,
+			NULL, 0,
 			irr::core::dimension2d<irr::f32>(0, 0),
 			irr::core::dimension2d<irr::f32>(this->_map.w,
 							 this->_map.h));
   this->_backgroundMesh = irr.getSmgr()->addMeshSceneNode(mesh);
-  this->_backgroundMesh->setPosition(irr::core::vector3df(this->_map.w * this->_scale.X / 2, 0,
-                                                          this->_map.h * this->_scale.Z / 2));
+
+  this->_backgroundMesh->setMaterialTexture(0, irr.getTexture("./asset/Texture_ground.png"));
+  this->_backgroundMesh->setMaterialTexture(1, irr.getTexture("./asset/Texture_ground_illum.png"));
+  this->_backgroundMesh->setMaterialType(irr::video::EMT_LIGHTMAP_ADD);
+
+
+  irr::core::vector3df pos;
+  pos.X = this->_map.w * this->_scale.X / 2;
+  pos.Z = this->_map.h * this->_scale.Z / 2;
+  this->_backgroundMesh->setPosition(pos);
+  pos.Y += 120;
+  this->_light = irr.getSmgr()->addLightSceneNode(0, pos);// irr::video::SColorf(1.f,1.f,1.f), 10.0f, 1 );
+  this->_light->setLightType(irr::video::ELT_DIRECTIONAL);
+
+  irr::scene::ISceneNode* pNode = irr.getSmgr()->addEmptySceneNode();
+  this->_light->setPosition(irr::core::vector3df(0,0,1)); //default is (1,1,0) for directional lights
+  this->_light->setParent(pNode);
+  pNode->setRotation(irr::core::vector3df(90, 0, 0));
+
+  /*irr::video::SLight &l = this->_light->getLightData();
+  l.Direction.X = pos.X;
+  l.Direction.Z = pos.Z;*/
 }
 
 void bbman::Board::initMap(void)

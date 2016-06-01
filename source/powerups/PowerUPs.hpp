@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:02:47 2016 stephane galibert
-// Last update Mon May 30 17:46:49 2016 stephane galibert
+// Last update Wed Jun  1 16:37:51 2016 stephane galibert
 //
 
 #ifndef _POWERUPS_HPP_
@@ -19,13 +19,12 @@
 # include "IPowerUP.hpp"
 # include "SpeedUPPowerUP.hpp"
 # include "AddExplosingBombPowerUP.hpp"
+# include "AddPowerPowerUP.hpp"
 # include "Irrlicht.hpp"
 # include "Generator.hpp"
 
 namespace bbman
 {
-  class Board;
-
   class PowerUPs
   {
   public:
@@ -33,14 +32,14 @@ namespace bbman
   public:
     PowerUPs(void);
     ~PowerUPs(void);
-    void add(Irrlicht &irr, Board *board, irr::core::vector3df const& pos);
+    void add(Irrlicht &irr, irr::core::vector3df const& pos);
     void checkCollision(APlayer *player);
   private:
-    void generate(Irrlicht &irr, Board *board, irr::core::vector3df const& pos);
-    void generateSpeedUp(Irrlicht &irr, Board *board,
-			 irr::core::vector3df const& pos);
-    void generateAddExplosingBomb(Irrlicht &irr, Board *board,
+    void generate(Irrlicht &irr, irr::core::vector3df const& pos);
+    void generateSpeedUp(Irrlicht &irr, irr::core::vector3df const& pos);
+    void generateAddExplosingBomb(Irrlicht &irr,
 				  irr::core::vector3df const& pos);
+    void generateAddPower(Irrlicht &irr, irr::core::vector3df const& pos);
     std::list<IPowerUP *> _powerUPs;
     tools::Generator _generator;
     irr::f32 _delta;

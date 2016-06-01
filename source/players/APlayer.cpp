@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:09:16 2016 stephane galibert
-// Last update Mon May 30 09:08:04 2016 stephane galibert
+// Last update Wed Jun  1 21:11:44 2016 stephane galibert
 //
 
 #include "APlayer.hpp"
@@ -18,6 +18,7 @@ bbman::APlayer::APlayer(void)
   this->_score = 0;
   this->_mood = 0;
   this->_username = "Player" + std::to_string(NumberOfPlayer);
+  this->_power = 0;
   ++NumberOfPlayer;
 }
 
@@ -51,16 +52,6 @@ void bbman::APlayer::setScore(irr::s32 score)
   this->_score = score;
 }
 
-/*bool bbman::APlayer::hasExplosed(void) const
-{
-  return (!this->_alive);
-}
-
-void bbman::APlayer::setAlive(bool value)
-{
-  this->_alive = value;
-  }*/
-
 std::string const& bbman::APlayer::getUsername(void) const
 {
   return (this->_username);
@@ -69,4 +60,14 @@ std::string const& bbman::APlayer::getUsername(void) const
 void bbman::APlayer::setUsername(std::string const& username)
 {
   this->_username = username;
+}
+
+size_t bbman::APlayer::getPower(void) const
+{
+  return (this->_power);
+}
+
+void bbman::APlayer::setPower(size_t power)
+{
+  this->_power = power;
 }

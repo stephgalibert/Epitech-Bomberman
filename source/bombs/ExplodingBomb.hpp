@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:08:37 2016 stephane galibert
-// Last update Wed Jun  1 15:32:51 2016 stephane galibert
+// Last update Wed Jun  1 21:01:54 2016 stephane galibert
 //
 
 #ifndef _EXPLODINGBOMB_HPP_
@@ -55,6 +55,7 @@ namespace bbman
     virtual size_t getOwnerID(void) const;
     virtual size_t getBombID(void) const;
     virtual size_t getRange(void) const;
+    virtual void addRange(size_t n);
     virtual std::string const& getColor(void) const;
     virtual void setColor(std::string const& color);
     void setOwner(APlayer *owner);

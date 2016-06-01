@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 20:29:11 2016 stephane galibert
-// Last update Sun May 29 09:28:46 2016 stephane galibert
+// Last update Wed Jun  1 16:21:35 2016 stephane galibert
 //
 
 #ifndef _BOMBMANAGER_HPP_
@@ -29,9 +29,7 @@ namespace bbman
     void operator--(void);
     std::map<size_t, std::pair<size_t, IBomb *> > const& getBombs(void) const;
     std::map<size_t, std::pair<size_t, IBomb *> >::iterator const& getCurrent(void) const;
-    // add
   private:
-    // <nb, bomb>
     std::map<size_t, std::pair<size_t, IBomb *> > _bombs;
     std::map<size_t, std::pair<size_t, IBomb *> >::iterator _selectedBomb;
   };

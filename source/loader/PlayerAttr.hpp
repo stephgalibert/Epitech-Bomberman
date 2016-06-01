@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:03:57 2016 stephane galibert
-// Last update Wed Jun  1 10:37:52 2016 stephane galibert
+// Last update Wed Jun  1 21:21:15 2016 stephane galibert
 //
 
 #ifndef _PLAYERATTR_HPP_
@@ -25,6 +25,7 @@
 # include "AIPlayer.hpp"
 # include "SpeedUPEffect.hpp"
 # include "AddExplosingBombEffect.hpp"
+# include "AddPowerEffect.hpp"
 
 namespace bbman
 {

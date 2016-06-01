@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:28:29 2016 stephane galibert
-// Last update Wed Jun  1 10:29:11 2016 stephane galibert
+// Last update Wed Jun  1 21:19:13 2016 stephane galibert
 //
 
 #ifndef _APLAYER_HPP_
@@ -66,6 +66,8 @@ namespace bbman
     size_t getID(void) const;
     irr::s32 getScore(void) const;
     void setScore(irr::s32 score);
+    size_t getPower(void) const;
+    void setPower(size_t power);
   private:
     static size_t NumberOfPlayer;
     size_t _id;
@@ -73,6 +75,7 @@ namespace bbman
   protected:
     std::string _username;
     irr::s32 _score;
+    size_t _power;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, APlayer const& player)

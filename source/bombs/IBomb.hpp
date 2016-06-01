@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 15:15:50 2016 stephane galibert
-// Last update Wed Jun  1 10:27:16 2016 stephane galibert
+// Last update Wed Jun  1 21:01:52 2016 stephane galibert
 //
 
 #ifndef _IBOMB_HPP_
@@ -45,6 +45,7 @@ namespace bbman
     virtual size_t getOwnerID(void) const = 0;
     virtual size_t getBombID(void) const = 0;
     virtual size_t getRange(void) const = 0;
+    virtual void addRange(size_t n) = 0;
     virtual std::string const& getColor(void) const = 0;
     virtual void setColor(std::string const& color) = 0;
   };

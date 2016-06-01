@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Tue May 31 20:10:32 2016 stephane galibert
+// Last update Wed Jun  1 20:58:08 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_

@@ -1,28 +1,26 @@
 //
-// AddExplosingBombPowerUP.hpp for indie in /home/galibe_s/rendu/bomberman/source/powerups
+// AddPowerPowerUP.hpp for indie in /home/galibe_s/rendu/bomberman/source/powerups
 //
 // Made by stephane galibert
 // Login   <galibe_s@epitech.net>
 //
-// Started on  Sun May 29 10:10:18 2016 stephane galibert
-// Last update Wed Jun  1 19:42:50 2016 stephane galibert
+// Started on  Wed Jun  1 16:26:55 2016 stephane galibert
+// Last update Wed Jun  1 21:16:34 2016 stephane galibert
 //
 
-#ifndef _ADDEXPLOSINGBOMBPOWERUP_HPP_
-# define _ADDEXPLOSINGBOMBPOWERUP_HPP_
-
-# include <iostream>
+#ifndef _ADDPOWERPOWERUP_HPP_
+# define _ADDPOWERPOWERUP_HPP_
 
 # include "IPowerUP.hpp"
-# include "AddExplosingBombEffect.hpp"
+# include "AddPowerEffect.hpp"
 
 namespace bbman
 {
-  class AddExplosingBombPowerUP : public IPowerUP
+  class AddPowerPowerUP : public IPowerUP
   {
   public:
-    AddExplosingBombPowerUP(void);
-    virtual ~AddExplosingBombPowerUP(void);
+    AddPowerPowerUP(void);
+    virtual ~AddPowerPowerUP(void);
     virtual void init(Irrlicht &irr, std::string const& color = "");
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void setPosition(irr::core::vector3df const& pos);
@@ -45,4 +43,4 @@ namespace bbman
   };
 }
 
-#endif /* !_ADDEXPLOSINGBOMBPOWERUP_HPP_ */
+#endif /* !_ADDPOWERPOWERUP_HPP_ */

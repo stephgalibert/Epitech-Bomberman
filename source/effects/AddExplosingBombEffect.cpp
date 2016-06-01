@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May 29 10:13:38 2016 stephane galibert
-// Last update Sun May 29 11:13:49 2016 stephane galibert
+// Last update Wed Jun  1 16:44:34 2016 stephane galibert
 //
 
 #include "AddExplosingBombEffect.hpp"
