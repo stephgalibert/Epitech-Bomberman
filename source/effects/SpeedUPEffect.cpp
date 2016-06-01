@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 21:14:34 2016 stephane galibert
-// Last update Sun May 29 11:14:14 2016 stephane galibert
+// Last update Wed Jun  1 15:38:49 2016 stephane galibert
 //
 
 #include "SpeedUPEffect.hpp"
@@ -45,7 +45,7 @@ void bbman::SpeedUPEffect::enable(void)
     this->_enabled = true;
     size_t speed = this->_target->getSpeed();
     if (speed == bbman::APlayer::INITIAL_SPEED) {
-      this->_target->setSpeed(bbman::APlayer::INITIAL_SPEED * 1.5f);
+      this->_target->setSpeed(bbman::APlayer::INITIAL_SPEED * 1.2f);
     }
   }
 }

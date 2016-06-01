@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Tue May 31 11:14:17 2016 stephane galibert
+// Last update Wed Jun  1 08:58:48 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -49,11 +49,11 @@ void bbman::Game::init(Irrlicht &irr, std::string const& saves)
       this->_board->addPlayer(ai1);
 
       HumanPlayer *p1 = bbman::HumanPlayer::create();
-      p1->init(irr);
+      p1->init(irr, "Blue");
       p1->setPosition(this->_board->getSpawnPosition(0));
       this->_board->addPlayer(p1);
       HumanPlayer *p2 = bbman::HumanPlayer::create();
-      p2->init(irr);
+      p2->init(irr, "Orange");
       p2->setPosition(this->_board->getSpawnPosition(1));
       this->_board->addPlayer(p2);
       // END todel

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:55:19 2016 stephane galibert
-// Last update Tue May 31 11:58:11 2016 stephane galibert
+// Last update Tue May 31 20:13:06 2016 stephane galibert
 //
 
 #ifndef _IBLOCK_HPP_
@@ -20,7 +20,7 @@ namespace bbman
   {
   public:
     virtual ~IBlock(void) {}
-    virtual void init(Irrlicht &irr) = 0;
+    virtual void init(Irrlicht &irr, std::string const& color = "") = 0;
     virtual void update(Irrlicht &irr, irr::f32 delta) = 0;
     virtual void setMaterialFlag(irr::video::E_MATERIAL_FLAG flag, bool value) = 0;
     virtual irr::core::vector3df const& getPosition(void) const = 0;
@@ -33,6 +33,8 @@ namespace bbman
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale) = 0;
     virtual bool hasExplosed(void) const = 0;
     virtual ItemID getID(void) const = 0;
+    virtual std::string const& getColor(void) const = 0;
+    virtual void setColor(std::string const& color) = 0;
   };
 }
 

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May 29 10:10:18 2016 stephane galibert
-// Last update Tue May 31 12:58:59 2016 stephane galibert
+// Last update Tue May 31 20:25:24 2016 stephane galibert
 //
 
 #ifndef _ADDEXPLOSINGBOMBPOWERUP_HPP_
@@ -23,7 +23,7 @@ namespace bbman
   public:
     AddExplosingBombPowerUP(void);
     virtual ~AddExplosingBombPowerUP(void);
-    virtual void init(Irrlicht &irr);
+    virtual void init(Irrlicht &irr, std::string const& color = "");
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void setPosition(irr::core::vector3df const& pos);
     virtual irr::core::vector3df const& getPosition(void) const;
@@ -34,10 +34,13 @@ namespace bbman
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual void affectPlayer(APlayer *player);
     virtual bool hasExplosed(void) const;
+    virtual std::string const& getColor(void) const;
+    virtual void setColor(std::string const& color);
   private:
     irr::scene::ISceneNode *_node;
     irr::f32 _delta;
     irr::core::vector3d<irr::s32> _posInMap;
+    std::string _color;
   };
 }
 

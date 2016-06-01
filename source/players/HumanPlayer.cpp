@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Tue May 31 14:52:40 2016 stephane galibert
+// Last update Wed Jun  1 15:29:22 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -60,28 +60,26 @@ bbman::HumanPlayer::~HumanPlayer(void)
   for (auto &it : this->_effects) {
     delete (it);
   }
-  /*if (this->_explosionTask && this->_explosionTask->isRunning()) {
-    this->_explosionTask->stop();
-    while (!this->_explosionTask->isFinished());
-    delete (this->_explosionTask);
-    }*/
   if (this->_explosion) {
     delete (this->_explosion);
   }
   --bbman::HumanPlayer::NumberOfPlayer;
 }
 
-void bbman::HumanPlayer::init(bbman::Irrlicht &irr)
+void bbman::HumanPlayer::init(bbman::Irrlicht &irr, std::string const& color)
 {
+  IBomb *bomb = NULL;
+
   try {
     if (this->_inits.find(this->_playerNum) != std::end(this->_inits)) {
       this->_inits[this->_playerNum](irr);
     }
-    //this->_explosionTask = new ExplosionTask(irr);
-    //this->_explosion.init(irr);
+    this->_color = color;
     this->_explosion = new Explosion;
-    this->_explosion->init(irr);
-    addBomb(new ExplodingBomb(this));
+    this->_explosion->init(irr, color);
+    bomb = new ExplodingBomb(this);
+    bomb->setColor(color);
+    addBomb(bomb);
     this->_alive = true;
   } catch (std::runtime_error const& e) {
     throw (e);
@@ -95,11 +93,6 @@ void bbman::HumanPlayer::update(bbman::Irrlicht &irr, irr::f32 delta)
     move(delta);
     updateEffets(delta);
   }
-  /*if (this->_explosionTask && this->_explosionTask->isRunning()
-      && this->_explosionTask->isFinished()) {
-    delete (this->_explosionTask);
-    this->_explosionTask = NULL;
-    }*/
   if (this->_explosion) {
     this->_explosion->update(delta);
     if (this->_explosion->hasFinished()) {
@@ -150,10 +143,8 @@ void bbman::HumanPlayer::dropBomb(bbman::Irrlicht &irr, bbman::Board *board)
   if (newBomb) {
     irr::core::vector3df pos = getPosition();
 
-    pos.X = board->getScale().X / 2 + std::floor(pos.X)
-      - (int)(std::floor(pos.X)) % (int)board->getScale().X;
-    pos.Z = board->getScale().Z / 2 + std::floor(pos.Z)
-      - (int)(std::floor(pos.Z)) % (int)board->getScale().Z;
+    pos.X = board->getScale().X / 2 + std::floor(pos.X) - (int)(std::floor(pos.X)) % (int)board->getScale().X;
+    pos.Z = board->getScale().Z / 2 + std::floor(pos.Z) - (int)(std::floor(pos.Z)) % (int)board->getScale().Z;
     newBomb->setPosition(pos);
     if (!board->addBomb(newBomb)) {
       addBomb(newBomb);
@@ -203,8 +194,6 @@ void bbman::HumanPlayer::explode(Board *board)
   (void)board;
   if (this->_alive) {
     this->_alive = false;
-    /*this->_mesh->remove();
-      this->_mesh = NULL;*/
     this->_mesh->setVisible(false);
     std::cerr << "player " + std::to_string(this->_playerNum) + " died" << std::endl;
   }
@@ -212,11 +201,6 @@ void bbman::HumanPlayer::explode(Board *board)
 
 void bbman::HumanPlayer::playExplosion(void)
 {
-  /*if (this->_explosionTask && this->_explosionTask->isFinished()) {
-    this->_explosionTask->setPosition(getPosition());
-    this->_explosionTask->setVisible(true);
-    tools::StaticTools::ThreadPool->addTask(this->_explosionTask);
-    }*/
   if (this->_explosion) {
     this->_explosion->play(getPosition());
   }
@@ -269,6 +253,16 @@ void bbman::HumanPlayer::setAlive(bool v)
   }
 }
 
+std::string const& bbman::HumanPlayer::getColor(void) const
+{
+  return (this->_color);
+}
+
+void bbman::HumanPlayer::setColor(std::string const& color)
+{
+  this->_color = color;
+}
+
 bool bbman::HumanPlayer::isAlive(void) const
 {
   return (this->_alive);
@@ -297,20 +291,8 @@ void bbman::HumanPlayer::setSpeed(size_t speed)
 void bbman::HumanPlayer::addEffect(IEffect *effect)
 {
   if (this->_alive) {
-    /*if (std::find_if(std::begin(this->_effects), std::end(this->_effects),
-		     [&effect](IEffect *buff) {
-		       if (effect->getEffectID() == buff->getEffectID())
-			 buff->restart();
-		       return (true);
-		       return (false);
-		   }) == std::end(this->_effects)) {
-		   effect->enable();*/
     effect->enable();
     this->_effects.push_back(effect);
-      /*}
-    else {
-      delete (effect);
-      }*/
   }
 }
 
@@ -333,6 +315,7 @@ void bbman::HumanPlayer::move(irr::f32 delta)
 {
   if (this->_direction == Direction::DIR_NONE) {
     this->_mesh->setCurrentFrame(5);
+    //this->_mesh->setCurrentFrame(0);
     this->_mesh->setAnimationSpeed(0);
     this->_isRunning = false;
   }
@@ -340,6 +323,7 @@ void bbman::HumanPlayer::move(irr::f32 delta)
     if (!this->_isRunning) {
       this->_mesh->setAnimationSpeed(15);
       this->_mesh->setFrameLoop(0, 13);
+      //this->_mesh->setFrameLoop(1, 45);
       this->_isRunning = true;
     }
     this->_move.at(this->_direction)(delta);
@@ -449,6 +433,7 @@ void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &listener)
 void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
 {
   std::string txt = "./asset/media/ninja.b3d";
+  //std::string txt = "./asset/Bomberman_iddle.fbx";
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -485,7 +470,7 @@ bbman::IBomb *bbman::HumanPlayer::createBomb(bbman::Irrlicht &irr)
 {
   IBomb *bomb = this->_bombManager.getSelectedBomb();
   if (bomb) {
-    bomb->init(irr);
+    bomb->init(irr, this->_color);
   }
   return (bomb);
 }

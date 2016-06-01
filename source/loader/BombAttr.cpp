@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May 26 11:32:16 2016 stephane galibert
-// Last update Thu May 26 12:25:50 2016 stephane galibert
+// Last update Wed Jun  1 10:43:42 2016 stephane galibert
 //
 
 #include "BombAttr.hpp"
@@ -24,6 +24,7 @@ bbman::BombAttr::BombAttr(void)
   this->_attrs["owner"] =
     std::bind(&bbman::BombAttr::setOwner, this, std::placeholders::_1,
 	      std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+
 }
 
 bbman::BombAttr::~BombAttr(void)
@@ -44,9 +45,16 @@ void bbman::BombAttr::setBombID(IBomb **bomb, std::vector<APlayer *> &player,
 				Irrlicht &irr, std::string const& v)
 {
   (void)player;
-  if (v == "1") {
-    *bomb = new ExplodingBomb(NULL);
-    (*bomb)->init(irr);
+  std::vector<std::string> tokens;
+  std::istringstream iss(v);
+  std::copy(std::istream_iterator<std::string>(iss),
+	    std::istream_iterator<std::string>(),
+	    std::back_inserter(tokens));
+  if (tokens.size() > 0) {
+    if (tokens[0] == "1") {
+      *bomb = new ExplodingBomb(NULL);
+      (*bomb)->init(irr, (tokens.size() > 1) ? tokens[1] : "");
+    }
   }
 }
 

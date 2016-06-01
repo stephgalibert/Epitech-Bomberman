@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 15:15:50 2016 stephane galibert
-// Last update Tue May 31 13:01:06 2016 stephane galibert
+// Last update Wed Jun  1 10:27:16 2016 stephane galibert
 //
 
 #ifndef _IBOMB_HPP_
@@ -23,7 +23,7 @@ namespace bbman
   {
   public:
     virtual ~IBomb(void) {}
-    virtual void init(Irrlicht &irr) = 0;
+    virtual void init(Irrlicht &irr, std::string const& color = "") = 0;
     virtual void update(Irrlicht &irr, irr::f32 delta) = 0;
     virtual bool isInExplosion(IEntity *entity, irr::core::vector3df const& scale) = 0;
     virtual bool isInDeflagration(IEntity *entity, irr::core::vector3df const& scale) = 0;
@@ -45,6 +45,8 @@ namespace bbman
     virtual size_t getOwnerID(void) const = 0;
     virtual size_t getBombID(void) const = 0;
     virtual size_t getRange(void) const = 0;
+    virtual std::string const& getColor(void) const = 0;
+    virtual void setColor(std::string const& color) = 0;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, bbman::IBomb const& bomb)
@@ -57,8 +59,9 @@ namespace bbman
     std::string owner = std::to_string(bomb.getOwnerID());
     std::string id = std::to_string(bomb.getBombID());
 
-    flux << "BID:" << id << ";timer:" << timer << ";pos:" << position
-	 << ";owner:" << owner << ";" << std::endl;
+    flux << "BID:" << id << " " << bomb.getColor() << ";timer:"
+	 << timer << ";pos:" << position << ";owner:" << owner
+	 << ";color:" << bomb.getColor() << ";" << std::endl;
     return (flux);
   }
 

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 14:22:45 2016 stephane galibert
-// Last update Mon May 30 07:04:24 2016 stephane galibert
+// Last update Wed Jun  1 10:56:49 2016 stephane galibert
 //
 
 #include "Loader.hpp"

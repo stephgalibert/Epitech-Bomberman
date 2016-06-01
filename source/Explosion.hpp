@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 31 14:19:18 2016 stephane galibert
-// Last update Tue May 31 14:42:36 2016 stephane galibert
+// Last update Wed Jun  1 09:19:50 2016 stephane galibert
 //
 
 #ifndef _EXPLOSION_HPP_
@@ -22,7 +22,7 @@ namespace bbman
   public:
     Explosion(void);
     ~Explosion(void);
-    void init(Irrlicht &irr);
+    void init(Irrlicht &irr, std::string const& color);
     void update(irr::f32 delta);
     void play(irr::core::vector3df const& pos);
     bool hasFinished(void) const;
@@ -31,6 +31,7 @@ namespace bbman
     irr::f32 _delta;
     bool _hasFinished;
     bool _played;
+    std::string _color;
   };
 }
 

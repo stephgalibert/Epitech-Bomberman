@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:45 2016 stephane galibert
-// Last update Tue May 31 12:59:49 2016 stephane galibert
+// Last update Tue May 31 20:26:46 2016 stephane galibert
 //
 
 #include "SpeedUPPowerUP.hpp"
@@ -23,10 +23,11 @@ bbman::SpeedUPPowerUP::~SpeedUPPowerUP(void)
   }
 }
 
-void bbman::SpeedUPPowerUP::init(Irrlicht &irr)
+void bbman::SpeedUPPowerUP::init(Irrlicht &irr, std::string const& color)
 {
   irr::scene::ISceneNodeAnimator *anms = NULL;
 
+  (void)color;
   this->_node = irr.getSmgr()->addCubeSceneNode();
   if (this->_node) {
     this->_node->setMaterialTexture(0, irr.getTexture("./asset/media/t351sml.jpg"));
@@ -95,4 +96,14 @@ void bbman::SpeedUPPowerUP::affectPlayer(APlayer *player)
 bool bbman::SpeedUPPowerUP::hasExplosed(void) const
 {
   return (true);
+}
+
+std::string const& bbman::SpeedUPPowerUP::getColor(void) const
+{
+  return (this->_color);
+}
+
+void bbman::SpeedUPPowerUP::setColor(std::string const& color)
+{
+  this->_color = color;
 }

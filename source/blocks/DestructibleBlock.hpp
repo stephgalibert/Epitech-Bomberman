@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:11:32 2016 stephane galibert
-// Last update Tue May 31 14:38:05 2016 stephane galibert
+// Last update Tue May 31 20:12:30 2016 stephane galibert
 //
 
 #ifndef _DESTRUCTIBLEBLOCK_HPP_
@@ -13,8 +13,6 @@
 
 # include <iostream>
 
-//# include "ExplosionTask.hpp"
-//# include "StaticTools.hpp"
 # include "Explosion.hpp"
 # include "IBlock.hpp"
 
@@ -25,7 +23,7 @@ namespace bbman
   public:
     DestructibleBlock(void);
     virtual ~DestructibleBlock(void);
-    virtual void init(Irrlicht &irr);
+    virtual void init(Irrlicht &irr, std::string const& color = "");
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void setMaterialFlag(irr::video::E_MATERIAL_FLAG flag, bool value);
     virtual void addAnimation(irr::scene::ISceneNodeAnimator *anim);
@@ -38,13 +36,14 @@ namespace bbman
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual bool hasExplosed(void) const;
     virtual ItemID getID(void) const;
+    virtual std::string const& getColor(void) const;
+    virtual void setColor(std::string const& color);
   private:
-    //ExplosionTask *_task;
     irr::scene::ISceneNode *_node;
-    //irr::scene::IParticleSystemSceneNode *_ps;
     Explosion *_explosion;
     irr::core::vector3d<irr::s32> _posInMap;
     bool _explosed;
+    std::string _color;
   };
 }
 

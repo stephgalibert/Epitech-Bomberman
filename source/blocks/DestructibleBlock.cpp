@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Tue May 31 14:45:50 2016 stephane galibert
+// Last update Wed Jun  1 15:27:04 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"
@@ -16,7 +16,6 @@ bbman::DestructibleBlock::DestructibleBlock(void)
   this->_node = NULL;
   this->_explosed = true;
   this->_explosion = NULL;
-  //this->_task = NULL;
 }
 
 bbman::DestructibleBlock::~DestructibleBlock(void)
@@ -24,26 +23,23 @@ bbman::DestructibleBlock::~DestructibleBlock(void)
   if (this->_node) {
     this->_node->remove();
   }
-  /*if (//this->_task && //this->_task->isRunning()) {
-    //this->_task->stop();
-    while (!//this->_task->isFinished());
-    delete (//this->_task);
-    }*/
   if (this->_explosion) {
     delete (this->_explosion);
   }
 }
 
-void bbman::DestructibleBlock::init(Irrlicht &irr)
+void bbman::DestructibleBlock::init(Irrlicht &irr, std::string const& color)
 {
+  this->_color = color;
   this->_node = irr.getSmgr()->addCubeSceneNode();
   if (this->_node) {
-    //this->_task = new ExplosionTask(irr);
     this->_explosion = new Explosion;
-    this->_explosion->init(irr);
+    this->_explosion->init(irr, "Orange");
     this->_node->setMaterialTexture(0, irr.getTexture("./asset/Texture/Texture_cube3.png"));
     this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-    this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
+    //this->_node->getMaterial(0).FogEnable = false;
+    //this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
+    this->_node->setScale(irr::core::vector3df(0.8f, 1.f, 0.8));
     this->_explosed = false;
   }
   else {
@@ -60,10 +56,6 @@ void bbman::DestructibleBlock::setMaterialFlag(irr::video::E_MATERIAL_FLAG flag,
 void bbman::DestructibleBlock::update(Irrlicht &irr, irr::f32 delta)
 {
   (void)irr;
-  /*if (//this->_task && //this->_task->isRunning() && //this->_task->isFinished()) {
-    delete (//this->_task);
-    //this->_task = NULL;
-    }*/
   if (this->_explosion) {
     this->_explosion->update(delta);
     if (this->_explosion->hasFinished()) {
@@ -102,11 +94,6 @@ bool bbman::DestructibleBlock::isColliding(irr::core::aabbox3df const& box) cons
 
 void bbman::DestructibleBlock::playExplosion(void)
 {
-  //if (this->_task && this->_task->isFinished()) {
-    //this->_task->setPosition(getPosition());
-    //this->_task->setVisible(true);
-    //tools::StaticTools::ThreadPool->addTask(//this->_task);
-  //}
   if (this->_explosion) {
     this->_explosion->play(getPosition());
   }
@@ -145,4 +132,14 @@ bool bbman::DestructibleBlock::hasExplosed(void) const
 bbman::ItemID bbman::DestructibleBlock::getID(void) const
 {
   return (ItemID::II_BLOCK_BRKABLE);
+}
+
+void bbman::DestructibleBlock::setColor(std::string const& color)
+{
+  this->_color = color;
+}
+
+std::string const& bbman::DestructibleBlock::getColor(void) const
+{
+  return (this->_color);
 }

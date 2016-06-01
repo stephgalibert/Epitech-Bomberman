@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Tue May 31 13:14:11 2016 stephane galibert
+// Last update Wed Jun  1 13:34:00 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -65,7 +65,9 @@ void bbman::Board::init(bbman::Irrlicht& irr, bbman::Loader const& loader)
   for (auto& it : loader.getPlayers()) {
     addPlayer(it);
   }
-  this->_bombs = loader.getBombs();
+  for (auto &it : loader.getBombs()) {
+    addBomb(it);
+  }
   this->_irr = &irr;
   initNode();
   initTerrain(irr);
@@ -271,8 +273,6 @@ bbman::IBlock *bbman::Board::createInbrkable(Irrlicht &irr, size_t x, size_t y)
     ext = block->getBoundingBox().getExtent();
     pos.Y = ext.Y / 2;
     block->setPosition(pos);
-    //this->_blocks.push_back(block);
-    //this->_map.at(x, y).id = ItemID::II_BLOCK_INBRKABLE;
 
   } catch (std::runtime_error const& e) {
     if (block) {
@@ -320,28 +320,6 @@ bool bbman::Board::isColliding(irr::core::aabbox3df const& box) const
   }
   return false;
 }
-
-/*void bbman::Board::deleteBlock(IEntity *entity)
-{
-  irr::core::vector3d<irr::s32>const& pos = entity->getPosInMap(board->getScale());
-  board->updateNode(entity->getPosInMap(getScale()));
-  this->_map.at(pos.X, pos.Z).id = ItemID::II_NONE;
-  entity->explode(this);
-}
-
-void bbman::Board::deleteEntity(IEntity *entity)
-{
-  entity->explode(this);
-}
-
-void bbman::Board::deleteBomb(IBomb *bomb)
-{
-  APlayer *owner = getPlayerByID(bomb->getOwnerID());
-  bomb->explode(this);
-  if (owner) {
-    owner->addBomb(bomb->clone());
-  }
-}*/
 
 bbman::IEntity *bbman::Board::getEntityByPosition(irr::core::vector3d<irr::s32>const& pos) const
 {
@@ -452,16 +430,21 @@ void bbman::Board::initTerrain(Irrlicht& irr)
 {
   irr::scene::IMesh *mesh;
 
-  this->_texture.setTexture(0, irr.getTexture("./asset/media/wall.jpg"));
-  this->_texture.setFlag(irr::video::EMF_LIGHTING, false);
+  this->_texture.setTexture(0, irr.getTexture("./asset/Texture_ground.png"));
+  this->_texture.setTexture(1, irr.getTexture("./asset/Texture_ground_illum.png"));
+  //this->_light = irr.getSmgr()->addLightSceneNode(0, irr::core::vector3df(10, 10, -5), irr::video::SColorf(1.f,1.f,1.f), 10.0f, 1 );
+  //irr.getSmgr()->setAmbientLight(irr::video::SColor(255, 255, 255, 0));
+
+  this->_texture.MaterialType = irr::video::EMT_LIGHTMAP_ADD;
+  this->_texture.setFlag(irr::video::EMF_LIGHTING, true);
   mesh = irr.getSmgr()->getGeometryCreator()->
-         createHillPlaneMesh(irr::core::dimension2d<irr::f32>(10, 10),
-                             irr::core::dimension2d<irr::u32>(this->_map.w,
-                                                              this->_map.h),
-                             &this->_texture, 0,
-                             irr::core::dimension2d<irr::f32>(0, 0),
-                             irr::core::dimension2d<irr::f32>(this->_map.w,
-                                                              this->_map.h));
+    createHillPlaneMesh(irr::core::dimension2d<irr::f32>(10, 10),
+			irr::core::dimension2d<irr::u32>(this->_map.w,
+							 this->_map.h),
+			&this->_texture, 0,
+			irr::core::dimension2d<irr::f32>(0, 0),
+			irr::core::dimension2d<irr::f32>(this->_map.w,
+							 this->_map.h));
   this->_backgroundMesh = irr.getSmgr()->addMeshSceneNode(mesh);
   this->_backgroundMesh->setPosition(irr::core::vector3df(this->_map.w * this->_scale.X / 2, 0,
                                                           this->_map.h * this->_scale.Z / 2));
@@ -526,11 +509,12 @@ void bbman::Board::initNode(void)
 void bbman::Board::initMesh(Irrlicht& irr)
 {
   ItemID id;
+  std::string txt = "./asset/pillar/Pilliar_blue.obj";
+  std::string txtobj = "./asset/pillar/Texture_pillier_green.png";
 
   for (size_t i = 0; i < this->_map.h; ++i) {
     for (size_t j = 0; j < this->_map.w; ++j) {
       id = this->_map.at(j, i).id;
-
       if (this->_ctor.find((int)id) != this->_ctor.cend()) {
         this->_ctor[(int)id](irr, j, i);
       }

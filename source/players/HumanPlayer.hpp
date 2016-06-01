@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Tue May 31 14:53:01 2016 stephane galibert
+// Last update Tue May 31 20:10:32 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -18,7 +18,6 @@
 # include <algorithm>
 
 # include "APlayer.hpp"
-//# include "ExplosionTask.hpp"
 # include "ExplodingBomb.hpp"
 # include "InputListener.hpp"
 # include "Direction.hpp"
@@ -32,7 +31,7 @@ namespace bbman
     static HumanPlayer *create(void);
     virtual ~HumanPlayer(void);
     virtual size_t getAPlayerID(void) const;
-    virtual void init(Irrlicht &irr);
+    virtual void init(Irrlicht &irr, std::string const& color = "");
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void play(Irrlicht &irr, Board *board);
     virtual void addBomb(IBomb *bomb);
@@ -56,6 +55,8 @@ namespace bbman
     virtual void setAlive(bool value);
     virtual bool isAlive(void) const;
     virtual bool hasExplosed(void) const;
+    virtual std::string const& getColor(void) const;
+    virtual void setColor(std::string const& color);
   private:
     static size_t NumberOfPlayer;
   private:
@@ -79,7 +80,6 @@ namespace bbman
     irr::scene::IAnimatedMeshSceneNode *_mesh;
     std::list<IEffect *> _effects;
     irr::core::vector3d<irr::s32> _posInMap;
-    //ExplosionTask *_explosionTask;
     Explosion *_explosion;
     BombManager _bombManager;
     t_direction _direction;
@@ -89,6 +89,7 @@ namespace bbman
     bool _isRunning;
     size_t _playerNum;
     bool _alive;
+    std::string _color;
   };
 }
 

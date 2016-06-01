@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:28:29 2016 stephane galibert
-// Last update Tue May 31 12:56:41 2016 stephane galibert
+// Last update Wed Jun  1 10:29:11 2016 stephane galibert
 //
 
 #ifndef _APLAYER_HPP_
@@ -33,7 +33,7 @@ namespace bbman
     APlayer(void);
     virtual ~APlayer(void);
     virtual size_t getAPlayerID(void) const = 0;
-    virtual void init(Irrlicht &irr) = 0;
+    virtual void init(Irrlicht &irr, std::string const& color = "") = 0;
     virtual void update(Irrlicht &irr, irr::f32 delta) = 0;
     virtual void play(Irrlicht &irr, Board *board) = 0;
     virtual void addBomb(IBomb *bomb) = 0;
@@ -57,6 +57,8 @@ namespace bbman
     virtual void setAlive(bool value) = 0;
     virtual bool isAlive(void) const = 0;
     virtual bool hasExplosed(void) const = 0;
+    virtual std::string const& getColor(void) const = 0;
+    virtual void setColor(std::string const& color) = 0;
     void setMood(int Mood);
     int getMood() const;
     std::string const& getUsername(void) const;
@@ -71,7 +73,6 @@ namespace bbman
   protected:
     std::string _username;
     irr::s32 _score;
-    //bool _alive;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, APlayer const& player)
@@ -91,7 +92,7 @@ namespace bbman
 	+ std::to_string((int)pos.Z);
       rotation = std::to_string(player.getRotation());
     }
-    flux << "PID:" << player.getAPlayerID() << ";name:" << username
+    flux << "PID:" << player.getAPlayerID() << " " << player.getColor() << ";name:" << username
 	 << ";id:" << id << ";pos:"
 	 << position << ";score:" << score << ";alive:" << alive << ";"
 	 << "rot:" << rotation << ";";
@@ -99,7 +100,8 @@ namespace bbman
       flux << "effect:" << it->getEffectID()
 	   << " " << (int)it->getDelta() << ";";
     }
-    flux << player.getBombManager() << std::endl;
+    flux << std::endl;
+    //flux << player.getBombManager() << std::endl;
     return (flux);
   }
 }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 31 14:21:03 2016 stephane galibert
-// Last update Tue May 31 14:50:10 2016 stephane galibert
+// Last update Wed Jun  1 10:23:36 2016 stephane galibert
 //
 
 #include "Explosion.hpp"
@@ -26,10 +26,13 @@ bbman::Explosion::~Explosion(void)
   }
 }
 
-void bbman::Explosion::init(Irrlicht &irr)
+void bbman::Explosion::init(Irrlicht &irr, std::string const& color)
 {
+  std::string txt = "./asset/Particles/particle" + color + ".png";
+  this->_color = color;
   this->_ps = irr.getSmgr()->addParticleSystemSceneNode(false);
-  this->_ps->setMaterialTexture(0, irr.getTexture("./asset/media/fire.bmp"));
+  //this->_ps->setMaterialTexture(0, irr.getTexture("./asset/media/fire.bmp"));
+  this->_ps->setMaterialTexture(0, irr.getTexture(txt.c_str()));
   this->_ps->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
   this->_ps->setMaterialFlag(irr::video::EMF_LIGHTING, false);
   this->_ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
@@ -40,7 +43,7 @@ void bbman::Explosion::update(irr::f32 delta)
 {
   if (this->_played) {
     this->_delta += delta;
-    this->_hasFinished = (this->_delta > 0.1f);
+    this->_hasFinished = (this->_delta > 0.4f);
   }
 }
 

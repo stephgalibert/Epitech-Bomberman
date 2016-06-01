@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Mon May 30 17:52:51 2016 stephane galibert
+// Last update Wed Jun  1 12:51:04 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -103,6 +103,7 @@ namespace bbman
     irr::core::vector3df _scale;
     irr::core::vector3df _spawn[4];
     Irrlicht *_irr;
+    irr::scene::ILightSceneNode* _light;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, bbman::Board const& board)

@@ -29,7 +29,7 @@ namespace bbman
     AIPlayer(void);
     virtual ~AIPlayer(void);
     virtual size_t getAPlayerID(void) const;
-    virtual void init(Irrlicht &irr);
+    virtual void init(Irrlicht &irr, std::string const& color = "");
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void play(Irrlicht &irr, Board *board);
     virtual void addBomb(IBomb *bomb);
@@ -53,13 +53,14 @@ namespace bbman
     virtual void setAlive(bool value);
     virtual bool isAlive(void) const;
     virtual bool hasExplosed(void) const;
+    virtual std::string const& getColor(void) const;
+    virtual void setColor(std::string const& color);
   private:
     static size_t NumberOfPlayer;
   private:
     void dropBomb(Irrlicht &irr, Board *board);
     IBomb *createBomb(Irrlicht &irr);
     void updateEffets(irr::f32 delta);
-    //void checkDirection(Board *board);
     void move(irr::f32 delta);
     void moveEast(irr::f32 delta);
     void moveWest(irr::f32 delta);
@@ -80,6 +81,7 @@ namespace bbman
     size_t _playerNum;
     bool _alive;
     bbman::Binding _binding;
+    std::string _color;
   };
 }
 

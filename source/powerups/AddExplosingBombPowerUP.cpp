@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May 29 10:09:35 2016 stephane galibert
-// Last update Tue May 31 13:03:37 2016 stephane galibert
+// Last update Tue May 31 20:26:11 2016 stephane galibert
 //
 
 #include "AddExplosingBombPowerUP.hpp"
@@ -23,10 +23,10 @@ bbman::AddExplosingBombPowerUP::~AddExplosingBombPowerUP(void)
   }
 }
 
-void bbman::AddExplosingBombPowerUP::init(Irrlicht &irr)
+void bbman::AddExplosingBombPowerUP::init(Irrlicht &irr, std::string const& color)
 {
   irr::scene::ISceneNodeAnimator *anms = NULL;
-
+  (void)color;
   this->_node = irr.getSmgr()->addCubeSceneNode();
   if (this->_node) {
     this->_node->setMaterialTexture(0, irr.getTexture("./asset/media/water.jpg"));
@@ -95,4 +95,14 @@ void bbman::AddExplosingBombPowerUP::affectPlayer(APlayer *player)
 bool bbman::AddExplosingBombPowerUP::hasExplosed(void) const
 {
   return (true);
+}
+
+std::string const& bbman::AddExplosingBombPowerUP::getColor(void) const
+{
+  return (this->_color);
+}
+
+void bbman::AddExplosingBombPowerUP::setColor(std::string const& color)
+{
+  this->_color = color;
 }

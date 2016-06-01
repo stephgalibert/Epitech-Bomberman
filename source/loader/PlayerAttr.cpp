@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:06:55 2016 stephane galibert
-// Last update Mon May 30 09:01:00 2016 stephane galibert
+// Last update Wed Jun  1 10:48:10 2016 stephane galibert
 //
 
 #include "PlayerAttr.hpp"
@@ -52,9 +52,20 @@ void bbman::PlayerAttr::set(bbman::APlayer **player, Irrlicht &irr,
 void bbman::PlayerAttr::setPlayerID(APlayer **player, Irrlicht &irr,
 				    std::string const& value)
 {
-  if (value == "1") {
-    *player = HumanPlayer::create();
-    (*player)->init(irr);
+  std::vector<std::string> tokens;
+  std::istringstream iss(value);
+  std::copy(std::istream_iterator<std::string>(iss),
+	    std::istream_iterator<std::string>(),
+	    std::back_inserter(tokens));
+  if (tokens.size() > 0) {
+    if (tokens[0] == "1") {
+      *player = HumanPlayer::create();
+      (*player)->init(irr, (tokens.size() > 1) ? tokens[1] : "");
+    }
+    else if (tokens[0] == "0") {
+      *player = new AIPlayer;
+      (*player)->init(irr, (tokens.size() > 1) ? tokens[1] : "");
+    }
   }
 }
 
@@ -102,8 +113,6 @@ void bbman::PlayerAttr::setAlive(APlayer **player, Irrlicht &irr,
 {
   (void)irr;
   if (player && *player) {
-    /*if (value == "false")
-      (*player)->explode();*/
     (*player)->setAlive((value == "true") ? true : false);
   }
 }
@@ -123,7 +132,6 @@ void bbman::PlayerAttr::addEffect(APlayer **player, Irrlicht &irr,
   (void)irr;
   IEffect *effect = NULL;
   if (player && *player) {
-    irr::core::vector3df pos;
     std::vector<std::string> tokens;
     std::istringstream iss(value);
     std::copy(std::istream_iterator<std::string>(iss),

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:23:18 2016 stephane galibert
-// Last update Tue May 31 11:58:07 2016 stephane galibert
+// Last update Tue May 31 20:23:06 2016 stephane galibert
 //
 
 #include "IndestructibleBlock.hpp"
@@ -23,7 +23,7 @@ bbman::IndestructibleBlock::~IndestructibleBlock(void)
   }
 }
 
-void bbman::IndestructibleBlock::init(Irrlicht &irr)
+void bbman::IndestructibleBlock::init(Irrlicht &irr, std::string const& color)
 {
   this->_node = irr.getSmgr()->addCubeSceneNode();
   //std::string txt = "./asset/Ind_Cube.obj";
@@ -87,6 +87,16 @@ void bbman::IndestructibleBlock::explode(Board *board)
 void bbman::IndestructibleBlock::playExplosion(void)
 {
 
+}
+
+void bbman::IndestructibleBlock::setColor(std::string const& color)
+{
+  this->_color = color;
+}
+
+std::string const& bbman::IndestructibleBlock::getColor(void) const
+{
+  return (this->_color);
 }
 
 irr::core::vector3d<irr::s32> const& bbman::IndestructibleBlock::getPosInMap(irr::core::vector3df const& scale)

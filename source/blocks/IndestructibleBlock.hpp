@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:22:34 2016 stephane galibert
-// Last update Tue May 31 11:58:11 2016 stephane galibert
+// Last update Tue May 31 20:27:18 2016 stephane galibert
 //
 
 #ifndef _INDESTRUCTIBLEBLOCK_HPP_
@@ -22,7 +22,7 @@ namespace bbman
   public:
     IndestructibleBlock(void);
     virtual ~IndestructibleBlock(void);
-    virtual void init(Irrlicht &irr);
+    virtual void init(Irrlicht &irr, std::string const& color = "");
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void setMaterialFlag(irr::video::E_MATERIAL_FLAG flag, bool value);
     virtual void addAnimation(irr::scene::ISceneNodeAnimator *anim);
@@ -35,10 +35,12 @@ namespace bbman
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale);
     virtual bool hasExplosed(void) const;
     virtual ItemID getID(void) const;
+    virtual std::string const& getColor(void) const;
+    virtual void setColor(std::string const& color);
   private:
     irr::scene::ISceneNode *_node;
-    //irr::scene::IMeshSceneNode *_node;
     irr::core::vector3d<irr::s32> _posInMap;
+    std::string _color;
   };
 }
 

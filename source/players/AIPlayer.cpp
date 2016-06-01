@@ -42,12 +42,12 @@ bbman::AIPlayer::~AIPlayer(void)
   }
 }
 
-void bbman::AIPlayer::init(bbman::Irrlicht& irr)
+void bbman::AIPlayer::init(bbman::Irrlicht& irr, std::string const& color)
 {
   try {
     std::string txt = "./asset/media/ninja.b3d";
+    this->_color = color;
     this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
-
     this->_binding.init("../source/binding/script.lua");
     if (this->_mesh) {
       this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -210,6 +210,16 @@ void bbman::AIPlayer::setAlive(bool v)
   if (!this->_alive && this->_mesh) {
     this->_mesh->setVisible(false);
   }
+}
+
+std::string const& bbman::AIPlayer::getColor(void) const
+{
+  return (this->_color);
+}
+
+void bbman::AIPlayer::setColor(std::string const& color)
+{
+  this->_color = color;
 }
 
 bool bbman::AIPlayer::isAlive(void) const

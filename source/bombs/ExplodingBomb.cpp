@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Tue May 31 14:48:57 2016 stephane galibert
+// Last update Wed Jun  1 15:09:48 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -21,8 +21,12 @@ bbman::ExplodingBomb::ExplodingBomb(bbman::APlayer *owner)
   this->_explosing = false;
   this->_explosed = false;
   this->_cpt = 0;
-  //this->_explosionTask = NULL;
   this->_explosion = NULL;
+  this->_nbeam = NULL;
+  this->_sbeam = NULL;
+  this->_ebeam = NULL;
+  this->_wbeam = NULL;
+  this->_range = 3;
 }
 
 bbman::ExplodingBomb::~ExplodingBomb(void)
@@ -30,25 +34,39 @@ bbman::ExplodingBomb::~ExplodingBomb(void)
   if (this->_mesh) {
     this->_mesh->remove();
   }
+  if (this->_nbeam) {
+    delete (this->_nbeam);
+  }
+  if (this->_sbeam) {
+    delete (this->_sbeam);
+  }
+  if (this->_ebeam) {
+    delete (this->_ebeam);
+  }
+  if (this->_wbeam) {
+    delete (this->_wbeam);
+  }
   if (this->_explosion) {
     delete (this->_explosion);
   }
-  /*if (this->_explosionTask && this->_explosionTask->isRunning()) {
-    this->_explosionTask->stop();
-    while (!this->_explosionTask->isFinished());
-    delete (this->_explosionTask);
-    }*/
 }
 
-void bbman::ExplodingBomb::init(bbman::Irrlicht &irr)
+void bbman::ExplodingBomb::init(bbman::Irrlicht &irr, std::string const& color)
 {
   try {
+    this->_color = color;
     initMesh(irr);
     initSound();
     this->_explosion = new Explosion;
-    this->_explosion->init(irr);
-    //this->_explosionTask = new ExplosionTask(irr);
-    //this->_explosion.init(irr);
+    this->_explosion->init(irr, color);
+    this->_nbeam = new NorthernBeam(irr, getRange());
+    this->_nbeam->init(irr, color);
+    this->_sbeam = new SouthernBeam(irr, getRange());
+    this->_sbeam->init(irr, color);
+    this->_ebeam = new EasternBeam(irr, getRange());
+    this->_ebeam->init(irr, color);
+    this->_wbeam = new WesternBeam(irr, getRange());
+    this->_wbeam->init(irr, color);
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
   }
@@ -76,11 +94,6 @@ void bbman::ExplodingBomb::update(bbman::Irrlicht &irr, irr::f32 delta)
     }
     ++this->_cpt;
   }
-  /*if (this->_explosionTask && this->_explosionTask->isRunning()
-      && this->_explosionTask->isFinished()) {
-    delete (this->_explosionTask);
-    this->_explosionTask = NULL;
-    }*/
   if (this->_explosion) {
     this->_explosion->update(delta);
     if (this->_explosion->hasFinished()) {
@@ -108,7 +121,9 @@ bool bbman::ExplodingBomb::isInDeflagration(IEntity *entity, irr::core::vector3d
 
 bbman::IBomb *bbman::ExplodingBomb::clone(void) const
 {
-  return (new ExplodingBomb(this->_owner));
+  IBomb *bomb = new ExplodingBomb(this->_owner);
+  bomb->setColor(this->_color);
+  return (bomb);
 }
 
 void bbman::ExplodingBomb::setPosition(irr::core::vector3df const& pos)
@@ -154,15 +169,16 @@ bool bbman::ExplodingBomb::isExploding(void) const
 
 void bbman::ExplodingBomb::initMesh(bbman::Irrlicht &irr)
 {
-  std::string txt = "./asset/media/ninja.b3d";
+  std::string txt = "./asset/bomb/bomb.obj";
+  std::string txtobj = "./asset/bomb/Texture_pillier_" + this->_color + ".png";
+  //std::string txt3 = "./asset/bomb/Texture_pillier_Selfillum_" + _color + ".png";
 
-  this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
+  this->_mesh = irr.getSmgr()->addMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-    this->_mesh->setAnimationSpeed(0);
-    this->_mesh->setCurrentFrame(3);
+    this->_mesh->setMaterialTexture(0, irr.getTexture(txtobj.data()));
+    //this->_mesh->setMaterialTexture(1, irr.getTexture(txt3.data()));
     this->_mesh->setScale(irr::core::vector3df(1.5f, 1.5f, 1.5f));
-    this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
   }
   else {
     throw (std::runtime_error("can not create exploding bomb"));
@@ -200,19 +216,80 @@ void bbman::ExplodingBomb::setDelta(irr::f32 value)
 
 void bbman::ExplodingBomb::explode(Board *board)
 {
-  (void)board;
+  int i = 0;
+  irr::core::vector3df const& scale = board->getScale();
+  irr::core::vector3d<irr::s32> const& pos = getPosInMap(scale);
+  Map<Cell> const& map = board->getMap();
+
+  if (this->_nbeam) {
+    while (i < this->_range && pos.Z + i < map.h - 1
+	   && map.at(pos.X, pos.Z + i).id == ItemID::II_NONE) {
+      ++i;
+    }
+    if (map.at(pos.X, pos.Z + i).id == ItemID::II_BLOCK_INBRKABLE) {
+      --i;
+    }
+    this->_nbeam->setRepeat(i);
+    this->_nbeam->setPosition(getPosition());
+  }
+
+  i = 0;
+  if (this->_sbeam) {
+    while (i < this->_range && pos.Z - i > 1
+	   && map.at(pos.X, pos.Z - i).id == ItemID::II_NONE) {
+      ++i;
+    }
+    if (map.at(pos.X, pos.Z - i).id == ItemID::II_BLOCK_INBRKABLE) {
+      --i;
+    }
+    this->_sbeam->setRepeat(i);
+    this->_sbeam->setPosition(getPosition());
+  }
+
+  i = 0;
+  if (this->_ebeam) {
+    while (i < this->_range && pos.X + i < map.w - 1
+	   && map.at(pos.X + i, pos.Z).id == ItemID::II_NONE) {
+      ++i;
+    }
+    if (map.at(pos.X + i, pos.Z).id == ItemID::II_BLOCK_INBRKABLE) {
+      --i;
+    }
+    this->_ebeam->setRepeat(i);
+    this->_ebeam->setPosition(getPosition());
+  }
+
+  i = 0;
+  if (this->_wbeam) {
+    while (i < this->_range && pos.X - i > 1
+	   && map.at(pos.X - i, pos.Z).id == ItemID::II_NONE) {
+      ++i;
+    }
+    if (map.at(pos.X - i, pos.Z).id == ItemID::II_BLOCK_INBRKABLE) {
+      --i;
+    }
+    this->_wbeam->setRepeat(i);
+    this->_wbeam->setPosition(getPosition());
+  }
   this->_delta = DELAY_TO_EXPLOSE;
 }
 
 void bbman::ExplodingBomb::playExplosion(void)
 {
-  /*if (this->_explosionTask && this->_explosionTask->isFinished()) {
-    this->_explosionTask->setPosition(getPosition());
-    this->_explosionTask->setVisible(true);
-    tools::StaticTools::ThreadPool->addTask(this->_explosionTask);
-    }*/
   if (this->_explosion) {
     this->_explosion->play(getPosition());
+  }
+  if (this->_nbeam) {
+    this->_nbeam->play();
+  }
+  if (this->_sbeam) {
+    this->_sbeam->play();
+  }
+  if (this->_ebeam) {
+    this->_ebeam->play();
+  }
+  if (this->_wbeam) {
+    this->_wbeam->play();
   }
 }
 
@@ -235,10 +312,20 @@ size_t bbman::ExplodingBomb::getBombID(void) const
 
 size_t bbman::ExplodingBomb::getRange(void) const
 {
-  return (3);
+  return (this->_range);
 }
 
 void bbman::ExplodingBomb::setOwner(bbman::APlayer *owner)
 {
   this->_owner = owner;
+}
+
+std::string const& bbman::ExplodingBomb::getColor(void) const
+{
+  return (this->_color);
+}
+
+void bbman::ExplodingBomb::setColor(std::string const& color)
+{
+  this->_color = color;
 }

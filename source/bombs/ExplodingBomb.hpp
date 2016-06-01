@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:08:37 2016 stephane galibert
-// Last update Tue May 31 14:46:52 2016 stephane galibert
+// Last update Wed Jun  1 15:32:51 2016 stephane galibert
 //
 
 #ifndef _EXPLODINGBOMB_HPP_
@@ -20,8 +20,8 @@
 # include "CacheManager.hpp"
 # include "MemoryFile.hpp"
 # include "StaticTools.hpp"
-//# include "ExplosionTask.hpp"
 # include "Explosion.hpp"
+# include "Beam.hpp"
 
 namespace bbman
 {
@@ -29,11 +29,11 @@ namespace bbman
   {
   public:
     static const irr::f32 constexpr DELAY_TO_EXPLOSE = 3.f;
-    static const irr::f32 constexpr DELAY_EXPLOSING = 1.f;
+    static const irr::f32 constexpr DELAY_EXPLOSING = 0.5f;
   public:
     ExplodingBomb(APlayer *owner);
     virtual ~ExplodingBomb(void);
-    virtual void init(Irrlicht &irr);
+    virtual void init(Irrlicht &irr, std::string const& color = "");
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual bool isInExplosion(IEntity *entity, irr::core::vector3df const& scale);
     virtual bool isInDeflagration(IEntity *entity, irr::core::vector3df const& scale);
@@ -55,6 +55,8 @@ namespace bbman
     virtual size_t getOwnerID(void) const;
     virtual size_t getBombID(void) const;
     virtual size_t getRange(void) const;
+    virtual std::string const& getColor(void) const;
+    virtual void setColor(std::string const& color);
     void setOwner(APlayer *owner);
   private:
     static CacheManager<std::string, MemoryFile> SoundCache;
@@ -62,9 +64,12 @@ namespace bbman
     void initMesh(Irrlicht &irr);
     void initSound(void);
     void setExplosion(Irrlicht &irr);
-    irr::scene::IAnimatedMeshSceneNode *_mesh;
-    //ExplosionTask *_explosionTask;
+    irr::scene::IMeshSceneNode *_mesh;
     Explosion *_explosion;
+    NorthernBeam *_nbeam;
+    SouthernBeam *_sbeam;
+    EasternBeam *_ebeam;
+    WesternBeam *_wbeam;
     APlayer *_owner;
     irr::f32 _delta;
     bool _explosing;
@@ -72,6 +77,8 @@ namespace bbman
     SoundBox _sounds;
     irr::core::vector3d<irr::s32> _posInMap;
     irr::s32 _cpt;
+    std::string _color;
+    size_t _range;
   };
 }
 
