@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Wed Jun  1 21:33:40 2016 stephane galibert
+// Last update Thu Jun  2 12:10:54 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -26,6 +26,7 @@ bbman::ExplodingBomb::ExplodingBomb(bbman::APlayer *owner)
   this->_sbeam = NULL;
   this->_ebeam = NULL;
   this->_wbeam = NULL;
+  this->_cbeam = NULL;
   this->_range = 3;
 }
 
@@ -45,6 +46,9 @@ bbman::ExplodingBomb::~ExplodingBomb(void)
   }
   if (this->_wbeam) {
     delete (this->_wbeam);
+  }
+  if (this->_cbeam) {
+    delete (this->_cbeam);
   }
   if (this->_explosion) {
     delete (this->_explosion);
@@ -67,6 +71,8 @@ void bbman::ExplodingBomb::init(bbman::Irrlicht &irr, std::string const& color)
     this->_ebeam->init(irr, color);
     this->_wbeam = new WesternBeam(irr, getRange());
     this->_wbeam->init(irr, color);
+    this->_cbeam = new CenterBeam(irr, getRange());
+    this->_cbeam->init(irr, color);
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
   }
@@ -227,6 +233,9 @@ void bbman::ExplodingBomb::explode(Board *board)
   irr::core::vector3d<irr::s32> const& pos = getPosInMap(scale);
   Map<Cell> const& map = board->getMap();
 
+  if (this->_cbeam) {
+    this->_cbeam->setPosition(getPosition());
+  }
   if (this->_nbeam) {
     while (i < this->_range && pos.Z + i < map.h - 1
 	   && map.at(pos.X, pos.Z + i).id == ItemID::II_NONE) {
@@ -284,6 +293,9 @@ void bbman::ExplodingBomb::playExplosion(void)
 {
   if (this->_explosion) {
     this->_explosion->play(getPosition());
+  }
+  if (this->_cbeam) {
+    this->_cbeam->play();
   }
   if (this->_nbeam) {
     this->_nbeam->play();

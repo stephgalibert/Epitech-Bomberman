@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Wed Jun  1 21:05:55 2016 stephane galibert
+// Last update Thu Jun  2 12:57:14 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -211,7 +211,7 @@ bool bbman::Board::isInNode(irr::core::vector3df const& pos) const
 {
   irr::f32 x = (int)(pos.X / this->_scale.X) * this->_scale.X;
   irr::f32 y = (int)(pos.Z / this->_scale.Z) * this->_scale.Z;
-  return pos.X > x + 2.f && pos.Z > y + 2.f
+  return pos.X > x + 4.f && pos.Z > y + 4.f
          && pos.X < x + 6.f && pos.Z < y + 6.f;
 }
 

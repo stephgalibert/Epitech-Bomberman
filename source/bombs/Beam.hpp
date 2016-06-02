@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 31 20:43:06 2016 stephane galibert
-// Last update Wed Jun  1 08:21:42 2016 stephane galibert
+// Last update Thu Jun  2 12:11:25 2016 stephane galibert
 //
 
 #ifndef _BEAM_HPP_
@@ -38,6 +38,15 @@ namespace bbman
     size_t _repeat;
     irr::core::array<irr::video::ITexture *> _textures;
     //irr::scene::ISceneNodeAnimator* _glow;
+  };
+
+  class CenterBeam : public ABeam
+  {
+  public:
+    CenterBeam(Irrlicht &irr, size_t range);
+    virtual ~CenterBeam(void);
+    virtual void init(Irrlicht &irr, std::string const& color);
+    virtual void play(void);
   };
 
   class NorthernBeam : public ABeam

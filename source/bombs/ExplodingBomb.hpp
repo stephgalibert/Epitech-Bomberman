@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:08:37 2016 stephane galibert
-// Last update Wed Jun  1 21:01:54 2016 stephane galibert
+// Last update Thu Jun  2 12:09:43 2016 stephane galibert
 //
 
 #ifndef _EXPLODINGBOMB_HPP_
@@ -71,6 +71,7 @@ namespace bbman
     SouthernBeam *_sbeam;
     EasternBeam *_ebeam;
     WesternBeam *_wbeam;
+    CenterBeam *_cbeam;
     APlayer *_owner;
     irr::f32 _delta;
     bool _explosing;

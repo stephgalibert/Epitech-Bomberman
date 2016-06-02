@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Wed Jun  1 21:19:53 2016 stephane galibert
+// Last update Thu Jun  2 12:51:49 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -314,18 +314,18 @@ void bbman::HumanPlayer::updateEffets(irr::f32 delta)
 void bbman::HumanPlayer::move(irr::f32 delta)
 {
   if (this->_direction == Direction::DIR_NONE) {
-    this->_mesh->setCurrentFrame(5);
-    this->_mesh->setAnimationSpeed(0);
-    /*this->_mesh->setFrameLoop(1, 51);
-      this->_mesh->setAnimationSpeed(15);*/
+    //this->_mesh->setCurrentFrame(5);
+    //this->_mesh->setAnimationSpeed(0);
+    this->_mesh->setFrameLoop(1, 51);
+    this->_mesh->setAnimationSpeed(15);
 
     this->_isRunning = false;
   }
   else {
     if (!this->_isRunning) {
       this->_mesh->setAnimationSpeed(15);
-      this->_mesh->setFrameLoop(0, 13);
-      //this->_mesh->setFrameLoop(60, 105);
+      //this->_mesh->setFrameLoop(0, 13);
+      this->_mesh->setFrameLoop(60, 105);
       this->_isRunning = true;
     }
     this->_move.at(this->_direction)(delta);
@@ -338,7 +338,7 @@ void bbman::HumanPlayer::moveEast(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.X += this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, -90, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 90, 0));
 }
 
 void bbman::HumanPlayer::moveWest(irr::f32 delta)
@@ -347,7 +347,7 @@ void bbman::HumanPlayer::moveWest(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.X -= this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 90, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, -90, 0));
 }
 
 void bbman::HumanPlayer::moveNorth(irr::f32 delta)
@@ -356,7 +356,7 @@ void bbman::HumanPlayer::moveNorth(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.Z += this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
 }
 
 void bbman::HumanPlayer::moveSouth(irr::f32 delta)
@@ -365,7 +365,7 @@ void bbman::HumanPlayer::moveSouth(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.Z -= this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
 }
 
 void bbman::HumanPlayer::inputPlayer1(bbman::InputListener &listener)
@@ -434,14 +434,22 @@ void bbman::HumanPlayer::inputPlayer2(bbman::InputListener &listener)
 
 void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
 {
-  std::string txt = "./asset/media/ninja.b3d";
-  //std::string txt = "./asset/perso.fbx";
-  this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
+  //std::string txt = "./asset/media/ninja.b3d";
+  std::string fbx = "./asset/perso/perso.fbx";
+  std::string diffuse = "./asset/perso/texture/diffuse/text_perso_blue.png";
+  std::string iri = "asset/perso/texture/iridescent map/png/bleu.png";
+
+  this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(fbx.data()));
   if (this->_mesh) {
+    this->_mesh->setMaterialTexture(0, irr.getTexture(diffuse.data()));
+    this->_mesh->setMaterialTexture(1, irr.getTexture(iri.data()));
+
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setAnimationSpeed(0);
-    this->_mesh->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
+    this->_mesh->setScale(irr::core::vector3df(0.8f, 0.8f, 0.8f));
     this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
+
+    //this->_mesh->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
   }
   else {
     throw (std::runtime_error("can not create player " + std::to_string(this->_playerNum)));
@@ -450,12 +458,19 @@ void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
 
 void bbman::HumanPlayer::initPlayer2(Irrlicht &irr)
 {
-  std::string txt = "./asset/media/ninja.b3d";
-  this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
+  //std::string txt = "./asset/media/ninja.b3d";
+  std::string fbx = "./asset/perso/perso.fbx";
+  std::string diffuse = "./asset/perso/texture/diffuse/text_perso_orange.png";
+  std::string iri = "./asset/perso/texture/iridescent map/png/orange iridescent.png";
+
+  this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(fbx.data()));
   if (this->_mesh) {
+    this->_mesh->setMaterialTexture(0, irr.getTexture(diffuse.data()));
+    this->_mesh->setMaterialTexture(1, irr.getTexture(iri.data()));
+
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setAnimationSpeed(0);
-    this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
+    this->_mesh->setScale(irr::core::vector3df(0.8f, 0.8f, 0.8f));
     this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
   }
   else {
