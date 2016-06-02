@@ -93,8 +93,11 @@ IObject& ui::operator[](const std::string& key)
 
 void ui::display(void)
 {
-  for (auto const& it : this->_entities[this->_currentScene]) {
-    it.second.object->draw(this->_driver, it.second.display);
+  if (this->_entities.find(this->_currentScene) != this->_entities.end()) {
+    for (auto const& it : this->_entities[this->_currentScene]) {
+      if (it.second.object)
+        it.second.object->draw(this->_driver, it.second.display);
+    }
   }
 }
 

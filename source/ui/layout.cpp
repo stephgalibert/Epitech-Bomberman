@@ -24,6 +24,8 @@ void layout::loadScene()
   this->_scene["default"] = new mainScene(*this->_ui);
   this->_scene["settings"] = new settingsScene(*this->_ui);
   this->_scene["game"] = new gameScene(*this->_ui);
+  this->_scene["controls"] = new controlsScene(*this->_ui);
+  this->_scene["lobby"] = new lobbyScene(*this->_ui);
 }
 
 const std::string &layout::display()
@@ -53,7 +55,8 @@ bool layout::isGameStarted(void) const
 
 void layout::backToMenu(void)
 {
-  this->_scene.at("default")->setStartGame(false);
+  this->_scene.at("lobby")->setStartGame(false);
+  this->_scene.at("default")->setNextScene("default");
   this->_ui->changeScene("default");
 }
 

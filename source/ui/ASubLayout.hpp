@@ -38,6 +38,7 @@ public:
   bool isGameStarted(void) const;
   bool isClosed(void) const;
   void setStartGame(bool value);
+  void setNextScene(const std::string &str);
 protected:
 
   ui& _ui;

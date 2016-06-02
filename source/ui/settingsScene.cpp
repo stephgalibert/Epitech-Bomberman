@@ -39,6 +39,7 @@ void settingsScene::manageEvent(bbman::InputListener &listener)
   if (listener.getState()){
     if (this->_ui["backBackground"].collision(listener.getPosition())){
       this->_nextScene = "default";
+      this->_ui.changeScene("default");
     }
   }
 }

@@ -129,12 +129,15 @@ void mainScene::manageEvent(bbman::InputListener &listener)
     }
 
     if (this->_ui["logoSettings"].collision(this->_mousePosition)) {
-      this->_nextScene = "settings";
+      this->_ui.changeScene("settings");
+    }
+
+    if (this->_ui["logoControls"].collision(this->_mousePosition)) {
+      this->_ui.changeScene("controls");
     }
 
     if (this->_ui["logoPlay"].collision(this->_mousePosition)) {
-      this->_nextScene = "game";
-      this->_startGame = true;
+      this->_nextScene = "lobby";
     }
   }
 }

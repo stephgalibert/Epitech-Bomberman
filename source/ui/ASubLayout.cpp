@@ -57,3 +57,8 @@ void ASubLayout::setStartGame(bool value)
 {
   this->_startGame = value;
 }
+
+void ASubLayout::setNextScene(const std::string &str)
+{
+  this->_nextScene = str;
+}

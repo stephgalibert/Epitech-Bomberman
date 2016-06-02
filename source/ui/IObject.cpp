@@ -178,10 +178,10 @@ int IObject::getAlpha(const std::string& style)
   return this->_style[style]._color.getAlpha();
 }
 
-bool IObject::collision(irr::core::vector2d<irr::s32> pos)
+bool IObject::collision(irr::core::position2d<irr::s32>pos)
 {
-  if (pos.X < this->_style["default"]._pos.X || pos.Y < this->_style["default"]._pos.Y ||
-      pos.X > this->_style["default"]._pos.X + this->_style["default"]._dimension.Width ||
+  if (pos.X < this->_style["default"]._pos.X || pos.Y<this->_style["default"]._pos.Y ||
+                                                      pos.X>this->_style["default"]._pos.X + this->_style["default"]._dimension.Width ||
       pos.Y > this->_style["default"]._pos.Y + this->_style["default"]._dimension.Height) {
     return false;
   } else {

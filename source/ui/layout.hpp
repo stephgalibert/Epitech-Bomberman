@@ -13,6 +13,8 @@
 #include "mainScene.hpp"
 #include "settingsScene.hpp"
 #include "gameScene.hpp"
+#include "controlsScene.hpp"
+#include "lobbyScene.hpp"
 #include "ui.hpp"
 
 class layout
