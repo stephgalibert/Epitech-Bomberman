@@ -109,10 +109,10 @@ void bbman::HumanPlayer::play(bbman::Irrlicht &irr, bbman::Board *board)
     if (!board->isInNode(this->getPosition())) {
       this->_direction = this->_prevDirection;
     }
-    move(this->_delta);
     if (this->_action == bbman::ACT_BOMB) {
       dropBomb(irr, board);
     }
+    move(this->_delta);
   }
 }
 

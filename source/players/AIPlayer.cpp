@@ -21,6 +21,7 @@ bbman::AIPlayer::AIPlayer(void)
     std::bind(&bbman::AIPlayer::moveSouth, this, std::placeholders::_1);
   this->_mesh      = NULL;
   this->_isRunning = false;
+  this->_mood = 0;
   this->_speed     = INITIAL_SPEED;
   this->_direction = Direction::DIR_NONE;
   this->_action = Action::ACT_NONE;
@@ -45,6 +46,8 @@ bbman::AIPlayer::~AIPlayer(void)
 
 void bbman::AIPlayer::init(bbman::Irrlicht& irr, std::string const& color)
 {
+  IBomb *bomb = NULL;
+
   try {
     std::string txt = "./asset/media/ninja.b3d";
     this->_color = color;
@@ -58,7 +61,9 @@ void bbman::AIPlayer::init(bbman::Irrlicht& irr, std::string const& color)
     } else {
       throw(std::runtime_error("can not create ai " + std::to_string(this->_playerNum)));
     }
-    addBomb(new ExplodingBomb(this));
+    bomb = new ExplodingBomb(this);
+    bomb->setColor(color);
+    addBomb(bomb);
     this->_alive = true;
   } catch (std::runtime_error const& e) {
     throw(e);
@@ -399,8 +404,10 @@ void bbman::AIPlayer::moveSouth(irr::f32 delta)
 bbman::IBomb * bbman::AIPlayer::createBomb(bbman::Irrlicht& irr)
 {
   IBomb *bomb = this->_bombManager.getSelectedBomb();
-
-  bomb->init(irr);
+  if (bomb) {
+  bomb->addRange(this->_power);
+  bomb->init(irr, _color);
+  }
   return bomb;
 }
 

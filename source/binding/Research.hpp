@@ -30,6 +30,7 @@ namespace bbman {
     irr::core::vector3d<irr::s32>const& getNearPlayer(irr::core::vector3d<irr::s32>const& ia);
     irr::core::vector3d<irr::s32>const& getNearBox(irr::core::vector3d<irr::s32>const& ia);
     irr::core::vector3d<irr::s32>const& getNearDBox(irr::core::vector3d<irr::s32>const& ia);
+    irr::core::vector3d<irr::s32>const& getNearPowerUPs(irr::core::vector3d<irr::s32>const& ia);
     bbman::Direction findNearestSafeZone(irr::core::vector3d<irr::s32>const& pos);
     bbman::APlayer* getAI(int numplayer);
     bbman::TrueAStar getTrueA() const;

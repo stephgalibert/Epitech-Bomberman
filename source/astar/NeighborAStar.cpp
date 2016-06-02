@@ -10,7 +10,9 @@
 
 #include "NeighborAStar.hpp"
 
-bbman::NeighborAStar::NeighborAStar(void) {}
+bbman::NeighborAStar::NeighborAStar(void) {
+ this->_found = false;
+}
 
 
 bbman::NeighborAStar::~NeighborAStar(void) {}
@@ -42,6 +44,11 @@ bool bbman::NeighborAStar::checkNeighbor(irr::core::vector3d<irr::s32>const& p1,
   return false;
 }
 
+bool bbman::NeighborAStar::isFound()
+{
+   return this->_found;
+}
+
 void bbman::NeighborAStar::compute(const Map<bbman::Cell>& map, irr::core::vector3d<irr::s32>const& p1,
                                irr::core::vector3d<irr::s32>const& p2)
 {
@@ -51,7 +58,6 @@ void bbman::NeighborAStar::compute(const Map<bbman::Cell>& map, irr::core::vecto
   this->_begin  = p1;
   if (checkNeighbor(p1, p2)) {
     found = true;
-    _path.push_back(p1);
   }
   addInList(begin, _listOpen);
 

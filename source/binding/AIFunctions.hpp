@@ -16,7 +16,8 @@
 # define BOX 1
 # define UNBREAKB 2
 # define PLAYER 3
-
+# define POWERUPS 4
+# define SAFE 5
 /*
 **
 ** Callable in C++

@@ -43,12 +43,12 @@ void bbman::Binding::init(const std::string &scriptName)
     luaL_openlibs(this->luaState);
     luaL_dofile(this->luaState, scriptName.data());
     lua_pcall(this->luaState, 0, 0, 0);
-    luabridge::getGlobalNamespace(this->luaState).addFunction("findPath", findPath);
-    luabridge::getGlobalNamespace(this->luaState).addFunction("getPos", getPos);
-    luabridge::getGlobalNamespace(this->luaState).addFunction("setMood", setMood);
-    luabridge::getGlobalNamespace(this->luaState).addFunction("getMood", getMood);
-    luabridge::getGlobalNamespace(this->luaState).addFunction("iAmSafe", iAmSafe);
-    luabridge::getGlobalNamespace(this->luaState).addFunction("directionIsSafe", directionIsSafe);
+    luabridge::getGlobalNamespace(this->luaState).addFunction("findPath", findPath)
+    .addFunction("getPos", getPos)
+    .addFunction("setMood", setMood)
+    .addFunction("getMood", getMood)
+    .addFunction("iAmSafe", iAmSafe)
+    .addFunction("directionIsSafe", directionIsSafe);
   }
   catch (...){
     std::cerr << "Erreur : Binding problem." << std::endl;

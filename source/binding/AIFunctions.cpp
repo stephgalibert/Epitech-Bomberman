@@ -15,14 +15,6 @@
 #include "AIPlayer.hpp"
 #include "Binding.hpp"
 
-/*
-   II_NONE = 0,
-   II_BLOCK_INBRKABLE = 1,
-   II_BLOCK_BRKABLE = 2,
-   II_WALL = 3,
-   II_CORNER = 4
-   II_BOMB = 5
- */
 bbman::Board* boardBinding(bbman::Board *board)
 {
   static bbman::Board *boardSave = NULL;
@@ -38,17 +30,29 @@ int iAmSafe(int numplayer, lua_State *L)
   bbman::Board *board       = boardBinding(NULL);
   static bbman::Research *r = NULL;
 
+  if (r == NULL) {
+    r = new bbman::Research;
+  }
+  r->setL(L);
+  r->setBoard(board);
+
   irr::core::vector3d<irr::s32> ai = r->getAIPos(numplayer);
   if (board->isInExplosion(ai)) {
-    return (1);
+    return 0;
   }
-  return (0);
+  return 1;
 }
 
 int directionIsSafe(int numplayer, int direction, lua_State *L)
 {
   bbman::Board *board       = boardBinding(NULL);
   static bbman::Research *r = NULL;
+
+  if (r == NULL) {
+    r = new bbman::Research;
+  }
+  r->setL(L);
+  r->setBoard(board);
   irr::core::vector3d<irr::s32> ai = r->getAIPos(numplayer);
 
   if (direction == 1) {
@@ -63,10 +67,11 @@ int directionIsSafe(int numplayer, int direction, lua_State *L)
   else if (direction == 8) {
     ai.Z -= 1;
   }
+
   if (board->isInExplosion(ai)) {
-    return (1);
+    return 1;
   }
-  return (0);  
+  return 0;
 }
 
 luabridge::LuaRef getPos(int numplayer, lua_State *L)
@@ -135,49 +140,51 @@ luabridge::LuaRef findPath(int numplayer, int type, lua_State *L)
   bbman::TrueAStar trueA;
   bbman::NeighborAStar neighA;
 
- 
+
   int distmin;
   int ret;
 
-  trueA.addBlockType(bbman::ItemID::II_BLOCK_INBRKABLE);
   trueA.addBlockType(bbman::ItemID::II_BLOCK_BRKABLE);
+  trueA.addBlockType(bbman::ItemID::II_BLOCK_INBRKABLE);
   neighA.addBlockType(bbman::ItemID::II_BLOCK_INBRKABLE);
   neighA.addBlockType(bbman::ItemID::II_BLOCK_BRKABLE);
 
   if (r == NULL) {
-  r = new bbman::Research;
+    r = new bbman::Research;
   }
   r->setL(L);
   r->setBoard(board);
   bbman::APlayer *aiPlayer = r->getAI(numplayer);
+
   if (aiPlayer) {
     ia = r->getAIPos(numplayer);
-    if (board->isInExplosion(ia)) {
-      table["success"] = 2;
+
+    if (type == SAFE) {
       table["safedir"] = static_cast<int>(r->findNearestSafeZone(ia));
-    } else {
-      table["success"] = 1;
-      if (type == BOX) {
-        near = r->getNearDBox(ia);
-	neighA.compute(board->getMap(), ia, near);
-        table["size"]   = neighA.getSize();
-        table["dir"]    = static_cast<int>(tools::StaticTools::getDirByCoord(ia, neighA.getNextResult()));
-        table["target"] = r->vecToTable(near);
-      } else if (type == UNBREAKB) {
-        near = r->getNearBox(ia);
-        neighA.compute(board->getMap(), ia, near);
-        table["size"]   = neighA.getSize();
-        table["dir"]    = static_cast<int>(tools::StaticTools::getDirByCoord(ia, neighA.getNextResult()));
-        table["target"] = r->vecToTable(near);
-      } else if (type == PLAYER) {
-        near = r->getNearPlayer(ia);
-        trueA.compute(board->getMap(), ia, near);
-        table["size"]   = trueA.getSize();
-        table["dir"]    = static_cast<int>(tools::StaticTools::getDirByCoord(ia, trueA.getNextResult()));
-        table["target"] = r->vecToTable(near);
-      } else {
-        table["success"] = 0;
-      }
+    } else if (type == BOX) {
+      near = r->getNearDBox(ia);
+      neighA.compute(board->getMap(), ia, near);
+      table["size"]   = neighA.getSize();
+      table["dir"]    = static_cast<int>(tools::StaticTools::getDirByCoord(ia, neighA.getNextResult()));
+      table["target"] = r->vecToTable(near);
+    } else if (type == UNBREAKB) {
+      near = r->getNearBox(ia);
+      neighA.compute(board->getMap(), ia, near);
+      table["size"]   = neighA.getSize();
+      table["dir"]    = static_cast<int>(tools::StaticTools::getDirByCoord(ia, neighA.getNextResult()));
+      table["target"] = r->vecToTable(near);
+    } else if (type == PLAYER) {
+      near = r->getNearPlayer(ia);
+      trueA.compute(board->getMap(), ia, near);
+      table["size"]   = trueA.getSize();
+      table["dir"]    = static_cast<int>(tools::StaticTools::getDirByCoord(ia, trueA.getNextResult()));
+      table["target"] = r->vecToTable(near);
+    } else if (type == POWERUPS) {
+      near = r->getNearPowerUPs(ia);
+      trueA.compute(board->getMap(), ia, near);
+      table["size"]   = trueA.getSize();
+      table["dir"]    = static_cast<int>(tools::StaticTools::getDirByCoord(ia, trueA.getNextResult()));
+      table["target"] = r->vecToTable(near);
     }
   }
   return table;

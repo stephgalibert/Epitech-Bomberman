@@ -83,6 +83,7 @@ namespace bbman
     bool _isRunning;
     size_t _playerNum;
     bool _alive;
+    int _mood;
     bbman::Binding _binding;
     std::string _color;
     irr::f32 _delta;

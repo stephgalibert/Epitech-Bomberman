@@ -43,23 +43,7 @@ void bbman::Game::init(Irrlicht &irr, layout *layout, std::string const& saves)
       this->_board->init(irr);
       this->_timeout = new TimeOut;
       this->_timeout->init(irr, this->_board);
-      createPlayers(irr);
-      // BEGIN todel
-
-      /*AIPlayer *ai1 = new AIPlayer;
-      ai1->init(irr);
-      ai1->setPosition(this->_board->getSpawnPosition(2));
-      this->_board->addPlayer(ai1);
-
-      HumanPlayer *p1 = bbman::HumanPlayer::create();
-      p1->init(irr, "Green");
-      p1->setPosition(this->_board->getSpawnPosition(0));
-      this->_board->addPlayer(p1);
-      HumanPlayer *p2 = bbman::HumanPlayer::create();
-      p2->init(irr, "Orange");
-      p2->setPosition(this->_board->getSpawnPosition(1));
-      this->_board->addPlayer(p2);*/
-      // END todel
+      createPlayers(irr)
     }
     initCamera(irr);
     initSound();

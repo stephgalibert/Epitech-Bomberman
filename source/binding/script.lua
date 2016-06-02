@@ -1,6 +1,8 @@
 Fbox = 1
 Fibox = 2
 Fplayer = 3
+Fpowerups = 4
+Fsafe = 5
 
   -- table(success, size, dir(x,y), target(x,y))findPath(int player ,int flag);
   -- table(x,y) getPos(int numplayer);
@@ -12,20 +14,24 @@ ai = function(id)
       bomb,
       move
     }
-    e = findPath(id, 1)
-    a = e["success"]
     r["bomb"] = 0
     r["move"] = 0
-    if a == 2 then
---      print("safesoze dir : " .. e["safedir"])
-      r["bomb"] = 0
-      r["move"] = e["safedir"]
-      return r
+    if (iAmSafe(id) == 1) then
+          retups = findPath(id, Fpowerups)
+          r["move"] = retups["dir"]
+          if retups["dir"] > 0 then
+             if (directionIsSafe(id, retups["dir"]) == 1) then r["move"] = 0 end
+          else
+          ret = findPath(id, Fbox)
+          r["move"] = ret["dir"]
+          if (directionIsSafe(id, ret["dir"]) == 1) then
+            r["move"] = 0 end
+          if (ret["size"] == 0) then
+            r["bomb"] = 1 end
+          end
     else
---      print("dir " .. e["dir"] .. " size " .. e["size"])
-      r["bomb"] = 0
-      r["move"] = 0 --e["dir"]
-      return r
+       ret = findPath(id, Fsafe)
+       r["move"] = ret["safedir"]
     end
-  return r
+    return r
 end

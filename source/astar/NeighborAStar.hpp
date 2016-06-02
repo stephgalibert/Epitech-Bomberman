@@ -38,7 +38,7 @@ public:
   void                         reset(void);
   bool                         isBlock(bbman::ItemID const& id);
   size_t                       getSize(void);
-
+  bool                         isFound(void);
 private:
 
   struct Node
@@ -70,6 +70,7 @@ private:
   Node _end;
   irr::core::vector3d<irr::s32> _begin;
   std::list<irr::core::vector3d<irr::s32> >_path;
+  bool  _found;
 };
 }
 

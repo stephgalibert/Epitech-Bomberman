@@ -41,6 +41,11 @@ void bbman::PowerUPs::add(bbman::Irrlicht &irr, irr::core::vector3df const& pos)
   generate(irr, pos);
 }
 
+std::list<bbman::IPowerUP *>const& bbman::PowerUPs::getPowerUPs(void) const
+{
+   return this->_powerUPs;
+}
+
 void bbman::PowerUPs::checkCollision(APlayer *player,
 				     irr::core::vector3df const& scale)
 {

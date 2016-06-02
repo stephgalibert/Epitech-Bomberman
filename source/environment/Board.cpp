@@ -1,4 +1,5 @@
 //
+
 // Board.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
 //
 // Made by stephane galibert
@@ -14,9 +15,10 @@
 bbman::Board::Board(void)
 {
   this->_backgroundMesh = NULL;
+
   // la taille de la map doit être impaire
-  this->_size = irr::core::vector3df(19, 0, 13);
-  this->_scale = irr::core::vector3df(10, 10, 10);
+  this->_size                                  = irr::core::vector3df(19, 0, 13);
+  this->_scale                                 = irr::core::vector3df(10, 10, 10);
   this->_ctor[(int)ItemID::II_BLOCK_INBRKABLE] =
     std::bind(&bbman::Board::buildInbrkable, this, std::placeholders::_1,
               std::placeholders::_2, std::placeholders::_3);
@@ -34,15 +36,19 @@ bbman::Board::~Board(void)
   for (auto& it : this->_blocks) {
     delete (it);
   }
+
   for (auto& it : this->_dblocks) {
     delete (it);
   }
+
   for (auto& it : this->_bombs) {
     delete (it);
   }
+
   for (auto& it : this->_players) {
     delete (it);
   }
+
   if (this->_backgroundMesh) {
     this->_backgroundMesh->remove();
   }
@@ -65,10 +71,12 @@ void bbman::Board::init(bbman::Irrlicht& irr)
 void bbman::Board::init(bbman::Irrlicht& irr, bbman::Loader const& loader)
 {
   this->_map = loader.getMap();
+
   for (auto& it : loader.getPlayers()) {
     addPlayer(it);
   }
-  for (auto &it : loader.getBombs()) {
+
+  for (auto& it : loader.getBombs()) {
     addBomb(it);
   }
   this->_irr = &irr;
@@ -92,7 +100,8 @@ void bbman::Board::update(Irrlicht& irr, irr::f32 delta)
 {
   updatePlayers(irr, delta);
   updateBombs(irr, delta);
-  for (auto &it : this->_dblocks) {
+
+  for (auto& it : this->_dblocks) {
     it->update(irr, delta);
   }
 }
@@ -100,66 +109,71 @@ void bbman::Board::update(Irrlicht& irr, irr::f32 delta)
 bool bbman::Board::hasWinners(void) const
 {
   int nbAlive = 0;
+
   for (auto it : this->_players) {
     if (!it->hasExplosed()) {
       ++nbAlive;
     }
   }
-  return (nbAlive < 2);
+  return nbAlive < 2;
 }
 
-bbman::APlayer *bbman::Board::getPlayerByID(size_t id) const
+bbman::APlayer * bbman::Board::getPlayerByID(size_t id) const
 {
   for (auto it : this->_players) {
     if (it->getID() == id) {
-      return (it);
+      return it;
     }
   }
-  return (NULL);
+  return NULL;
 }
 
-bool bbman::Board::isNotProtected(IBomb *bombs,
-				  irr::core::vector3d<irr::s32>const& bomb,
+bool bbman::Board::isNotProtected(IBomb                              *bombs,
+                                  irr::core::vector3d<irr::s32>const& bomb,
                                   irr::core::vector3d<irr::s32>const& block)
 {
   if (block.X == bomb.X) {
     if (block.Z > bomb.Z) {
       if (this->_map.at(block.X, block.Z - 1).id == ItemID::II_BLOCK_INBRKABLE)
-	return (false);
+        return false;
     }
     else if (block.Z < bomb.Z) {
       if (this->_map.at(block.X, block.Z + 1).id == ItemID::II_BLOCK_INBRKABLE)
-	return (false);
+        return false;
     }
+
     if (tools::StaticTools::getDistance2D(bomb, block) > bombs->getRange())
-      return (false);
+      return false;
   }
   else if (block.Z == bomb.Z) {
     if (block.X > bomb.X) {
       if (this->_map.at(block.X - 1, block.Z).id == ItemID::II_BLOCK_INBRKABLE)
-	return (false);
+        return false;
     }
     else if (block.X < bomb.X) {
       if (this->_map.at(block.X + 1, block.Z).id == ItemID::II_BLOCK_INBRKABLE)
-	return (false);
+        return false;
     }
+
     if (tools::StaticTools::getDistance2D(bomb, block) > bombs->getRange())
-      return (false);
+      return false;
   }
   else
-    return (false);
+    return false;
+
   return true;
 }
 
-bool bbman::Board::isInExplosion(irr::core::vector3d<irr::s32> const& pos)
+bool bbman::Board::isInExplosion(irr::core::vector3d<irr::s32>const& pos)
 {
   for (auto it : this->_bombs) {
-    irr::core::vector3d<irr::s32> const& bpos = it->getPosInMap(getScale());
+    irr::core::vector3d<irr::s32>const& bpos = it->getPosInMap(getScale());
+
     if (isNotProtected(it, bpos, pos)) {
-      return (true);
+      return true;
     }
   }
-  return (false);
+  return false;
 }
 
 void bbman::Board::addPlayer(APlayer *player)
@@ -170,18 +184,19 @@ void bbman::Board::addPlayer(APlayer *player)
 
 bool bbman::Board::addBomb(IBomb *newBomb)
 {
-  if (std::find_if(std::begin(this->_bombs), std::end(this->_bombs),
-		   [&newBomb](IBomb *bomb) {
-		     if (newBomb->getPosition() == bomb->getPosition())
-		       return (true);
-		     return (false);
-		   }) == std::end(this->_bombs)
+  if ((std::find_if(std::begin(this->_bombs), std::end(this->_bombs),
+                    [&newBomb](IBomb * bomb) {
+                      if (newBomb->getPosition() == bomb->getPosition())
+                        return true;
+
+                      return false;
+                    }) == std::end(this->_bombs))
       && !isOutside(newBomb->getPosition())) {
     this->_bombs.push_back(newBomb);
     this->_explosable.push_back(newBomb);
-    return (true);
+    return true;
   }
-  return (false);
+  return false;
 }
 
 void bbman::Board::setPosition(irr::core::vector3df const& pos)
@@ -213,6 +228,7 @@ bool bbman::Board::isInNode(irr::core::vector3df const& pos) const
 {
   irr::f32 x = (int)(pos.X / this->_scale.X) * this->_scale.X;
   irr::f32 y = (int)(pos.Z / this->_scale.Z) * this->_scale.Z;
+
   return pos.X > x + 4.f && pos.Z > y + 4.f
          && pos.X < x + 6.f && pos.Z < y + 6.f;
 }
@@ -222,7 +238,7 @@ bbman::Map<bbman::Cell>const& bbman::Board::getMap(void) const
   return this->_map;
 }
 
-bbman::Map<bbman::Cell> &bbman::Board::getMap(void)
+bbman::Map<bbman::Cell>& bbman::Board::getMap(void)
 {
   return this->_map;
 }
@@ -249,20 +265,20 @@ std::list<bbman::IBomb *>const& bbman::Board::getBombs(void) const
 
 bbman::PowerUPs const& bbman::Board::getPowerUPs(void) const
 {
-  return (this->_powerUPs);
+  return this->_powerUPs;
 }
 
-bbman::PowerUPs &bbman::Board::getPowerUPs(void)
+bbman::PowerUPs& bbman::Board::getPowerUPs(void)
 {
-  return (this->_powerUPs);
+  return this->_powerUPs;
 }
 
-bbman::Irrlicht *bbman::Board::getIrrlicht(void)
+bbman::Irrlicht * bbman::Board::getIrrlicht(void)
 {
-  return (this->_irr);
+  return this->_irr;
 }
 
-bbman::IBlock *bbman::Board::createInbrkable(Irrlicht &irr, size_t x, size_t y)
+bbman::IBlock * bbman::Board::createInbrkable(Irrlicht& irr, size_t x, size_t y)
 {
   IndestructibleBlock *block = new IndestructibleBlock;
   irr::core::vector3df pos;
@@ -283,7 +299,7 @@ bbman::IBlock *bbman::Board::createInbrkable(Irrlicht &irr, size_t x, size_t y)
     }
     std::cerr << e.what() << std::endl;
   }
-  return (block);
+  return block;
 }
 
 void bbman::Board::disableDirection(size_t x, size_t y)
@@ -292,23 +308,26 @@ void bbman::Board::disableDirection(size_t x, size_t y)
     Cell& north = this->_map.at(x, y - 1);
     north.node &= ~(north.node & ((size_t)DIR_NORTH));
   }
+
   if (y < this->_map.h - 1) {
     Cell& south = this->_map.at(x, y + 1);
     south.node &= ~(south.node & ((size_t)DIR_SOUTH));
   }
+
   if (x > 0) {
-    Cell& east  = this->_map.at(x - 1, y);
+    Cell& east = this->_map.at(x - 1, y);
     east.node &= ~(east.node & ((size_t)DIR_EAST));
   }
+
   if (x < this->_map.w - 1) {
-    Cell& west  = this->_map.at(x + 1, y);
+    Cell& west = this->_map.at(x + 1, y);
     west.node &= ~(west.node & ((size_t)DIR_WEST));
   }
 }
 
 void bbman::Board::registerBlock(IBlock *block)
 {
-  irr::core::vector3d<irr::s32> const& pos = block->getPosInMap(this->_scale);
+  irr::core::vector3d<irr::s32>const& pos = block->getPosInMap(this->_scale);
   this->_map.at(pos.X, pos.Z).id = block->getID();
   this->_blocks.push_back(block);
 }
@@ -328,7 +347,8 @@ std::list<bbman::IEntity *> const& bbman::Board::getEntityByPosition(irr::core::
   this->_entities.erase(this->_entities.begin(), this->_entities.end());
   for (auto it : this->_explosable) {
     if (!it->hasExplosed()) {
-      irr::core::vector3d<irr::s32> const& epos = it->getPosInMap(getScale());
+      irr::core::vector3d<irr::s32>const& epos = it->getPosInMap(getScale());
+
       if (epos == pos) {
 	this->_entities.push_back(it);
       }
@@ -381,8 +401,9 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
       bomb->explode(this);
       bomb->playExplosion();
       APlayer *owner = getPlayerByID(bomb->getOwnerID());
+
       if (owner) {
-	owner->addBomb(bomb->clone());
+        owner->addBomb(bomb->clone());
       }
     }
     else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
@@ -521,7 +542,7 @@ void bbman::Board::initMap(void)
   for (size_t i = 0; i < this->_map.h; ++i) {
     for (size_t j = 0; j < this->_map.w; ++j) {
       if ((!(i % 2) && !(j % 2))
-          || (i == 0 || j == 0 || i == this->_map.h - 1 || j == this->_map.w - 1)) {
+          || ((i == 0) || (j == 0) || (i == this->_map.h - 1) || (j == this->_map.w - 1))) {
         this->_map.at(j, i).id = ItemID::II_BLOCK_INBRKABLE;
       } else {
         this->_map.at(j, i).id = ItemID::II_BLOCK_BRKABLE;
@@ -537,14 +558,14 @@ void bbman::Board::initMap(void)
   this->_map.at(17, 10).id = ItemID::II_NONE;
   this->_map.at(16, 11).id = ItemID::II_NONE;
   this->_map.at(15, 11).id = ItemID::II_NONE;
-  this->_map.at(17, 1).id = ItemID::II_NONE;
-  this->_map.at(17, 2).id = ItemID::II_NONE;
-  this->_map.at(16, 1).id = ItemID::II_NONE;
-  this->_map.at(15, 1).id = ItemID::II_NONE;
-  this->_map.at(1, 11).id = ItemID::II_NONE;
-  this->_map.at(1, 10).id = ItemID::II_NONE;
-  this->_map.at(2, 11).id = ItemID::II_NONE;
-  this->_map.at(3, 11).id = ItemID::II_NONE;
+  this->_map.at(17, 1).id  = ItemID::II_NONE;
+  this->_map.at(17, 2).id  = ItemID::II_NONE;
+  this->_map.at(16, 1).id  = ItemID::II_NONE;
+  this->_map.at(15, 1).id  = ItemID::II_NONE;
+  this->_map.at(1, 11).id  = ItemID::II_NONE;
+  this->_map.at(1, 10).id  = ItemID::II_NONE;
+  this->_map.at(2, 11).id  = ItemID::II_NONE;
+  this->_map.at(3, 11).id  = ItemID::II_NONE;
 }
 
 void bbman::Board::initNode(void)
@@ -553,19 +574,22 @@ void bbman::Board::initNode(void)
     for (size_t j = 0; j < this->_map.w; ++j) {
       if (this->_map.at(j, i).id != ItemID::II_NONE) {
         if (i > 0) {
-	  Cell& north = this->_map.at(j, i - 1);
+          Cell& north = this->_map.at(j, i - 1);
           north.node &= ~(north.node & ((size_t)DIR_NORTH));
         }
+
         if (i < this->_map.h - 1) {
-	  Cell& south = this->_map.at(j, i + 1);
+          Cell& south = this->_map.at(j, i + 1);
           south.node &= ~(south.node & ((size_t)DIR_SOUTH));
         }
+
         if (j > 0) {
-	  Cell& east  = this->_map.at(j - 1, i);
+          Cell& east = this->_map.at(j - 1, i);
           east.node &= ~(east.node & ((size_t)DIR_EAST));
         }
+
         if (j < this->_map.w - 1) {
-	  Cell& west  = this->_map.at(j + 1, i);
+          Cell& west = this->_map.at(j + 1, i);
           west.node &= ~(west.node & ((size_t)DIR_WEST));
         }
       }
@@ -576,12 +600,13 @@ void bbman::Board::initNode(void)
 void bbman::Board::initMesh(Irrlicht& irr)
 {
   ItemID id;
-  std::string txt = "./asset/pillar/Pilliar_blue.obj";
+  std::string txt    = "./asset/pillar/Pilliar_blue.obj";
   std::string txtobj = "./asset/pillar/Texture_pillier_green.png";
 
   for (size_t i = 0; i < this->_map.h; ++i) {
     for (size_t j = 0; j < this->_map.w; ++j) {
       id = this->_map.at(j, i).id;
+
       if (this->_ctor.find((int)id) != this->_ctor.cend()) {
         this->_ctor[(int)id](irr, j, i);
       }
@@ -771,19 +796,20 @@ void bbman::Board::updateBombs(bbman::Irrlicht& irr, irr::f32 delta)
        it != std::end(this->_bombs);) {
     if ((*it)->hasExplosed()) {
       for (std::list<IEntity *>::iterator it2 = std::begin(this->_explosable);
-	   it2 != std::end(this->_explosable);) {
-	if ((*it) == (*it2)) {
-	  it2 = this->_explosable.erase(it2);
-	  break;
-	}
-	else {
-	  ++it2;
-	}
+           it2 != std::end(this->_explosable);) {
+        if ((*it) == (*it2)) {
+          it2 = this->_explosable.erase(it2);
+          break;
+        }
+        else {
+          ++it2;
+        }
       }
       delete (*it);
       it = this->_bombs.erase(it);
     } else {
       (*it)->update(irr, delta);
+
       if ((*it)->isExplosing()) {
         explodeBlocks(*it);
       }
@@ -797,6 +823,7 @@ void bbman::Board::updatePlayers(bbman::Irrlicht& irr, irr::f32 delta)
   for (auto& it : this->_players) {
     it->play(irr, this);
     it->update(irr, delta);
+
     if (it->isRunning()) {
       this->_powerUPs.checkCollision(it, this->_scale);
     }

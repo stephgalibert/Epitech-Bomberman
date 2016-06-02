@@ -33,8 +33,8 @@ namespace bbman
     PowerUPs(void);
     ~PowerUPs(void);
     void add(Irrlicht &irr, irr::core::vector3df const& pos);
-    void checkCollision(APlayer *player,
-			irr::core::vector3df const& scale);
+    void checkCollision(APlayer *player, irr::core::vector3df const& scale);
+    std::list<IPowerUP *>const& getPowerUPs() const;
   private:
     void generate(Irrlicht &irr, irr::core::vector3df const& pos);
     void generateSpeedUp(Irrlicht &irr, irr::core::vector3df const& pos);
