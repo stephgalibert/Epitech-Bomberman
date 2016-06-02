@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Thu Jun  2 12:51:49 2016 stephane galibert
+// Last update Thu Jun  2 13:23:33 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -323,7 +323,7 @@ void bbman::HumanPlayer::move(irr::f32 delta)
   }
   else {
     if (!this->_isRunning) {
-      this->_mesh->setAnimationSpeed(15);
+      this->_mesh->setAnimationSpeed(25);
       //this->_mesh->setFrameLoop(0, 13);
       this->_mesh->setFrameLoop(60, 105);
       this->_isRunning = true;
