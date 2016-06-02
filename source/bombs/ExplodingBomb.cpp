@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Thu Jun  2 12:10:54 2016 stephane galibert
+// Last update Thu Jun  2 22:07:34 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -176,21 +176,21 @@ bool bbman::ExplodingBomb::isExploding(void) const
 void bbman::ExplodingBomb::initMesh(bbman::Irrlicht &irr)
 {
   std::string txt = "./asset/bomb/bomb.obj";
-  std::string txtobj = "./asset/bomb/Texture_pillier_" + this->_color + ".png";
-  std::string alpha = "./asset/bomb/Texture_pillier_alpha_" + this->_color + ".png";
-  //std::string txt3 = "./asset/bomb/Texture_pillier_Selfillum_" + _color + ".png";
+  //std::string txtobj = "./asset/bomb/Texture_pillier_" + this->_color + ".png";
+  std::string txtobj = "./asset/pillier/Texture_pillier_" + this->_color + ".png";
+  //std::string light = "./asset/pillier/Texture_pillier_Selfillum_" + _color + ".png";
+  //std::string alpha = "./asset/pillier/Texture_pillier_alpha_" + this->_color + ".png";
 
   this->_mesh = irr.getSmgr()->addMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
-    this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, true);
+    this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setMaterialTexture(0, irr.getTexture(txtobj.data()));
-    //this->_mesh->setMaterialTexture(1, irr.getTexture(txt3.data()));
-    //this->_mesh->setMaterialTexture(1, irr.getTexture(txt3.data()));
+    //this->_mesh->setMaterialTexture(1, irr.getTexture(light.data()));
+    //this->_mesh->setMaterialTexture(2, irr.getTexture(alpha.data()));
     //this->_mesh->setMaterialTexture(2, irr.getTexture(alpha.data()));
     this->_mesh->setScale(irr::core::vector3df(1.8f, 1.8f, 1.8f));
 
-    //this->_mesh->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
-    this->_mesh->setMaterialType(irr::video::EMT_SOLID);
+    //this->_mesh->setMaterialType(irr::video::EMT_LIGHTMAP_ADD);
   }
   else {
     throw (std::runtime_error("can not create exploding bomb"));

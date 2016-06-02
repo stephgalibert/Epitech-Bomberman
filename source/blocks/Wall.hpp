@@ -1,27 +1,25 @@
 //
-// IndestructibleBlock.hpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// Wall.hpp for indie in /home/galibe_s/rendu/bomberman/source/blocks
 //
 // Made by stephane galibert
 // Login   <galibe_s@epitech.net>
 //
-// Started on  Sat May  7 18:22:34 2016 stephane galibert
-// Last update Thu Jun  2 14:52:51 2016 stephane galibert
+// Started on  Thu Jun  2 17:11:02 2016 stephane galibert
+// Last update Thu Jun  2 17:12:02 2016 stephane galibert
 //
 
-#ifndef _INDESTRUCTIBLEBLOCK_HPP_
-# define _INDESTRUCTIBLEBLOCK_HPP_
-
-# include <iostream>
+#ifndef _WALL_HPP_
+# define _WALL_HPP_
 
 # include "IBlock.hpp"
 
 namespace bbman
 {
-  class IndestructibleBlock : public IBlock
+  class Wall : public IBlock
   {
   public:
-    IndestructibleBlock(void);
-    virtual ~IndestructibleBlock(void);
+    Wall(void);
+    virtual ~Wall(void);
     virtual void init(Irrlicht &irr, std::string const& color = "");
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void setMaterialFlag(irr::video::E_MATERIAL_FLAG flag, bool value);
@@ -38,10 +36,11 @@ namespace bbman
     virtual std::string const& getColor(void) const;
     virtual void setColor(std::string const& color);
   private:
-    irr::scene::ISceneNode *_node;
+    //irr::scene::ISceneNode *_node;
+    irr::scene::IMeshSceneNode *_mesh;
     irr::core::vector3d<irr::s32> _posInMap;
     std::string _color;
   };
 }
 
-#endif /* !_BLOCK_HPP_ */
+#endif /* !_WALL_HPP_ */

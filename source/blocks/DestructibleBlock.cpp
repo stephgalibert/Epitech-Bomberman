@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Wed Jun  1 21:42:17 2016 stephane galibert
+// Last update Thu Jun  2 20:30:31 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"

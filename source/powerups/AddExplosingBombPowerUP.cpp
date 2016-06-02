@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May 29 10:09:35 2016 stephane galibert
-// Last update Wed Jun  1 20:26:20 2016 stephane galibert
+// Last update Thu Jun  2 22:09:40 2016 stephane galibert
 //
 
 #include "AddExplosingBombPowerUP.hpp"
@@ -28,8 +28,8 @@ void bbman::AddExplosingBombPowerUP::init(Irrlicht &irr, std::string const& colo
   irr::scene::ISceneNodeAnimator *anms = NULL;
   (void)color;
   std::string obj = "./asset/powerup/powerUpBomb.obj";
-  std::string txt1 = "./asset/bomb/Texture_pillier_Selfillum_Blue.png";
-  std::string txt2 = "./asset/bomb/Texture_pillier_alpha_Blue.png";
+  std::string txt1 = "./asset/pillier/Texture_pillier_Selfillum_Blue.png";
+  std::string txt2 = "./asset/pillier/Texture_pillier_alpha_Blue.png";
   //std::string txt3 = "./asset/bomb2_normals.png";
 
   //this->_mesh = irr.getSmgr()->addCubeSceneNode();

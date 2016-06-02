@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Thu Jun  2 14:03:00 2016 stephane galibert
+// Last update Thu Jun  2 17:34:04 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -28,7 +28,9 @@
 # include "IBlock.hpp"
 # include "IndestructibleBlock.hpp"
 # include "DestructibleBlock.hpp"
+# include "Pillar.hpp"
 # include "PowerUPs.hpp"
+# include "Wall.hpp"
 # include "InputListener.hpp"
 # include "PowerUPs.hpp"
 
@@ -80,6 +82,8 @@ namespace bbman
 			irr::core::vector3d<irr::s32> const& block);
     void buildInbrkable(Irrlicht &irr, size_t x, size_t y);
     void buildBrkable(Irrlicht &irr, size_t x, size_t y);
+    void buildPillar(Irrlicht &irr, size_t x, size_t y, std::string const& color);
+    void buildWall(Irrlicht &irr, size_t x, size_t y, std::string const& color);
     void initTerrain(Irrlicht &irr);
     void initMap(void);
     void initNode(void);
@@ -88,7 +92,6 @@ namespace bbman
     void updatePlayers(bbman::Irrlicht &irr, irr::f32 delta);
     std::unordered_map<int, std::function<void(Irrlicht &, size_t, size_t)> > _ctor;
     irr::scene::IMeshSceneNode *_backgroundMesh;
-    irr::video::SMaterial _texture;
     std::vector<IBlock *> _blocks;
     std::list<IBlock *> _dblocks;
     std::vector<APlayer *> _players;

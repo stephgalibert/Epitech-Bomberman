@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Thu Jun  2 14:17:04 2016 stephane galibert
+// Last update Thu Jun  2 21:42:18 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -22,7 +22,7 @@ bbman::Board::Board(void)
               std::placeholders::_2, std::placeholders::_3);
   this->_ctor[(int)ItemID::II_BLOCK_BRKABLE] =
     std::bind(&bbman::Board::buildBrkable, this, std::placeholders::_1,
-              std::placeholders::_2, std::placeholders::_3);
+    std::placeholders::_2, std::placeholders::_3);
   this->_irr = NULL;
 }
 
@@ -92,7 +92,6 @@ void bbman::Board::update(Irrlicht& irr, irr::f32 delta)
   for (auto &it : this->_dblocks) {
     it->update(irr, delta);
   }
-  //this->_powerUPs.update(irr, delta, this);
 }
 
 bool bbman::Board::hasWinners(void) const
@@ -428,46 +427,25 @@ bool bbman::Board::isOutside(irr::core::vector3df const& pos)
 
 void bbman::Board::initTerrain(Irrlicht& irr)
 {
-  irr::scene::IMesh *mesh;
-
-  //this->_texture.setTexture(0, irr.getTexture("
-  //this->_texture.setTexture(1, irr.getTexture("./asset/Texture_ground_illum.png"));
-
-  //irr.getSmgr()->setAmbientLight(irr::video::SColor(255, 255, 255, 0));
-
-  /*this->_texture.MaterialType = irr::video::EMT_LIGHTMAP_ADD;
-    this->_texture.setFlag(irr::video::EMF_LIGHTING, true);*/
-  mesh = irr.getSmgr()->getGeometryCreator()->
-    createHillPlaneMesh(irr::core::dimension2d<irr::f32>(10, 10),
-			irr::core::dimension2d<irr::u32>(this->_map.w,
-							 this->_map.h),
-			NULL, 0,
-			irr::core::dimension2d<irr::f32>(0, 0),
-			irr::core::dimension2d<irr::f32>(this->_map.w,
-							 this->_map.h));
-  this->_backgroundMesh = irr.getSmgr()->addMeshSceneNode(mesh);
-
+  std::string txt = "./asset/Ground.obj";
+  this->_backgroundMesh = irr.getSmgr()->addMeshSceneNode(irr.getMesh(txt.data()));
   this->_backgroundMesh->setMaterialTexture(0, irr.getTexture("./asset/Texture_ground.png"));
   this->_backgroundMesh->setMaterialTexture(1, irr.getTexture("./asset/Texture_ground_illum.png"));
   this->_backgroundMesh->setMaterialType(irr::video::EMT_LIGHTMAP_ADD);
-
+  this->_backgroundMesh->setScale(irr::core::vector3df(10, 1, 8));
 
   irr::core::vector3df pos;
   pos.X = this->_map.w * this->_scale.X / 2;
   pos.Z = this->_map.h * this->_scale.Z / 2;
   this->_backgroundMesh->setPosition(pos);
   pos.Y += 120;
-  this->_light = irr.getSmgr()->addLightSceneNode(0, pos);// irr::video::SColorf(1.f,1.f,1.f), 10.0f, 1 );
+  this->_light = irr.getSmgr()->addLightSceneNode(0, pos);
   this->_light->setLightType(irr::video::ELT_DIRECTIONAL);
 
   irr::scene::ISceneNode* pNode = irr.getSmgr()->addEmptySceneNode();
-  this->_light->setPosition(irr::core::vector3df(0,0,1)); //default is (1,1,0) for directional lights
+  this->_light->setPosition(irr::core::vector3df(0,0,1));
   this->_light->setParent(pNode);
   pNode->setRotation(irr::core::vector3df(90, 0, 0));
-
-  /*irr::video::SLight &l = this->_light->getLightData();
-  l.Direction.X = pos.X;
-  l.Direction.Z = pos.Z;*/
 }
 
 void bbman::Board::initMap(void)
@@ -482,6 +460,7 @@ void bbman::Board::initMap(void)
       }
     }
   }
+
   this->_map.at(1, 1).id = ItemID::II_NONE;
   this->_map.at(1, 2).id = ItemID::II_NONE;
   this->_map.at(2, 1).id = ItemID::II_NONE;
@@ -540,6 +519,14 @@ void bbman::Board::initMesh(Irrlicht& irr)
       }
     }
   }
+
+  buildPillar(irr, 0, 0, "Green");
+  buildPillar(irr, 18, 0, "Orange");
+  buildPillar(irr, 0, 12, "Purple");
+  buildPillar(irr, 18, 12, "Blue");
+  buildWall(irr, 18, 6, "1");
+  buildWall(irr, 9, 12, "2");
+  buildWall(irr, 0, 6, "3");
 }
 
 void bbman::Board::updateNode(irr::core::vector3d<irr::s32>const& pos)
@@ -564,9 +551,58 @@ void bbman::Board::buildInbrkable(Irrlicht& irr, size_t x, size_t y)
   pos.X = x * this->_scale.X + (this->_scale.X / 2);
   pos.Z = y * this->_scale.Z + (this->_scale.Z / 2);
   try {
-    block->init(irr);
+    if ((x == 0 || y == 0) || (x == 18 || y == 12))
+      block->init(irr, "0");
+    else
+      block->init(irr, "1");
     ext = block->getBoundingBox().getExtent();
     block->setPosition(irr::core::vector3df(pos.X, ext.Y / 2, pos.Z));
+    this->_blocks.push_back(block);
+    this->_map.at(x, y).id = ItemID::II_BLOCK_INBRKABLE;
+  } catch (std::runtime_error const& e) {
+    if (block) {
+      delete (block);
+    }
+    std::cerr << e.what() << std::endl;
+  }
+}
+
+void bbman::Board::buildPillar(Irrlicht& irr, size_t x, size_t y,
+			       std::string const& color)
+{
+  IBlock *block = new Pillar;
+  irr::core::vector3df pos;
+  irr::core::vector3df ext;
+
+  pos.X = x * this->_scale.X + (this->_scale.X / 2);
+  pos.Z = y * this->_scale.Z + (this->_scale.Z / 2);
+  try {
+    block->init(irr, color);
+    ext = block->getBoundingBox().getExtent();
+    block->setPosition(irr::core::vector3df(pos.X, 10, pos.Z));
+    this->_blocks.push_back(block);
+    this->_map.at(x, y).id = ItemID::II_BLOCK_INBRKABLE;
+  } catch (std::runtime_error const& e) {
+    if (block) {
+      delete (block);
+    }
+    std::cerr << e.what() << std::endl;
+  }
+}
+
+void bbman::Board::buildWall(Irrlicht& irr, size_t x, size_t y,
+			       std::string const& color)
+{
+  IBlock *block = new Wall;
+  irr::core::vector3df pos;
+  irr::core::vector3df ext;
+
+  pos.X = x * this->_scale.X + (this->_scale.X / 2);
+  pos.Z = y * this->_scale.Z + (this->_scale.Z / 2);
+  try {
+    block->init(irr, color);
+    ext = block->getBoundingBox().getExtent();
+    block->setPosition(irr::core::vector3df(pos.X, 10, pos.Z));
     this->_blocks.push_back(block);
     this->_map.at(x, y).id = ItemID::II_BLOCK_INBRKABLE;
   } catch (std::runtime_error const& e) {

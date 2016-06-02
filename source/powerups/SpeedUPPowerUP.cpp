@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:45 2016 stephane galibert
-// Last update Wed Jun  1 20:05:56 2016 stephane galibert
+// Last update Thu Jun  2 22:09:18 2016 stephane galibert
 //
 
 #include "SpeedUPPowerUP.hpp"
@@ -28,9 +28,9 @@ void bbman::SpeedUPPowerUP::init(Irrlicht &irr, std::string const& color)
 {
   irr::scene::ISceneNodeAnimator *anms = NULL;
   std::string obj = "./asset/powerup/powerUpSpeed.obj";
-  std::string txt = "./asset/Texture_pillier_green.png";
-  std::string txt1 = "./asset/Texture_pillier_Selfillum_green.png";
-  std::string txt2 = "./asset/Texture_pillier_alpha_green.png";
+  std::string txt = "./asset/pillier/Texture_pillier_Green.png";
+  std::string txt1 = "./asset/pillier/Texture_pillier_Selfillum_Green.png";
+  std::string txt2 = "./asset/pillier/Texture_pillier_alpha_Green.png";
   //std::string txt3 = "./asset/bomb2_normals.png";
 
   (void)color;
@@ -39,10 +39,7 @@ void bbman::SpeedUPPowerUP::init(Irrlicht &irr, std::string const& color)
   if (this->_mesh) {
 
     this->_mesh->setMaterialTexture(0, irr.getTexture(txt1.data()));
-    this->_mesh->setMaterialTexture(1, irr.getTexture(txt2.data())); // 3
-    /*this->_mesh->setMaterialTexture(2, irr.getTexture(txt1.data()));
-      this->_mesh->setMaterialTexture(3, irr.getTexture(txt2.data()));*/
-
+    this->_mesh->setMaterialTexture(1, irr.getTexture(txt2.data()));
 
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, true);
     this->_mesh->setScale(irr::core::vector3df(0.5f, 0.5f, 0.5f));

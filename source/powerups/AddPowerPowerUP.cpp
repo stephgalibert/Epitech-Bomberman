@@ -5,14 +5,13 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed Jun  1 16:30:03 2016 stephane galibert
-// Last update Wed Jun  1 21:16:12 2016 stephane galibert
+// Last update Thu Jun  2 22:15:04 2016 stephane galibert
 //
 
 #include "AddPowerPowerUP.hpp"
 
 bbman::AddPowerPowerUP::AddPowerPowerUP(void)
 {
-  //this->_node = NULL;
   this->_mesh = NULL;
   this->_delta = 0;
 }
@@ -28,8 +27,8 @@ void bbman::AddPowerPowerUP::init(Irrlicht &irr, std::string const& color)
 {
   irr::scene::ISceneNodeAnimator *anms = NULL;
   std::string obj = "./asset/powerup/powerUpP.obj";
-  std::string txt1 = "./asset/bomb/Texture_pillier_Selfillum_Orange.png";
-  std::string txt2 = "./asset/bomb/Texture_pillier_alpha_Orange.png";
+  std::string txt1 = "./asset/pillier/Texture_pillier_Selfillum_Orange.png";
+  std::string txt2 = "./asset/pillier/Texture_pillier_alpha_Orange.png";
 
   this->_mesh = irr.getSmgr()->addMeshSceneNode(irr.getMesh(obj.c_str()));
   if (this->_mesh) {

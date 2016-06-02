@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Thu Jun  2 13:23:33 2016 stephane galibert
+// Last update Thu Jun  2 21:41:22 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -71,10 +71,10 @@ void bbman::HumanPlayer::init(bbman::Irrlicht &irr, std::string const& color)
   IBomb *bomb = NULL;
 
   try {
+    this->_color = color;
     if (this->_inits.find(this->_playerNum) != std::end(this->_inits)) {
       this->_inits[this->_playerNum](irr);
     }
-    this->_color = color;
     this->_explosion = new Explosion;
     this->_explosion->init(irr, color);
     bomb = new ExplodingBomb(this);
@@ -436,8 +436,8 @@ void bbman::HumanPlayer::initPlayer1(bbman::Irrlicht &irr)
 {
   //std::string txt = "./asset/media/ninja.b3d";
   std::string fbx = "./asset/perso/perso.fbx";
-  std::string diffuse = "./asset/perso/texture/diffuse/text_perso_blue.png";
-  std::string iri = "asset/perso/texture/iridescent map/png/bleu.png";
+  std::string diffuse = "./asset/perso/texture/diffuse/" + this->_color + ".png";
+  std::string iri = "asset/perso/texture/illum/" + this->_color + ".png";
 
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(fbx.data()));
   if (this->_mesh) {
@@ -460,8 +460,8 @@ void bbman::HumanPlayer::initPlayer2(Irrlicht &irr)
 {
   //std::string txt = "./asset/media/ninja.b3d";
   std::string fbx = "./asset/perso/perso.fbx";
-  std::string diffuse = "./asset/perso/texture/diffuse/text_perso_orange.png";
-  std::string iri = "./asset/perso/texture/iridescent map/png/orange iridescent.png";
+  std::string diffuse = "./asset/perso/texture/diffuse/" + this->_color + ".png";
+  std::string iri = "asset/perso/texture/illum/" + this->_color + ".png";
 
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(fbx.data()));
   if (this->_mesh) {
