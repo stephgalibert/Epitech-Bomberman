@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Thu Jun  2 17:34:04 2016 stephane galibert
+// Last update Thu Jun  2 22:48:00 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -33,6 +33,7 @@
 # include "Wall.hpp"
 # include "InputListener.hpp"
 # include "PowerUPs.hpp"
+# include "Generator.hpp"
 
 namespace bbman
 {
@@ -104,6 +105,7 @@ namespace bbman
     irr::core::vector3df _spawn[4];
     Irrlicht *_irr;
     irr::scene::ILightSceneNode* _light;
+    tools::Generator _generator;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, bbman::Board const& board)

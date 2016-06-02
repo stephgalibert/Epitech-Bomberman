@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Thu Jun  2 21:41:22 2016 stephane galibert
+// Last update Fri Jun  3 01:25:04 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -90,7 +90,7 @@ void bbman::HumanPlayer::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
   (void)irr;
   if (this->_alive) {
-    move(delta);
+    this->_delta = delta;
     updateEffets(delta);
   }
   if (this->_explosion) {
@@ -106,9 +106,13 @@ void bbman::HumanPlayer::play(bbman::Irrlicht &irr, bbman::Board *board)
 {
   if (this->_alive) {
     checkDirection(board);
+    if (!board->isInNode(this->getPosition())) {
+      this->_direction = this->_prevDirection;
+      }
     if (this->_action == bbman::ACT_BOMB) {
       dropBomb(irr, board);
     }
+    move(this->_delta);
   }
 }
 

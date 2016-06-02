@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:02:47 2016 stephane galibert
-// Last update Wed Jun  1 16:37:51 2016 stephane galibert
+// Last update Fri Jun  3 01:26:08 2016 stephane galibert
 //
 
 #ifndef _POWERUPS_HPP_
@@ -33,7 +33,8 @@ namespace bbman
     PowerUPs(void);
     ~PowerUPs(void);
     void add(Irrlicht &irr, irr::core::vector3df const& pos);
-    void checkCollision(APlayer *player);
+    void checkCollision(APlayer *player,
+			irr::core::vector3df const& scale);
   private:
     void generate(Irrlicht &irr, irr::core::vector3df const& pos);
     void generateSpeedUp(Irrlicht &irr, irr::core::vector3df const& pos);

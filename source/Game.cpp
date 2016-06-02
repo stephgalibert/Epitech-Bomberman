@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Thu Jun  2 21:58:31 2016 stephane galibert
+// Last update Fri Jun  3 01:07:00 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -100,7 +100,7 @@ void bbman::Game::initCamera(bbman::Irrlicht &irr)
   pos = this->_board->getPosition();
   this->_camera = irr.getSmgr()->addCameraSceneNode();
   this->_camera->setTarget(irr::core::vector3df(pos.X, pos.Y, pos.Z));
-  this->_camera->setPosition(irr::core::vector3df(pos.X, pos.Y + 120, 0));
+  this->_camera->setPosition(irr::core::vector3df(pos.X, pos.Y + 120, 10));
 }
 
 void bbman::Game::initSound(void)

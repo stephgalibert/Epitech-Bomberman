@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Wed Jun  1 20:58:08 2016 stephane galibert
+// Last update Fri Jun  3 00:40:58 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -90,6 +90,7 @@ namespace bbman
     size_t _playerNum;
     bool _alive;
     std::string _color;
+    irr::f32 _delta;
   };
 }
 

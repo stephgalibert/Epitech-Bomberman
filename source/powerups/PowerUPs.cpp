@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 17:37:21 2016 stephane galibert
-// Last update Wed Jun  1 21:27:01 2016 stephane galibert
+// Last update Fri Jun  3 01:26:22 2016 stephane galibert
 //
 
 #include "PowerUPs.hpp"
@@ -41,18 +41,28 @@ void bbman::PowerUPs::add(bbman::Irrlicht &irr, irr::core::vector3df const& pos)
   generate(irr, pos);
 }
 
-void bbman::PowerUPs::checkCollision(APlayer *player)
+void bbman::PowerUPs::checkCollision(APlayer *player,
+				     irr::core::vector3df const& scale)
 {
   for (std::list<IPowerUP *>::iterator it = std::begin(this->_powerUPs);
        it != std::end(this->_powerUPs); ) {
-    if ((*it)->isColliding(player->getBoundingBox())) {
+    irr::core::vector3d<irr::s32> const& pos = player->getPosInMap(scale);
+    if (pos == (*it)->getPosInMap(scale)) {
+      (*it)->affectPlayer(player);
+      delete (*it);
+      it = this->_powerUPs.erase(it);
+    } else {
+      ++it;
+    }
+
+    /*if ((*it)->isColliding(player->getBoundingBox())) {
       (*it)->affectPlayer(player);
       delete (*it);
       it = this->_powerUPs.erase(it);
     }
     else {
       ++it;
-    }
+      }*/
   }
 }
 

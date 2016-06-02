@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Thu Jun  2 20:30:31 2016 stephane galibert
+// Last update Fri Jun  3 01:06:06 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"
@@ -30,16 +30,23 @@ bbman::DestructibleBlock::~DestructibleBlock(void)
 
 void bbman::DestructibleBlock::init(Irrlicht &irr, std::string const& color)
 {
+  std::string txt = "./asset/cube/Texture_cube_" + color + ".png";
+
   this->_color = color;
   this->_node = irr.getSmgr()->addCubeSceneNode();
   if (this->_node) {
     this->_explosion = new Explosion;
-    this->_explosion->init(irr, "Orange");
-    this->_node->setMaterialTexture(0, irr.getTexture("./asset/cubeGreen.png"));
-    this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, true);
+    this->_explosion->init(irr, color);
+    this->_node->setMaterialTexture(0, irr.getTexture(txt.data()));
+    if (color == "White") {
+      this->_node->setMaterialTexture(1, irr.getTexture(txt.data()));
+    //this->_node->setMaterialTexture(0, irr.getTexture("./asset/cube/Texture_cube_orange.png"));
+      this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, true);
+    }
     //this->_node->getMaterial(0).FogEnable = false;
     //this->_node->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
     this->_node->setScale(irr::core::vector3df(0.8f, 1.f, 0.8));
+    this->_node->setMaterialType(irr::video::EMT_LIGHTMAP_ADD);
     this->_explosed = false;
   }
   else {

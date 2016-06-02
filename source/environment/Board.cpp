@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Thu Jun  2 21:42:18 2016 stephane galibert
+// Last update Fri Jun  3 01:25:30 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -553,8 +553,19 @@ void bbman::Board::buildInbrkable(Irrlicht& irr, size_t x, size_t y)
   try {
     if ((x == 0 || y == 0) || (x == 18 || y == 12))
       block->init(irr, "0");
-    else
-      block->init(irr, "1");
+    else {
+      if (x < 8 && y < 6) {
+	block->init(irr, "Green");
+      } else if (x > 10 && y < 6) {
+	block->init(irr, "Orange");
+      } else if (x > 10 && y > 6) {
+	block->init(irr, "Blue");
+      } else if (x < 8 && y > 6) {
+	block->init(irr, "Purple");
+      } else {
+	block->init(irr, "White");
+      }
+    }
     ext = block->getBoundingBox().getExtent();
     block->setPosition(irr::core::vector3df(pos.X, ext.Y / 2, pos.Z));
     this->_blocks.push_back(block);
@@ -618,11 +629,24 @@ void bbman::Board::buildBrkable(Irrlicht& irr, size_t x, size_t y)
   IBlock *block = new DestructibleBlock;
   irr::core::vector3df pos;
   irr::core::vector3df ext;
+  int random = 0;
 
+  random = this->_generator(0, 100);
   pos.X = x * this->_scale.X + (this->_scale.X / 2);
   pos.Z = y * this->_scale.Z + (this->_scale.Z / 2);
   try {
-    block->init(irr);
+
+    if (x < 9 && y < 6) {
+      block->init(irr, "Green");
+    } else if (x > 9 && y < 6) {
+      block->init(irr, "Orange");
+    } else if (x > 9 && y > 6) {
+      block->init(irr, "Blue");
+    } else if (x < 9 && y > 6) {
+      block->init(irr, "Purple");
+    } else {
+      block->init(irr, "White");
+    }
     ext = block->getBoundingBox().getExtent();
     block->setPosition(irr::core::vector3df(pos.X, ext.Y / 2, pos.Z));
     this->_dblocks.push_back(block);
@@ -668,7 +692,7 @@ void bbman::Board::updatePlayers(bbman::Irrlicht& irr, irr::f32 delta)
     it->play(irr, this);
     it->update(irr, delta);
     if (it->isRunning()) {
-      this->_powerUPs.checkCollision(it);
+      this->_powerUPs.checkCollision(it, this->_scale);
     }
   }
 }

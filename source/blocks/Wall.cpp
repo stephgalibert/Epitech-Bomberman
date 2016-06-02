@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu Jun  2 17:14:10 2016 stephane galibert
-// Last update Thu Jun  2 20:54:07 2016 stephane galibert
+// Last update Fri Jun  3 00:13:01 2016 stephane galibert
 //
 
 #include "Wall.hpp"
@@ -31,7 +31,7 @@ void bbman::Wall::init(Irrlicht &irr, std::string const& num)
   this->_mesh = irr.getSmgr()->addMeshSceneNode(irr.getMesh(obj.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialTexture(0, irr.getTexture(alpha.data()));
-    this->_mesh->setMaterialTexture(1, irr.getTexture(light.data()));
+    this->_mesh->setMaterialTexture(0, irr.getTexture(light.data()));
 
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setMaterialType(irr::video::EMT_LIGHTMAP_ADD);
@@ -46,7 +46,6 @@ void bbman::Wall::init(Irrlicht &irr, std::string const& num)
       this->_mesh->setScale(irr::core::vector3df(1.f, 6.f, 9.4f));
       this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
     }
-    //
   }
   else {
     throw (std::runtime_error("cannot add Wall"));
