@@ -33,7 +33,7 @@ bbman::Board* boardBinding(bbman::Board *board)
   return boardSave;
 }
 
-int i_am_safe(int numplayer, lua_State *L)
+int iAmSafe(int numplayer, lua_State *L)
 {
   bbman::Board *board       = boardBinding(NULL);
   static bbman::Research *r = NULL;
@@ -45,12 +45,24 @@ int i_am_safe(int numplayer, lua_State *L)
   return (0);
 }
 
-int direction(int numplayer, lua_State *L)
+int directionIsSafe(int numplayer, int direction, lua_State *L)
 {
   bbman::Board *board       = boardBinding(NULL);
   static bbman::Research *r = NULL;
   irr::core::vector3d<irr::s32> ai = r->getAIPos(numplayer);
 
+  if (direction == 1) {
+    ai.X += 1;
+  }
+  else if (direction == 2) {
+    ai.X -= 1;
+  }
+  else if (direction == 4) {
+    ai.Z += 1;
+  }
+  else if (direction == 8) {
+    ai.Z -= 1;
+  }
   if (board->isInExplosion(ai)) {
     return (1);
   }

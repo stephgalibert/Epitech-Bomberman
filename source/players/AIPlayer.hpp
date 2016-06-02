@@ -82,6 +82,7 @@ namespace bbman
     bool _alive;
     bbman::Binding _binding;
     std::string _color;
+    irr::f32 _delta;
   };
 }
 

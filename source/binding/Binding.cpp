@@ -47,6 +47,8 @@ void bbman::Binding::init(const std::string &scriptName)
     luabridge::getGlobalNamespace(this->luaState).addFunction("getPos", getPos);
     luabridge::getGlobalNamespace(this->luaState).addFunction("setMood", setMood);
     luabridge::getGlobalNamespace(this->luaState).addFunction("getMood", getMood);
+    luabridge::getGlobalNamespace(this->luaState).addFunction("iAmSafe", iAmSafe);
+    luabridge::getGlobalNamespace(this->luaState).addFunction("directionIsSafe", directionIsSafe);
   }
   catch (...){
     std::cerr << "Erreur : Binding problem." << std::endl;

@@ -55,7 +55,7 @@ void bbman::AIPlayer::init(bbman::Irrlicht& irr, std::string const& color)
       this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
       this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
     } else {
-      throw(std::runtime_error("can not create player " + std::to_string(this->_playerNum)));
+      throw(std::runtime_error("can not create ai " + std::to_string(this->_playerNum)));
     }
     addBomb(new ExplodingBomb(this));
     this->_alive = true;
@@ -93,7 +93,7 @@ void bbman::AIPlayer::update(bbman::Irrlicht& irr, irr::f32 delta)
     else {
       this->_direction = Direction::DIR_NONE;
     }
-    move(delta);
+    this->_delta = delta;
     updateEffets(delta);
   }
 }
@@ -105,10 +105,12 @@ void bbman::AIPlayer::play(bbman::Irrlicht& irr, bbman::Board *board)
     if (this->_action == bbman::ACT_BOMB) {
       dropBomb(irr, board);
     }
+    if (!board->isInNode(this->getPosition())) {
+      this->_direction = this->_prevDirection;
+    }
+    move(this->_delta);
   }
 }
-
-
 
 void bbman::AIPlayer::dropBomb(bbman::Irrlicht& irr, bbman::Board *board)
 {
