@@ -36,4 +36,5 @@ luabridge::LuaRef getPos(int numplayer, lua_State *L);
 int getMood(int numplayer, lua_State *L);
 void setMood(int numplayer, int mood, lua_State *L);
 
+
 #endif /* !_AIFUNCTIONS_HPP_ */

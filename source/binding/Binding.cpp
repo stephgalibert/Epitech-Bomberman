@@ -30,9 +30,9 @@ int  bbman::Binding::runAI(size_t id)
   this->init("../source/binding/script.lua"); // A REMOVE AVANT FINAL PUSH
   luabridge::LuaRef aiFct = luabridge::getGlobal(this->luaState, "ai");
   luabridge::LuaRef ret = aiFct(id);
-  int move = ret.cast<int>();
-  if (move == 3)
-    move = 8;
+  int move = ret["move"].cast<int>();
+  if (ret["bomb"] == 1)
+    move += 10;
   return (move);
 }
 

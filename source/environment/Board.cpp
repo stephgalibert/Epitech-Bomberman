@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Thu Jun  2 12:57:14 2016 stephane galibert
+// Last update Thu Jun  2 14:17:04 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -129,7 +129,7 @@ bool bbman::Board::isNotProtected(IBomb *bombs,
       if (this->_map.at(block.X, block.Z + 1).id == ItemID::II_BLOCK_INBRKABLE)
 	return (false);
     }
-    if (tools::StaticTools::getDistance2D(bomb, block) >= bombs->getRange())
+    if (tools::StaticTools::getDistance2D(bomb, block) > bombs->getRange())
       return (false);
   }
   else if (block.Z == bomb.Z) {
@@ -141,7 +141,7 @@ bool bbman::Board::isNotProtected(IBomb *bombs,
       if (this->_map.at(block.X + 1, block.Z).id == ItemID::II_BLOCK_INBRKABLE)
 	return (false);
     }
-    if (tools::StaticTools::getDistance2D(bomb, block) >= bombs->getRange())
+    if (tools::StaticTools::getDistance2D(bomb, block) > bombs->getRange())
       return (false);
   }
   else

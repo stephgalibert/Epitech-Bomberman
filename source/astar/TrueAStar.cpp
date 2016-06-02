@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 21 16:44:05 2016 stephane galibert
-// Last update Tue May 31 11:50:24 2016 stephane galibert
+// Last update Wed Jun  1 19:38:59 2016 jeremy Care
 //
 
 #include "TrueAStar.hpp"
@@ -27,7 +27,8 @@ void bbman::TrueAStar::compute(const Map<bbman::Cell>& map, irr::core::vector3d<
 {
   Node begin(p1);
   bool found = false;
-
+  
+  this->_begin = p1;
   if (p1 == p2) {
     found = true;
     _path.push_back(p2);
@@ -53,7 +54,7 @@ void bbman::TrueAStar::compute(const Map<bbman::Cell>& map, irr::core::vector3d<
 
 irr::core::vector3d<irr::s32>bbman::TrueAStar::getNextResult(void)
 {
-  irr::core::vector3d<irr::s32> ret;
+  irr::core::vector3d<irr::s32> ret = this->_begin;
 
   if (_path.size() > 0) {
     ret = *_path.cbegin();

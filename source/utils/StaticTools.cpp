@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 17:54:23 2016 stephane galibert
-// Last update Tue May 31 10:44:02 2016 stephane galibert
+// Last update Thu Jun  2 14:02:25 2016 stephane galibert
 //
 
 #include "StaticTools.hpp"
@@ -32,4 +32,28 @@ void tools::StaticTools::deleteThreadPool(void)
     delete (tools::StaticTools::ThreadPool);
     tools::StaticTools::ThreadPool = NULL;
   }
+}
+
+bbman::Direction tools::StaticTools::getDirByCoord(irr::core::vector3d<irr::s32> const& p1, irr::core::vector3d<irr::s32> const& p2)
+{
+  bbman::Direction dir = bbman::Direction::DIR_NONE;
+  if (p1.X != p2.X)
+    {
+      if (p1.X < p2.X) {
+	dir = bbman::Direction::DIR_EAST;
+      }
+      else if (p1.X > p2.X) {
+	dir = bbman::Direction::DIR_WEST;
+      }
+    }
+  else if (p1.Z != p2.Z)
+    {
+      if (p1.Z > p2.Z) {
+	dir = bbman::Direction::DIR_SOUTH;
+      }
+      else if (p1.Z < p2.Z) {
+	dir = bbman::Direction::DIR_NORTH;
+      }
+    }
+  return (dir);
 }

@@ -1,12 +1,11 @@
 //
-
 // AStar.hpp for indie in /home/galibe_s/rendu/bomberman/source
 //
 // Made by stephane galibert
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 21 16:44:05 2016 stephane galibert
-// Last update Tue May 31 11:50:41 2016 stephane galibert
+// Last update Wed Jun  1 19:38:47 2016 jeremy Care
 //
 
 #include "NeighborAStar.hpp"
@@ -49,16 +48,17 @@ void bbman::NeighborAStar::compute(const Map<bbman::Cell>& map, irr::core::vecto
   Node begin(p1);
   bool found = false;
 
+  this->_begin  = p1;
   if (checkNeighbor(p1, p2)) {
     found = true;
-    _path.push_back(p2);
+    _path.push_back(p1);
   }
   addInList(begin, _listOpen);
 
   while (!_listOpen.empty() && !found) {
     Node u = getBestNode(_listOpen);
 
-    if (u.pos == p2) {
+    if (checkNeighbor(p2, u.pos)) {
       _end = u;
       addInCloseList(u);
       retrievePath(begin.pos);
@@ -79,7 +79,7 @@ size_t bbman::NeighborAStar::getSize(void)
 
 irr::core::vector3d<irr::s32>bbman::NeighborAStar::getNextResult(void)
 {
-  irr::core::vector3d<irr::s32> ret;
+  irr::core::vector3d<irr::s32> ret = this->_begin;
 
   if (_path.size() > 0) {
     ret = *_path.cbegin();
@@ -190,7 +190,6 @@ bbman::NeighborAStar::Node & bbman::NeighborAStar::getNode(irr::core::vector3d<i
       return it;
     }
   }
-  //std::cerr << p.X << " " << p.Y << " " << p.Z << std::endl;
   throw std::runtime_error("Node not found");
 }
 

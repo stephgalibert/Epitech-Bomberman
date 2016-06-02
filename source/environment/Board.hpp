@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Wed Jun  1 12:51:04 2016 stephane galibert
+// Last update Thu Jun  2 14:03:00 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -50,9 +50,6 @@ namespace bbman
     void setPosition(irr::core::vector3df const& pos);
     irr::core::vector3df const& getPosition(void) const;
     bool isColliding(irr::core::aabbox3df const& box) const;
-    /*void deleteBlock(IEntity *entity);
-    void deleteEntity(IEntity *entity);
-    void deleteBomb(IBomb *bomb);*/
     IEntity *getEntityByPosition(irr::core::vector3d<irr::s32> const& pos) const;
     void eraseEntityByPosition(irr::core::vector3d<irr::s32> const& pos);
     void explodeBlocks(IBomb *bomb);

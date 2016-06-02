@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 21 16:44:05 2016 stephane galibert
-// Last update Sat May 21 16:49:53 2016 stephane galibert
+// Last update Wed Jun  1 14:28:15 2016 jeremy Care
 //
 
 #ifndef _NEIGHBORASTAR_HPP_
@@ -68,6 +68,7 @@ private:
   std::vector<Node> _listOpen;
   std::vector<bbman::ItemID> _blockType;
   Node _end;
+  irr::core::vector3d<irr::s32> _begin;
   std::list<irr::core::vector3d<irr::s32> >_path;
 };
 }

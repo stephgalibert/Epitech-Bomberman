@@ -10,7 +10,10 @@
 
 bbman::Research::Research(void)
 {
-  this->_board = boardBinding(NULL);
+  this->_trueA.addBlockType(bbman::ItemID::II_BLOCK_INBRKABLE);
+  this->_trueA.addBlockType(bbman::ItemID::II_BLOCK_BRKABLE);
+  this->_neighA.addBlockType(bbman::ItemID::II_BLOCK_INBRKABLE);
+  this->_neighA.addBlockType(bbman::ItemID::II_BLOCK_BRKABLE);
 }
 
 bbman::Research::~Research(void)
@@ -23,6 +26,10 @@ void bbman::Research::setL(lua_State *L)
   this->_L = L;
 }
 
+void bbman::Research::setBoard(bbman::Board * board)
+{
+  this->_board = board;
+}
 
 size_t bbman::Research::distCalc(irr::core::vector3d<irr::s32>const& p1,
                                  irr::core::vector3d<irr::s32>const& p2)
@@ -49,69 +56,83 @@ luabridge::LuaRef bbman::Research::vecToTable(irr::core::vector3d<irr::s32> cons
   return pos;
 }
 
-irr::core::vector3d<irr::s32> bbman::Research::getAIPos(int numplayer)
+irr::core::vector3d<irr::s32> const& bbman::Research::getAIPos(int numplayer)
 {
-  std::vector<bbman::APlayer *>const& Players = this->_board->getPlayers();
-  irr::core::vector3d<irr::s32> ia;
-
-  for (auto& it : Players) {
-    if (it->getID() == numplayer) {
-      ia = it->getPosInMap(this->_board->getScale());
-    }
+  IEntity *player = this->_board->getPlayerByID(numplayer);
+  if (player) {
+    return (player->getPosInMap(this->_board->getScale()));
   }
-  return ia;
+  throw (std::runtime_error("player " + std::to_string(numplayer) + " not found"));
 }
 
-irr::core::vector3d<irr::s32> bbman::Research::getNearPlayer(irr::core::vector3d<irr::s32> const& ia)
+irr::core::vector3d<irr::s32> const&
+bbman::Research::getNearPlayer(irr::core::vector3d<irr::s32> const& ia)
 {
   std::vector<bbman::APlayer *> const& Players = this->_board->getPlayers();
-  size_t distmin = distCalc((*Players.begin())->getPosInMap(this->_board->getScale()), ia);
+  size_t distmin = 1000; // TROUVER UNE SOLUTION
 
-  irr::core::vector3d<irr::s32> near;
   size_t ret;
 
   for (auto& it : Players) {
-    if (distmin > (ret = distCalc(it->getPosInMap(this->_board->getScale()), ia))) {
+    irr::core::vector3d<irr::s32> pos = it->getPosInMap(this->_board->getScale());
+    if (distmin > (ret = distCalc(pos, ia)) && ((pos.X != ia.X) != (pos.Z != ia.Z))) {
       distmin = ret;
-      near    = it->getPosInMap(this->_board->getScale());
+      this->_near    = it->getPosInMap(this->_board->getScale());
     }
   }
-  return near;
+  return this->_near;
 }
 
-irr::core::vector3d<irr::s32>bbman::Research::getNearBox(irr::core::vector3d<irr::s32> const& ia)
+irr::core::vector3d<irr::s32> const&
+bbman::Research::getNearBox(irr::core::vector3d<irr::s32> const& ia)
 {
   std::vector<bbman::IBlock *>  Blocks = this->_board->getBlocks();
   size_t distmin = distCalc((*Blocks.begin())->getPosInMap(this->_board->getScale()), ia);
 
-  irr::core::vector3d<irr::s32> near;
   size_t ret;
 
-  for (std::vector<bbman::IBlock *>::iterator it = Blocks.begin(); it != Blocks.end(); ++it) {
-    if (distmin > (ret = distCalc((*it)->getPosInMap(this->_board->getScale()), ia))) {
+  for (auto& it : Blocks) {
+    if (distmin > (ret = distCalc(it->getPosInMap(this->_board->getScale()), ia))) {
       distmin = ret;
-      near    = (*it)->getPosInMap(this->_board->getScale());
+      this->_near    = it->getPosInMap(this->_board->getScale());
     }
   }
-  return near;
+  return this->_near;
 }
 
-irr::core::vector3d<irr::s32>bbman::Research::getNearDBox(irr::core::vector3d<irr::s32> const& ia)
+irr::core::vector3d<irr::s32> const&
+bbman::Research::getNearDBox(irr::core::vector3d<irr::s32> const& ia)
 {
   std::list<bbman::IBlock *>  Blocks = this->_board->getDBlocks();
   size_t distmin = distCalc((*Blocks.begin())->getPosInMap(this->_board->getScale()), ia);
 
-  irr::core::vector3d<irr::s32> near;
   size_t ret;
 
-  for (std::list<bbman::IBlock *>::iterator it = Blocks.begin(); it != Blocks.end(); ++it) {
-    if (distmin > (ret = distCalc((*it)->getPosInMap(this->_board->getScale()), ia))) {
+  for (auto& it : Blocks) {
+    if (distmin > (ret = distCalc(it->getPosInMap(this->_board->getScale()), ia))) {
       distmin = ret;
-      near    = (*it)->getPosInMap(this->_board->getScale());
+      this->_near    = it->getPosInMap(this->_board->getScale());
     }
   }
-  return near;
+  return this->_near;
 }
+
+/*irr::core::vector3d<irr::s32> const&
+bbman::Research::getNearPowerUp(irr::core::vector3d<irr::s32> const& ia)
+{
+   std::list<bbman::IBlock *>  Blocks = this->_board->getDBlocks();
+  size_t distmin = distCalc((*Blocks.begin())->getPosInMap(this->_board->getScale()), ia);
+
+  size_t ret;
+
+  for (auto& it : Blocks) {
+    if (distmin > (ret = distCalc(it->getPosInMap(this->_board->getScale()), ia))) {
+      distmin = ret;
+      this->_near    = it->getPosInMap(this->_board->getScale());
+    }
+  }
+  return this->_near;
+  }*/
 
 bbman::APlayer * bbman::Research::getAI(int numplayer)
 {
@@ -128,4 +149,50 @@ bbman::APlayer * bbman::Research::getAI(int numplayer)
     std::cerr << "ai not alive" << std::endl;
   }
   return ia;
+}
+
+bbman::Direction bbman::Research::findNearestSafeZone(irr::core::vector3d<irr::s32>const& pos)
+{
+  Map<bbman::Cell> const& map = this->_board->getMap();
+  bbman::TrueAStar trueA;
+
+  trueA.addBlockType(bbman::ItemID::II_BLOCK_INBRKABLE);
+  trueA.addBlockType(bbman::ItemID::II_BLOCK_BRKABLE);
+  for (int i = 0; i < 10; ++i) {
+    for (int j = 0; j < 10; ++j) {
+      if (pos.X + j < map.w && pos.Z + i < map.h &&
+          map.at(pos.X + j, pos.Z + i).id == ItemID::II_NONE) {
+            if (this->_board->isInExplosion(
+                irr::core::vector3d<irr::s32>(pos.X + j, 0 , pos.Z + i)) == false) {
+                trueA.compute(map, pos, irr::core::vector3d<irr::s32>(pos.X + j, 0 , pos.Z + i));
+                if (trueA.getSize() != 0) {
+                    return tools::StaticTools::getDirByCoord(pos, trueA.getNextResult());
+                }
+            }
+      }
+
+      if (pos.X - j > 0 && pos.Z - i > 0 && map.at(pos.X - j, pos.Z - i).id == ItemID::II_NONE) {
+
+        if (this->_board->isInExplosion(
+            irr::core::vector3d<irr::s32>(pos.X - j, 0 , pos.Z - i)) == false) {
+            trueA.compute(map, pos, irr::core::vector3d<irr::s32>(pos.X - j, 0 , pos.Z - i));
+            if (trueA.getSize() != 0) {
+                return tools::StaticTools::getDirByCoord(pos, trueA.getNextResult());
+            }
+        }
+      }
+    }
+   }
+
+   return bbman::Direction::DIR_NONE;
+}
+
+bbman::TrueAStar bbman::Research::getTrueA() const
+{
+  return this->_trueA;
+}
+
+bbman::NeighborAStar bbman::Research::getNeighA() const
+{
+  return this->_neighA;
 }

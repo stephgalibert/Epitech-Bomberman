@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 17:50:51 2016 stephane galibert
-// Last update Tue May 31 10:57:54 2016 stephane galibert
+// Last update Thu Jun  2 14:05:32 2016 stephane galibert
 //
 
 #ifndef _STATICTOOLS_HPP_
@@ -15,6 +15,7 @@
 # include <cmath>
 
 # include "ThreadPool.hpp"
+# include "Direction.hpp"
 
 namespace tools
 {
@@ -27,6 +28,7 @@ namespace tools
 				  irr::core::vector3d<irr::s32> const& p2);
     static void initThreadPool(size_t nbThread);
     static void deleteThreadPool(void);
+    static bbman::Direction getDirByCoord(irr::core::vector3d<irr::s32> const& p1, irr::core::vector3d<irr::s32> const& p2);
   };
 }
 

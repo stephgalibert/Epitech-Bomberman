@@ -71,17 +71,27 @@ void bbman::AIPlayer::update(bbman::Irrlicht& irr, irr::f32 delta)
 
   if (this->_alive) {
     retAI = this->_binding.runAI(this->getID());
+    if (retAI >= 10) {
+      this->_action = bbman::ACT_BOMB;
+      retAI -= 10;
+    }
+    else {
+      this->_action = bbman::ACT_NONE;
+    }
     if (retAI == 1) {
-      this->_direction = Direction::DIR_NORTH;
+      this->_direction = Direction::DIR_EAST;
     }
     else if (retAI == 2) {
-      this->_direction = Direction::DIR_SOUTH;
-    }
-    else if (retAI == 4) {
       this->_direction = Direction::DIR_WEST;
     }
+    else if (retAI == 4) {
+      this->_direction = Direction::DIR_NORTH;
+    }
     else if (retAI == 8) {
-      this->_direction = Direction::DIR_EAST;
+      this->_direction = Direction::DIR_SOUTH;
+    }
+    else {
+      this->_direction = Direction::DIR_NONE;
     }
     move(delta);
     updateEffets(delta);

@@ -8,9 +8,24 @@ Fplayer = 3
   -- void setMood(int numplayer, int moood);
 
 ai = function(id)
-    e = findPath(id,2)
-    j = getMood(id)
-    setMood(id, j + 1)
-    k = getMood(id)
-    return 0
+    r = {
+      bomb,
+      move
+    }
+    e = findPath(id, 1)
+    a = e["success"]
+    r["bomb"] = 0
+    r["move"] = 0
+    if a == 2 then
+--      print("safesoze dir : " .. e["safedir"])
+      r["bomb"] = 0
+      r["move"] = e["safedir"]
+      return r
+    else
+--      print("dir " .. e["dir"] .. " size " .. e["size"])
+      r["bomb"] = 0
+      r["move"] = 0 --e["dir"]
+      return r
+    end
+  return r
 end

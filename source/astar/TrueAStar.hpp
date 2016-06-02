@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 21 16:44:05 2016 stephane galibert
-// Last update Sat May 21 16:49:53 2016 stephane galibert
+// Last update Wed Jun  1 17:00:00 2016 jeremy Care
 //
 
 #ifndef _TRUEASTAR_HPP_
@@ -67,6 +67,7 @@ private:
   std::vector<bbman::ItemID> _blockType;
   Node _end;
   std::list<irr::core::vector3d<irr::s32> >_path;
+  irr::core::vector3d<irr::s32> _begin;
 };
 }
 
