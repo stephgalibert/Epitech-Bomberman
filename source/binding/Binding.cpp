@@ -27,7 +27,7 @@ bbman::Binding::~Binding(void)
 
 int  bbman::Binding::runAI(size_t id)
 {
-  this->init("../source/binding/script.lua"); // A REMOVE AVANT FINAL PUSH
+  this->init("./asset/script.lua"); // A REMOVE AVANT FINAL PUSH
   luabridge::LuaRef aiFct = luabridge::getGlobal(this->luaState, "ai");
   luabridge::LuaRef ret = aiFct(id);
   int move = ret["move"].cast<int>();
