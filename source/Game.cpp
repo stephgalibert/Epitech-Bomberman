@@ -43,7 +43,7 @@ void bbman::Game::init(Irrlicht &irr, layout *layout, std::string const& saves)
       this->_board->init(irr);
       this->_timeout = new TimeOut;
       this->_timeout->init(irr, this->_board);
-      createPlayers(irr)
+      createPlayers(irr);
     }
     initCamera(irr);
     initSound();
