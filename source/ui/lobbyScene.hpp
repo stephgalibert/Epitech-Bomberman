@@ -28,6 +28,8 @@ public:
   void loadRessources(void);
   void prevChoice(int id);
   void nextChoice(int id);
+  std::vector<int> const& getUsed(void) const;
+  void setGamepad(int pad);
 
 private:
   std::vector<std::string>  _selecter;

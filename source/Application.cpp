@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Wed Jun  1 21:25:22 2016 stephane galibert
+// Last update Fri Jun  3 06:40:11 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -17,7 +17,7 @@ bbman::Application::Application(void)
   this->_menu = NULL;
   this->_as = bbman::ApplicationState::AS_NONE;
   this->_close = false;
-  tools::StaticTools::initThreadPool(16);
+  //tools::StaticTools::initThreadPool(16);
 }
 
 bbman::Application::~Application(void)
@@ -31,7 +31,7 @@ bbman::Application::~Application(void)
   if (this->_irr) {
     delete (this->_irr);
   }
-  tools::StaticTools::deleteThreadPool();
+  //tools::StaticTools::deleteThreadPool();
 }
 
 void bbman::Application::init(void)
@@ -44,8 +44,10 @@ void bbman::Application::init(void)
     this->_timer.setTimer(this->_irr->getTimer());
     this->_irr->getDevice()->getCursorControl()->setVisible(true);
     this->_irr->getDevice()->activateJoysticks(this->_joystickInfo);
+
     this->_irr->getDevice()->setWindowCaption(L"Bomberman");
     this->_menu = new layout(this->_irr->getDevice());
+    this->_menu->setGamepads(this->_joystickInfo);
     goToMenu();
   } catch (std::runtime_error const& e) {
     throw (e);
@@ -141,8 +143,8 @@ void bbman::Application::goToGame(void)
     this->_as = bbman::ApplicationState::AS_GAME;
     this->_game = new Game;
     try {
-      //this->_game->init(*this->_irr, "./save.txt");
-      this->_game->init(*this->_irr);
+      //this->_game->init(*this->_irr, this->_menu, "./save.txt");
+      this->_game->init(*this->_irr, this->_menu);
     } catch (std::runtime_error const& e) {
       delete (this->_game);
       this->_game = NULL;

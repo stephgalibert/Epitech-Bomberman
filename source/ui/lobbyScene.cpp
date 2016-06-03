@@ -77,7 +77,7 @@ void lobbyScene::loadRessources()
 void lobbyScene::loadScene()
 {
   this->_nextScene = this->_name;
-  this->_ui.create<rect>("0backgroundColor")
+  this->_ui.create<rect>("0backgrounDColor")
     .color(0, 22, 30)
     .accros(1920, 1080);
 
@@ -159,6 +159,16 @@ void lobbyScene::nextChoice(int id)
       return;
     }
   }
+}
+
+std::vector<int> const& lobbyScene::getUsed(void) const
+{
+  return (this->_used);
+}
+
+void lobbyScene::setGamepad(int pad)
+{
+  this->_gamepad = pad;
 }
 
 void lobbyScene::manageEvent(bbman::InputListener &listener) {

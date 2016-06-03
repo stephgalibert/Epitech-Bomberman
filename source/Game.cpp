@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Fri Jun  3 01:07:00 2016 stephane galibert
+// Last update Fri Jun  3 03:16:34 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -16,6 +16,7 @@ bbman::Game::Game(void)
   this->_board = new Board;
   //this->_timeout = new TimeOut;
   this->_timeout = NULL;
+  this->_layout = NULL;
 }
 
 bbman::Game::~Game(void)
@@ -28,9 +29,10 @@ bbman::Game::~Game(void)
   }
 }
 
-void bbman::Game::init(Irrlicht &irr, std::string const& saves)
+void bbman::Game::init(Irrlicht &irr, layout *layout, std::string const& saves)
 {
   try {
+    this->_layout = layout;
     if (!saves.empty()) {
       this->_loader.load(irr, saves);
       this->_board->init(irr, this->_loader);
@@ -41,9 +43,10 @@ void bbman::Game::init(Irrlicht &irr, std::string const& saves)
       this->_timeout = new TimeOut;
       this->_board->init(irr);
       this->_timeout->init(irr, this->_board);
+      createPlayers(irr);
       // BEGIN todel
 
-      AIPlayer *ai1 = new AIPlayer;
+      /*AIPlayer *ai1 = new AIPlayer;
       ai1->init(irr);
       ai1->setPosition(this->_board->getSpawnPosition(2));
       this->_board->addPlayer(ai1);
@@ -55,7 +58,7 @@ void bbman::Game::init(Irrlicht &irr, std::string const& saves)
       HumanPlayer *p2 = bbman::HumanPlayer::create();
       p2->init(irr, "Orange");
       p2->setPosition(this->_board->getSpawnPosition(1));
-      this->_board->addPlayer(p2);
+      this->_board->addPlayer(p2);*/
       // END todel
     }
     initCamera(irr);
@@ -128,5 +131,46 @@ void bbman::Game::save(std::string const& fname)
   }
   else {
     throw (std::runtime_error("can not create ./save.txt"));
+  }
+}
+
+void bbman::Game::createPlayers(Irrlicht &irr)
+{
+  /*AIPlayer *ai1 = new AIPlayer;
+    ai1->init(irr);
+    ai1->setPosition(this->_board->getSpawnPosition(2));
+    this->_board->addPlayer(ai1);
+
+    HumanPlayer *p1 = bbman::HumanPlayer::create();
+    p1->init(irr, "Green");
+    p1->setPosition(this->_board->getSpawnPosition(0));
+    this->_board->addPlayer(p1);
+    HumanPlayer *p2 = bbman::HumanPlayer::create();
+    p2->init(irr, "Orange");
+    p2->setPosition(this->_board->getSpawnPosition(1));
+    this->_board->addPlayer(p2);*/
+  std::vector<int> const& data = this->_layout->getDevices();
+  std::string color;
+
+  for (int i = 0 ; i < data.size() ; ++i) {
+    if (i == 0)
+      color = "Blue";
+    else if (i == 1)
+      color = "Orange";
+    else if (i == 2)
+      color = "Green";
+    else
+      color = "Purple";
+    if (data[i] == -1) {
+      AIPlayer *ai = new AIPlayer;
+      ai->init(irr, color);
+      ai->setPosition(this->_board->getSpawnPosition(i));
+      this->_board->addPlayer(ai);
+    } else {
+      HumanPlayer *p1 = new HumanPlayer;
+      p1->init(irr, data[i], color);
+      p1->setPosition(this->_board->getSpawnPosition(i));
+      this->_board->addPlayer(p1);
+    }
   }
 }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Mon May 30 15:57:58 2016 stephane galibert
+// Last update Fri Jun  3 02:47:29 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -28,6 +28,7 @@
 # include "TimeOut.hpp"
 # include "AIPlayer.hpp"
 # include "Binding.hpp"
+# include "layout.hpp"
 
 namespace bbman
 {
@@ -36,7 +37,7 @@ namespace bbman
   public:
     Game(void);
     ~Game(void);
-    void init(Irrlicht &irr, std::string const& saves = "");
+    void init(Irrlicht &irr, layout *layout, std::string const& saves = "");
     bool input(InputListener &inputListener);
     void update(Irrlicht &irr, irr::f32 delta);
     bool leaveGame(void) const;
@@ -46,6 +47,7 @@ namespace bbman
     void updateBombs(Irrlicht &irr, irr::f32 delta);
     void updatePlayers(Irrlicht &irr, irr::f32 delta);
     void save(std::string const& fname);
+    void createPlayers(Irrlicht &irr);
     bool _leaveGame;
     Loader _loader;
     Board *_board;
@@ -53,6 +55,7 @@ namespace bbman
     MusicBox _musics;
     MemoryFile _musicBackground;
     irr::scene::ICameraSceneNode *_camera;
+    layout *_layout;
   };
 }
 

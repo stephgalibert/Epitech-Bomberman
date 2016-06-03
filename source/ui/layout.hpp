@@ -10,6 +10,7 @@
 #ifndef LAYOUT_HPP_
 #define LAYOUT_HPP_
 
+#include <vector>
 #include "mainScene.hpp"
 #include "settingsScene.hpp"
 #include "gameScene.hpp"
@@ -26,6 +27,8 @@ public:
 
   const std::string & display();
   void  input(bbman::InputListener &listener);
+  void setGamepads(irr::core::array<irr::SJoystickInfo> const& jinfo);
+  std::vector<int> const& getDevices(void) const;
   bool isGameStarted(void) const;
   void backToMenu(void);
   bool isClosed(void);

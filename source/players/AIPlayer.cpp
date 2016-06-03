@@ -24,6 +24,7 @@ bbman::AIPlayer::AIPlayer(void)
   this->_speed     = INITIAL_SPEED;
   this->_direction = Direction::DIR_NONE;
   this->_action = Action::ACT_NONE;
+  this->_deviceID = 0;
 }
 
 size_t bbman::AIPlayer::getAPlayerID(void) const
@@ -47,6 +48,30 @@ void bbman::AIPlayer::init(bbman::Irrlicht& irr, std::string const& color)
   try {
     std::string txt = "./asset/media/ninja.b3d";
     this->_color = color;
+    this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
+    this->_binding.init("../source/binding/script.lua");
+    if (this->_mesh) {
+      this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+      this->_mesh->setAnimationSpeed(0);
+      this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
+      this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
+    } else {
+      throw(std::runtime_error("can not create ai " + std::to_string(this->_playerNum)));
+    }
+    addBomb(new ExplodingBomb(this));
+    this->_alive = true;
+  } catch (std::runtime_error const& e) {
+    throw(e);
+  }
+}
+
+void bbman::AIPlayer::init(bbman::Irrlicht& irr, int deviceID,
+			   std::string const& color)
+{
+  try {
+    std::string txt = "./asset/media/ninja.b3d";
+    this->_color = color;
+    this->_deviceID = deviceID;
     this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
     this->_binding.init("../source/binding/script.lua");
     if (this->_mesh) {
@@ -382,4 +407,14 @@ bbman::IBomb * bbman::AIPlayer::createBomb(bbman::Irrlicht& irr)
 size_t bbman::AIPlayer::getPlayerNumber(void) const
 {
   return (this->_playerNum);
+}
+
+void bbman::AIPlayer::setDeviceID(int id)
+{
+  this->_deviceID = 0;
+}
+
+int bbman::AIPlayer::getDeviceID(void) const
+{
+  return (this->_deviceID);
 }

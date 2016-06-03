@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Thu Jun  2 22:07:34 2016 stephane galibert
+// Last update Fri Jun  3 06:25:38 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -28,6 +28,7 @@ bbman::ExplodingBomb::ExplodingBomb(bbman::APlayer *owner)
   this->_wbeam = NULL;
   this->_cbeam = NULL;
   this->_range = 3;
+  this->_lol = false;
 }
 
 bbman::ExplodingBomb::~ExplodingBomb(void)
@@ -289,8 +290,16 @@ void bbman::ExplodingBomb::explode(Board *board)
   this->_delta = DELAY_TO_EXPLOSE;
 }
 
+void bbman::ExplodingBomb::setLol(bool value)
+{
+  this->_lol = value;
+}
+
 void bbman::ExplodingBomb::playExplosion(void)
 {
+  if (this->_lol)
+    return;
+
   if (this->_explosion) {
     this->_explosion->play(getPosition());
   }

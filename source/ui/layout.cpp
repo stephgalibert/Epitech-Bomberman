@@ -45,6 +45,28 @@ void layout::input(bbman::InputListener &listener) {
   }
 }
 
+void layout::setGamepads(irr::core::array<irr::SJoystickInfo> const& jinfo)
+{
+  lobbyScene *lobby = dynamic_cast<lobbyScene *>(this->_scene.at("lobby"));
+  if (lobby) {
+    lobby->setGamepad(jinfo.size());
+  }
+  else {
+    throw std::runtime_error("can not cast asublayout to lobbyscene");
+  }
+}
+
+std::vector<int> const& layout::getDevices(void) const
+{
+  lobbyScene *lobby = dynamic_cast<lobbyScene *>(this->_scene.at("lobby"));
+  if (lobby) {
+    return (lobby->getUsed());
+  }
+  else {
+    throw std::runtime_error("can not cast asublayout to lobbyscene");
+  }
+}
+
 bool layout::isGameStarted(void) const
 {
   if (this->_scene.find(this->_currentScene) != this->_scene.cend()) {

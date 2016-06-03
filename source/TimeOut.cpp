@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 28 08:20:16 2016 stephane galibert
-// Last update Tue May 31 12:07:00 2016 stephane galibert
+// Last update Fri Jun  3 06:40:49 2016 stephane galibert
 //
 
 #include "TimeOut.hpp"
@@ -50,10 +50,10 @@ void bbman::TimeOut::init(Irrlicht &irr, Board *board)
 
 void bbman::TimeOut::update(Irrlicht &irr, irr::f32 delta)
 {
-  if (this->_delta >= 120.0000f) {
+  if (this->_delta >= 60.0000f) {
     //this->_delta = 0.f;
     this->_deltaAnim += delta;
-    if (this->_deltaAnim >= 5.0000f) {
+    if (this->_deltaAnim >= 10.0000f) {
       narrowBoard(irr);
       //this->_deltaAnim = 0;
     }
@@ -124,19 +124,26 @@ irr::core::vector3d<irr::s32> const& bbman::TimeOut::getCurrent(void) const
   return (this->_current);
 }
 
+#include "ExplodingBomb.hpp"
 void bbman::TimeOut::updateAnim(void)
 {
-  IEntity *entity = NULL;
-
   for (std::list<std::pair<IBlock *, irr::scene::ISceneNodeAnimator *> >::iterator
 	 it = this->_anims.begin() ; it != this->_anims.end();) {
     if ((*it).second->hasFinished()) {
       irr::core::vector3d<irr::s32> const& pos = (*it).first->getPosInMap(_board->getScale());
       this->_board->disableDirection(pos.X, pos.Z);
-      entity = _board->getEntityByPosition(pos);
-      if (entity) {
-	entity->explode(this->_board);
+      std::list<IEntity *> const& entities = this->_board->getEntityByPosition(pos);
+      for (auto &it : entities) {
+	IEntity *entity = it;
+	ExplodingBomb *tmp = dynamic_cast<ExplodingBomb *>(entity);
+	if (tmp) {
+	  tmp->setLol(true);
+	}
+	else if (entity && !entity->hasExplosed()) {
+	  entity->explode(this->_board);
+	}
       }
+      this->_board->registerBlock(it->first);
       it = this->_anims.erase(it);
     }
     else {
@@ -224,7 +231,7 @@ void bbman::TimeOut::putBlock(Irrlicht &irr)
     irr::scene::ISceneNodeAnimator *anim =
       irr.getSmgr()->createFlyStraightAnimator(irr::core::vector3df(pos.X, pos.Y + 60, pos.Z), pos, 500, false);
     block->addAnimation(anim);
-    this->_board->registerBlock(block);
+    //this->_board->registerBlock(block);
     this->_anims.push_back(std::make_pair(block, anim));
   }
 }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Thu Jun  2 22:48:00 2016 stephane galibert
+// Last update Fri Jun  3 05:53:54 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -53,7 +53,7 @@ namespace bbman
     void setPosition(irr::core::vector3df const& pos);
     irr::core::vector3df const& getPosition(void) const;
     bool isColliding(irr::core::aabbox3df const& box) const;
-    IEntity *getEntityByPosition(irr::core::vector3d<irr::s32> const& pos) const;
+    std::list<IEntity *> const& getEntityByPosition(irr::core::vector3d<irr::s32> const& pos);
     void eraseEntityByPosition(irr::core::vector3d<irr::s32> const& pos);
     void explodeBlocks(IBomb *bomb);
     bool isOutside(irr::core::vector3df const& pos);
@@ -106,6 +106,7 @@ namespace bbman
     Irrlicht *_irr;
     irr::scene::ILightSceneNode* _light;
     tools::Generator _generator;
+    std::list<IEntity *> _entities;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, bbman::Board const& board)

@@ -30,6 +30,7 @@ namespace bbman
     virtual ~AIPlayer(void);
     virtual size_t getAPlayerID(void) const;
     virtual void init(Irrlicht &irr, std::string const& color = "");
+    virtual void init(Irrlicht &irr, int deviceID, std::string const& color = "");
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void play(Irrlicht &irr, Board *board);
     virtual void addBomb(IBomb *bomb);
@@ -55,6 +56,8 @@ namespace bbman
     virtual bool hasExplosed(void) const;
     virtual std::string const& getColor(void) const;
     virtual void setColor(std::string const& color);
+    virtual void setDeviceID(int id);
+    virtual int getDeviceID(void) const;
   private:
     static size_t NumberOfPlayer;
   private:
@@ -83,6 +86,7 @@ namespace bbman
     bbman::Binding _binding;
     std::string _color;
     irr::f32 _delta;
+    int _deviceID;
   };
 }
 

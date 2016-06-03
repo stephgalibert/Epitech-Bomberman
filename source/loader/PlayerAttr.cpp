@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:06:55 2016 stephane galibert
-// Last update Wed Jun  1 21:20:59 2016 stephane galibert
+// Last update Fri Jun  3 03:25:19 2016 stephane galibert
 //
 
 #include "PlayerAttr.hpp"
@@ -59,8 +59,9 @@ void bbman::PlayerAttr::setPlayerID(APlayer **player, Irrlicht &irr,
 	    std::back_inserter(tokens));
   if (tokens.size() > 0) {
     if (tokens[0] == "1") {
-      *player = HumanPlayer::create();
-      (*player)->init(irr, (tokens.size() > 1) ? tokens[1] : "");
+      *player = new HumanPlayer;
+      (*player)->init(irr, (tokens.size() > 1) ? std::atoi(tokens[1].data()) : 0,
+		      (tokens.size() > 2) ? tokens[2] : "");
     }
     else if (tokens[0] == "0") {
       *player = new AIPlayer;
