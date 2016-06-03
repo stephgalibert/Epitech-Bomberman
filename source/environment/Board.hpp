@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Fri Jun  3 11:46:00 2016 stephane galibert
+// Last update Fri Jun  3 13:03:15 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -85,6 +85,7 @@ namespace bbman
     void buildBrkable(Irrlicht &irr, size_t x, size_t y);
     void buildPillar(Irrlicht &irr, size_t x, size_t y, std::string const& color);
     void buildWall(Irrlicht &irr, size_t x, size_t y, std::string const& color);
+    void buildParticle(Irrlicht &irr, size_t x, size_t y, std::string const& color);
     void initTerrain(Irrlicht &irr);
     void initMap(void);
     void initNode(void);
@@ -107,6 +108,7 @@ namespace bbman
     irr::scene::ILightSceneNode* _light;
     tools::Generator _generator;
     std::list<IEntity *> _entities;
+    std::vector<irr::scene::IParticleSystemSceneNode *> _pss;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, bbman::Board const& board)

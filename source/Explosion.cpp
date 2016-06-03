@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 31 14:21:03 2016 stephane galibert
-// Last update Fri Jun  3 06:18:12 2016 stephane galibert
+// Last update Fri Jun  3 13:20:30 2016 stephane galibert
 //
 
 #include "Explosion.hpp"

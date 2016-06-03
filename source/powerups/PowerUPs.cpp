@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 17:37:21 2016 stephane galibert
-// Last update Fri Jun  3 01:26:22 2016 stephane galibert
+// Last update Fri Jun  3 12:47:00 2016 stephane galibert
 //
 
 #include "PowerUPs.hpp"
@@ -71,13 +71,13 @@ void bbman::PowerUPs::generate(bbman::Irrlicht &irr, irr::core::vector3df const&
   size_t random;
 
   random = this->_generator(0, 100);
-  if (random > 90) {
+  if (random > 95) {
+    generateSpeedUp(irr, pos);
+  }
+  else if (random > 90) {
     generateAddPower(irr, pos);
   }
   else if (random > 80) {
-    generateSpeedUp(irr, pos);
-  }
-  else if (random > 70) {
     generateAddExplosingBomb(irr, pos);
   }
 }
