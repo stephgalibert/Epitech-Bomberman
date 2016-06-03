@@ -53,21 +53,21 @@ void bbman::Explosion::play(irr::core::vector3df const& pos)
   irr::scene::IParticleEmitter* emitter =
     this->_ps->createSphereEmitter(irr::core::vector3df(0.0f,0.0f,0.0f),
 				   0.5f,
-				   irr::core::vector3df(0.0f,0.1f,0.0f),
-				   20,60,
+				   irr::core::vector3df(0.0f,0.2f,0.0f),
+				   10,30,
 				   irr::video::SColor(0,127,127,127),
 				   irr::video::SColor(0,255,255,255),
-				   1000,1000,360,
+				   150,250,360,
 				   irr::core::dimension2df(1.f,1.f),
 				   irr::core::dimension2df(10.f,10.f));
   this->_ps->setEmitter(emitter);
   emitter->drop();
   irr::scene::IParticleAffector* gravityAffector =
-    this->_ps->createGravityAffector(irr::core::vector3df(0.0f,-0.01f, 0.0f), 333);
+    this->_ps->createGravityAffector(irr::core::vector3df(0.0f,-0.01f, 0.0f), 200);
   this->_ps->addAffector(gravityAffector);
   gravityAffector->drop();
   irr::scene::IParticleAffector* fadeOutAffector =
-    this->_ps->createFadeOutParticleAffector(irr::video::SColor(0, 0, 0, 0), 333);
+    this->_ps->createFadeOutParticleAffector(irr::video::SColor(0, 0, 0, 0), 200);
   this->_ps->addAffector(fadeOutAffector);
   fadeOutAffector->drop();
 }
