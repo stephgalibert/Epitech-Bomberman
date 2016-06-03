@@ -1,3 +1,0 @@
-D:\Code Project\bomberman\WindowInstaller\vcredist.x86.exe
-D:\Code Project\bomberman\WindowInstaller\game-installer\bin\release\gameInstaller.msi
-D:\Code Project\bomberman\WindowInstaller\game-installer\bin\release\cab1.cab

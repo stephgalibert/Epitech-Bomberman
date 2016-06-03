@@ -1,6 +1,5 @@
 cmake_minimum_required(VERSION 2.8)
 SET(CMAKE_CXX_COMPILER  g++)
-# SET ( CMAKE_CXX_FLAGS "-std=c++0x" CACHE STRING "compile flags" FORCE)
 project(Bomberman)
 
 # Enable testing for current directory and below.
@@ -19,11 +18,12 @@ IF (START_GTEST)
 ENDIF (START_GTEST)
 
 # Enable c++11 with CMake
+if (UNIX)
 add_compile_options(-std=c++11)
 #add_compile_options(-Wall)
 #add_compile_options(-Werror)
 add_compile_options(-g)
-
+endif (UNIX)
 # configure a header file to pass some of the CMake settings to the source code
 configure_file (
   "${PROJECT_SOURCE_DIR}/build_config.h.in"
@@ -107,6 +107,7 @@ if (MSVC)
     ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-system.lib
   )
 
+  # copy asset to debug build
   file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build)
   file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
   file(COPY ${PROJECT_SOURCE_DIR}/lib/assimp/lib/window/assimp-vc130-mt.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
@@ -116,6 +117,17 @@ if (MSVC)
   file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/libsndfile-1.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
   file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-audio-2.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
   file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-system-2.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/Debug)
+
+  # copy asset to release build
+  file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build)
+  file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build/release)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/assimp/lib/window/assimp-vc130-mt.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/release)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/irrlicht/lib/window/irrlicht.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/release)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/lua/LuaInterpreter/lib/window/lua5.3.0.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/release)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/openal32.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/release)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/libsndfile-1.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/release)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-audio-2.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/release)
+  file(COPY ${PROJECT_SOURCE_DIR}/lib/SFML/lib/window/sfml-system-2.dll DESTINATION ${PROJECT_SOURCE_DIR}/build/release)
 endif (MSVC)
 
 # add the install targets in bin directory

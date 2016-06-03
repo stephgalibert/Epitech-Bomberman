@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
+  <Product Id="*" Name="Bomberman" Language="1033" Version="1.0.0.0" Manufacturer="Indeed Studio" UpgradeCode="75cdaecd-94e8-42d3-a0c6-b5203967a816">
+    <Package InstallerVersion="301" Compressed="yes" InstallScope="perMachine" />
+
+    <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
+    <MediaTemplate />
+
+    <Icon Id="icon.ico" SourceFile="../asset/installer/bomberman-icon.ico"/>
+    <Property Id="ARPPRODUCTICON" Value="icon.ico" />
+
+    <WixVariable Id="WixUILicenseRtf" Value="../asset/installer/license.rtf" />
+
+    <Property Id="WIXUI_INSTALLDIR" Value="INSTALLFOLDER" />
+    <UIRef Id="WixUI_InstallDir" />
+
+    <Feature Id="ProductFeature" Title="BombermanInstaller" Level="1">
+      <ComponentGroupRef Id="ProductComponents" />
+      <ComponentGroupRef Id="Asset" />
+      <ComponentRef Id="ApplicationShortcutDesktop" />
+    </Feature>
+
+    <Binary Id="VCRedist" SourceFile="vcredist_x86.exe"/>
+     <CustomAction Id="InstallCpp" BinaryKey="VCRedist" ExeCommand="/install /passive"  Execute="immediate" Return="asyncNoWait" Impersonate="yes"/>
+    <CustomAction Id="InstallCppSilent" BinaryKey="VCRedist" ExeCommand="/install /passive /quiet"  Execute="immediate" Return="asyncNoWait" Impersonate="yes"/>
+    <InstallExecuteSequence>
+      <Custom Action="InstallCpp" Before="InstallInitialize"><![CDATA[NOT UILevel=2 AND NOT Installed]]></Custom>
+      <Custom Action="InstallCppSilent" Before="InstallInitialize"><![CDATA[UILevel=2 AND NOT Installed]]></Custom>
+    </InstallExecuteSequence>
+
+  </Product>
+  
+  <Fragment>
+    <Directory Id="TARGETDIR" Name="SourceDir">
+
+      <Directory Id="DesktopFolder" Name="Desktop">
+        <Component Id="ApplicationShortcutDesktop" Guid="*">
+          <Shortcut Id="ApplicationDesktopShortcut"
+              Name="Bomberman"
+              Description="Bomberman by Indeed Studio"
+              Target="[INSTALLFOLDER]Bomberman.exe"
+              Icon="icon.ico"
+              WorkingDirectory="INSTALLFOLDER"/>
+          <RemoveFolder Id="DesktopFolder" On="uninstall"/>
+          <RegistryValue
+              Root="HKCU"
+              Key="Software/Bomberman"
+              Name="installed"
+              Type="integer"
+              Value="1"
+              KeyPath="yes"/>
+        </Component>
+      </Directory>
+
+      <Directory Id="ProgramFilesFolder">
+        <Directory Id="INSTALLFOLDER" Name="Indeed_Studio">
+          <Directory Id="ASSETFOLDER" Name="asset" />
+        </Directory>
+      </Directory>
+    </Directory>
+  
+  </Fragment>
+  
+  <Fragment>
+    <ComponentGroup Id="ProductComponents" Directory="INSTALLFOLDER">
+      <!-- TODO: Remove the comments around this Component element and the ComponentRef below in order to add resources to this installer. -->
+      <Component Id='MainExecutable' Guid="*">
+        <File Id='BombermanEXE' Name='Bomberman.exe' DiskId='1' Source='Bomberman.exe' KeyPath='yes' />
+      </Component>
+
+      <Component Id='AssimpLibrary' Guid="*">
+        <File Id='AssimpDLL' Name='assimp-vc130-mt.dll' DiskId='1' Source='../lib/assimp/lib/window/assimp-vc130-mt.dll' KeyPath='yes' />
+      </Component>
+
+      <Component Id='IrrlichtLibrary' Guid="*">
+        <File Id='IrrlichtDLL' Name='Irrlicht.dll' DiskId='1' Source='../lib/irrlicht/lib/window/Irrlicht.dll' KeyPath='yes' />
+      </Component>
+
+      <Component Id='LuaLibrary' Guid="*">
+        <File Id='LuaDLL' Name='lua5.3.0.dll' DiskId='1' Source='../lib/lua/LuaInterpreter/lib/window/lua5.3.0.dll' KeyPath='yes' />
+      </Component>
+
+      <Component Id='SfmlAudioLibrary' Guid="*">
+        <File Id='SfmlAudioDLL' Name='sfml-audio-2.dll' DiskId='1' Source='../lib/SFML/lib/window/sfml-audio-2.dll' KeyPath='yes' />
+      </Component>
+
+      <Component Id='SfmlSystemLibrary' Guid="*">
+        <File Id='SfmlSystemDLL' Name='sfml-system-2.dll' DiskId='1' Source='../lib/SFML/lib/window/sfml-system-2.dll' KeyPath='yes' />
+      </Component>
+
+      <Component Id='libSndLibrary' Guid="*">
+        <File Id='libSndDLL' Name='libsndfile-1.dll' DiskId='1' Source='../lib/SFML/lib/window/libsndfile-1.dll' KeyPath='yes' />
+      </Component>
+
+      <Component Id='openAlLibrary' Guid="*">
+        <File Id='openAlDLL' Name='openal32.dll' DiskId='1' Source='../lib/SFML/lib/window/openal32.dll' KeyPath='yes' />
+      </Component>
+      
+    </ComponentGroup>
+  </Fragment>
+
+</Wix>
