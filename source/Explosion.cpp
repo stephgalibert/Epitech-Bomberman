@@ -31,7 +31,6 @@ void bbman::Explosion::init(Irrlicht &irr, std::string const& color)
   std::string txt = "./asset/Particles/particle" + color + ".png";
   this->_color = color;
   this->_ps = irr.getSmgr()->addParticleSystemSceneNode(false);
-  //this->_ps->setMaterialTexture(0, irr.getTexture("./asset/media/fire.bmp"));
   this->_ps->setMaterialTexture(0, irr.getTexture(txt.c_str()));
   this->_ps->setScale(irr::core::vector3df(1.f, 1.f, 1.f));
   this->_ps->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -55,20 +54,20 @@ void bbman::Explosion::play(irr::core::vector3df const& pos)
     this->_ps->createSphereEmitter(irr::core::vector3df(0.0f,0.0f,0.0f),
 				   0.5f,
 				   irr::core::vector3df(0.0f,0.1f,0.0f),
-				   120,150,
+				   20,60,
 				   irr::video::SColor(0,127,127,127),
 				   irr::video::SColor(0,255,255,255),
-				   150,150,360,
+				   1000,1000,360,
 				   irr::core::dimension2df(1.f,1.f),
 				   irr::core::dimension2df(10.f,10.f));
   this->_ps->setEmitter(emitter);
   emitter->drop();
   irr::scene::IParticleAffector* gravityAffector =
-    this->_ps->createGravityAffector(irr::core::vector3df(0.0f,-0.03f, 0.0f), 300);
+    this->_ps->createGravityAffector(irr::core::vector3df(0.0f,-0.01f, 0.0f), 333);
   this->_ps->addAffector(gravityAffector);
   gravityAffector->drop();
   irr::scene::IParticleAffector* fadeOutAffector =
-    this->_ps->createFadeOutParticleAffector(irr::video::SColor(0, 0, 0, 0), 100);
+    this->_ps->createFadeOutParticleAffector(irr::video::SColor(0, 0, 0, 0), 333);
   this->_ps->addAffector(fadeOutAffector);
   fadeOutAffector->drop();
 }
