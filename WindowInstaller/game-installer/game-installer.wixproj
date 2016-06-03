@@ -32,7 +32,7 @@
   </ItemGroup>
   <Import Project="$(WixTargetsPath)" />
   <PropertyGroup>
-    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(mediaBomberman)" -cg cg_Media -gg -scom -sreg -sfrag -srd -dr ASSETFOLDER -var env.mediaBomberman -out "$(ProjectDir)Media.wxs"</PreBuildEvent>
+    <PreBuildEvent>"$(WIX)bin\heat.exe" dir "$(mediaBomberman)" -cg Asset -gg -scom -sreg -sfrag -srd -dr ASSETFOLDER -var env.mediaBomberman -out "$(ProjectDir)Media.wxs"</PreBuildEvent>
   </PropertyGroup>
   <!--
 	To modify your build process, add your task inside one of the targets below and uncomment it.

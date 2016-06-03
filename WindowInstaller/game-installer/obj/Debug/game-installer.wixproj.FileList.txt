@@ -1,0 +1,2 @@
+obj\Debug\Product.wixobj
+obj\Debug\Media.wixobj

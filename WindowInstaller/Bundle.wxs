@@ -1,29 +1,56 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" xmlns:bal="http://schemas.microsoft.com/wix/BalExtension">
-	<Bundle Name="BombermanSetup" Version="1.0.0.0" Manufacturer="Indeed Studio" UpgradeCode="202b251a-fc45-4e7e-8ffa-a1dd5dcc5bf0">
+<Wix xmlns="http://schemas.microsoft.com/wix/2006/wi" 
+     xmlns:bal="http://schemas.microsoft.com/wix/BalExtension"
+    xmlns:netfx="http://schemas.microsoft.com/wix/NetFxExtension"
+    xmlns:util="http://schemas.microsoft.com/wix/UtilExtension">
+  
+	<Bundle Name="BombermanSetup"
+          Version="1.0.0.0"
+          Manufacturer="Indeed Studio"
+          UpgradeCode="202b251a-fc45-4e7e-8ffa-a1dd5dcc5bf0">
+    
     <BootstrapperApplicationRef Id="WixStandardBootstrapperApplication.RtfLicense" >
       <bal:WixStandardBootstrapperApplication
             LicenseFile="../asset/installer/license.rtf"
             LogoFile="../asset/installer/bomberman-logo.jpg"
             />
-      
     </BootstrapperApplicationRef>
-    <Variable Name="InstallFolder" Type="string"
-              Value="[ProgramFilesFolder]The Application"/>
-    <!--<Variable Name="BurnVariable" 
-              bal:Overridable="yes"/>-->
-    
-		<Chain>
-			<!-- TODO: Define the list of chained packages. -->
+
+    <util:FileSearch
+            Id="CheckFile"
+            Path="[CommonAppDataFolder]thirdpartapp\thirdparty.dll"
+            Variable="THIRDPARTYFILE"
+            Result="version" 
+            />
+
+    <Chain>
+      <PackageGroupRef Id="Netfx4Full"/>
       <ExePackage
-                SourceFile="../windowInstaller/vcredist_x86.exe"
+                SourceFile="./vcredist.x86.exe"
                 DetectCondition="ExeDetectedVariable"
                 InstallCommand="/q /ACTION=Install"
                 RepairCommand="/q ACTION=Repair /hideconsole"
                 UninstallCommand="/q ACTION=Uninstall /hideconsole" />
-      <MsiPackage SourceFile="game-installer/bin/release/gameInstaller.msi" >
-        <MsiProperty Name="INSTALLFOLDER" Value="[InstallFolder]" />
-      </MsiPackage> 
+      <MsiPackage SourceFile="game-installer/bin/release/gameInstaller.msi" />
 		</Chain>
 	</Bundle>
+
+  <Fragment>
+    <util:RegistrySearchRef Id="NETFRAMEWORK40"/>
+    <PackageGroup
+        Id="Netfx4Full">
+
+      <ExePackage
+          Id="Netfx4FullExe"
+          Cache="no"
+          Compressed="no"
+          PerMachine="yes"
+          Permanent="yes"
+          Vital="yes"
+          SourceFile="C:\Program Files (x86)\Microsoft SDKs\Windows\v7.0A\Bootstrapper\Packages\DotNetFX40\dotNetFx40_Full_x86_x64.exe"
+          InstallCommand="/q /norestart /ChainingPackage FullX64Bootstrapper"
+          DetectCondition="NETFRAMEWORK40"
+          DownloadUrl="http://go.microsoft.com/fwlink/?LinkId=164193"/>
+    </PackageGroup>
+  </Fragment>
 </Wix>

@@ -1,0 +1,7 @@
+obj\Release\Product.wixobj
+D:\Code Project\bomberman\WindowInstaller\game-installer\bin\Release\cab1.cab
+D:\Code Project\bomberman\WindowInstaller\game-installer\bin\Release\gameInstaller.msi
+D:\Code Project\bomberman\WindowInstaller\game-installer\bin\Release\gameInstaller.wixpdb
+obj\Release\game-installer.wixproj.BindContentsFileListnull.txt
+obj\Release\game-installer.wixproj.BindOutputsFileListnull.txt
+obj\Release\game-installer.wixproj.BindBuiltOutputsFileListnull.txt

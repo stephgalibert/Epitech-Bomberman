@@ -1,0 +1,6 @@
+obj\Release\Bundle.wixobj
+D:\Code Project\bomberman\WindowInstaller\bin\Release\Bootstrapper1.exe
+D:\Code Project\bomberman\WindowInstaller\bin\Release\Bootstrapper1.wixpdb
+obj\Release\full-Install.wixproj.BindContentsFileList.txt
+obj\Release\full-Install.wixproj.BindOutputsFileList.txt
+obj\Release\full-Install.wixproj.BindBuiltOutputsFileList.txt

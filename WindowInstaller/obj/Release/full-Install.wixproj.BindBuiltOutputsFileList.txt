@@ -1,0 +1,2 @@
+D:\Code Project\bomberman\WindowInstaller\bin\Release\Bootstrapper1.exe
+D:\Code Project\bomberman\WindowInstaller\bin\Release\Bootstrapper1.wixpdb

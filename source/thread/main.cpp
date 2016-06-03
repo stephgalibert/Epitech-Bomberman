@@ -8,7 +8,6 @@
 // Last update Sat May 28 10:11:17 2016 stephane galibert
 */
 
-#include <unistd.h>
 #include "ThreadPool.hpp"
 #define NB_TASK 100
 #define NB_THREAD 8
@@ -32,7 +31,6 @@ namespace bbman
 
       std::cout << "Thread start working on action " << id <<
 	" delay is " << delay << " sec" << std::endl;
-      sleep(delay);
     }
 
     virtual void stop()
