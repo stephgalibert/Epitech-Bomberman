@@ -9,6 +9,8 @@
 #include "AIPlayer.hpp"
 #include "Board.hpp"
 
+bbman::CacheManager<std::string, bbman::MemoryFile> bbman::AIPlayer::SoundCache;
+
 bbman::AIPlayer::AIPlayer(void)
 {
   this->_move[Direction::DIR_EAST] =
@@ -67,6 +69,17 @@ void bbman::AIPlayer::init(bbman::Irrlicht& irr, std::string const& color)
     bomb->setColor(color);
     addBomb(bomb);
     this->_alive = true;
+
+    try {
+      if (!SoundCache.find("death")) {
+	SoundCache.insert("death", MemoryFile("./asset/sound/deathia.wav"));
+	SoundCache["death"].load();
+      }
+      this->_sounds.addSample("death", SoundCache["death"]);
+      this->_sounds.setVolumeBySample("death", 50.f);
+    } catch (std::runtime_error const& e) {
+      std::cerr << e.what() << std::endl;
+    }
   } catch (std::runtime_error const& e) {
     throw(e);
   }
@@ -204,6 +217,11 @@ void bbman::AIPlayer::explode(Board *board)
   if (this->_alive) {
     this->_alive = false;
     this->_mesh->setVisible(false);
+    try {
+      this->_sounds.play("death");
+    } catch (std::runtime_error const& e) {
+      std::cerr << e.what() << std::endl;
+    }
     std::cerr << "ia" << getID() << "died" << std::endl;
   }
 }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Fri Jun  3 14:29:59 2016 stephane galibert
+// Last update Fri Jun  3 16:28:40 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -22,6 +22,9 @@
 # include "InputListener.hpp"
 # include "Direction.hpp"
 # include "Explosion.hpp"
+# include "SoundBox.hpp"
+# include "CacheManager.hpp"
+# include "MemoryFile.hpp"
 
 namespace bbman
 {
@@ -62,6 +65,7 @@ namespace bbman
     virtual int getDeviceID(void) const;
   private:
     static size_t NumberOfPlayer;
+    static CacheManager<std::string, MemoryFile> SoundCache;
   private:
     void dropBomb(Irrlicht &irr, Board *board);
     IBomb *createBomb(Irrlicht &irr);
@@ -94,6 +98,7 @@ namespace bbman
     std::string _color;
     irr::f32 _delta;
     int _deviceID;
+    SoundBox _sounds;
   };
 }
 

@@ -5,13 +5,14 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Fri Jun  3 15:42:29 2016 stephane galibert
+// Last update Fri Jun  3 16:33:58 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
 #include "Board.hpp"
 
 size_t bbman::HumanPlayer::NumberOfPlayer = 0;
+bbman::CacheManager<std::string, bbman::MemoryFile> bbman::HumanPlayer::SoundCache;
 
 bbman::HumanPlayer::HumanPlayer(void)
 {
@@ -81,6 +82,17 @@ void bbman::HumanPlayer::init(bbman::Irrlicht &irr, int deviceID,
     bomb->setColor(color);
     addBomb(bomb);
     this->_alive = true;
+
+    try {
+      if (!SoundCache.find("death")) {
+	SoundCache.insert("death", MemoryFile("./asset/sound/death.wav"));
+	SoundCache["death"].load();
+      }
+      this->_sounds.addSample("death", SoundCache["death"]);
+      this->_sounds.setVolumeBySample("death", 50.f);
+    } catch (std::runtime_error const& e) {
+      std::cerr << e.what() << std::endl;
+    }
   } catch (std::runtime_error const& e) {
     throw (e);
   }
@@ -200,6 +212,12 @@ void bbman::HumanPlayer::explode(Board *board)
     this->_alive = false;
     this->_mesh->setVisible(false);
     std::cerr << "player " + std::to_string(this->_playerNum) + " died" << std::endl;
+
+    try {
+      this->_sounds.play("death");
+    } catch (std::runtime_error const& e) {
+      std::cerr << e.what() << std::endl;
+    }
   }
 }
 

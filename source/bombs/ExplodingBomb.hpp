@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:08:37 2016 stephane galibert
-// Last update Fri Jun  3 11:49:11 2016 stephane galibert
+// Last update Fri Jun  3 16:05:55 2016 stephane galibert
 //
 
 #ifndef _EXPLODINGBOMB_HPP_

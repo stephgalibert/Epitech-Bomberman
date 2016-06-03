@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Fri Jun  3 11:23:28 2016 stephane galibert
+// Last update Fri Jun  3 16:15:46 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"

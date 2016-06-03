@@ -20,6 +20,9 @@
 # include "InputListener.hpp"
 # include "Direction.hpp"
 # include "Binding.hpp"
+# include "SoundBox.hpp"
+# include "CacheManager.hpp"
+# include "MemoryFile.hpp"
 
 namespace bbman
 {
@@ -60,6 +63,7 @@ namespace bbman
     virtual int getDeviceID(void) const;
   private:
     static size_t NumberOfPlayer;
+    static CacheManager<std::string, MemoryFile> SoundCache;
   private:
     void dropBomb(Irrlicht &irr, Board *board);
     IBomb *createBomb(Irrlicht &irr);
@@ -88,6 +92,7 @@ namespace bbman
     std::string _color;
     irr::f32 _delta;
     int _deviceID;
+    SoundBox _sounds;
   };
 }
 
