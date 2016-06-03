@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 15:15:50 2016 stephane galibert
-// Last update Wed Jun  1 21:01:52 2016 stephane galibert
+// Last update Fri Jun  3 11:48:47 2016 stephane galibert
 //
 
 #ifndef _IBOMB_HPP_
@@ -36,6 +36,7 @@ namespace bbman
     virtual bool isExplosing(void) const = 0;
     virtual bool hasExplosed(void) const = 0;
     virtual bool isExploding(void) const = 0;
+    virtual void setExplosed(bool value) = 0;
     virtual irr::f32 getDelay(void) const = 0;
     virtual irr::f32 getDelta(void) const = 0;
     virtual void setDelta(irr::f32 value) = 0;
@@ -48,6 +49,8 @@ namespace bbman
     virtual void addRange(size_t n) = 0;
     virtual std::string const& getColor(void) const = 0;
     virtual void setColor(std::string const& color) = 0;
+    virtual void setLol(bool value) = 0;
+    virtual bool getLol(void) const = 0;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, bbman::IBomb const& bomb)
@@ -62,7 +65,16 @@ namespace bbman
 
     flux << "BID:" << id << " " << bomb.getColor() << ";timer:"
 	 << timer << ";pos:" << position << ";owner:" << owner
-	 << ";color:" << bomb.getColor() << ";" << std::endl;
+	 << ";color:" << bomb.getColor()
+	 << ";explosed:" << bomb.hasExplosed()
+	 << ";lol:" << bomb.getLol() << ";" << std::endl;
+
+    /*try {
+      bbman::ExplosingBomb &b = dynamic_cast<bbman::ExplosingBomb &>(bomb);
+      flux << "lol:" << b.getLol() << ";" << std::endl;
+    } catch (std::exception const& e) {
+      flux << std::endl;
+      }*/
     return (flux);
   }
 

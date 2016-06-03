@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Fri Jun  3 06:25:38 2016 stephane galibert
+// Last update Fri Jun  3 11:23:28 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -169,6 +169,13 @@ bool bbman::ExplodingBomb::hasExplosed(void) const
   return (this->_explosed);
 }
 
+void bbman::ExplodingBomb::setExplosed(bool value)
+{
+  if (value)
+    this->_delta = DELAY_TO_EXPLOSE;
+  this->_explosed = value;
+}
+
 bool bbman::ExplodingBomb::isExploding(void) const
 {
   return (this->_cpt == 1);
@@ -177,7 +184,6 @@ bool bbman::ExplodingBomb::isExploding(void) const
 void bbman::ExplodingBomb::initMesh(bbman::Irrlicht &irr)
 {
   std::string txt = "./asset/bomb/bomb.obj";
-  //std::string txtobj = "./asset/bomb/Texture_pillier_" + this->_color + ".png";
   std::string txtobj = "./asset/pillier/Texture_pillier_" + this->_color + ".png";
   //std::string light = "./asset/pillier/Texture_pillier_Selfillum_" + _color + ".png";
   //std::string alpha = "./asset/pillier/Texture_pillier_alpha_" + this->_color + ".png";
@@ -360,4 +366,9 @@ std::string const& bbman::ExplodingBomb::getColor(void) const
 void bbman::ExplodingBomb::setColor(std::string const& color)
 {
   this->_color = color;
+}
+
+bool bbman::ExplodingBomb::getLol(void) const
+{
+  return (this->_lol);
 }

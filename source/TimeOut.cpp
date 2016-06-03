@@ -5,10 +5,11 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 28 08:20:16 2016 stephane galibert
-// Last update Fri Jun  3 06:40:49 2016 stephane galibert
+// Last update Fri Jun  3 11:57:11 2016 stephane galibert
 //
 
 #include "TimeOut.hpp"
+#include "ExplodingBomb.hpp"
 
 //# include "ThreadPool.hpp"
 //# include "TimeOutAsyncTask.hpp"
@@ -50,10 +51,10 @@ void bbman::TimeOut::init(Irrlicht &irr, Board *board)
 
 void bbman::TimeOut::update(Irrlicht &irr, irr::f32 delta)
 {
-  if (this->_delta >= 60.0000f) {
+  if (this->_delta >= 3.0000f) {
     //this->_delta = 0.f;
     this->_deltaAnim += delta;
-    if (this->_deltaAnim >= 10.0000f) {
+    if (this->_deltaAnim >= 1.0000f) {
       narrowBoard(irr);
       //this->_deltaAnim = 0;
     }
@@ -124,7 +125,6 @@ irr::core::vector3d<irr::s32> const& bbman::TimeOut::getCurrent(void) const
   return (this->_current);
 }
 
-#include "ExplodingBomb.hpp"
 void bbman::TimeOut::updateAnim(void)
 {
   for (std::list<std::pair<IBlock *, irr::scene::ISceneNodeAnimator *> >::iterator
@@ -227,11 +227,14 @@ void bbman::TimeOut::putBlock(Irrlicht &irr)
 {
   IBlock *block = this->_board->createInbrkable(irr, this->_current.X, _current.Z);
   if (block) {
+    /*this->_board->registerBlock(block);
+    irr::core::vector3d<irr::s32> const& ppos = block->getPosInMap(this->_board->getScale());
+      Map<Cell> &map = this->_board->getMap();
+      map.at(ppos.X, ppos.Z).id = block->getID();*/
     irr::core::vector3df const& pos = block->getPosition();
     irr::scene::ISceneNodeAnimator *anim =
-      irr.getSmgr()->createFlyStraightAnimator(irr::core::vector3df(pos.X, pos.Y + 60, pos.Z), pos, 500, false);
+      irr.getSmgr()->createFlyStraightAnimator(irr::core::vector3df(pos.X, pos.Y + 60, pos.Z), pos, 300, false);
     block->addAnimation(anim);
-    //this->_board->registerBlock(block);
     this->_anims.push_back(std::make_pair(block, anim));
   }
 }

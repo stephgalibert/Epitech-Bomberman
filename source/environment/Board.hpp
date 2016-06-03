@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Fri Jun  3 05:53:54 2016 stephane galibert
+// Last update Fri Jun  3 11:46:00 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May 26 10:30:09 2016 stephane galibert
-// Last update Wed Jun  1 09:25:40 2016 stephane galibert
+// Last update Fri Jun  3 11:50:17 2016 stephane galibert
 //
 
 #ifndef _BOMBATTR_HPP_
@@ -46,6 +46,10 @@ namespace bbman
 		     std::string const& v);
     void setOwner(IBomb **bombs, std::vector<APlayer *> &player, Irrlicht &irr,
 		  std::string const& v);
+    void setExplosed(IBomb **bombs, std::vector<APlayer *> &player, Irrlicht &irr,
+		     std::string const& v);
+    void setLol(IBomb **bombs, std::vector<APlayer *> &player, Irrlicht &irr,
+		std::string const& v);
     std::map<std::string, std::function<void(IBomb **, std::vector<APlayer *> &,
 					     Irrlicht &,
 					     std::string const&)> > _attrs;

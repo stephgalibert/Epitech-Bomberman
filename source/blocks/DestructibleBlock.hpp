@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:11:32 2016 stephane galibert
-// Last update Tue May 31 20:12:30 2016 stephane galibert
+// Last update Fri Jun  3 12:03:00 2016 stephane galibert
 //
 
 #ifndef _DESTRUCTIBLEBLOCK_HPP_

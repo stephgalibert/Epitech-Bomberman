@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Fri Jun  3 03:16:34 2016 stephane galibert
+// Last update Fri Jun  3 11:52:18 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -40,8 +40,8 @@ void bbman::Game::init(Irrlicht &irr, layout *layout, std::string const& saves)
       this->_timeout->init(irr, this->_board);
     }
     else {
-      this->_timeout = new TimeOut;
       this->_board->init(irr);
+      this->_timeout = new TimeOut;
       this->_timeout->init(irr, this->_board);
       createPlayers(irr);
       // BEGIN todel

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:23:18 2016 stephane galibert
-// Last update Fri Jun  3 01:13:19 2016 stephane galibert
+// Last update Fri Jun  3 12:02:07 2016 stephane galibert
 //
 
 #include "IndestructibleBlock.hpp"
@@ -42,6 +42,13 @@ void bbman::IndestructibleBlock::init(Irrlicht &irr, std::string const& color)
   }
   else {
     throw (std::runtime_error("cannot add IndestructibleBlock"));
+  }
+}
+
+void bbman::IndestructibleBlock::setScale(irr::core::vector3df const& scale)
+{
+  if (this->_node) {
+    this->_node->setScale(scale);
   }
 }
 

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Fri Jun  3 06:39:43 2016 stephane galibert
+// Last update Fri Jun  3 12:05:15 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -261,18 +261,18 @@ bbman::Irrlicht *bbman::Board::getIrrlicht(void)
 
 bbman::IBlock *bbman::Board::createInbrkable(Irrlicht &irr, size_t x, size_t y)
 {
-  IBlock *block = new IndestructibleBlock;
+  IndestructibleBlock *block = new IndestructibleBlock;
   irr::core::vector3df pos;
   irr::core::vector3df ext;
 
   pos.X = x * this->_scale.X + (this->_scale.X / 2);
   pos.Z = y * this->_scale.Z + (this->_scale.Z / 2);
   try {
-    block->init(irr);
+    block->init(irr, "Grey");
     ext = block->getBoundingBox().getExtent();
     pos.Y = ext.Y / 2;
     block->setPosition(pos);
-
+    block->setScale(irr::core::vector3df(0.8f, 0.8f, 0.8f));
   } catch (std::runtime_error const& e) {
     if (block) {
       delete (block);

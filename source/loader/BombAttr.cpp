@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May 26 11:32:16 2016 stephane galibert
-// Last update Wed Jun  1 10:43:42 2016 stephane galibert
+// Last update Fri Jun  3 11:50:32 2016 stephane galibert
 //
 
 #include "BombAttr.hpp"
@@ -24,7 +24,12 @@ bbman::BombAttr::BombAttr(void)
   this->_attrs["owner"] =
     std::bind(&bbman::BombAttr::setOwner, this, std::placeholders::_1,
 	      std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
-
+  this->_attrs["explosed"] =
+    std::bind(&bbman::BombAttr::setExplosed, this, std::placeholders::_1,
+	      std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
+  this->_attrs["lol"] =
+    std::bind(&bbman::BombAttr::setLol, this, std::placeholders::_1,
+	      std::placeholders::_2, std::placeholders::_3, std::placeholders::_4);
 }
 
 bbman::BombAttr::~BombAttr(void)
@@ -98,5 +103,23 @@ void bbman::BombAttr::setOwner(IBomb **bomb, std::vector<APlayer *> &player,
     if (explodingBomb && std::atoi(v.data()) < (int)player.size()) {
       explodingBomb->setOwner(player[std::atoi(v.data())]);
     }
+  }
+}
+
+void bbman::BombAttr::setExplosed(IBomb **bomb, std::vector<APlayer *> &player,
+				  Irrlicht &irr, std::string const& v)
+{
+  (void)irr;
+  if (bomb && *bomb) {
+    (*bomb)->setExplosed(v == "1");
+  }
+}
+
+void bbman::BombAttr::setLol(IBomb **bomb, std::vector<APlayer *> &player,
+			     Irrlicht &irr, std::string const& v)
+{
+  (void)irr;
+  if (bomb && *bomb) {
+    (*bomb)->setExplosed(v == "1");
   }
 }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 14:22:45 2016 stephane galibert
-// Last update Wed Jun  1 10:56:49 2016 stephane galibert
+// Last update Fri Jun  3 11:52:07 2016 stephane galibert
 //
 
 #include "Loader.hpp"
@@ -24,7 +24,6 @@ bbman::Loader::Loader(void)
   this->_loads["TIMEOUT_BEGIN"] =
     std::bind(&bbman::Loader::loadTimeOut, this, std::placeholders::_1,
 	      std::placeholders::_2);
-
 }
 
 bbman::Loader::~Loader(void)
@@ -147,7 +146,11 @@ void bbman::Loader::loadBombs(Irrlicht &irr, std::ifstream &ifs)
 	  pos2 = line.find_first_of(";", pos2 + 1);
 	}
       if (bomb) {
+	/*irr::core::vector3df scale(10, 10, 10);
+	  irr::core::vector3d<irr::s32> const& pos = bomb->getPosInMap(scale);
+	  if (this->_map.at(pos.X, pos.Z).id != ItemID::II_NONE) {*/
 	this->_bombs.push_back(bomb);
+	//}
       }
     }
 }

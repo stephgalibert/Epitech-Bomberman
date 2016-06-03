@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:22:34 2016 stephane galibert
-// Last update Thu Jun  2 14:52:51 2016 stephane galibert
+// Last update Fri Jun  3 12:02:59 2016 stephane galibert
 //
 
 #ifndef _INDESTRUCTIBLEBLOCK_HPP_
@@ -37,6 +37,7 @@ namespace bbman
     virtual ItemID getID(void) const;
     virtual std::string const& getColor(void) const;
     virtual void setColor(std::string const& color);
+    void setScale(irr::core::vector3df const& scale);
   private:
     irr::scene::ISceneNode *_node;
     irr::core::vector3d<irr::s32> _posInMap;
