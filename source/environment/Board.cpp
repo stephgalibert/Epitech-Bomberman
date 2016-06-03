@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Fri Jun  3 13:27:29 2016 stephane galibert
+// Last update Fri Jun  3 13:33:41 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -712,16 +712,6 @@ void bbman::Board::buildParticle(Irrlicht& irr, size_t x, size_t y,
   ps->setMaterialFlag(irr::video::EMF_ZWRITE_ENABLE, false);
   ps->setMaterialType(irr::video::EMT_TRANSPARENT_ADD_COLOR);
   ps->setPosition(irr::core::vector3df(pos.X, 10, pos.Z));
-  /*irr::scene::IParticleEmitter* emitter =
-    ps->createSphereEmitter(irr::core::vector3df(0.0f,0.0f,0.0f),
-				   0.5f,
-				   irr::core::vector3df(0.0f,0.1f,0.0f),
-				   120,150,
-				   irr::video::SColor(0,127,127,127),
-				   irr::video::SColor(0,255,255,255),
-				   150,150,360,
-				   irr::core::dimension2df(1.f,1.f),
-				   irr::core::dimension2df(10.f,10.f));*/
   irr::scene::IParticleEmitter* emitter =
     ps->createBoxEmitter(irr::core::aabbox3d<irr::f32>(-5,5,-5,5,-5,5),
 			 irr::core::vector3df(0.0f,0.005f,0.0f),
@@ -733,10 +723,6 @@ void bbman::Board::buildParticle(Irrlicht& irr, size_t x, size_t y,
 			 irr::core::dimension2df(3.f,3.f));
   ps->setEmitter(emitter);
   emitter->drop();
-  /*irr::scene::IParticleAffector* gravityAffector =
-    ps->createGravityAffector(irr::core::vector3df(0.0f,-0.03f, 0.0f), 300);
-    ps->addAffector(gravityAffector);
-    gravityAffector->drop();*/
   irr::scene::IParticleAffector* fadeOutAffector =
     ps->createFadeOutParticleAffector(irr::video::SColor(0, 0, 0, 0), 100);
   ps->addAffector(fadeOutAffector);

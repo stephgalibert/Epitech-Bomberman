@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Fri Jun  3 03:30:37 2016 stephane galibert
+// Last update Fri Jun  3 14:29:59 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -73,18 +73,11 @@ namespace bbman
     void moveNorth(irr::f32 delta);
     void moveSouth(irr::f32 delta);
     std::unordered_map<int, std::function<void(irr::f32 delta)> > _move;
-    /*void inputPlayer1(InputListener &inputListener);
-      void inputPlayer2(InputListener &inputListener);
-    std::unordered_map<size_t, std::function<void(InputListener &)> > _inputs;*/
     void deviceKeyboard1(InputListener &listener);
     void deviceKeyboard2(InputListener &listener);
     void deviceJoystick1(InputListener &listener);
     void deviceJoystick2(InputListener &listener);
     std::unordered_map<size_t, std::function<void(InputListener &)> > _devices;
-
-    /*void initPlayer1(Irrlicht &irr);
-    void initPlayer2(Irrlicht &irr);
-    std::unordered_map<size_t, std::function<void(Irrlicht &)> > _inits;*/
     void initPlayer(Irrlicht &irr);
     irr::scene::IAnimatedMeshSceneNode *_mesh;
     std::list<IEffect *> _effects;
