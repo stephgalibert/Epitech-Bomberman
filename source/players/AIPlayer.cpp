@@ -77,7 +77,7 @@ void bbman::AIPlayer::init(bbman::Irrlicht& irr, std::string const& color)
 	SoundCache["death"].load();
       }
       this->_sounds.addSample("death", SoundCache["death"]);
-      this->_sounds.setVolumeBySample("death", 50.f);
+      this->_sounds.setVolumeBySample("death", tools::StaticTools::volume("effect"));
     } catch (std::runtime_error const& e) {
       std::cerr << e.what() << std::endl;
     }

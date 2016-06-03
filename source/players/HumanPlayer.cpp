@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Fri Jun  3 21:26:06 2016 stephane galibert
+// Last update Sat Jun  4 01:33:53 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -89,7 +89,7 @@ void bbman::HumanPlayer::init(bbman::Irrlicht &irr, int deviceID,
 	SoundCache["death"].load();
       }
       this->_sounds.addSample("death", SoundCache["death"]);
-      this->_sounds.setVolumeBySample("death", 50.f);
+      this->_sounds.setVolumeBySample("death", tools::StaticTools::volume("effect"));
     } catch (std::runtime_error const& e) {
       std::cerr << e.what() << std::endl;
     }

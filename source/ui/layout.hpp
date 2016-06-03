@@ -36,7 +36,9 @@ public:
   bool isClosed(void);
   std::vector<std::pair<std::string, int> > const getVolume(void) const;
   int getIADifficulty(void) const;
-  void displayPauseMenu(void);
+
+  void pauseMenu(bool display);
+  void resetPauseMenu(void);
   bool isResuming(void) const;
   bool isSaving(void) const;
   bool isMenuing(void) const;
@@ -52,6 +54,7 @@ private:
   ui *_ui;
   std::map<std::string, ASubLayout *>_scene;
   gameScene *_game;
+  echapScene *_echap;
 
   std::string _currentScene;
   irr::IrrlichtDevice *_device;

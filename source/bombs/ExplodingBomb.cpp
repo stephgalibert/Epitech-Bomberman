@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Fri Jun  3 21:22:00 2016 stephane galibert
+// Last update Sat Jun  4 01:32:52 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -213,7 +213,7 @@ void bbman::ExplodingBomb::initSound(void)
       SoundCache["explosion"].load();
     }
   this->_sounds.addSample("explosion", SoundCache["explosion"]);
-  this->_sounds.setVolumeBySample("explosion", 50.f);
+  this->_sounds.setVolumeBySample("explosion", tools::StaticTools::volume("effect"));
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
   }

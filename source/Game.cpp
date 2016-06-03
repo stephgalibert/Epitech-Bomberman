@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Fri Jun  3 23:58:00 2016 stephane galibert
+// Last update Sat Jun  4 01:36:37 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -17,6 +17,8 @@ bbman::Game::Game(void)
   this->_timeout = NULL;
   this->_layout = NULL;
   this->_delta = 0;
+  this->_pause = false;
+  this->_delta_pause = 0;
 }
 
 bbman::Game::~Game(void)
@@ -45,6 +47,12 @@ void bbman::Game::init(Irrlicht &irr, layout *layout, std::string const& saves)
       this->_timeout->init(irr, this->_board);
       createPlayers(irr);
     }
+
+    std::vector<std::pair<std::string, int> > const vol = _layout->getVolume();
+    for (auto &it : vol) {
+      tools::StaticTools::volume(it.first, it.second);
+    }
+
     initCamera(irr);
     initSound();
     boardBinding(this->_board);
@@ -57,13 +65,12 @@ bool bbman::Game::input(InputListener &inputListener)
 {
   this->_layout->input(inputListener);
   if (inputListener.IsKeyDown(irr::KEY_ESCAPE)) {
-    //this->_leaveGame = true;
-    this->_layout->displayPauseMenu();
-    // mettre le jeu en pause
-    return (true);
-  }
-  else if (inputListener.IsKeyDown(irr::KEY_KEY_P)) {
-    save("./save.txt");
+
+    if (this->_delta_pause > 0.5) {
+      this->_pause = !this->_pause;
+      this->_layout->pauseMenu(this->_pause);
+      this->_delta_pause = 0;
+    }
     return (true);
   }
   else {
@@ -86,9 +93,24 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
     this->_camera->setTarget(winner->getPosition());
     this->_camera->setPosition(irr::core::vector3df(, y, z));
     } else {*/
+  if (!this->_pause) {
     this->_board->update(irr, delta);
     this->_timeout->update(irr, delta);
-    //}
+    this->_delta += delta;
+  }
+  else {
+    if (this->_layout->isResuming()) {
+      this->_pause = false;
+    }
+    if (this->_layout->isMenuing()) {
+      this->_leaveGame = true;
+    }
+    if (this->_layout->isSaving()) {
+      save("./save.txt");
+    }
+    this->_layout->resetPauseMenu();
+  }
+  this->_delta_pause += delta;
 }
 
 bool bbman::Game::leaveGame(void) const

@@ -25,7 +25,8 @@ void layout::loadScene()
   this->_scene["settings"] = new settingsScene(*this->_ui);
   this->_scene["controls"] = new controlsScene(*this->_ui);
   this->_scene["lobby"] = new lobbyScene(*this->_ui);
-  this->_scene["echap"]= new echapScene(*this->_ui);
+  this->_echap = new echapScene(*this->_ui);
+  this->_scene["echap"] = this->_echap;
   this->_game = new gameScene(*this->_ui);
   this->_scene["game"] = this->_game;
 }
@@ -95,37 +96,24 @@ std::vector<std::pair<std::string, int> > const layout::getVolume(void) const
   }
 }
 
+void layout::resetPauseMenu(void)
+{
+  this->_echap->updateRuntime();
+}
+
 bool layout::isResuming(void) const
 {
-  echapScene *echap = dynamic_cast<echapScene *>(this->_scene.at("echap"));
-  if (echap) {
-    return (echap->isResuming());
-  }
-  else {
-    throw std::runtime_error("can not cast asublayout to echapscene");
-  }
+  return this->_echap->isResuming();
 }
 
 bool layout::isSaving(void) const
 {
-  echapScene *echap = dynamic_cast<echapScene *>(this->_scene.at("echap"));
-  if (echap) {
-    return (echap->isSaving());
-  }
-  else {
-    throw std::runtime_error("can not cast asublayout to echapscene");
-  }
+  return this->_echap->isSaving();
 }
 
 bool layout::isMenuing(void) const
 {
-  echapScene *echap = dynamic_cast<echapScene *>(this->_scene.at("echap"));
-  if (echap) {
-    return (echap->isMenuing());
-  }
-  else {
-    throw std::runtime_error("can not cast asublayout to echapscene");
-  }
+  return this->_echap->isMenuing();
 }
 
 int layout::getIADifficulty(void) const
@@ -139,12 +127,12 @@ int layout::getIADifficulty(void) const
   }
 }
 
-void layout::displayPauseMenu(void)
+void layout::pauseMenu(bool display)
 {
-  if (this->_currentScene == "echap")
-    this->_ui->changeScene("game");
-  else
+  if (display)
     this->_ui->changeScene("echap");
+  else
+    this->_ui->changeScene("game");
 }
 
 bool layout::isClosed(void)

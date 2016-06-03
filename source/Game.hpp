@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Fri Jun  3 22:34:10 2016 stephane galibert
+// Last update Sat Jun  4 00:59:57 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -48,6 +48,7 @@ namespace bbman
     void updatePlayers(Irrlicht &irr, irr::f32 delta);
     void save(std::string const& fname);
     void createPlayers(Irrlicht &irr);
+    void pause(void);
     bool _leaveGame;
     Loader _loader;
     Board *_board;
@@ -57,7 +58,9 @@ namespace bbman
     irr::scene::ICameraSceneNode *_camera;
     layout *_layout;
     irr::f32 _delta;
-    irr::core::vector3df _prev;
+    irr::f32 _delta_pause;
+    //irr::core::vector3df _prev;
+    bool _pause;
   };
 }
 
