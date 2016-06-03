@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Fri Jun  3 01:06:06 2016 stephane galibert
+// Last update Fri Jun  3 21:23:52 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"
@@ -16,6 +16,7 @@ bbman::DestructibleBlock::DestructibleBlock(void)
   this->_node = NULL;
   this->_explosed = true;
   this->_explosion = NULL;
+  this->_anim = true;
 }
 
 bbman::DestructibleBlock::~DestructibleBlock(void)
@@ -101,7 +102,7 @@ bool bbman::DestructibleBlock::isColliding(irr::core::aabbox3df const& box) cons
 
 void bbman::DestructibleBlock::playExplosion(void)
 {
-  if (this->_explosion) {
+  if (this->_anim && this->_explosion) {
     this->_explosion->play(getPosition());
   }
 }
@@ -149,4 +150,9 @@ void bbman::DestructibleBlock::setColor(std::string const& color)
 std::string const& bbman::DestructibleBlock::getColor(void) const
 {
   return (this->_color);
+}
+
+void bbman::DestructibleBlock::disableAnimation(void)
+{
+  this->_anim = false;
 }

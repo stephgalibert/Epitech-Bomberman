@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Fri Jun  3 16:28:40 2016 stephane galibert
+// Last update Fri Jun  3 21:17:21 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -63,10 +63,12 @@ namespace bbman
     virtual void setColor(std::string const& color);
     virtual void setDeviceID(int id);
     virtual int getDeviceID(void) const;
+    virtual void disableAnimation(void);
   private:
     static size_t NumberOfPlayer;
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:
+    bool _anim;
     void dropBomb(Irrlicht &irr, Board *board);
     IBomb *createBomb(Irrlicht &irr);
     void updateEffets(irr::f32 delta);

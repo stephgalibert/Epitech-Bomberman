@@ -1,12 +1,11 @@
 //
-
 // Board.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
 //
 // Made by stephane galibert
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Fri Jun  3 13:33:41 2016 stephane galibert
+// Last update Fri Jun  3 22:07:54 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -115,8 +114,19 @@ bool bbman::Board::hasWinners(void) const
       ++nbAlive;
     }
   }
-  return nbAlive < 2;
+  return nbAlive > 0 && nbAlive < 2;
 }
+
+bbman::APlayer *bbman::Board::getWinner(void) const
+{
+  for (auto it : this->_players) {
+    if (!it->hasExplosed()) {
+      return (it);
+    }
+  }
+  return (NULL);
+}
+
 
 bbman::APlayer * bbman::Board::getPlayerByID(size_t id) const
 {

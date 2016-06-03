@@ -61,6 +61,7 @@ namespace bbman
     virtual void setColor(std::string const& color);
     virtual void setDeviceID(int id);
     virtual int getDeviceID(void) const;
+    virtual void disableAnimation(void);
   private:
     static size_t NumberOfPlayer;
     static CacheManager<std::string, MemoryFile> SoundCache;
@@ -77,6 +78,7 @@ namespace bbman
     std::unordered_map<size_t, std::function<void(InputListener &)> > _inputs;
     std::unordered_map<size_t, std::function<void(Irrlicht &)> > _inits;
     irr::scene::IAnimatedMeshSceneNode *_mesh;
+    bool _anim;
     std::list<IEffect *> _effects;
     irr::core::vector3d<irr::s32> _posInMap;
     BombManager _bombManager;

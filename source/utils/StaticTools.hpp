@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 17:50:51 2016 stephane galibert
-// Last update Thu Jun  2 14:05:32 2016 stephane galibert
+// Last update Fri Jun  3 21:47:31 2016 stephane galibert
 //
 
 #ifndef _STATICTOOLS_HPP_
@@ -29,6 +29,7 @@ namespace tools
     static void initThreadPool(size_t nbThread);
     static void deleteThreadPool(void);
     static bbman::Direction getDirByCoord(irr::core::vector3d<irr::s32> const& p1, irr::core::vector3d<irr::s32> const& p2);
+    static int volume(std::string const& volume, int value = -1);
   };
 }
 

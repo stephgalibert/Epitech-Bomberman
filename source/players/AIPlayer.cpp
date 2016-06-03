@@ -28,6 +28,7 @@ bbman::AIPlayer::AIPlayer(void)
   this->_direction = Direction::DIR_NONE;
   this->_action = Action::ACT_NONE;
   this->_deviceID = 0;
+  this->_anim = true;
 }
 
 size_t bbman::AIPlayer::getAPlayerID(void) const
@@ -407,4 +408,9 @@ void bbman::AIPlayer::setDeviceID(int id)
 int bbman::AIPlayer::getDeviceID(void) const
 {
   return (this->_deviceID);
+}
+
+void bbman::AIPlayer::disableAnimation(void)
+{
+  this->_anim = false;
 }

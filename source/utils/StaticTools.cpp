@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 17:54:23 2016 stephane galibert
-// Last update Thu Jun  2 14:02:25 2016 stephane galibert
+// Last update Fri Jun  3 21:48:54 2016 stephane galibert
 //
 
 #include "StaticTools.hpp"
@@ -56,4 +56,18 @@ bbman::Direction tools::StaticTools::getDirByCoord(irr::core::vector3d<irr::s32>
       }
     }
   return (dir);
+}
+
+int tools::StaticTools::volume(std::string const& volume, int value)
+{
+  static int music = 0;
+  static int effect = 0;
+  if (value > -1) {
+    if (volume == "music") {
+      music = value;
+    } else if (volume == "effect") {
+      effect = value;
+    }
+  }
+  return ((volume == "music") ? music : effect);
 }

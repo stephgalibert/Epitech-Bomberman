@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:11:32 2016 stephane galibert
-// Last update Fri Jun  3 12:03:00 2016 stephane galibert
+// Last update Fri Jun  3 21:23:18 2016 stephane galibert
 //
 
 #ifndef _DESTRUCTIBLEBLOCK_HPP_
@@ -38,7 +38,9 @@ namespace bbman
     virtual ItemID getID(void) const;
     virtual std::string const& getColor(void) const;
     virtual void setColor(std::string const& color);
+    virtual void disableAnimation(void);
   private:
+    bool _anim;
     irr::scene::ISceneNode *_node;
     Explosion *_explosion;
     irr::core::vector3d<irr::s32> _posInMap;

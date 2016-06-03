@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:02:45 2016 stephane galibert
-// Last update Tue May 31 20:24:16 2016 stephane galibert
+// Last update Fri Jun  3 21:22:16 2016 stephane galibert
 //
 
 #ifndef _IPOWERUP_HPP_
@@ -36,6 +36,7 @@ namespace bbman
     virtual bool hasExplosed(void) const = 0;
     virtual std::string const& getColor(void) const = 0;
     virtual void setColor(std::string const& color) = 0;
+    virtual void disableAnimation(void) {}
   };
 }
 

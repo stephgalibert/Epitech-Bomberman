@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Fri Jun  3 11:55:47 2016 stephane galibert
+// Last update Fri Jun  3 21:54:33 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -48,6 +48,8 @@ void bbman::Application::init(void)
     this->_irr->getDevice()->setWindowCaption(L"Bomberman");
     this->_menu = new layout(this->_irr->getDevice());
     this->_menu->setGamepads(this->_joystickInfo);
+    tools::StaticTools::volume("music", 50);
+    tools::StaticTools::volume("effect", 50);
     goToMenu();
   } catch (std::runtime_error const& e) {
     throw (e);

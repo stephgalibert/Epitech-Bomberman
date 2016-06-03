@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 28 08:20:16 2016 stephane galibert
-// Last update Fri Jun  3 12:41:19 2016 stephane galibert
+// Last update Fri Jun  3 21:45:12 2016 stephane galibert
 //
 
 #include "TimeOut.hpp"
@@ -51,10 +51,10 @@ void bbman::TimeOut::init(Irrlicht &irr, Board *board)
 
 void bbman::TimeOut::update(Irrlicht &irr, irr::f32 delta)
 {
-  if (this->_delta >= 60.0000f) {
+  if (this->_delta >= 3.0000f) {
     //this->_delta = 0.f;
     this->_deltaAnim += delta;
-    if (this->_deltaAnim >= 10.0000f) {
+    if (this->_deltaAnim >= 1.0000f) {
       narrowBoard(irr);
       //this->_deltaAnim = 0;
     }
@@ -135,13 +135,15 @@ void bbman::TimeOut::updateAnim(void)
       std::list<IEntity *> const& entities = this->_board->getEntityByPosition(pos);
       for (auto &it : entities) {
 	IEntity *entity = it;
-	ExplodingBomb *tmp = dynamic_cast<ExplodingBomb *>(entity);
+	/*ExplodingBomb *tmp = dynamic_cast<ExplodingBomb *>(entity);
 	if (tmp) {
 	  tmp->setLol(true);
 	}
 	else if (entity && !entity->hasExplosed()) {
 	  entity->explode(this->_board);
-	}
+	  }*/
+	it->disableAnimation();
+	it->explode(this->_board);
       }
       this->_board->registerBlock(it->first);
       it = this->_anims.erase(it);

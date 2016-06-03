@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 03:11:29 2016 stephane galibert
-// Last update Tue May 31 20:23:41 2016 stephane galibert
+// Last update Fri Jun  3 21:16:37 2016 stephane galibert
 //
 
 #ifndef _IENTITY_HPP_
@@ -34,6 +34,7 @@ namespace bbman
     virtual irr::core::vector3d<irr::s32> const& getPosInMap(irr::core::vector3df const& scale) = 0;
     virtual std::string const& getColor(void) const = 0;
     virtual void setColor(std::string const& color) = 0;
+    virtual void disableAnimation(void) = 0;
   };
 }
 

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Fri Jun  3 16:33:58 2016 stephane galibert
+// Last update Fri Jun  3 21:26:06 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -32,7 +32,7 @@ bbman::HumanPlayer::HumanPlayer(void)
     std::bind(&bbman::HumanPlayer::deviceJoystick1, this, std::placeholders::_1);
   this->_devices[3] =
     std::bind(&bbman::HumanPlayer::deviceJoystick2, this, std::placeholders::_1);
-
+  this->_anim = true;
   this->_mesh = NULL;
   this->_isRunning = false;
   this->_speed = INITIAL_SPEED;
@@ -223,7 +223,7 @@ void bbman::HumanPlayer::explode(Board *board)
 
 void bbman::HumanPlayer::playExplosion(void)
 {
-  if (this->_explosion) {
+  if (this->_anim && this->_explosion) {
     this->_explosion->play(getPosition());
   }
 }
@@ -539,4 +539,9 @@ void bbman::HumanPlayer::setDeviceID(int id)
 int bbman::HumanPlayer::getDeviceID(void) const
 {
   return (this->_deviceID);
+}
+
+void bbman::HumanPlayer::disableAnimation(void)
+{
+  this->_anim = false;
 }

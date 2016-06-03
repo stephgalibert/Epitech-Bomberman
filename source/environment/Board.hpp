@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Fri Jun  3 13:03:15 2016 stephane galibert
+// Last update Fri Jun  3 22:04:41 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -72,6 +72,7 @@ namespace bbman
     PowerUPs &getPowerUPs(void);
     Irrlicht *getIrrlicht(void);
     bool hasWinners(void) const;
+    APlayer *getWinner(void) const;
     IBlock *createInbrkable(Irrlicht &irr, size_t x, size_t y);
     void registerBlock(IBlock *block);
     void disableDirection(size_t x, size_t y);

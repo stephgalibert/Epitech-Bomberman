@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Fri Jun  3 11:52:18 2016 stephane galibert
+// Last update Fri Jun  3 22:55:40 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -14,9 +14,9 @@ bbman::Game::Game(void)
 {
   this->_leaveGame = false;
   this->_board = new Board;
-  //this->_timeout = new TimeOut;
   this->_timeout = NULL;
   this->_layout = NULL;
+  this->_delta = 0;
 }
 
 bbman::Game::~Game(void)
@@ -71,8 +71,21 @@ bool bbman::Game::input(InputListener &inputListener)
 
 void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
-  this->_board->update(irr, delta);
-  this->_timeout->update(irr, delta);
+  /*if (this->_board->hasWinners()) {
+    APlayer *winner = this->_board->getWinner();
+    irr::core::vector3df const& cpos = this->_camera->getPosition();
+    irr::core::vector3df const& npos = winner->getPosition();
+
+    float x = 45 * std::cos(1 / delta * (2 * 3.1415));
+    float y = 45 * std::sin(1 / delta * (2 * 3.1415));
+    float z = std::atan2(y, x) + 3.1415f / 2;
+
+    this->_camera->setTarget(winner->getPosition());
+    this->_camera->setPosition(irr::core::vector3df(, y, z));
+    } else {*/
+    this->_board->update(irr, delta);
+    this->_timeout->update(irr, delta);
+    //}
 }
 
 bool bbman::Game::leaveGame(void) const
@@ -97,7 +110,7 @@ void bbman::Game::initSound(void)
     this->_musicBackground.load();
     this->_musics.addSample("mbackground", this->_musicBackground);
     this->_musics.setLoop("mbackground", true);
-    this->_musics.setVolumeBySample("mbackground", 50.f);
+    this->_musics.setVolumeBySample("mbackground", tools::StaticTools::volume("music"));
     this->_musics.play("mbackground");
   } catch (std::runtime_error const& e) {
     std::cerr << e.what() << std::endl;
@@ -120,19 +133,6 @@ void bbman::Game::save(std::string const& fname)
 
 void bbman::Game::createPlayers(Irrlicht &irr)
 {
-  /*AIPlayer *ai1 = new AIPlayer;
-    ai1->init(irr);
-    ai1->setPosition(this->_board->getSpawnPosition(2));
-    this->_board->addPlayer(ai1);
-
-    HumanPlayer *p1 = bbman::HumanPlayer::create();
-    p1->init(irr, "Green");
-    p1->setPosition(this->_board->getSpawnPosition(0));
-    this->_board->addPlayer(p1);
-    HumanPlayer *p2 = bbman::HumanPlayer::create();
-    p2->init(irr, "Orange");
-    p2->setPosition(this->_board->getSpawnPosition(1));
-    this->_board->addPlayer(p2);*/
   std::vector<int> const& data = this->_layout->getDevices();
   std::string color;
 

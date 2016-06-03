@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Fri Jun  3 02:47:29 2016 stephane galibert
+// Last update Fri Jun  3 22:34:10 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -56,6 +56,8 @@ namespace bbman
     MemoryFile _musicBackground;
     irr::scene::ICameraSceneNode *_camera;
     layout *_layout;
+    irr::f32 _delta;
+    irr::core::vector3df _prev;
   };
 }
 
