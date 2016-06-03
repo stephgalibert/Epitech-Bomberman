@@ -23,6 +23,9 @@ public:
   void updateRuntime(void);
   void manageEvent(bbman::InputListener &listener);
   void loadRessources(void);
+  void displayScore(int id, int value);
+  void displayTimerGlobal(int value);
+  void displayTimerTimeout(int value);
 };
 
 #endif // ifndef GAMESCENE_HPP

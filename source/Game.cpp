@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Fri Jun  3 22:55:40 2016 stephane galibert
+// Last update Fri Jun  3 23:58:00 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -55,8 +55,11 @@ void bbman::Game::init(Irrlicht &irr, layout *layout, std::string const& saves)
 
 bool bbman::Game::input(InputListener &inputListener)
 {
+  this->_layout->input(inputListener);
   if (inputListener.IsKeyDown(irr::KEY_ESCAPE)) {
-    this->_leaveGame = true;
+    //this->_leaveGame = true;
+    this->_layout->displayPauseMenu();
+    // mettre le jeu en pause
     return (true);
   }
   else if (inputListener.IsKeyDown(irr::KEY_KEY_P)) {

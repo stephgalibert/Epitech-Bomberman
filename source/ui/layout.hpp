@@ -11,12 +11,14 @@
 #define LAYOUT_HPP_
 
 #include <vector>
+#include <utility>
 #include "mainScene.hpp"
 #include "settingsScene.hpp"
 #include "gameScene.hpp"
 #include "controlsScene.hpp"
 #include "lobbyScene.hpp"
 #include "ui.hpp"
+#include "echapScene.hpp"
 
 class layout
 {
@@ -32,12 +34,25 @@ public:
   bool isGameStarted(void) const;
   void backToMenu(void);
   bool isClosed(void);
+  std::vector<std::pair<std::string, int> > const getVolume(void) const;
+  int getIADifficulty(void) const;
+  void displayPauseMenu(void);
+  bool isResuming(void) const;
+  bool isSaving(void) const;
+  bool isMenuing(void) const;
+
+  void setScore(int id, int value);
+  void setTimerGlobal(int value);
+  void setTimerTimeout(int value);
+
 private:
 
   void loadScene();
 
   ui *_ui;
   std::map<std::string, ASubLayout *>_scene;
+  gameScene *_game;
+
   std::string _currentScene;
   irr::IrrlichtDevice *_device;
 };

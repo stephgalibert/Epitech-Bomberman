@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Fri Jun  3 21:54:33 2016 stephane galibert
+// Last update Fri Jun  3 23:14:10 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -87,6 +87,7 @@ void bbman::Application::update_game(irr::f32 delta)
     this->_irr->beginScene();
     this->_irr->drawScene();
     this->_irr->drawGUI();
+    this->_menu->display();
     //this->_irr->getLayout()->display();
     this->_irr->endScene();
     if (this->_game->leaveGame()) {

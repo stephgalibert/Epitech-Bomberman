@@ -16,7 +16,8 @@
 
 //#define GETSTATE listener.getState()
 //#define GETPOSITION listener.getPosition()
-#define MEDIAPATH "./asset/ui/"
+//#define MEDIAPATH "../source/ui/scene/media/"
+#define MEDIAPATH "../asset/ui/"
 
 class ASubLayout
 {

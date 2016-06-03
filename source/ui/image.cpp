@@ -25,11 +25,13 @@ image::image(const std::string& name, irr::video::ITexture *image,
 image::~image() {}
 
 /* setter */
+#include <iostream>
 void image::setImage(irr::video::ITexture *image, const std::string& style)
 {
   this->_style[style]._image     = image;
-  if (image)
+  if (image) {
     this->_style[style]._dimension = image->getSize();
+  }
 }
 
 IObject &image::texture(irr::video::ITexture *image)

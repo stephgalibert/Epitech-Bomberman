@@ -23,9 +23,11 @@ void layout::loadScene()
 {
   this->_scene["default"] = new mainScene(*this->_ui);
   this->_scene["settings"] = new settingsScene(*this->_ui);
-  this->_scene["game"] = new gameScene(*this->_ui);
   this->_scene["controls"] = new controlsScene(*this->_ui);
   this->_scene["lobby"] = new lobbyScene(*this->_ui);
+  this->_scene["echap"]= new echapScene(*this->_ui);
+  this->_game = new gameScene(*this->_ui);
+  this->_scene["game"] = this->_game;
 }
 
 const std::string &layout::display()
@@ -82,10 +84,88 @@ void layout::backToMenu(void)
   this->_ui->changeScene("default");
 }
 
+std::vector<std::pair<std::string, int> > const layout::getVolume(void) const
+{
+  settingsScene *set = dynamic_cast<settingsScene *>(this->_scene.at("settings"));
+  if (set) {
+    return (set->getVolume());
+  }
+  else {
+    throw std::runtime_error("can not cast asublayout to setscene");
+  }
+}
+
+bool layout::isResuming(void) const
+{
+  echapScene *echap = dynamic_cast<echapScene *>(this->_scene.at("echap"));
+  if (echap) {
+    return (echap->isResuming());
+  }
+  else {
+    throw std::runtime_error("can not cast asublayout to echapscene");
+  }
+}
+
+bool layout::isSaving(void) const
+{
+  echapScene *echap = dynamic_cast<echapScene *>(this->_scene.at("echap"));
+  if (echap) {
+    return (echap->isSaving());
+  }
+  else {
+    throw std::runtime_error("can not cast asublayout to echapscene");
+  }
+}
+
+bool layout::isMenuing(void) const
+{
+  echapScene *echap = dynamic_cast<echapScene *>(this->_scene.at("echap"));
+  if (echap) {
+    return (echap->isMenuing());
+  }
+  else {
+    throw std::runtime_error("can not cast asublayout to echapscene");
+  }
+}
+
+int layout::getIADifficulty(void) const
+{
+  settingsScene *set = dynamic_cast<settingsScene *>(this->_scene.at("settings"));
+  if (set) {
+    return (set->getIADifficulty());
+  }
+  else {
+    throw std::runtime_error("can not cast asublayout to setscene");
+  }
+}
+
+void layout::displayPauseMenu(void)
+{
+  if (this->_currentScene == "echap")
+    this->_ui->changeScene("game");
+  else
+    this->_ui->changeScene("echap");
+}
+
 bool layout::isClosed(void)
 {
   if (this->_scene.find(this->_currentScene) != this->_scene.cend()) {
     return this->_scene.at(this->_currentScene)->isClosed();
   }
   return false;
+}
+
+void layout::setScore(int id, int value)
+{
+  this->_game->displayScore(id, value);
+}
+
+void layout::setTimerGlobal(int value)
+{
+  this->_game->displayTimerGlobal(value);
+}
+
+void layout::setTimerTimeout(int value)
+{
+  this->_game->displayTimerTimeout(value);
 }

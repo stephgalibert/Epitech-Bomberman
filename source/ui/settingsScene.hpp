@@ -10,6 +10,9 @@
 #ifndef SETTINGSSCENE_HPP
 #define SETTINGSSCENE_HPP
 
+#include <vector>
+#include <string>
+#include <utility>
 #include "ASubLayout.hpp"
 
 class settingsScene : public ASubLayout
@@ -24,7 +27,16 @@ public:
   void manageEvent(bbman::InputListener &listener);
 
   void loadRessources(void);
+  void loadIA(void);
+  void loadSound(void);
 
+std::vector<std::pair<std::string, int> > const getVolume(void) const;
+int getIADifficulty(void) const;
+
+private:
+  int   _music;
+  int   _effect;
+  int   _iaLevel;
 };
 
 #endif
