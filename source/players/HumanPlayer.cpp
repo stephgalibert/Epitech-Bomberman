@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Fri Jun  3 14:34:36 2016 stephane galibert
+// Last update Fri Jun  3 15:42:29 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -329,8 +329,7 @@ void bbman::HumanPlayer::move(irr::f32 delta)
       this->_mesh->setFrameLoop(60, 105);
       this->_isRunning = true;
     }
-    if (this->_move.find(this->_direction) != this->_move.end())
-      this->_move.at(this->_direction)(delta);
+    this->_move.at(this->_direction)(delta);
   }
 }
 

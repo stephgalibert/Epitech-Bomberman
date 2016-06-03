@@ -49,14 +49,16 @@ void bbman::AIPlayer::init(bbman::Irrlicht& irr, std::string const& color)
   IBomb *bomb = NULL;
 
   try {
-    std::string txt = "./asset/media/ninja.b3d";
     this->_color = color;
-    this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
+    std::string fbx = "./asset/perso/perso.fbx";
+    std::string diffuse = "./asset/perso/texture/diffuse/" + this->_color + ".png";
+    this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(fbx.data()));
     this->_binding.init("../source/binding/script.lua");
     if (this->_mesh) {
+      this->_mesh->setMaterialTexture(0, irr.getTexture(diffuse.data()));
       this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
       this->_mesh->setAnimationSpeed(0);
-      this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
+      this->_mesh->setScale(irr::core::vector3df(.8f, .8f, .8f));
       this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
     } else {
       throw(std::runtime_error("can not create ai " + std::to_string(this->_playerNum)));
@@ -74,15 +76,17 @@ void bbman::AIPlayer::init(bbman::Irrlicht& irr, int deviceID,
 			   std::string const& color)
 {
   try {
-    std::string txt = "./asset/media/ninja.b3d";
     this->_color = color;
+    std::string fbx = "./asset/perso/perso.fbx";
+    std::string diffuse = "./asset/perso/texture/diffuse/" + this->_color + ".png";
     this->_deviceID = deviceID;
-    this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(txt.data()));
+    this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(fbx.data()));
     this->_binding.init("../source/binding/script.lua");
     if (this->_mesh) {
+      this->_mesh->setMaterialTexture(0, irr.getTexture(diffuse.data()));
       this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
+      this->_mesh->setScale(irr::core::vector3df(0.8f, 0.8f, 0.8f));
       this->_mesh->setAnimationSpeed(0);
-      this->_mesh->setScale(irr::core::vector3df(1.5f, 2.f, 1.5f));
       this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
     } else {
       throw(std::runtime_error("can not create ai " + std::to_string(this->_playerNum)));
@@ -131,7 +135,6 @@ void bbman::AIPlayer::update(bbman::Irrlicht& irr, irr::f32 delta)
 void bbman::AIPlayer::play(bbman::Irrlicht& irr, bbman::Board *board)
 {
   if (this->_alive) {
-    //checkDirection(board);
     if (this->_action == bbman::ACT_BOMB) {
       dropBomb(irr, board);
     }
@@ -200,8 +203,6 @@ void bbman::AIPlayer::explode(Board *board)
 {
   if (this->_alive) {
     this->_alive = false;
-    //this->_mesh->remove();
-    //this->_mesh = NULL;
     this->_mesh->setVisible(false);
     std::cerr << "ia" << getID() << "died" << std::endl;
   }
@@ -293,20 +294,8 @@ void bbman::AIPlayer::setSpeed(size_t speed)
 void bbman::AIPlayer::addEffect(IEffect *effect)
 {
   if (this->_alive) {
-    if (std::find_if(std::begin(this->_effects), std::end(this->_effects),
-                     [&effect](IEffect * buff) {
-                       if (effect->getEffectID() == buff->getEffectID()) {
-                         buff->restart();
-                       }
-                       return true;
-
-                       return false;
-                     }) == std::end(this->_effects)) {
-      effect->enable();
-      this->_effects.push_back(effect);
-    } else {
-      delete (effect);
-    }
+    effect->enable();
+    this->_effects.push_back(effect);
   }
 }
 
@@ -324,44 +313,20 @@ void bbman::AIPlayer::updateEffets(irr::f32 delta)
   }
 }
 
-/*void bbman::AIPlayer::checkDirection(bbman::Board *board)
-{
-  if (this->_alive) {
-    if (!board->isInNode(getPosition())) {
-      if ((this->_prevDirection == Direction::DIR_EAST
-	   || this->_prevDirection == Direction::DIR_WEST)
-	  &&
-	  (this->_direction == Direction::DIR_NORTH
-	 || this->_direction == Direction::DIR_SOUTH)) {
-	this->_direction = Direction::DIR_NONE;
-      }
-      else if ((this->_prevDirection == Direction::DIR_NORTH
-		|| this->_prevDirection == Direction::DIR_SOUTH)
-	       &&
-	       (this->_direction == Direction::DIR_EAST
-		|| this->_direction == Direction::DIR_WEST)) {
-	this->_direction = Direction::DIR_NONE;
-      }
-    }
-    else if (!board->isValidMove(getPosition(), this->_direction)) {
-      this->_direction = Direction::DIR_NONE;
-    }
-  }
-  }*/
-
 void bbman::AIPlayer::move(irr::f32 delta)
 {
   if (this->_direction == Direction::DIR_NONE) {
-    this->_mesh->setCurrentFrame(5);
-    this->_mesh->setAnimationSpeed(0);
+    this->_mesh->setFrameLoop(1, 51);
+    this->_mesh->setAnimationSpeed(15);
     this->_isRunning = false;
-  } else {
+  }
+  else {
     if (!this->_isRunning) {
-      this->_mesh->setAnimationSpeed(15);
-      this->_mesh->setFrameLoop(0, 13);
+      this->_mesh->setAnimationSpeed(25);
+      this->_mesh->setFrameLoop(60, 105);
       this->_isRunning = true;
     }
-    this->_move.at(this->_direction) (delta);
+    this->_move.at(this->_direction)(delta);
   }
 }
 
@@ -371,7 +336,7 @@ void bbman::AIPlayer::moveEast(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.X += this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, -90, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 90, 0));
 }
 
 void bbman::AIPlayer::moveWest(irr::f32 delta)
@@ -380,7 +345,7 @@ void bbman::AIPlayer::moveWest(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.X -= this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 90, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, -90, 0));
 }
 
 void bbman::AIPlayer::moveNorth(irr::f32 delta)
@@ -389,7 +354,7 @@ void bbman::AIPlayer::moveNorth(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.Z += this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
 }
 
 void bbman::AIPlayer::moveSouth(irr::f32 delta)
@@ -398,7 +363,7 @@ void bbman::AIPlayer::moveSouth(irr::f32 delta)
   irr::core::vector3df playerPos = this->_mesh->getPosition();
   playerPos.Z -= this->_speed * delta;
   this->_mesh->setPosition(playerPos);
-  this->_mesh->setRotation(irr::core::vector3df(0, 0, 0));
+  this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
 }
 
 bbman::IBomb * bbman::AIPlayer::createBomb(bbman::Irrlicht& irr)
