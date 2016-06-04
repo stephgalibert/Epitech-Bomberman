@@ -9,7 +9,8 @@
 
 #include "gameScene.hpp"
 
-gameScene::gameScene(ui& ui) : ASubLayout(ui, "game") {}
+gameScene::gameScene(ui& ui) : ASubLayout(ui, "game") {
+}
 
 gameScene::~gameScene() {}
 
@@ -47,53 +48,69 @@ void gameScene::loadScene()
 
   this->_ui.create<text>("mainTimer")
   .font(this->_ui.getFont("mc48"))
-  .msg("03:20")
+  .msg("00:00")
   .color(255, 255, 255)
   .at(860, 0);
 
   this->_ui.create<text>("alerte")
   .font(this->_ui.getFont("m26"))
-  .msg("0:17")
+  .msg("0:00")
   .color(255, 75, 75)
   .at(925, 65);
 
+  this->_ui.create<text>("scoreP0")
+  .font(this->_ui.getFont("m36"))
+  .msg("0")
+  .at(150, 55);
+
   this->_ui.create<text>("scoreP1")
   .font(this->_ui.getFont("m36"))
-  .msg("460")
-  .at(150, 55);
+  .msg("0")
+  .at(150, 175);
 
   this->_ui.create<text>("scoreP2")
   .font(this->_ui.getFont("m36"))
-  .msg("236")
-  .at(150, 175);
+  .msg("0")
+  .at(1720, 55);
 
   this->_ui.create<text>("scoreP3")
   .font(this->_ui.getFont("m36"))
-  .msg("117")
-  .at(1720, 55);
-
-  this->_ui.create<text>("scoreP4")
-  .font(this->_ui.getFont("m36"))
-  .msg("203")
+  .msg("0")
   .at(1720, 175);
 }
 
 void gameScene::updateRuntime() {}
 
-void gameScene::manageEvent(bbman::InputListener &listener) {}
+void gameScene::manageEvent(bbman::InputListener& listener) {}
 
-
+#include <iostream>
 void gameScene::displayScore(int id, int value)
 {
-
+  if (id < 0 || id > 3)
+    return;
+  this->_ui.get<text>("scoreP" + std::to_string(id)).msg(std::to_string(value));
 }
 
 void gameScene::displayTimerGlobal(int value)
 {
-
+  this->_ui.get<text>("mainTimer")
+    .msg(((value / 60 < 10) ? "0" : "") + std::to_string(value / 60) + ":" + ((value % 60 < 10) ? "0" : "") + std::to_string(value % 60));
 }
 
 void gameScene::displayTimerTimeout(int value)
 {
-
+  if (value >= 0) {
+    if (value <= 10) {
+      if (value % 2) {
+        this->_ui["alerte"].color(255, 100, 100);
+      } else {
+        this->_ui["alerte"].color(255, 15, 15);
+      }
+    }
+    this->_ui.get<text>("alerte")
+    .msg(std::to_string(value / 60) + ":" + ((value % 60 < 10) ? "0" : "") + std::to_string(value % 60));
+  } else {
+    this->_ui.get<text>("alerte")
+    .msg("0:00");
+  }
 }

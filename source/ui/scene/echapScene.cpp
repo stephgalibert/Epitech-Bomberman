@@ -34,20 +34,32 @@ void echapScene::loadScene()
 
   this->_ui.create<image>("resume")
     .texture(this->_ui.getTexture("resume"))
-    .at(825, 450);
+    .at(825, 450)
+    .in("hover")
+    .alpha(200)
+    .closeStyle();
 
   this->_ui.create<image>("menu")
     .texture(this->_ui.getTexture("menu"))
-    .at(825, 560);
+    .at(825, 670)
+    .in("hover")
+    .alpha(200)
+    .closeStyle();
 
   this->_ui.create<image>("save")
     .texture(this->_ui.getTexture("save"))
-    .at(825, 670);
+    .at(825, 560)
+    .in("hover")
+    .alpha(200)
+    .closeStyle();
+
 }
 
 void echapScene::updateRuntime()
 {
-
+  this->_ui.setStyle("save", (this->_ui["save"].collision(this->_mousePosition)) ? "hover" : "default");
+  this->_ui.setStyle("resume", (this->_ui["resume"].collision(this->_mousePosition)) ? "hover" : "default");
+  this->_ui.setStyle("menu", (this->_ui["menu"].collision(this->_mousePosition)) ? "hover" : "default");
 }
 
 void echapScene::manageEvent(bbman::InputListener &listener)

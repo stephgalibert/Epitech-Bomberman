@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Sat Jun  4 15:41:06 2016 stephane galibert
+// Last update Sat Jun  4 18:26:21 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -38,6 +38,7 @@ void bbman::Game::init(Irrlicht &irr, layout *layout, std::string const& saves)
 {
   try {
     this->_layout = layout;
+    this->_layout->loadHUD();
     if (!saves.empty()) {
       this->_loader.load(irr, saves);
       this->_board->init(irr, this->_loader);
@@ -72,7 +73,7 @@ bool bbman::Game::input(InputListener &inputListener)
 
     if (this->_delta_pause > 0.5) {
       this->_pause = !this->_pause;
-      this->_layout->pauseMenu(this->_pause);
+      this->_layout->displayPauseMenu();
       this->_delta_pause = 0;
     }
     return (true);
@@ -98,6 +99,7 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
     }
     this->_layout->resetPauseMenu();
   } else if (this->_board->hasWinners()) {
+    // ...
     APlayer *winner = this->_board->getWinner();
     irr::core::vector3df const& cpos = this->_camera->getPosition();
     irr::core::vector3df const& npos = winner->getPosition();
@@ -109,6 +111,12 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
   } else {
     this->_board->update(irr, delta);
     this->_timeout->update(irr, delta);
+    std::vector<APlayer *> const& players = this->_board->getPlayers();
+    for (auto it : players) {
+      this->_layout->setScore(it->getID(), it->getScore());
+    }
+    this->_layout->setTimerGlobal(this->_delta);
+    this->_layout->setTimerTimeout(this->_timeout->getDelta());
     this->_delta += delta;
   }
   this->_delta_pause += delta;

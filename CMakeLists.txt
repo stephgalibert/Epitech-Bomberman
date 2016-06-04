@@ -48,6 +48,7 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/source/utils
   ${PROJECT_SOURCE_DIR}/source/thread
   ${PROJECT_SOURCE_DIR}/source/ui
+  ${PROJECT_SOURCE_DIR}/source/ui/scene
   ${PROJECT_SOURCE_DIR}/lib/irrlicht/include
   ${PROJECT_SOURCE_DIR}/lib/assimp/include
   ${PROJECT_SOURCE_DIR}/lib/lua/LuaBridge/
@@ -63,6 +64,8 @@ FILE(GLOB SRCS
     source/*.hpp
     source/**/*.cpp
     source/**/*.hpp
+    source/**/**/*.cpp
+    source/**/**/*.hpp
   )
 
 # call the CMakeList to build gtest.a

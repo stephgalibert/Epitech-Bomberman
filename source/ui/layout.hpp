@@ -17,8 +17,12 @@
 #include "gameScene.hpp"
 #include "controlsScene.hpp"
 #include "lobbyScene.hpp"
-#include "ui.hpp"
+#include "creditScene.hpp"
+#include "rankingScene.hpp"
+#include "replayScene.hpp"
 #include "echapScene.hpp"
+#include "tipsScene.hpp"
+#include "ui.hpp"
 
 class layout
 {
@@ -37,8 +41,8 @@ public:
   std::vector<std::pair<std::string, int> > const getVolume(void) const;
   int getIADifficulty(void) const;
 
-  void pauseMenu(bool display);
   void resetPauseMenu(void);
+  void displayPauseMenu(void);
   bool isResuming(void) const;
   bool isSaving(void) const;
   bool isMenuing(void) const;
@@ -46,6 +50,8 @@ public:
   void setScore(int id, int value);
   void setTimerGlobal(int value);
   void setTimerTimeout(int value);
+
+  void loadHUD(void);
 
 private:
 

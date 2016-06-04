@@ -30,6 +30,7 @@ public:
   void nextChoice(int id);
   std::vector<int> const& getUsed(void) const;
   void setGamepad(int pad);
+  void init();
 
 private:
   std::vector<std::string>  _selecter;

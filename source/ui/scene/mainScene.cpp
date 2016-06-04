@@ -139,6 +139,22 @@ void mainScene::manageEvent(bbman::InputListener &listener)
     if (this->_ui["logoPlay"].collision(this->_mousePosition)) {
       this->_nextScene = "lobby";
     }
+
+    if (this->_ui["logoCredit"].collision(this->_mousePosition)) {
+      this->_nextScene = "credit";
+    }
+
+    if (this->_ui["logoRanking"].collision(this->_mousePosition)) {
+      this->_nextScene = "ranking";
+    }
+
+    if (this->_ui["logoPause"].collision(this->_mousePosition)) {
+      this->_nextScene = "replay";
+    }
+
+    if (this->_ui["logoTips"].collision(this->_mousePosition)) {
+      this->_nextScene = "tips";
+    }
   }
 }
 

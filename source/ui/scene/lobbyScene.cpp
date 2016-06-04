@@ -26,6 +26,14 @@ lobbyScene::lobbyScene(ui& ui) : ASubLayout(ui, "lobby")
 
 lobbyScene::~lobbyScene() {}
 
+void lobbyScene::init()
+{
+  this->_used[0] = -1;
+  this->_used[1] = -1;
+  this->_used[2] = -1;
+  this->_used[3] = -1;
+}
+
 void lobbyScene::createPlayerLabel(int x, int id)
 {
   this->_ui.create<image>("labelPlayer" + std::to_string(id))
@@ -76,6 +84,7 @@ void lobbyScene::loadRessources()
 
 void lobbyScene::loadScene()
 {
+  this->init();
   this->_nextScene = this->_name;
   this->_ui.create<rect>("0backgrounDColor")
     .color(0, 22, 30)
@@ -168,7 +177,12 @@ std::vector<int> const& lobbyScene::getUsed(void) const
 
 void lobbyScene::setGamepad(int pad)
 {
-  this->_gamepad = pad;
+  if (pad <= 0)
+    this->_gamepad = 0;
+  else if (pad <= 2)
+    this->_gamepad = pad;
+  else
+    this->_gamepad = 2;
 }
 
 void lobbyScene::manageEvent(bbman::InputListener &listener) {
