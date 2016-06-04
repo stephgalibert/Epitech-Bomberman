@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 28 08:15:00 2016 stephane galibert
-// Last update Sat Jun  4 20:42:51 2016 stephane galibert
+// Last update Sat Jun  4 22:22:00 2016 stephane galibert
 //
 
 #ifndef _TIMEOUT_HPP_
@@ -25,8 +25,8 @@ namespace bbman
   class TimeOut
   {
   public:
-    static const size_t constexpr Release = 10.f;
-    static const size_t constexpr ReleaseStep = 5.f;
+    static const size_t constexpr Release = 60.f;
+    static const size_t constexpr ReleaseStep = 10.f;
   public:
     TimeOut(void);
     ~TimeOut(void);

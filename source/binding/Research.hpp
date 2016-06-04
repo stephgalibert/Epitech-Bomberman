@@ -36,7 +36,11 @@ namespace bbman {
     bbman::TrueAStar getTrueA() const;
     bbman::NeighborAStar getNeighA() const;
   private:
-
+    bbman::Direction checkNorthEast(irr::core::vector3d<irr::s32>const& pos, bbman::TrueAStar & trueA, int i, int j);
+    bbman::Direction checkNorthWest(irr::core::vector3d<irr::s32>const& pos, bbman::TrueAStar & trueA, int i, int j);
+    bbman::Direction checkSouthEast(irr::core::vector3d<irr::s32>const& pos, bbman::TrueAStar & trueA, int i, int j);
+    bbman::Direction checkSouthWest(irr::core::vector3d<irr::s32>const& pos, bbman::TrueAStar & trueA, int i, int j);
+    std::unordered_map<int, std::function<bbman::Direction(irr::core::vector3d<irr::s32>const& pos, bbman::TrueAStar& trueA, int i, int j)> > _checkers;
     lua_State *_L;
     bbman::Board *_board;
     irr::core::vector3d<irr::s32> _near;
