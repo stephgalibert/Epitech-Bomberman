@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Sat Jun  4 15:32:24 2016 stephane galibert
+// Last update Sat Jun  4 21:26:34 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -29,6 +29,7 @@
 # include "AIPlayer.hpp"
 # include "Binding.hpp"
 # include "layout.hpp"
+# include "HighScore.hpp"
 
 namespace bbman
 {
@@ -54,7 +55,9 @@ namespace bbman
     void initSound(void);
     void updateBombs(Irrlicht &irr, irr::f32 delta);
     void updatePlayers(Irrlicht &irr, irr::f32 delta);
+
     void save(std::string const& fname);
+    void saveScore(void);
     void createPlayers(Irrlicht &irr);
     void pause(void);
     bool _leaveGame;

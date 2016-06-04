@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Sat Jun  4 20:43:46 2016 stephane galibert
+// Last update Sat Jun  4 21:53:29 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -23,6 +23,7 @@ bbman::Game::Game(void)
 
 bbman::Game::~Game(void)
 {
+  saveScore();
   if (this->_timeout) {
     delete (this->_timeout);
   }
@@ -239,6 +240,19 @@ void bbman::Game::save(std::string const& fname)
   else {
     throw (std::runtime_error("can not create ./save.txt"));
   }
+}
+
+void bbman::Game::saveScore(void)
+{
+  std::vector<HighScore> ranking;
+  std::vector<APlayer *> const& players = this->_board->getPlayers();
+
+  //HighScore::loadScoreFromFile("score.txt", ranking);
+  for (auto it : players) {
+    HighScore::saveNewHighScore(ranking, "Player" + std::to_string(it->getID()),
+				it->getScore());
+  }
+  HighScore::saveScoreInFile("score.txt", ranking);
 }
 
 void bbman::Game::createPlayers(Irrlicht &irr)

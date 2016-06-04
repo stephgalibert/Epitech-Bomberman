@@ -9,7 +9,10 @@
 
 #include "echapScene.hpp"
 
-echapScene::echapScene(ui& ui) : ASubLayout(ui, "echap") {}
+echapScene::echapScene(ui& ui) : ASubLayout(ui, "echap")
+{
+  reset();
+}
 
 echapScene::~echapScene() {}
 
