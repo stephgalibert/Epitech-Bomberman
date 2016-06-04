@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 31 20:43:06 2016 stephane galibert
-// Last update Thu Jun  2 12:11:25 2016 stephane galibert
+// Last update Sat Jun  4 20:45:14 2016 stephane galibert
 //
 
 #ifndef _BEAM_HPP_
@@ -23,7 +23,6 @@ namespace bbman
     ABeam(Irrlicht &irr, size_t range);
     virtual ~ABeam(void);
     virtual void init(Irrlicht &irr, std::string const& color) = 0;
-    //virtual void setScale(irr::core::vector3df const& scale) = 0;
     virtual void play(void) = 0;
     void setRepeat(size_t n);
     void setPosition(irr::core::vector3df const& pos);
@@ -31,13 +30,10 @@ namespace bbman
     Irrlicht &_irr;
     bool _running;
     size_t _range;
-    //irr::scene::IVolumeLightSceneNode *_vl;
     std::vector<irr::scene::IVolumeLightSceneNode *> _vls;
-    //std::vector<irr::scene::ISceneNodeAnimator *> _glows;
     irr::core::vector3df _pos;
     size_t _repeat;
     irr::core::array<irr::video::ITexture *> _textures;
-    //irr::scene::ISceneNodeAnimator* _glow;
   };
 
   class CenterBeam : public ABeam

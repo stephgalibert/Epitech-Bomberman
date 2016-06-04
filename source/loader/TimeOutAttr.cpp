@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:06:55 2016 stephane galibert
-// Last update Mon May 30 10:28:44 2016 stephane galibert
+// Last update Sat Jun  4 20:50:47 2016 stephane galibert
 //
 
 #include "TimeOutAttr.hpp"
@@ -84,7 +84,7 @@ void bbman::TimeOutAttr::setBegin(TimeOut *out, Irrlicht &irr,
 				  std::string const& value)
 {
   if (out) {
-    irr::core::vector3d<irr::s32> pos;
+    irr::core::vector3d<irr::u32> pos;
     std::vector<std::string> tokens;
     std::istringstream iss(value);
     std::copy(std::istream_iterator<std::string>(iss),
@@ -102,7 +102,7 @@ void bbman::TimeOutAttr::setCurrent(TimeOut *out, Irrlicht &irr,
 				    std::string const& value)
 {
   if (out) {
-    irr::core::vector3d<irr::s32> pos;
+    irr::core::vector3d<irr::u32> pos;
     std::vector<std::string> tokens;
     std::istringstream iss(value);
     std::copy(std::istream_iterator<std::string>(iss),

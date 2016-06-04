@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 31 20:50:44 2016 stephane galibert
-// Last update Thu Jun  2 12:09:10 2016 stephane galibert
+// Last update Sat Jun  4 20:48:24 2016 stephane galibert
 //
 
 #include "Beam.hpp"
@@ -15,19 +15,11 @@ bbman::ABeam::ABeam(Irrlicht &irr, size_t range)
 {
   this->_running = false;
   this->_range = range;
-  //this->_vl = NULL;
   this->_repeat = 0;
-  //this->_glow = NULL;
 }
 
 bbman::ABeam::~ABeam(void)
 {
-  /*if (this->_vl) {
-    this->_vl->remove();
-    }*/
-  /*if (this->_glow) {
-    this->_glow->drop();
-    }*/
   for (auto it : this->_vls) {
     it->remove();
   }
@@ -101,22 +93,14 @@ bbman::NorthernBeam::~NorthernBeam(void)
 
 void bbman::NorthernBeam::init(Irrlicht &irr, std::string const& color)
 {
-  /*this->_vl =
-    irr.getSmgr()->addVolumeLightSceneNode(0, -1, 32, 32,
-					   irr::video::SColor(0, 255, 255, 255),
-					   irr::video::SColor(0, 0, 0, 0));
-  if (this->_vl) {
-  this->_vl->setScale(irr::core::vector3df(10, 10, 10));*/
-      //irr::core::array<irr::video::ITexture *> textures;
-    for (irr::s32 g = 7 ; g > 0 ; --g) {
-      irr::core::stringc tmp;
-      tmp = "./asset/Beam/vbeam";
-      tmp += color.c_str();
-      tmp += g;
-      tmp += ".png";
-      this->_textures.push_back(irr.getTexture(tmp.c_str()));
-    }
-    //}
+  for (irr::s32 g = 7 ; g > 0 ; --g) {
+    irr::core::stringc tmp;
+    tmp = "./asset/Beam/vbeam";
+    tmp += color.c_str();
+    tmp += g;
+    tmp += ".png";
+    this->_textures.push_back(irr.getTexture(tmp.c_str()));
+  }
 }
 
 void bbman::NorthernBeam::play(void)
@@ -124,9 +108,9 @@ void bbman::NorthernBeam::play(void)
   irr::scene::ISceneNodeAnimator *glow = NULL;
   irr::scene::IVolumeLightSceneNode *vl = NULL;
 
-  if (!this->_running /*&& this->_vl*/) {
+  if (!this->_running) {
     this->_running = true;
-    for (int i = 0 ; i < this->_repeat ; ++i)
+    for (size_t i = 0 ; i < this->_repeat ; ++i)
       {
 	vl = this->_irr.getSmgr()->addVolumeLightSceneNode(0, -1, 32, 32, irr::video::SColor(0, 255, 255, 255), irr::video::SColor(0, 0, 0, 0));
 	glow = this->_irr.getSmgr()->createTextureAnimator(this->_textures, 70);
@@ -137,19 +121,9 @@ void bbman::NorthernBeam::play(void)
 	vl->addAnimator(glow);
 	glow->drop();
 	this->_vls.push_back(vl);
-	//this->_glows.push_back(glow);
       }
   }
 }
-
-/*void bbman::NorthernBeam::setScale(irr::core::vector3df const& scale)
-{
-  irr::core::vector3df fscale = scale;
-  if (this->_vl) {
-    this->_vl->setScale(fscale);
-  }
-  }*/
-
 
 bbman::SouthernBeam::SouthernBeam(Irrlicht &irr, size_t range)
   : ABeam(irr, range)

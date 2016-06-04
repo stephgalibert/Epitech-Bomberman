@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Sat Jun  4 19:52:30 2016 stephane galibert
+// Last update Sat Jun  4 20:43:46 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -101,7 +101,6 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
   } else if (this->_board->hasWinners()) {
     // ...
     APlayer *winner = this->_board->getWinner();
-    irr::core::vector3df const& cpos = this->_camera->getPosition();
     irr::core::vector3df const& npos = winner->getPosition();
     cameraTargetSmoothAnimation(delta, this->_camera->getTarget(), npos);
     if (this->_camera->getTarget() == winner->getPosition()) {
@@ -247,7 +246,7 @@ void bbman::Game::createPlayers(Irrlicht &irr)
   std::vector<int> const& data = this->_layout->getDevices();
   std::string color;
 
-  for (int i = 0 ; i < data.size() ; ++i) {
+  for (size_t i = 0 ; i < data.size() ; ++i) {
     if (i == 0)
       color = "Blue";
     else if (i == 1)

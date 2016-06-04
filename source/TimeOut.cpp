@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 28 08:20:16 2016 stephane galibert
-// Last update Sat Jun  4 18:50:17 2016 stephane galibert
+// Last update Sat Jun  4 20:40:26 2016 stephane galibert
 //
 
 #include "TimeOut.hpp"
@@ -87,22 +87,22 @@ bbman::Direction bbman::TimeOut::getDirection(void) const
   return (this->_direction);
 }
 
-void bbman::TimeOut::setBegin(irr::core::vector3d<irr::s32> const& v)
+void bbman::TimeOut::setBegin(irr::core::vector3d<irr::u32> const& v)
 {
   this->_begin = v;
 }
 
-irr::core::vector3d<irr::s32> const& bbman::TimeOut::getBegin(void) const
+irr::core::vector3d<irr::u32> const& bbman::TimeOut::getBegin(void) const
 {
   return (this->_begin);
 }
 
-void bbman::TimeOut::setCurrent(irr::core::vector3d<irr::s32> const& v)
+void bbman::TimeOut::setCurrent(irr::core::vector3d<irr::u32> const& v)
 {
   this->_current = v;
 }
 
-irr::core::vector3d<irr::s32> const& bbman::TimeOut::getCurrent(void) const
+irr::core::vector3d<irr::u32> const& bbman::TimeOut::getCurrent(void) const
 {
   return (this->_current);
 }
@@ -116,7 +116,6 @@ void bbman::TimeOut::updateAnim(void)
       this->_board->disableDirection(pos.X, pos.Z);
       std::list<IEntity *> const& entities = this->_board->getEntityByPosition(pos);
       for (auto &it : entities) {
-	IEntity *entity = it;
 	it->disableAnimation();
 	it->explode(this->_board);
       }

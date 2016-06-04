@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Sat Jun  4 15:05:23 2016 stephane galibert
+// Last update Sat Jun  4 20:44:46 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -28,7 +28,6 @@ bbman::ExplodingBomb::ExplodingBomb(bbman::APlayer *owner)
   this->_wbeam = NULL;
   this->_cbeam = NULL;
   this->_range = 3;
-  //this->_lol = false;
   this->_anim = true;
 }
 
@@ -236,7 +235,7 @@ void bbman::ExplodingBomb::setDelta(irr::f32 value)
 
 void bbman::ExplodingBomb::explode(Board *board)
 {
-  int i = 0;
+  size_t i = 0;
   irr::core::vector3df const& scale = board->getScale();
   irr::core::vector3d<irr::s32> const& pos = getPosInMap(scale);
   Map<Cell> const& map = board->getMap();

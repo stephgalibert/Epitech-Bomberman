@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 28 08:15:00 2016 stephane galibert
-// Last update Sat Jun  4 19:20:56 2016 stephane galibert
+// Last update Sat Jun  4 20:42:51 2016 stephane galibert
 //
 
 #ifndef _TIMEOUT_HPP_
@@ -40,10 +40,10 @@ namespace bbman
     int getStep(void) const;
     void setDirection(Direction dir);
     Direction getDirection(void) const;
-    void setBegin(irr::core::vector3d<irr::s32> const& begin);
-    irr::core::vector3d<irr::s32> const& getBegin(void) const;
-    void setCurrent(irr::core::vector3d<irr::s32> const& begin);
-    irr::core::vector3d<irr::s32> const& getCurrent(void) const;
+    void setBegin(irr::core::vector3d<irr::u32> const& v);
+    irr::core::vector3d<irr::u32> const& getBegin(void) const;
+    void setCurrent(irr::core::vector3d<irr::u32> const& v);
+    irr::core::vector3d<irr::u32> const& getCurrent(void) const;
   private:
     void updateAnim(void);
     void narrowBoard(Irrlicht &irr);
@@ -55,17 +55,17 @@ namespace bbman
     irr::f32 _delta;
     irr::f32 _deltaAnim;
     Board *_board;
-    irr::core::vector3d<irr::s32> _begin;
-    irr::core::vector3d<irr::s32> _current;
+    irr::core::vector3d<irr::u32> _begin;
+    irr::core::vector3d<irr::u32> _current;
     std::list<std::pair<IBlock *, irr::scene::ISceneNodeAnimator *> > _anims;
-    int _step;
+    size_t _step;
     Direction _direction;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, TimeOut const& obj)
   {
-    irr::core::vector3d<irr::s32> const& b = obj.getBegin();
-    irr::core::vector3d<irr::s32> const& c = obj.getCurrent();
+    irr::core::vector3d<irr::u32> const& b = obj.getBegin();
+    irr::core::vector3d<irr::u32> const& c = obj.getCurrent();
     flux << "delta:" << obj.getDelta() << ";"
 	 << "deltaanim:" << obj.getDeltaAnim() << ";"
 	 << "step:" << obj.getStep() << ";"
