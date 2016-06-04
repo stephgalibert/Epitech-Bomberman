@@ -17,6 +17,7 @@ void tipsScene::loadRessources()
 {
   this->_ui.load(ui::TEXTURE, MEDIAPATH "mode/background.png", "background");
   this->_ui.load(ui::TEXTURE, MEDIAPATH "controls/back.png", "backButton");
+  this->_ui.load(ui::TEXTURE, MEDIAPATH "tips/tips.png", "tips");
 }
 
 void tipsScene::loadScene()
@@ -35,6 +36,9 @@ void tipsScene::loadScene()
   this->_ui["backButton"].in("hover")
   .color(170, 245, 245)
   .closeStyle();
+
+  this->_ui.create<image>("tips")
+  .texture(this->_ui.getTexture("tips"));
 }
 
 void tipsScene::updateRuntime()

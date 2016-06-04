@@ -24,7 +24,7 @@ namespace bbman
   public:
     SaveInfo(void);
     ~SaveInfo(void);
-    void parse(std::string const& filename);
+    bool parse(std::string const& filename);
     irr::f32 getTimer(void) const;
     size_t getNbPlayers(void) const;
   private:

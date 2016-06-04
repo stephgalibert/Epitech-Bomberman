@@ -25,7 +25,7 @@ bbman::SaveInfo::~SaveInfo(void)
 
 }
 
-void bbman::SaveInfo::parse(std::string const& filename)
+bool bbman::SaveInfo::parse(std::string const& filename)
 {
   std::string line;
   std::ifstream ifs(filename.data());
@@ -36,7 +36,9 @@ void bbman::SaveInfo::parse(std::string const& filename)
 	this->_infos[line](ifs);
       }
     }
+    return true;
   }
+  return false;
 }
 
 irr::f32 bbman::SaveInfo::getTimer(void) const
