@@ -1,11 +1,11 @@
 //
-// SpeedUPEffect.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// SpeedUPEffect.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Sun May  8 21:14:34 2016 stephane galibert
-// Last update Fri Jun  3 03:34:51 2016 stephane galibert
+// Started on  Sun Jun  5 00:02:44 2016 avelin_j
+// Last update Sun Jun  5 00:02:46 2016 avelin_j
 //
 
 #include "SpeedUPEffect.hpp"
@@ -68,4 +68,14 @@ size_t bbman::SpeedUPEffect::getEffectID(void) const
 irr::f32 bbman::SpeedUPEffect::getDelta(void) const
 {
   return (this->_delta);
+}
+
+bool bbman::SpeedUPEffect::testGetEnable(void) const
+{
+  return (this->_enabled);
+}
+
+bbman::APlayer const *bbman::SpeedUPEffect::testGetTarget(void) const
+{
+  return (this->_target);
 }

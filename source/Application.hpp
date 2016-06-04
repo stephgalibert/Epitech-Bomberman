@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 15:36:32 2016 stephane galibert
-// Last update Tue May 31 10:37:53 2016 stephane galibert
+// Last update Fri Jun  3 11:03:05 2016 avelin_j
 //
 
 #ifndef _APPLICATION_HPP_
@@ -27,6 +27,11 @@ namespace bbman
     ~Application(void);
     void init(void);
     int play(void);
+    Irrlicht const *testGetIrrlicht(void) const;
+    Game const *testGetGame(void) const;
+    layout const *testGetMenu(void) const;
+    bool testGetClose(void) const;
+    ApplicationState testGetApplicationState(void) const;
   private:
     void update_game(irr::f32 delta);
     void update_menu(irr::f32 delta);

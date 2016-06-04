@@ -1,11 +1,11 @@
 //
-// PowerUPs.hpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// PowerUPs.hpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Sat May  7 16:02:47 2016 stephane galibert
-// Last update Fri Jun  3 01:26:08 2016 stephane galibert
+// Started on  Sun Jun  5 00:09:51 2016 avelin_j
+// Last update Sun Jun  5 00:10:38 2016 avelin_j
 //
 
 #ifndef _POWERUPS_HPP_
@@ -35,6 +35,7 @@ namespace bbman
     void add(Irrlicht &irr, irr::core::vector3df const& pos);
     void checkCollision(APlayer *player, irr::core::vector3df const& scale);
     std::list<IPowerUP *>const& getPowerUPs() const;
+    irr::f32 testGetDelta(void) const;
   private:
     void generate(Irrlicht &irr, irr::core::vector3df const& pos);
     void generateSpeedUp(Irrlicht &irr, irr::core::vector3df const& pos);

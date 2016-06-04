@@ -1,11 +1,11 @@
 //
-// AddPowerPowerUP.cpp for indie in /home/galibe_s/rendu/bomberman/source/powerups
+// AddPowerPowerUP.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Wed Jun  1 16:30:03 2016 stephane galibert
-// Last update Thu Jun  2 22:15:04 2016 stephane galibert
+// Started on  Sun Jun  5 00:07:59 2016 avelin_j
+// Last update Sun Jun  5 00:08:00 2016 avelin_j
 //
 
 #include "AddPowerPowerUP.hpp"
@@ -115,4 +115,14 @@ std::string const& bbman::AddPowerPowerUP::getColor(void) const
 void bbman::AddPowerPowerUP::setColor(std::string const& color)
 {
   this->_color = color;
+}
+
+irr::scene::IMeshSceneNode const *bbman::AddPowerPowerUP::testGetMesh(void) const
+{
+  return (this->_mesh);
+}
+
+irr::f32 bbman::AddPowerPowerUP::testGetDelta(void) const
+{
+  return (this->_delta);
 }

@@ -1,11 +1,11 @@
 //
-// Game.hpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// Game.hpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Sat Jun  4 21:26:34 2016 stephane galibert
+// Started on  Sat Jun  4 23:38:22 2016 avelin_j
+// Last update Sat Jun  4 23:39:21 2016 avelin_j
 //
 
 #ifndef _GAME_HPP_
@@ -44,6 +44,8 @@ namespace bbman
     bool leaveGame(void) const;
     irr::f32 getDelta(void) const;
     void setDelta(irr::f32 delta);
+    Board const *testGetBoard(void) const;
+    TimeOut const *testGetTimeOut(void) const;
   private:
     void cameraTargetSmoothAnimation(irr::f32 delta,
 				     irr::core::vector3df const& cpos,

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 31 14:19:18 2016 stephane galibert
-// Last update Wed Jun  1 09:19:50 2016 stephane galibert
+// Last update Fri Jun  3 20:52:41 2016 avelin_j
 //
 
 #ifndef _EXPLOSION_HPP_
@@ -26,6 +26,9 @@ namespace bbman
     void update(irr::f32 delta);
     void play(irr::core::vector3df const& pos);
     bool hasFinished(void) const;
+    bool testGetPlayed(void) const;
+    irr::scene::IParticleSystemSceneNode const *testGetSystem(void) const;
+    irr::f32 testGetDelta(void) const;
   private:
     irr::scene::IParticleSystemSceneNode *_ps;
     irr::f32 _delta;

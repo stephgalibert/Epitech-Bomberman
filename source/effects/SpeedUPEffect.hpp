@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 21:11:53 2016 stephane galibert
-// Last update Thu May 26 10:08:29 2016 stephane galibert
+// Last update Sat Jun  4 17:09:04 2016 avelin_j
 //
 
 #ifndef _SPEEDUPEFFECT_HPP_
@@ -30,6 +30,8 @@ namespace bbman
     virtual void setDelta(irr::f32 delta);
     virtual size_t getEffectID(void) const;
     virtual irr::f32 getDelta(void) const;
+    bool testGetEnable(void) const;
+    APlayer const *testGetTarget(void) const;
   private:
     irr::f32 _delta;
     APlayer *_target;

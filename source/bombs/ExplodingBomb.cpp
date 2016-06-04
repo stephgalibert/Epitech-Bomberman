@@ -1,11 +1,11 @@
 //
-// ExplodingBomb.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// ExplodingBomb.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Sat Jun  4 20:44:46 2016 stephane galibert
+// Started on  Sat Jun  4 23:59:35 2016 avelin_j
+// Last update Sun Jun  5 00:00:06 2016 avelin_j
 //
 
 #include "ExplodingBomb.hpp"
@@ -353,6 +353,11 @@ void bbman::ExplodingBomb::setOwner(bbman::APlayer *owner)
   this->_owner = owner;
 }
 
+irr::scene::IMeshSceneNode const *bbman::ExplodingBomb::testGetMesh(void) const
+{
+  return (this->_mesh);
+}
+
 std::string const& bbman::ExplodingBomb::getColor(void) const
 {
   return (this->_color);
@@ -371,4 +376,44 @@ void bbman::ExplodingBomb::disableAnimation(void)
 int bbman::ExplodingBomb::getScoreValue(void) const
 {
   return (0);
+}
+
+bbman::Explosion const *bbman::ExplodingBomb::testGetExplosion(void) const
+{
+  return (this->_explosion);
+}
+
+bbman::NorthernBeam const *bbman::ExplodingBomb::testGetNorthernBeam(void) const
+{
+  return (this->_nbeam);
+}
+
+bbman::SouthernBeam const *bbman::ExplodingBomb::testGetSouthernBeam(void) const
+{
+  return (this->_sbeam);
+}
+
+bbman::EasternBeam const *bbman::ExplodingBomb::testGetEasternBeam(void) const
+{
+  return (this->_ebeam);
+}
+
+bbman::WesternBeam const *bbman::ExplodingBomb::testGetWesternBeam(void) const
+{
+  return (this->_wbeam);
+}
+
+bbman::CenterBeam const *bbman::ExplodingBomb::testGetCenterBeam(void) const
+{
+  return (this->_cbeam);
+}
+
+irr::f32 bbman::ExplodingBomb::testGetDelta(void) const
+{
+  return (this->_delta);
+}
+
+irr::s32 bbman::ExplodingBomb::testGetCpt(void) const
+{
+  return (this->_cpt);
 }

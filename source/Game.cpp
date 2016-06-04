@@ -1,11 +1,11 @@
 //
-// BoardGame.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// Game.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Sat Jun  4 22:08:13 2016 stephane galibert
+// Started on  Sat Jun  4 23:39:40 2016 avelin_j
+// Last update Sat Jun  4 23:42:47 2016 avelin_j
 //
 
 #include "Game.hpp"
@@ -199,6 +199,16 @@ void bbman::Game::cameraTargetSmoothAnimation(irr::f32 delta,
   else
     res.Z = npos.Z;
   this->_camera->setTarget(res);
+}
+
+bbman::Board const *bbman::Game::testGetBoard(void) const
+{
+  return (this->_board);
+}
+
+bbman::TimeOut const *bbman::Game::testGetTimeOut(void) const
+{
+  return (this->_timeout);
 }
 
 void bbman::Game::initCamera(bbman::Irrlicht &irr)

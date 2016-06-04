@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed Jun  1 16:41:20 2016 stephane galibert
-// Last update Wed Jun  1 21:13:10 2016 stephane galibert
+// Last update Sat Jun  4 16:57:00 2016 avelin_j
 //
 
 #include "AddPowerEffect.hpp"
@@ -59,4 +59,14 @@ size_t bbman::AddPowerEffect::getEffectID(void) const
 irr::f32 bbman::AddPowerEffect::getDelta(void) const
 {
   return (this->_delta);
+}
+
+bool bbman::AddPowerEffect::testGetEnable(void) const
+{
+  return (this->_enabled);
+}
+
+bbman::APlayer const *bbman::AddPowerEffect::testGetTarget(void) const
+{
+  return (this->_target);
 }

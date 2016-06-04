@@ -1,11 +1,11 @@
 //
-// SpeedUPPowerUP.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// SpeedUPPowerUP.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Sun May  8 18:34:45 2016 stephane galibert
-// Last update Thu Jun  2 22:09:18 2016 stephane galibert
+// Started on  Sun Jun  5 00:11:00 2016 avelin_j
+// Last update Sun Jun  5 00:11:02 2016 avelin_j
 //
 
 #include "SpeedUPPowerUP.hpp"
@@ -121,4 +121,14 @@ std::string const& bbman::SpeedUPPowerUP::getColor(void) const
 void bbman::SpeedUPPowerUP::setColor(std::string const& color)
 {
   this->_color = color;
+}
+
+irr::scene::IMeshSceneNode const *bbman::SpeedUPPowerUP::testGetMesh(void) const
+{
+  return (this->_mesh);
+}
+
+irr::f32 bbman::SpeedUPPowerUP::testGetDelta(void) const
+{
+  return (this->_delta);
 }

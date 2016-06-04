@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:24:07 2016 stephane galibert
-// Last update Wed Jun  1 17:18:04 2016 stephane galibert
+// Last update Fri Jun  3 22:39:41 2016 avelin_j
 //
 
 #include "Irrlicht.hpp"
@@ -127,4 +127,14 @@ irr::gui::IGUIEnvironment *bbman::Irrlicht::getGUIEnv(void) const
 irr::ITimer *bbman::Irrlicht::getTimer(void) const
 {
   return (this->_timer);
+}
+
+bbman::IrrlichtComponent const& bbman::Irrlicht::testGetComponent(void) const
+{
+  return (this->_irr);
+}
+
+IrrAssimp const *bbman::Irrlicht::testGetLoader(void) const
+{
+  return (this->_loader);
 }

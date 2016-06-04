@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 17:45:43 2016 stephane galibert
-// Last update Thu May  5 17:45:45 2016 stephane galibert
+// Last update Sat Jun  4 22:29:20 2016 avelin_j
 //
 
 #ifndef _CHRONOMETER_HPP_
@@ -26,6 +26,9 @@ namespace tools
     void start(void);
     void pause(void);
     irr::f32 getElapsedTime(void);
+    irr::f32 testGetValue(void) const;
+    irr::ITimer const *testGetTimer(void) const;
+    bool testGetRunning(void) const;
   private:
     irr::ITimer *_timer;
     irr::u32 _now;

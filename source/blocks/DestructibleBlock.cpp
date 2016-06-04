@@ -1,11 +1,11 @@
 //
-// DestructibleBlock.cpp for indie in /home/galibe_s/rendu/bomberman/source/blocks
+// DestructibleBlock.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Sat Jun  4 15:12:13 2016 stephane galibert
+// Started on  Sat Jun  4 23:50:57 2016 avelin_j
+// Last update Sat Jun  4 23:52:13 2016 avelin_j
 //
 
 #include "DestructibleBlock.hpp"
@@ -160,4 +160,14 @@ void bbman::DestructibleBlock::disableAnimation(void)
 int bbman::DestructibleBlock::getScoreValue(void) const
 {
   return (5);
+}
+
+irr::scene::ISceneNode const *bbman::DestructibleBlock::testGetNode(void) const
+{
+  return (this->_node);
+}
+
+bbman::Explosion const * bbman::DestructibleBlock::testGetExplosion(void) const
+{
+  return (this->_explosion);
 }

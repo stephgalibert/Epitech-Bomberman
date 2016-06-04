@@ -1,11 +1,11 @@
 //
-// Board.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// Board.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Sat Jun  4 19:58:35 2016 stephane galibert
+// Started on  Sun Jun  5 00:04:09 2016 avelin_j
+// Last update Sun Jun  5 00:04:10 2016 avelin_j
 //
 
 #include "Board.hpp"
@@ -808,4 +808,14 @@ void bbman::Board::updatePlayers(bbman::Irrlicht& irr, irr::f32 delta)
       this->_powerUPs.checkCollision(it, this->_scale);
     }
   }
+}
+
+irr::core::vector3df const& bbman::Board::testGetSize(void) const
+{
+  return (this->_size);
+}
+
+irr::core::vector3df const& bbman::Board::testGetScale(void) const
+{
+  return (this->_scale);
 }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May  3 03:29:01 2016 stephane galibert
-// Last update Mon May 30 22:12:26 2016 stephane galibert
+// Last update Fri Jun  3 22:40:38 2016 avelin_j
 //
 
 #ifndef _IRRLICHT_HPP_
@@ -47,6 +47,8 @@ namespace bbman
     irr::scene::ISceneManager *getSmgr(void) const;
     irr::gui::IGUIEnvironment *getGUIEnv(void) const;
     irr::ITimer *getTimer(void) const;
+    IrrAssimp const *testGetLoader(void) const;
+    IrrlichtComponent const& testGetComponent(void) const;
   private:
     irr::ITimer *_timer;
     IrrlichtComponent _irr;

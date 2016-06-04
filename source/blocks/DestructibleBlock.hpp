@@ -1,11 +1,11 @@
 //
-// DestructibleBlock.hpp for indie in /home/galibe_s/rendu/bomberman/source
+// DestructibleBlock.hpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Mon May 23 19:11:32 2016 stephane galibert
-// Last update Sat Jun  4 14:54:11 2016 stephane galibert
+// Started on  Sat Jun  4 23:50:50 2016 avelin_j
+// Last update Sat Jun  4 23:51:27 2016 avelin_j
 //
 
 #ifndef _DESTRUCTIBLEBLOCK_HPP_
@@ -40,6 +40,8 @@ namespace bbman
     virtual void setColor(std::string const& color);
     virtual void disableAnimation(void);
     virtual int getScoreValue(void) const;
+    irr::scene::ISceneNode const *testGetNode(void) const;
+    Explosion const *testGetExplosion(void) const;
   private:
     bool _anim;
     irr::scene::ISceneNode *_node;

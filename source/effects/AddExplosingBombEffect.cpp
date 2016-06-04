@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May 29 10:13:38 2016 stephane galibert
-// Last update Wed Jun  1 16:44:34 2016 stephane galibert
+// Last update Sat Jun  4 17:08:44 2016 avelin_j
 //
 
 #include "AddExplosingBombEffect.hpp"
@@ -66,4 +66,14 @@ size_t bbman::AddExplosingBombEffect::getEffectID(void) const
 irr::f32 bbman::AddExplosingBombEffect::getDelta(void) const
 {
   return (this->_delta);
+}
+
+bool bbman::AddExplosingBombEffect::testGetEnable(void) const
+{
+  return (this->_enabled);
+}
+
+bbman::APlayer const *bbman::AddExplosingBombEffect::testGetTarget(void) const
+{
+  return (this->_target);
 }

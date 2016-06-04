@@ -1,11 +1,11 @@
 //
-// Beam.cpp for indie in /home/galibe_s/rendu/bomberman/source/bombs
+// Beam.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Tue May 31 20:50:44 2016 stephane galibert
-// Last update Sat Jun  4 20:48:24 2016 stephane galibert
+// Started on  Sat Jun  4 23:57:27 2016 avelin_j
+// Last update Sat Jun  4 23:57:28 2016 avelin_j
 //
 
 #include "Beam.hpp"
@@ -35,6 +35,20 @@ void bbman::ABeam::setPosition(irr::core::vector3df const& pos)
   this->_pos = pos;
 }
 
+bool bbman::ABeam::testGetRunning(void) const
+{
+  return (this->_running);
+}
+
+size_t bbman::ABeam::testGetRange(void) const
+{
+  return (this->_range);
+}
+
+size_t bbman::ABeam::testGetRepeat(void) const
+{
+  return (this->_repeat);
+}
 
 bbman::CenterBeam::CenterBeam(Irrlicht &irr, size_t range)
   : ABeam(irr, range)

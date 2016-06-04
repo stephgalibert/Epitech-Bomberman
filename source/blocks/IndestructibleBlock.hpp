@@ -1,11 +1,11 @@
 //
-// IndestructibleBlock.hpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// IndestructibleBlock.hpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Sat May  7 18:22:34 2016 stephane galibert
-// Last update Sat Jun  4 14:55:07 2016 stephane galibert
+// Started on  Sat Jun  4 23:54:09 2016 avelin_j
+// Last update Sat Jun  4 23:56:00 2016 avelin_j
 //
 
 #ifndef _INDESTRUCTIBLEBLOCK_HPP_
@@ -40,6 +40,7 @@ namespace bbman
     virtual void disableAnimation(void) {}
     virtual int getScoreValue(void) const;
     void setScale(irr::core::vector3df const& scale);
+    irr::scene::ISceneNode const *testGetNode(void) const;
   private:
     irr::scene::ISceneNode *_node;
     irr::core::vector3d<irr::s32> _posInMap;

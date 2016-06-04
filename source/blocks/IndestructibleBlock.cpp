@@ -1,11 +1,11 @@
 //
-// IndestructibleBlock.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// IndestructibleBlock.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Sat May  7 18:23:18 2016 stephane galibert
-// Last update Sat Jun  4 14:55:07 2016 stephane galibert
+// Started on  Sat Jun  4 23:54:19 2016 avelin_j
+// Last update Sat Jun  4 23:55:22 2016 avelin_j
 //
 
 #include "IndestructibleBlock.hpp"
@@ -129,4 +129,9 @@ bbman::ItemID bbman::IndestructibleBlock::getID(void) const
 int bbman::IndestructibleBlock::getScoreValue(void) const
 {
   return (0);
+}
+
+irr::scene::ISceneNode const *bbman::IndestructibleBlock::testGetNode(void) const
+{
+  return (this->_node);
 }

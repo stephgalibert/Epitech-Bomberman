@@ -1,11 +1,11 @@
 //
-// TimeOut.cpp for indie in /home/galibe_s/rendu/bomberman/source
+// TimeOut.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Sat May 28 08:20:16 2016 stephane galibert
-// Last update Sat Jun  4 20:40:26 2016 stephane galibert
+// Started on  Sat Jun  4 23:44:07 2016 avelin_j
+// Last update Sat Jun  4 23:44:09 2016 avelin_j
 //
 
 #include "TimeOut.hpp"
@@ -105,6 +105,11 @@ void bbman::TimeOut::setCurrent(irr::core::vector3d<irr::u32> const& v)
 irr::core::vector3d<irr::u32> const& bbman::TimeOut::getCurrent(void) const
 {
   return (this->_current);
+}
+
+bbman::Board const *bbman::TimeOut::testGetBoard(void) const
+{
+  return (this->_board);
 }
 
 void bbman::TimeOut::updateAnim(void)

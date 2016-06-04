@@ -1,11 +1,11 @@
 //
-// Application.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// Application.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Sat Jun  4 17:31:42 2016 stephane galibert
+// Started on  Sat Jun  4 23:33:40 2016 avelin_j
+// Last update Sat Jun  4 23:33:42 2016 avelin_j
 //
 
 #include "Application.hpp"
@@ -72,6 +72,31 @@ int bbman::Application::play(void)
       }
     }
   return (0);
+}
+
+bbman::Irrlicht const *bbman::Application::testGetIrrlicht(void) const
+{
+  return (this->_irr);
+}
+
+bbman::Game const *bbman::Application::testGetGame(void) const
+{
+  return (this->_game);
+}
+
+layout const *bbman::Application::testGetMenu(void) const
+{
+  return (this->_menu);
+}
+
+bool bbman::Application::testGetClose(void) const
+{
+  return (this->_close);
+}
+
+bbman::ApplicationState bbman::Application::testGetApplicationState(void) const
+{
+  return (this->_as);
 }
 
 void bbman::Application::update_game(irr::f32 delta)

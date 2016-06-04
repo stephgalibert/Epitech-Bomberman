@@ -1,11 +1,11 @@
 //
-// Beam.hpp for indie in /home/galibe_s/rendu/bomberman/source/bombs
+// Beam.hpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Tue May 31 20:43:06 2016 stephane galibert
-// Last update Sat Jun  4 20:45:14 2016 stephane galibert
+// Started on  Sat Jun  4 23:57:20 2016 avelin_j
+// Last update Sat Jun  4 23:57:21 2016 avelin_j
 //
 
 #ifndef _BEAM_HPP_
@@ -26,6 +26,9 @@ namespace bbman
     virtual void play(void) = 0;
     void setRepeat(size_t n);
     void setPosition(irr::core::vector3df const& pos);
+    bool testGetRunning(void) const;
+    size_t testGetRange(void) const;
+    size_t testGetRepeat(void) const;
   protected:
     Irrlicht &_irr;
     bool _running;

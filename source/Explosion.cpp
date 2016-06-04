@@ -1,11 +1,11 @@
 //
-// Explosion.cpp for indie in /home/galibe_s/rendu/bomberman/source/thread
+// Explosion.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Tue May 31 14:21:03 2016 stephane galibert
-// Last update Fri Jun  3 13:20:30 2016 stephane galibert
+// Started on  Sat Jun  4 23:37:07 2016 avelin_j
+// Last update Sat Jun  4 23:37:09 2016 avelin_j
 //
 
 #include "Explosion.hpp"
@@ -75,4 +75,19 @@ void bbman::Explosion::play(irr::core::vector3df const& pos)
 bool bbman::Explosion::hasFinished(void) const
 {
   return (this->_hasFinished);
+}
+
+bool bbman::Explosion::testGetPlayed(void) const
+{
+  return (this->_played);
+}
+
+irr::scene::IParticleSystemSceneNode const *bbman::Explosion::testGetSystem(void) const
+{
+  return (this->_ps);
+}
+
+irr::f32 bbman::Explosion::testGetDelta(void) const
+{
+  return (this->_delta);
 }

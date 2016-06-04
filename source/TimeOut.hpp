@@ -1,11 +1,11 @@
 //
-// TimeOut.hpp for indie in /home/galibe_s/rendu/bomberman/source
+// TimeOut.hpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Sat May 28 08:15:00 2016 stephane galibert
-// Last update Sat Jun  4 22:22:00 2016 stephane galibert
+// Started on  Sat Jun  4 23:44:01 2016 avelin_j
+// Last update Sat Jun  4 23:47:08 2016 avelin_j
 //
 
 #ifndef _TIMEOUT_HPP_
@@ -44,6 +44,7 @@ namespace bbman
     irr::core::vector3d<irr::u32> const& getBegin(void) const;
     void setCurrent(irr::core::vector3d<irr::u32> const& v);
     irr::core::vector3d<irr::u32> const& getCurrent(void) const;
+    Board const *testGetBoard(void) const;
   private:
     void updateAnim(void);
     void narrowBoard(Irrlicht &irr);

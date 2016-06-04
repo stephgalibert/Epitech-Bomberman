@@ -1,11 +1,11 @@
 //
-// ExplodingBomb.hpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// ExplodingBomb.hpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Fri May  6 17:08:37 2016 stephane galibert
-// Last update Sat Jun  4 14:58:14 2016 stephane galibert
+// Started on  Sat Jun  4 23:59:06 2016 avelin_j
+// Last update Sat Jun  4 23:59:07 2016 avelin_j
 //
 
 #ifndef _EXPLODINGBOMB_HPP_
@@ -62,6 +62,15 @@ namespace bbman
     virtual void disableAnimation(void);
     virtual int getScoreValue(void) const;
     void setOwner(APlayer *owner);
+    irr::scene::IMeshSceneNode const *testGetMesh(void) const;
+    Explosion const *testGetExplosion(void) const;
+    NorthernBeam const *testGetNorthernBeam(void) const;
+    SouthernBeam const *testGetSouthernBeam(void) const;
+    EasternBeam const *testGetEasternBeam(void) const;
+    WesternBeam const *testGetWesternBeam(void) const;
+    CenterBeam const *testGetCenterBeam(void) const;
+    irr::f32 testGetDelta(void) const;
+    irr::s32 testGetCpt(void) const;
   private:
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:

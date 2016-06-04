@@ -64,6 +64,8 @@ FILE(GLOB SRCS
     source/*.hpp
     source/**/*.cpp
     source/**/*.hpp
+    source/unitTest/**/*.cpp
+    source/unitTest/**/*.hpp
     source/**/**/*.cpp
     source/**/**/*.hpp
   )

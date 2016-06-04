@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun May  8 18:34:04 2016 stephane galibert
-// Last update Wed Jun  1 16:46:18 2016 stephane galibert
+// Last update Sat Jun  4 20:25:42 2016 avelin_j
 //
 
 #ifndef _SPEEDUPPOWERUP_HPP_
@@ -36,6 +36,8 @@ namespace bbman
     virtual bool hasExplosed(void) const;
     virtual std::string const& getColor(void) const;
     virtual void setColor(std::string const& color);
+    irr::scene::IMeshSceneNode const *testGetMesh(void) const;
+    irr::f32 testGetDelta(void) const;
   private:
     //irr::scene::ISceneNode *_mesh;
     irr::scene::IMeshSceneNode *_mesh;

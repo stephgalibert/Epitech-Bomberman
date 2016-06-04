@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon Apr 11 02:48:39 2016 stephane galibert
-// Last update Wed May 18 17:20:08 2016 stephane galibert
+// Last update Sat Jun  4 22:32:25 2016 avelin_j
 //
 
 #include "Chronometer.hpp"
@@ -71,4 +71,19 @@ irr::f32 tools::Chronometer::getElapsedTime(void)
     return (this->_now - this->_then + this->_value);
   }
   return (this->_value);
+}
+
+irr::f32 tools::Chronometer::testGetValue(void) const
+{
+  return (this->_value);
+}
+
+irr::ITimer const *tools::Chronometer::testGetTimer(void) const
+{
+  return (this->_timer);
+}
+
+bool tools::Chronometer::testGetRunning(void) const
+{
+  return (this->_running);
 }

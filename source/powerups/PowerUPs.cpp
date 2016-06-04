@@ -1,11 +1,11 @@
 //
-// PowerUPs.cpp for indie in /home/galibe_s/irrlicht/irrlicht-1.8.3/test
+// PowerUPs.cpp for  in /home/avelin_j/bomberman
 //
-// Made by stephane galibert
-// Login   <galibe_s@epitech.net>
+// Made by avelin_j
+// Login   <avelin_j@epitech.net>
 //
-// Started on  Sun May  8 17:37:21 2016 stephane galibert
-// Last update Fri Jun  3 12:47:00 2016 stephane galibert
+// Started on  Sun Jun  5 00:09:11 2016 avelin_j
+// Last update Sun Jun  5 00:09:13 2016 avelin_j
 //
 
 #include "PowerUPs.hpp"
@@ -115,6 +115,11 @@ void bbman::PowerUPs::generateAddPower(bbman::Irrlicht &irr,
   add->init(irr);
   add->setPosition(pos);
   this->_powerUPs.push_back(add);
+}
+
+irr::f32 bbman::PowerUPs::testGetDelta(void) const
+{
+  return (this->_delta);
 }
 
 /*bool bbman::PowerUPs::isFree(bbman::IPowerUP *powerUP, bbman::Board *board) const
