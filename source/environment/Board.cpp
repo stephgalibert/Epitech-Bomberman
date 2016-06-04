@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Sat Jun  4 15:17:17 2016 stephane galibert
+// Last update Sat Jun  4 19:58:35 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -127,6 +127,16 @@ bbman::APlayer *bbman::Board::getWinner(void) const
   return (NULL);
 }
 
+bool bbman::Board::isNoPlayer(void) const
+{
+  int n = 0;
+  for (auto it : this->_players) {
+    if (!it->hasExplosed()) {
+      ++n;
+    }
+  }
+  return n == 0;
+}
 
 bbman::APlayer * bbman::Board::getPlayerByID(size_t id) const
 {
@@ -789,6 +799,9 @@ void bbman::Board::updatePlayers(bbman::Irrlicht& irr, irr::f32 delta)
 {
   for (auto& it : this->_players) {
     it->play(irr, this);
+    irr::core::vector3df const& pos = it->getPosition();
+    if (pos.X < 10 || pos.Z < 10 || pos.X > 180 || pos.Z > 120)
+      it->explode(this);
     it->update(irr, delta);
 
     if (it->isRunning()) {

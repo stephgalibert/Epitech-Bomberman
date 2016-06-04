@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 02:14:22 2016 stephane galibert
-// Last update Fri Jun  3 22:04:41 2016 stephane galibert
+// Last update Sat Jun  4 19:49:38 2016 stephane galibert
 //
 
 #ifndef _BOARD_HPP_
@@ -56,6 +56,7 @@ namespace bbman
     std::list<IEntity *> const& getEntityByPosition(irr::core::vector3d<irr::s32> const& pos);
     void eraseEntityByPosition(irr::core::vector3d<irr::s32> const& pos);
     void explodeBlocks(IBomb *bomb);
+    bool isNoPlayer(void) const;
     bool isOutside(irr::core::vector3df const& pos);
     irr::core::vector3df const& getSize(void) const;
     irr::core::vector3df const& getScale(void) const;

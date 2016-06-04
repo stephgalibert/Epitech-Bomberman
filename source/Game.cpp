@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Sat Jun  4 18:26:21 2016 stephane galibert
+// Last update Sat Jun  4 19:52:30 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -108,6 +108,9 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
       irr::core::vector3df fpos(npos.X, npos.Y + 50, npos.Z - 60);
       cameraPositionSmoothAnimation(delta, this->_camera->getPosition(), fpos);
     }
+  } else if (this->_board->isNoPlayer()) {
+    std::cout << "no player left" << std::endl;
+    this->_leaveGame = true;
   } else {
     this->_board->update(irr, delta);
     this->_timeout->update(irr, delta);
@@ -116,7 +119,14 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
       this->_layout->setScore(it->getID(), it->getScore());
     }
     this->_layout->setTimerGlobal(this->_delta);
-    this->_layout->setTimerTimeout(this->_timeout->getDelta());
+
+    int tmp = 0;
+    if (this->_timeout->getDelta() < TimeOut::Release) {
+      tmp = TimeOut::Release + TimeOut::ReleaseStep - this->_timeout->getDelta();
+    } else {
+      tmp = TimeOut::ReleaseStep - this->_timeout->getDeltaAnim();
+    }
+    this->_layout->setTimerTimeout(tmp);
     this->_delta += delta;
   }
   this->_delta_pause += delta;
