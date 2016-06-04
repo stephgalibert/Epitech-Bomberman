@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Sat Jun  4 21:53:29 2016 stephane galibert
+// Last update Sat Jun  4 22:08:13 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -153,13 +153,13 @@ void bbman::Game::cameraPositionSmoothAnimation(irr::f32 delta,
 {
   irr::core::vector3df res = cpos;
 
-  if (res.X > npos.X + 1.5f)
+  if (res.X > npos.X + 2.f)
     res.X -= (fabs(npos.X) * delta);
   else if (res.X < npos.X - 1.5f)
     res.X += (fabs(npos.X) * delta);
   else
     res.X = npos.X;
-  if (res.Y > npos.Y + 1.5f)
+  if (res.Y > npos.Y + 2.f)
     res.Y -= (fabs(npos.Y) * delta);
   else if (res.Y < npos.Y - 1.5f)
     res.Y += (fabs(npos.Y) * delta);
@@ -180,9 +180,9 @@ void bbman::Game::cameraTargetSmoothAnimation(irr::f32 delta,
 {
   irr::core::vector3df res = cpos;
 
-  if (res.X > npos.X + 1.5f)
+  if (res.X > npos.X + 2.f)
     res.X -= (fabs(npos.X) * delta);
-  else if (res.X < npos.X - 1.5f)
+  else if (res.X < npos.X - 2.f)
     res.X += (fabs(npos.X) * (delta));
   else
     res.X = npos.X;
@@ -192,9 +192,9 @@ void bbman::Game::cameraTargetSmoothAnimation(irr::f32 delta,
     res.Y += (fabs(npos.Y) * (delta));
   else
     res.Y = npos.Y;
-  if (res.Z > npos.Z + 1.5f)
+  if (res.Z > npos.Z + 2.f)
     res.Z -= (fabs(npos.Z) * delta);
-  else if (res.Z < npos.Z - 1.5f)
+  else if (res.Z < npos.Z - 2.f)
     res.Z += (fabs(npos.Z) * (delta));
   else
     res.Z = npos.Z;
