@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Sat Jun  4 11:22:29 2016 stephane galibert
+// Last update Sat Jun  4 12:58:27 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -66,9 +66,6 @@ int bbman::Application::play(void)
       delta = this->_timer.restart() / 1000.f;
       if (delta > 0.06000) {
 	delta = 0.060;
-      }
-      if (this->_inputListener.IsKeyDown(irr::KEY_KEY_N)) {
-	this->_close = true;
       }
       if (this->_as == ApplicationState::AS_GAME) {
 	update_game(delta);
