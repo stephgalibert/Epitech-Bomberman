@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 18:23:18 2016 stephane galibert
-// Last update Fri Jun  3 12:02:07 2016 stephane galibert
+// Last update Sat Jun  4 14:55:07 2016 stephane galibert
 //
 
 #include "IndestructibleBlock.hpp"
@@ -33,8 +33,6 @@ void bbman::IndestructibleBlock::init(Irrlicht &irr, std::string const& color)
     }
     else {
       this->_node->setMaterialTexture(0, irr.getTexture(txt.data()));
-      //this->_node->setMaterialTexture(1, irr.getTexture("./asset/cube/indCubeWhite.png"));
-      //this->_node->setMaterialType(irr::video::EMT_LIGHTMAP_ADD);
     }
 
     this->_node->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -72,7 +70,6 @@ void bbman::IndestructibleBlock::addAnimation(irr::scene::ISceneNodeAnimator *an
 
 void bbman::IndestructibleBlock::setPosition(irr::core::vector3df const& pos)
 {
-  //this->_node->setPosition(irr::core::vector3df(pos.X, ext.Y / 2, pos.Z));
   this->_node->setPosition(pos);
   this->_node->updateAbsolutePosition();
 }
@@ -127,4 +124,9 @@ bool bbman::IndestructibleBlock::hasExplosed(void) const
 bbman::ItemID bbman::IndestructibleBlock::getID(void) const
 {
   return (ItemID::II_BLOCK_INBRKABLE);
+}
+
+int bbman::IndestructibleBlock::getScoreValue(void) const
+{
+  return (0);
 }

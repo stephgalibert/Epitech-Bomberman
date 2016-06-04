@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Sat Jun  4 12:58:27 2016 stephane galibert
+// Last update Sat Jun  4 15:41:21 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -17,7 +17,6 @@ bbman::Application::Application(void)
   this->_menu = NULL;
   this->_as = bbman::ApplicationState::AS_NONE;
   this->_close = false;
-  //tools::StaticTools::initThreadPool(16);
 }
 
 bbman::Application::~Application(void)
@@ -31,7 +30,6 @@ bbman::Application::~Application(void)
   if (this->_irr) {
     delete (this->_irr);
   }
-  //tools::StaticTools::deleteThreadPool();
 }
 
 void bbman::Application::init(void)
@@ -85,7 +83,6 @@ void bbman::Application::update_game(irr::f32 delta)
     this->_irr->drawScene();
     this->_irr->drawGUI();
     this->_menu->display();
-    //this->_irr->getLayout()->display();
     this->_irr->endScene();
     if (this->_game->leaveGame()) {
       goToMenu();
@@ -98,26 +95,15 @@ void bbman::Application::update_menu(irr::f32 delta)
   (void)delta;
   if (this->_menu) {
     this->_menu->input(this->_inputListener);
-    //_menu->update(delta);
-    //if (_menu->startGame()) {
-      /*delete (_menu);
-      _menu = NULL;
-
-    // ! a delete quand y aura le menu
-      this->_irr.beginScene();
-      this->_irr.endScene();
-      // go to menu*/
-    // }
-    //else
-      this->_irr->beginScene();
-      this->_menu->display();
-      this->_irr->endScene();
-      if (this->_menu->isGameStarted()) {
-	goToGame();
-      }
-      if (this->_menu->isClosed()) {
-	this->_close = true;
-      }
+    this->_irr->beginScene();
+    this->_menu->display();
+    this->_irr->endScene();
+    if (this->_menu->isGameStarted()) {
+      goToGame();
+    }
+    if (this->_menu->isClosed()) {
+      this->_close = true;
+    }
   }
 }
 
@@ -129,11 +115,7 @@ void bbman::Application::goToMenu(void)
       delete (this->_game);
       this->_game = NULL;
     }
-    //this->_menu = new layout(this->_irr->getDevice());
     this->_menu->backToMenu();
-    // try
-    // _menu->init(*this->_irr);
-    // catch
   }
 }
 
@@ -143,8 +125,8 @@ void bbman::Application::goToGame(void)
     this->_as = bbman::ApplicationState::AS_GAME;
     this->_game = new Game;
     try {
-      //this->_game->init(*this->_irr, this->_menu, "./save.txt");
-      this->_game->init(*this->_irr, this->_menu);
+      this->_game->init(*this->_irr, this->_menu, "./save.txt");
+      //this->_game->init(*this->_irr, this->_menu);
     } catch (std::runtime_error const& e) {
       delete (this->_game);
       this->_game = NULL;

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Sat Jun  4 12:05:40 2016 stephane galibert
+// Last update Sat Jun  4 15:32:24 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -41,6 +41,8 @@ namespace bbman
     bool input(InputListener &inputListener);
     void update(Irrlicht &irr, irr::f32 delta);
     bool leaveGame(void) const;
+    irr::f32 getDelta(void) const;
+    void setDelta(irr::f32 delta);
   private:
     void cameraTargetSmoothAnimation(irr::f32 delta,
 				     irr::core::vector3df const& cpos,

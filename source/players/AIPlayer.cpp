@@ -415,3 +415,8 @@ void bbman::AIPlayer::disableAnimation(void)
 {
   this->_anim = false;
 }
+
+int bbman::AIPlayer::getScoreValue(void) const
+{
+  return (10);
+}

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 28 08:20:16 2016 stephane galibert
-// Last update Sat Jun  4 11:43:04 2016 stephane galibert
+// Last update Sat Jun  4 14:10:55 2016 stephane galibert
 //
 
 #include "TimeOut.hpp"
@@ -35,7 +35,7 @@ void bbman::TimeOut::init(Irrlicht &irr, Board *board)
 
 void bbman::TimeOut::update(Irrlicht &irr, irr::f32 delta)
 {
-  if (this->_delta >= 20.0000f) {
+  if (this->_delta >= 120.0000f) {
     this->_deltaAnim += delta;
     if (this->_deltaAnim >= 1.0000f) {
       narrowBoard(irr);

@@ -64,6 +64,7 @@ namespace bbman
     virtual void setDeviceID(int id);
     virtual int getDeviceID(void) const;
     virtual void disableAnimation(void);
+    virtual int getScoreValue(void) const;
   private:
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:

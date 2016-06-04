@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May  7 16:55:19 2016 stephane galibert
-// Last update Fri Jun  3 21:22:33 2016 stephane galibert
+// Last update Sat Jun  4 14:55:05 2016 stephane galibert
 //
 
 #ifndef _IBLOCK_HPP_
@@ -36,6 +36,7 @@ namespace bbman
     virtual std::string const& getColor(void) const = 0;
     virtual void setColor(std::string const& color) = 0;
     virtual void disableAnimation(void) = 0;
+    virtual int getScoreValue(void) const = 0;
   };
 }
 

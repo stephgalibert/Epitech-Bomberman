@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 15:15:50 2016 stephane galibert
-// Last update Fri Jun  3 21:20:25 2016 stephane galibert
+// Last update Sat Jun  4 14:57:48 2016 stephane galibert
 //
 
 #ifndef _IBOMB_HPP_
@@ -49,9 +49,8 @@ namespace bbman
     virtual void addRange(size_t n) = 0;
     virtual std::string const& getColor(void) const = 0;
     virtual void setColor(std::string const& color) = 0;
-    /*virtual void setLol(bool value) = 0;
-      virtual bool getLol(void) const = 0;*/
     virtual void disableAnimation(void) = 0;
+    virtual int getScoreValue(void) const = 0;
   };
 
   inline std::ostream &operator<<(std::ostream &flux, bbman::IBomb const& bomb)

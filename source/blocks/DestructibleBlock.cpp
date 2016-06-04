@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:14:02 2016 stephane galibert
-// Last update Fri Jun  3 21:23:52 2016 stephane galibert
+// Last update Sat Jun  4 15:12:13 2016 stephane galibert
 //
 
 #include "DestructibleBlock.hpp"
@@ -155,4 +155,9 @@ std::string const& bbman::DestructibleBlock::getColor(void) const
 void bbman::DestructibleBlock::disableAnimation(void)
 {
   this->_anim = false;
+}
+
+int bbman::DestructibleBlock::getScoreValue(void) const
+{
+  return (5);
 }

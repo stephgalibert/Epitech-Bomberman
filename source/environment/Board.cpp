@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May  5 11:08:25 2016 stephane galibert
-// Last update Fri Jun  3 22:07:54 2016 stephane galibert
+// Last update Sat Jun  4 15:17:17 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -373,25 +373,24 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
   IEntity *entity    = NULL;
   bool end = false;
 
-  if (!bomb->isExploding()) {
+  if (!bomb || !bomb->isExploding()) {
     return;
   }
-
+  APlayer *owner = getPlayerByID(bomb->getOwnerID());
   for (size_t i = 0; i <= bombRange; ++i) {
     size_t x = bomb->getPosInMap(getScale()).X + i;
     size_t y = bomb->getPosInMap(getScale()).Z;
-
     std::list<IEntity *> const& entities = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y));
     for (auto &it : entities) {
       entity = it;
       if (it != bomb) {
+	owner->setScore(owner->getScore() + entity->getScoreValue());
 	entity->explode(this);
 	entity->playExplosion();
 	end = true;
       } else if (it == bomb) {
 	bomb->explode(this);
 	bomb->playExplosion();
-	APlayer *owner = getPlayerByID(bomb->getOwnerID());
 	if (owner) {
 	  owner->addBomb(bomb->clone());
 	}
@@ -401,24 +400,6 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
       break;
     if (end)
       break;
-    /*if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))
-	&& entity != bomb) {
-      entity->explode(this);
-      entity->playExplosion();
-      break;
-    }
-    else if (entity == bomb) {
-      bomb->explode(this);
-      bomb->playExplosion();
-      APlayer *owner = getPlayerByID(bomb->getOwnerID());
-
-      if (owner) {
-        owner->addBomb(bomb->clone());
-      }
-    }
-    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
-    break;
-    }*/
   }
   end = false;
   for (size_t i = 0; i <= bombRange; ++i) {
@@ -429,6 +410,7 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     for (auto &it : entities) {
       entity = it;
       if (it != bomb) {
+	owner->setScore(owner->getScore() + entity->getScoreValue());
 	entity->explode(this);
 	entity->playExplosion();
 	end = true;
@@ -439,15 +421,6 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     }
     if (end)
       break;
-    /*if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))
-	&& entity != bomb) {
-      entity->explode(this);
-      entity->playExplosion();
-      break;
-    }
-    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
-      break;
-      }*/
   }
   end = false;
   for (size_t i = 0; i <= bombRange; ++i) {
@@ -457,6 +430,7 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     for (auto &it : entities) {
       entity = it;
       if (it != bomb) {
+	owner->setScore(owner->getScore() + entity->getScoreValue());
 	entity->explode(this);
 	entity->playExplosion();
 	end = true;
@@ -467,15 +441,6 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     }
     if (end)
       break;
-    /*if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))
-	&& entity != bomb) {
-      entity->explode(this);
-      entity->playExplosion();
-      break;
-    }
-    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
-      break;
-      }*/
   }
   end = false;
   for (size_t i = 0; i <= bombRange; ++i) {
@@ -483,8 +448,9 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
     size_t y = bomb->getPosInMap(this->_scale).Z - i;
     std::list<IEntity *> const& entities = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y));
     for (auto &it : entities) {
-      entity = it;;
+      entity = it;
       if (it != bomb) {
+	owner->setScore(owner->getScore() + entity->getScoreValue());
 	entity->explode(this);
 	entity->playExplosion();
 	end = true;
@@ -494,15 +460,6 @@ void bbman::Board::explodeBlocks(bbman::IBomb *bomb)
       end = true;
     if (end)
       break;
-    /*if ((entity = getEntityByPosition(irr::core::vector3d<irr::s32>(x, 0, y)))
-	&& entity != bomb) {
-      entity->explode(this);
-      entity->playExplosion();
-      break;
-    }
-    else if (this->_map.at(x, y).id == ItemID::II_BLOCK_INBRKABLE) {
-      break;
-      }*/
   }
 }
 

@@ -5,13 +5,16 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 14:22:45 2016 stephane galibert
-// Last update Fri Jun  3 11:52:07 2016 stephane galibert
+// Last update Sat Jun  4 15:38:21 2016 stephane galibert
 //
 
 #include "Loader.hpp"
 
 bbman::Loader::Loader(void)
 {
+  this->_loads["GAME_BEGIN"] =
+    std::bind(&bbman::Loader::loadGame, this, std::placeholders::_1,
+	      std::placeholders::_2);
   this->_loads["MAP_BEGIN"] =
     std::bind(&bbman::Loader::loadMap, this, std::placeholders::_1,
 	      std::placeholders::_2);
@@ -62,6 +65,37 @@ std::list<bbman::IBomb *> const& bbman::Loader::getBombs(void) const
 bbman::TimeOut *bbman::Loader::getTimeOut(void) const
 {
   return (this->_timeout);
+}
+
+irr::f32 bbman::Loader::getChrono(void) const
+{
+  return (this->_chrono);
+}
+
+void bbman::Loader::loadGame(Irrlicht &irr, std::ifstream &ifs)
+{
+  std::string name;
+  std::string value;
+  std::string line;
+  size_t pos = 0;
+  size_t pos1 = 0;
+  size_t pos2 = 0;
+
+  while (std::getline(ifs, line) && line != "GAME_END")
+    {
+      pos = 0;
+      pos1 = line.find_first_of(":");
+      pos2 = line.find_first_of(";");
+      while (pos1 != std::string::npos && pos2 != std::string::npos)
+	{
+	  name = line.substr(pos, pos1 - pos);
+	  value = line.substr(pos1 + 1, pos2 - pos1 - 1);
+	  this->_chrono = std::atoi(value.data());
+	  pos = pos2 + 1;
+	  pos1 = line.find_first_of(":", pos2);
+	  pos2 = line.find_first_of(";", pos2 + 1);
+	}
+    }
 }
 
 void bbman::Loader::loadMap(Irrlicht &irr, std::ifstream &ifs)
@@ -146,11 +180,7 @@ void bbman::Loader::loadBombs(Irrlicht &irr, std::ifstream &ifs)
 	  pos2 = line.find_first_of(";", pos2 + 1);
 	}
       if (bomb) {
-	/*irr::core::vector3df scale(10, 10, 10);
-	  irr::core::vector3d<irr::s32> const& pos = bomb->getPosInMap(scale);
-	  if (this->_map.at(pos.X, pos.Z).id != ItemID::II_NONE) {*/
 	this->_bombs.push_back(bomb);
-	//}
       }
     }
 }

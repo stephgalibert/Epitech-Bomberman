@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:28:29 2016 stephane galibert
-// Last update Sat Jun  4 11:36:36 2016 stephane galibert
+// Last update Sat Jun  4 14:57:28 2016 stephane galibert
 //
 
 #ifndef _APLAYER_HPP_
@@ -64,6 +64,7 @@ namespace bbman
     virtual void setDeviceID(int id) = 0;
     virtual int getDeviceID(void) const = 0;
     virtual void disableAnimation(void) = 0;
+    virtual int getScoreValue(void) const = 0;
     void setMood(int Mood);
     int getMood() const;
     std::string const& getUsername(void) const;

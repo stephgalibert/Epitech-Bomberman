@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Sat Jun  4 13:06:42 2016 stephane galibert
+// Last update Sat Jun  4 15:41:06 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -41,6 +41,7 @@ void bbman::Game::init(Irrlicht &irr, layout *layout, std::string const& saves)
     if (!saves.empty()) {
       this->_loader.load(irr, saves);
       this->_board->init(irr, this->_loader);
+      this->_delta = this->_loader.getChrono();
       this->_timeout = this->_loader.getTimeOut();
       this->_timeout->init(irr, this->_board);
     }
@@ -118,6 +119,16 @@ bool bbman::Game::leaveGame(void) const
   return (this->_leaveGame);
 }
 
+irr::f32 bbman::Game::getDelta(void) const
+{
+  return (this->_delta);
+}
+
+void bbman::Game::setDelta(irr::f32 delta)
+{
+  this->_delta = delta;
+}
+
 void bbman::Game::cameraPositionSmoothAnimation(irr::f32 delta,
 						irr::core::vector3df const& cpos,
 						irr::core::vector3df const& npos)
@@ -130,14 +141,12 @@ void bbman::Game::cameraPositionSmoothAnimation(irr::f32 delta,
     res.X += (fabs(npos.X) * delta);
   else
     res.X = npos.X;
-
   if (res.Y > npos.Y + 1.5f)
     res.Y -= (fabs(npos.Y) * delta);
   else if (res.Y < npos.Y - 1.5f)
     res.Y += (fabs(npos.Y) * delta);
   else
     res.Y = npos.Y;
-
   if (res.Z > npos.Z + 2.f)
     res.Z -= (fabs(npos.Z) * delta);
   else if (res.Z < npos.Z - 2.f)
@@ -159,14 +168,12 @@ void bbman::Game::cameraTargetSmoothAnimation(irr::f32 delta,
     res.X += (fabs(npos.X) * (delta));
   else
     res.X = npos.X;
-
   if (res.Y > npos.Y + 1.5f)
     res.Y -= (fabs(npos.Y) * delta);
   else if (res.Y < npos.Y - 1.5f)
     res.Y += (fabs(npos.Y) * (delta));
   else
     res.Y = npos.Y;
-
   if (res.Z > npos.Z + 1.5f)
     res.Z -= (fabs(npos.Z) * delta);
   else if (res.Z < npos.Z - 1.5f)
@@ -204,6 +211,9 @@ void bbman::Game::save(std::string const& fname)
 {
   std::ofstream ofs(fname.c_str(), std::ifstream::out);
   if (ofs) {
+    ofs << "GAME_BEGIN" << std::endl;
+    ofs << "timer:" << this->_delta << ";" << std::endl;
+    ofs << "GAME_END" << std::endl;
     ofs << *this->_board;
     ofs << "TIMEOUT_BEGIN" << std::endl;
     ofs << *this->_timeout;

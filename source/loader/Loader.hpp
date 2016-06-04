@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 14:13:49 2016 stephane galibert
-// Last update Mon May 30 07:04:11 2016 stephane galibert
+// Last update Sat Jun  4 15:39:06 2016 stephane galibert
 //
 
 #ifndef _LOADER_HPP_
@@ -39,7 +39,9 @@ namespace bbman
     std::vector<APlayer *> const& getPlayers(void) const;
     std::list<IBomb *> const& getBombs(void) const;
     TimeOut *getTimeOut(void) const;
+    irr::f32 getChrono(void) const;
   private:
+    void loadGame(Irrlicht &irr, std::ifstream &ifs);
     void loadMap(Irrlicht &irr, std::ifstream &ifs);
     void loadPlayers(Irrlicht &irr, std::ifstream &ifs);
     void loadBombs(Irrlicht &irr, std::ifstream &ifs);
@@ -49,6 +51,7 @@ namespace bbman
     std::vector<APlayer *> _players;
     std::list<IBomb *> _bombs;
     TimeOut *_timeout;
+    irr::f32 _chrono;
   };
 }
 

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:08:37 2016 stephane galibert
-// Last update Fri Jun  3 21:21:31 2016 stephane galibert
+// Last update Sat Jun  4 14:58:14 2016 stephane galibert
 //
 
 #ifndef _EXPLODINGBOMB_HPP_
@@ -59,10 +59,9 @@ namespace bbman
     virtual void addRange(size_t n);
     virtual std::string const& getColor(void) const;
     virtual void setColor(std::string const& color);
-    void setOwner(APlayer *owner);
-    /*virtual void setLol(bool value);
-      virtual bool getLol(void) const;*/
     virtual void disableAnimation(void);
+    virtual int getScoreValue(void) const;
+    void setOwner(APlayer *owner);
   private:
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:

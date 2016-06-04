@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 19:11:32 2016 stephane galibert
-// Last update Fri Jun  3 21:23:18 2016 stephane galibert
+// Last update Sat Jun  4 14:54:11 2016 stephane galibert
 //
 
 #ifndef _DESTRUCTIBLEBLOCK_HPP_
@@ -39,6 +39,7 @@ namespace bbman
     virtual std::string const& getColor(void) const;
     virtual void setColor(std::string const& color);
     virtual void disableAnimation(void);
+    virtual int getScoreValue(void) const;
   private:
     bool _anim;
     irr::scene::ISceneNode *_node;

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 18:11:12 2016 stephane galibert
-// Last update Sat Jun  4 01:32:52 2016 stephane galibert
+// Last update Sat Jun  4 15:05:23 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -297,11 +297,6 @@ void bbman::ExplodingBomb::explode(Board *board)
   this->_delta = DELAY_TO_EXPLOSE;
 }
 
-/*void bbman::ExplodingBomb::setLol(bool value)
-{
-  this->_lol = value;
-  }*/
-
 void bbman::ExplodingBomb::playExplosion(void)
 {
   if (!this->_anim)
@@ -369,12 +364,12 @@ void bbman::ExplodingBomb::setColor(std::string const& color)
   this->_color = color;
 }
 
-/*bool bbman::ExplodingBomb::getLol(void) const
-{
-  return (this->_lol);
-  }*/
-
 void bbman::ExplodingBomb::disableAnimation(void)
 {
   this->_anim = false;
+}
+
+int bbman::ExplodingBomb::getScoreValue(void) const
+{
+  return (0);
 }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu Jun  2 14:50:32 2016 stephane galibert
-// Last update Fri Jun  3 21:24:42 2016 stephane galibert
+// Last update Sat Jun  4 14:55:02 2016 stephane galibert
 //
 
 #ifndef _PILLAR_HPP_
@@ -36,8 +36,8 @@ namespace bbman
     virtual std::string const& getColor(void) const;
     virtual void setColor(std::string const& color);
     virtual void disableAnimation(void) {}
+    virtual int getScoreValue(void) const {return (0);}
   private:
-    //irr::scene::ISceneNode *_node;
     irr::scene::IMeshSceneNode *_mesh;
     irr::core::vector3d<irr::s32> _posInMap;
     std::string _color;
