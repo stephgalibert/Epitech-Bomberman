@@ -5,29 +5,11 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat May 28 08:20:16 2016 stephane galibert
-// Last update Sat Jun  4 01:16:32 2016 stephane galibert
+// Last update Sat Jun  4 11:43:04 2016 stephane galibert
 //
 
 #include "TimeOut.hpp"
 #include "ExplodingBomb.hpp"
-
-//# include "ThreadPool.hpp"
-//# include "TimeOutAsyncTask.hpp"
-//TimeOutAsyncTask *_asynctask;
-//this->_asynctask = NULL;
-/*if (this->_asynctask && this->_asynctask->isRunning()) {
-  this->_asynctask->stop();
-  while (!this->_asynctask->isFinished());
-  delete (this->_asynctask);
-  }*/
-//this->_asynctask = new TimeOutAsyncTask(irr, board);
-//this->_asynctask = new TimeOutAsyncTask(irr, board);
-/*if ((int)this->_delta < 10.0000f) {
-  this->_delta += delta;
-  if (this->_delta >= 10.0000f) {
-  pool->addTask(this->_asynctask);
-  }
-  }*/
 
 bbman::TimeOut::TimeOut(void)
 {
@@ -40,7 +22,9 @@ bbman::TimeOut::TimeOut(void)
 
 bbman::TimeOut::~TimeOut(void)
 {
-
+  for (auto it : this->_anims) {
+    delete (it.first);
+  }
 }
 
 void bbman::TimeOut::init(Irrlicht &irr, Board *board)
@@ -51,12 +35,10 @@ void bbman::TimeOut::init(Irrlicht &irr, Board *board)
 
 void bbman::TimeOut::update(Irrlicht &irr, irr::f32 delta)
 {
-  if (this->_delta >= 30.0000f) {
-    //this->_delta = 0.f;
+  if (this->_delta >= 20.0000f) {
     this->_deltaAnim += delta;
-    if (this->_deltaAnim >= 3.0000f) {
+    if (this->_deltaAnim >= 1.0000f) {
       narrowBoard(irr);
-      //this->_deltaAnim = 0;
     }
   }
   else {
@@ -135,13 +117,6 @@ void bbman::TimeOut::updateAnim(void)
       std::list<IEntity *> const& entities = this->_board->getEntityByPosition(pos);
       for (auto &it : entities) {
 	IEntity *entity = it;
-	/*ExplodingBomb *tmp = dynamic_cast<ExplodingBomb *>(entity);
-	if (tmp) {
-	  tmp->setLol(true);
-	}
-	else if (entity && !entity->hasExplosed()) {
-	  entity->explode(this->_board);
-	  }*/
 	it->disableAnimation();
 	it->explode(this->_board);
       }
@@ -229,10 +204,6 @@ void bbman::TimeOut::putBlock(Irrlicht &irr)
 {
   IBlock *block = this->_board->createInbrkable(irr, this->_current.X, _current.Z);
   if (block) {
-    /*this->_board->registerBlock(block);
-    irr::core::vector3d<irr::s32> const& ppos = block->getPosInMap(this->_board->getScale());
-      Map<Cell> &map = this->_board->getMap();
-      map.at(ppos.X, ppos.Z).id = block->getID();*/
     irr::core::vector3df const& pos = block->getPosition();
     irr::scene::ISceneNodeAnimator *anim =
       irr.getSmgr()->createFlyStraightAnimator(irr::core::vector3df(pos.X, pos.Y + 60, pos.Z), pos, 300, false);

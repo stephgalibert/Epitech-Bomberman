@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 11 16:04:29 2016 stephane galibert
-// Last update Sat Jun  4 00:59:57 2016 stephane galibert
+// Last update Sat Jun  4 12:05:40 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -42,6 +42,12 @@ namespace bbman
     void update(Irrlicht &irr, irr::f32 delta);
     bool leaveGame(void) const;
   private:
+    void cameraTargetSmoothAnimation(irr::f32 delta,
+				     irr::core::vector3df const& cpos,
+				     irr::core::vector3df const& npos);
+    void cameraPositionSmoothAnimation(irr::f32 delta,
+				       irr::core::vector3df const& cpos,
+				       irr::core::vector3df const& npos);
     void initCamera(Irrlicht &irr);
     void initSound(void);
     void updateBombs(Irrlicht &irr, irr::f32 delta);
@@ -59,7 +65,6 @@ namespace bbman
     layout *_layout;
     irr::f32 _delta;
     irr::f32 _delta_pause;
-    //irr::core::vector3df _prev;
     bool _pause;
   };
 }

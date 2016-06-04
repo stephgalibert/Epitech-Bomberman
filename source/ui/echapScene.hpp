@@ -24,6 +24,7 @@ public:
   void manageEvent(bbman::InputListener &listener);
   void loadRessources(void);
 
+  void reset(void);
   bool isResuming(void) const;
   bool isSaving(void) const;
   bool isMenuing(void) const;

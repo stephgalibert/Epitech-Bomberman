@@ -29,6 +29,8 @@ namespace bbman
   class AIPlayer : public APlayer
   {
   public:
+    static size_t NumberOfPlayer;
+  public:
     AIPlayer(void);
     virtual ~AIPlayer(void);
     virtual size_t getAPlayerID(void) const;
@@ -63,7 +65,6 @@ namespace bbman
     virtual int getDeviceID(void) const;
     virtual void disableAnimation(void);
   private:
-    static size_t NumberOfPlayer;
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:
     void dropBomb(Irrlicht &irr, Board *board);

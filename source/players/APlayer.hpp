@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:28:29 2016 stephane galibert
-// Last update Fri Jun  3 21:16:59 2016 stephane galibert
+// Last update Sat Jun  4 11:36:36 2016 stephane galibert
 //
 
 #ifndef _APLAYER_HPP_
@@ -29,6 +29,7 @@ namespace bbman
   {
   public:
     static const constexpr float INITIAL_SPEED = 40.0f;
+    static size_t NumberOfPlayer;
   public:
     APlayer(void);
     virtual ~APlayer(void);
@@ -73,7 +74,6 @@ namespace bbman
     size_t getPower(void) const;
     void setPower(size_t power);
   private:
-    static size_t NumberOfPlayer;
     size_t _id;
     int _mood;
   protected:
@@ -103,7 +103,8 @@ namespace bbman
 	 << " " << player.getColor() << ";name:" << username
 	 << ";id:" << id << ";pos:"
 	 << position << ";score:" << score << ";alive:" << alive << ";"
-	 << "rot:" << rotation << ";";
+	 << "rot:" << rotation << ";"
+	 << "color:" << player.getColor() << ";";
     for (auto it : effects) {
       flux << "effect:" << it->getEffectID()
 	   << " " << (int)it->getDelta() << ";";

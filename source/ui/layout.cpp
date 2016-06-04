@@ -98,7 +98,7 @@ std::vector<std::pair<std::string, int> > const layout::getVolume(void) const
 
 void layout::resetPauseMenu(void)
 {
-  this->_echap->updateRuntime();
+  this->_echap->reset();
 }
 
 bool layout::isResuming(void) const

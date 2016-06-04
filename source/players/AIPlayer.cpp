@@ -9,6 +9,7 @@
 #include "AIPlayer.hpp"
 #include "Board.hpp"
 
+size_t bbman::AIPlayer::NumberOfPlayer = 0;
 bbman::CacheManager<std::string, bbman::MemoryFile> bbman::AIPlayer::SoundCache;
 
 bbman::AIPlayer::AIPlayer(void)

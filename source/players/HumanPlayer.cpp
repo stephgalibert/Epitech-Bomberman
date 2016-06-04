@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Sat Jun  4 01:33:53 2016 stephane galibert
+// Last update Sat Jun  4 11:34:34 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"

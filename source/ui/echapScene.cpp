@@ -47,9 +47,7 @@ void echapScene::loadScene()
 
 void echapScene::updateRuntime()
 {
-  this->_resume = false;
-  this->_save = false;
-  this->_menu = false;
+
 }
 
 void echapScene::manageEvent(bbman::InputListener &listener)
@@ -69,6 +67,13 @@ void echapScene::manageEvent(bbman::InputListener &listener)
       this->_menu = true;
     }
   }
+}
+
+void echapScene::reset(void)
+{
+  this->_resume = false;
+  this->_save = false;
+  this->_menu = false;
 }
 
 bool echapScene::isResuming(void) const

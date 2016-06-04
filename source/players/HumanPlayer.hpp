@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Fri Jun  3 21:17:21 2016 stephane galibert
+// Last update Sat Jun  4 11:36:21 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -30,6 +30,8 @@ namespace bbman
 {
   class HumanPlayer : public APlayer
   {
+  public:
+    static size_t NumberOfPlayer;
   public:
     HumanPlayer(void);
     virtual ~HumanPlayer(void);
@@ -65,7 +67,6 @@ namespace bbman
     virtual int getDeviceID(void) const;
     virtual void disableAnimation(void);
   private:
-    static size_t NumberOfPlayer;
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:
     bool _anim;

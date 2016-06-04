@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 19:02:00 2016 stephane galibert
-// Last update Sat Jun  4 01:36:37 2016 stephane galibert
+// Last update Sat Jun  4 12:29:25 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -29,6 +29,9 @@ bbman::Game::~Game(void)
   if (this->_board) {
     delete (this->_board);
   }
+  AIPlayer::NumberOfPlayer = 0;
+  HumanPlayer::NumberOfPlayer = 0;
+  APlayer::NumberOfPlayer = 0;
 }
 
 void bbman::Game::init(Irrlicht &irr, layout *layout, std::string const& saves)
@@ -81,24 +84,7 @@ bool bbman::Game::input(InputListener &inputListener)
 
 void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
 {
-  /*if (this->_board->hasWinners()) {
-    APlayer *winner = this->_board->getWinner();
-    irr::core::vector3df const& cpos = this->_camera->getPosition();
-    irr::core::vector3df const& npos = winner->getPosition();
-
-    float x = 45 * std::cos(1 / delta * (2 * 3.1415));
-    float y = 45 * std::sin(1 / delta * (2 * 3.1415));
-    float z = std::atan2(y, x) + 3.1415f / 2;
-
-    this->_camera->setTarget(winner->getPosition());
-    this->_camera->setPosition(irr::core::vector3df(, y, z));
-    } else {*/
-  if (!this->_pause) {
-    this->_board->update(irr, delta);
-    this->_timeout->update(irr, delta);
-    this->_delta += delta;
-  }
-  else {
+  if (this->_pause) {
     if (this->_layout->isResuming()) {
       this->_pause = false;
     }
@@ -107,8 +93,22 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
     }
     if (this->_layout->isSaving()) {
       save("./save.txt");
+      this->_pause = false;
     }
     this->_layout->resetPauseMenu();
+  } else if (this->_board->hasWinners()) {
+    APlayer *winner = this->_board->getWinner();
+    irr::core::vector3df const& cpos = this->_camera->getPosition();
+    irr::core::vector3df const& npos = winner->getPosition();
+    cameraTargetSmoothAnimation(delta, this->_camera->getTarget(), npos);
+    if (this->_camera->getTarget() == winner->getPosition()) {
+      irr::core::vector3df fpos(npos.X, npos.Y + 50, npos.Z - 60);
+      cameraPositionSmoothAnimation(delta, this->_camera->getPosition(), fpos);
+    }
+  } else {
+    this->_board->update(irr, delta);
+    this->_timeout->update(irr, delta);
+    this->_delta += delta;
   }
   this->_delta_pause += delta;
 }
@@ -116,6 +116,64 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
 bool bbman::Game::leaveGame(void) const
 {
   return (this->_leaveGame);
+}
+
+void bbman::Game::cameraPositionSmoothAnimation(irr::f32 delta,
+						irr::core::vector3df const& cpos,
+						irr::core::vector3df const& npos)
+{
+  irr::core::vector3df res = cpos;
+
+  if (res.X > npos.X + 1.5f)
+    res.X -= (fabs(npos.X) * delta);
+  else if (res.X < npos.X - 1.5f)
+    res.X += (fabs(npos.X) * delta);
+  else
+    res.X = npos.X;
+
+  if (res.Y > npos.Y + 1.5f)
+    res.Y -= (fabs(npos.Y) * delta);
+  else if (res.Y < npos.Y - 1.5f)
+    res.Y += (fabs(npos.Y) * delta);
+  else
+    res.Y = npos.Y;
+
+  if (res.Z > npos.Z + 2.f)
+    res.Z -= (fabs(npos.Z) * delta);
+  else if (res.Z < npos.Z - 2.f)
+    res.Z += (fabs(npos.Z) * delta);
+  else
+    res.Z = npos.Z;
+  this->_camera->setPosition(res);
+}
+
+void bbman::Game::cameraTargetSmoothAnimation(irr::f32 delta,
+					      irr::core::vector3df const& cpos,
+					      irr::core::vector3df const& npos)
+{
+  irr::core::vector3df res = cpos;
+
+  if (res.X > npos.X + 1.5f)
+    res.X -= (fabs(npos.X) * delta);
+  else if (res.X < npos.X - 1.5f)
+    res.X += (fabs(npos.X) * (delta));
+  else
+    res.X = npos.X;
+
+  if (res.Y > npos.Y + 1.5f)
+    res.Y -= (fabs(npos.Y) * delta);
+  else if (res.Y < npos.Y - 1.5f)
+    res.Y += (fabs(npos.Y) * (delta));
+  else
+    res.Y = npos.Y;
+
+  if (res.Z > npos.Z + 1.5f)
+    res.Z -= (fabs(npos.Z) * delta);
+  else if (res.Z < npos.Z - 1.5f)
+    res.Z += (fabs(npos.Z) * (delta));
+  else
+    res.Z = npos.Z;
+  this->_camera->setTarget(res);
 }
 
 void bbman::Game::initCamera(bbman::Irrlicht &irr)
