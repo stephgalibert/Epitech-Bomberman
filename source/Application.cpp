@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 18:45:42 2016 stephane galibert
-// Last update Sat Jun  4 15:41:21 2016 stephane galibert
+// Last update Sat Jun  4 15:45:04 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -125,8 +125,8 @@ void bbman::Application::goToGame(void)
     this->_as = bbman::ApplicationState::AS_GAME;
     this->_game = new Game;
     try {
-      this->_game->init(*this->_irr, this->_menu, "./save.txt");
-      //this->_game->init(*this->_irr, this->_menu);
+      //this->_game->init(*this->_irr, this->_menu, "./save.txt");
+      this->_game->init(*this->_irr, this->_menu);
     } catch (std::runtime_error const& e) {
       delete (this->_game);
       this->_game = NULL;
