@@ -83,7 +83,6 @@ void gameScene::updateRuntime() {}
 
 void gameScene::manageEvent(bbman::InputListener& listener) {}
 
-#include <iostream>
 void gameScene::displayScore(int id, int value)
 {
   if (id < 0 || id > 3)

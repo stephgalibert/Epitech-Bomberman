@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 14:22:45 2016 stephane galibert
-// Last update Sat Jun  4 15:38:21 2016 stephane galibert
+// Last update Sun Jun  5 01:30:47 2016 stephane galibert
 //
 
 #include "Loader.hpp"
@@ -39,12 +39,14 @@ void bbman::Loader::load(Irrlicht &irr, std::string const& filename)
   std::string line;
   std::ifstream ifs(filename.c_str(), std::ifstream::in);
 
-  while (std::getline(ifs, line))
-    {
-      if (this->_loads.find(line) != this->_loads.cend()) {
-	this->_loads[line](irr, ifs);
+  if (ifs) {
+    while (std::getline(ifs, line))
+      {
+	if (this->_loads.find(line) != this->_loads.cend()) {
+	  this->_loads[line](irr, ifs);
+	}
       }
-    }
+  }
 }
 
 bbman::Map<bbman::Cell> const& bbman::Loader::getMap(void) const
@@ -90,7 +92,7 @@ void bbman::Loader::loadGame(Irrlicht &irr, std::ifstream &ifs)
 	{
 	  name = line.substr(pos, pos1 - pos);
 	  value = line.substr(pos1 + 1, pos2 - pos1 - 1);
-	  this->_chrono = std::atoi(value.data());
+	  this->_chrono = std::atof(value.data());
 	  pos = pos2 + 1;
 	  pos1 = line.find_first_of(":", pos2);
 	  pos2 = line.find_first_of(";", pos2 + 1);

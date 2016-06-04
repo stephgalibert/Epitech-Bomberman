@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:39:40 2016 avelin_j
-// Last update Sat Jun  4 23:42:47 2016 avelin_j
+// Last update Sun Jun  5 01:29:47 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -257,7 +257,6 @@ void bbman::Game::saveScore(void)
   std::vector<HighScore> ranking;
   std::vector<APlayer *> const& players = this->_board->getPlayers();
 
-  //HighScore::loadScoreFromFile("score.txt", ranking);
   for (auto it : players) {
     HighScore::saveNewHighScore(ranking, "Player" + std::to_string(it->getID()),
 				it->getScore());
