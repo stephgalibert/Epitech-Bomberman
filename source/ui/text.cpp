@@ -25,7 +25,6 @@ text::text(const std::string& name, const std::string& msg,
 
 text::~text() {}
 
-#include <iostream>
 void text::setMsg(const std::string& msg, const std::string& style)
 {
   this->_style[style]._msg = msg;
@@ -55,6 +54,7 @@ const std::string &text::getMsg(const std::string& style)
 
 bool text::draw(irr::video::IVideoDriver *driver, const std::string& style)
 {
+  (void)driver;
   if (this->_style[style]._font) {
     this->_style[style]._font->draw(this->_style[style]._msg.c_str(), irr::core::rect<irr::s32>
                         (this->_style[style]._pos.X, this->_style[style]._pos.Y, 0, 0), this->_style[style]._color);

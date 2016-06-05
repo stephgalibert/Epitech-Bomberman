@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 14:22:45 2016 stephane galibert
-// Last update Sun Jun  5 01:30:47 2016 stephane galibert
+// Last update Sun Jun  5 13:39:32 2016 stephane galibert
 //
 
 #include "Loader.hpp"
@@ -83,6 +83,7 @@ void bbman::Loader::loadGame(Irrlicht &irr, std::ifstream &ifs)
   size_t pos1 = 0;
   size_t pos2 = 0;
 
+  (void)irr;
   while (std::getline(ifs, line) && line != "GAME_END")
     {
       pos = 0;

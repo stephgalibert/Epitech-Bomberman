@@ -16,7 +16,6 @@ ai = function(id)
           r["move"] = ret["dir"]
           if (directionIsSafe(id, ret["dir"]) == 1) then
             r["move"] = 0 end
-          print(ret["size"])
           if (ret["size"] == 0) then
             r["bomb"] = 1 end
     else

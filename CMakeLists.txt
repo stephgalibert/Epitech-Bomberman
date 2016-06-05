@@ -20,9 +20,9 @@ ENDIF (START_GTEST)
 # Enable c++11 with CMake
 if (UNIX)
 add_compile_options(-std=c++11)
-#add_compile_options(-Wall)
-#add_compile_options(-Werror)
-add_compile_options(-g)
+add_compile_options(-Wall)
+add_compile_options(-Wextra)
+add_compile_options(-Werror)
 endif (UNIX)
 # configure a header file to pass some of the CMake settings to the source code
 configure_file (
@@ -31,24 +31,10 @@ configure_file (
   )
 
 # add search path for include files
-include_directories(
-  ${PROJECT_SOURCE_DIR}
-  ${PROJECT_SOURCE_DIR}/source
-  ${PROJECT_SOURCE_DIR}/source/astar
-  ${PROJECT_SOURCE_DIR}/source/binding
-  ${PROJECT_SOURCE_DIR}/source/blocks
-  ${PROJECT_SOURCE_DIR}/source/bombs
-  ${PROJECT_SOURCE_DIR}/source/effects
-  ${PROJECT_SOURCE_DIR}/source/environment
+
+# warning disable
+include_directories(SYSTEM
   ${PROJECT_SOURCE_DIR}/source/irrassimp
-  ${PROJECT_SOURCE_DIR}/source/loader
-  ${PROJECT_SOURCE_DIR}/source/music
-  ${PROJECT_SOURCE_DIR}/source/players
-  ${PROJECT_SOURCE_DIR}/source/powerups
-  ${PROJECT_SOURCE_DIR}/source/utils
-  ${PROJECT_SOURCE_DIR}/source/thread
-  ${PROJECT_SOURCE_DIR}/source/ui
-  ${PROJECT_SOURCE_DIR}/source/ui/scene
   ${PROJECT_SOURCE_DIR}/lib/irrlicht/include
   ${PROJECT_SOURCE_DIR}/lib/assimp/include
   ${PROJECT_SOURCE_DIR}/lib/lua/LuaBridge/
@@ -58,6 +44,26 @@ include_directories(
   ${PROJECT_SOURCE_DIR}/lib/google-test/include/
   ${PROJECT_SOURCE_DIR}/lib/google-test/include/gtest
 )
+
+# warning enable
+include_directories(
+  ${PROJECT_SOURCE_DIR}
+  ${PROJECT_SOURCE_DIR}/source
+  ${PROJECT_SOURCE_DIR}/source/astar
+  ${PROJECT_SOURCE_DIR}/source/binding
+  ${PROJECT_SOURCE_DIR}/source/blocks
+  ${PROJECT_SOURCE_DIR}/source/bombs
+  ${PROJECT_SOURCE_DIR}/source/effects
+  ${PROJECT_SOURCE_DIR}/source/environment
+  ${PROJECT_SOURCE_DIR}/source/loader
+  ${PROJECT_SOURCE_DIR}/source/music
+  ${PROJECT_SOURCE_DIR}/source/players
+  ${PROJECT_SOURCE_DIR}/source/powerups
+  ${PROJECT_SOURCE_DIR}/source/utils
+  ${PROJECT_SOURCE_DIR}/source/thread
+  ${PROJECT_SOURCE_DIR}/source/ui
+  ${PROJECT_SOURCE_DIR}/source/ui/scene
+  )
 
 FILE(GLOB SRCS
     source/*.cpp

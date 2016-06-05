@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May 26 11:32:16 2016 stephane galibert
-// Last update Fri Jun  3 11:50:32 2016 stephane galibert
+// Last update Sun Jun  5 13:39:03 2016 stephane galibert
 //
 
 #include "BombAttr.hpp"
@@ -110,6 +110,7 @@ void bbman::BombAttr::setExplosed(IBomb **bomb, std::vector<APlayer *> &player,
 				  Irrlicht &irr, std::string const& v)
 {
   (void)irr;
+  (void)player;
   if (bomb && *bomb) {
     (*bomb)->setExplosed(v == "1");
   }
@@ -119,6 +120,7 @@ void bbman::BombAttr::setLol(IBomb **bomb, std::vector<APlayer *> &player,
 			     Irrlicht &irr, std::string const& v)
 {
   (void)irr;
+  (void)player;
   if (bomb && *bomb) {
     (*bomb)->setExplosed(v == "1");
   }

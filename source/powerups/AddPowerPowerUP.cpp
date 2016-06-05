@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sun Jun  5 00:07:59 2016 avelin_j
-// Last update Sun Jun  5 00:08:00 2016 avelin_j
+// Last update Sun Jun  5 13:24:06 2016 stephane galibert
 //
 
 #include "AddPowerPowerUP.hpp"
@@ -25,6 +25,7 @@ bbman::AddPowerPowerUP::~AddPowerPowerUP(void)
 
 void bbman::AddPowerPowerUP::init(Irrlicht &irr, std::string const& color)
 {
+  (void)color;
   irr::scene::ISceneNodeAnimator *anms = NULL;
   std::string obj = "./asset/powerup/powerUpP.obj";
   std::string txt1 = "./asset/pillier/Texture_pillier_Selfillum_Orange.png";

@@ -93,6 +93,7 @@ bool layout::isGameStarted(void) const
   } else if (this->_scene.find(this->_currentScene) != this->_scene.cend()) {
     return (this->_scene.at(this->_currentScene)->isGameStarted());
   }
+  return (false);
 }
 
 void layout::backToMenu(void)

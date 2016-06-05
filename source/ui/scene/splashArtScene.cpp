@@ -39,4 +39,4 @@ void splashArtScene::updateRuntime()
   }
 }
 
-void splashArtScene::manageEvent(bbman::InputListener& listener) {}
+void splashArtScene::manageEvent(bbman::InputListener& listener) {(void)listener;}

@@ -236,6 +236,7 @@ bool bbman::AIPlayer::isColliding(irr::core::aabbox3df const& box) const
 
 void bbman::AIPlayer::explode(Board *board)
 {
+  (void)board;
   if (this->_alive) {
     this->_alive = false;
     this->_mesh->setVisible(false);

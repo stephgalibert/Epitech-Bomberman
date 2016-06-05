@@ -140,10 +140,6 @@ luabridge::LuaRef findPath(int numplayer, int type, lua_State *L)
   bbman::TrueAStar trueA;
   bbman::NeighborAStar neighA;
 
-
-  int distmin;
-  int ret;
-
   trueA.addBlockType(bbman::ItemID::II_BLOCK_BRKABLE);
   trueA.addBlockType(bbman::ItemID::II_BLOCK_INBRKABLE);
   neighA.addBlockType(bbman::ItemID::II_BLOCK_INBRKABLE);

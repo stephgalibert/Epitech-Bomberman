@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Mon May 23 17:50:51 2016 stephane galibert
-// Last update Fri Jun  3 21:47:31 2016 stephane galibert
+// Last update Sun Jun  5 13:37:23 2016 stephane galibert
 //
 
 #ifndef _STATICTOOLS_HPP_
@@ -24,7 +24,7 @@ namespace tools
   public:
     static bbman::ThreadPool *ThreadPool;
   public:
-    static irr::s32 getDistance2D(irr::core::vector3d<irr::s32> const& p1,
+    static irr::u32 getDistance2D(irr::core::vector3d<irr::s32> const& p1,
 				  irr::core::vector3d<irr::s32> const& p2);
     static void initThreadPool(size_t nbThread);
     static void deleteThreadPool(void);

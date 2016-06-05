@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:44:07 2016 avelin_j
-// Last update Sun Jun  5 11:03:10 2016 stephane galibert
+// Last update Sun Jun  5 13:23:27 2016 stephane galibert
 //
 
 #include "TimeOut.hpp"
@@ -126,14 +126,14 @@ void bbman::TimeOut::updateAnim(void)
       }
       this->_board->registerBlock(it->first);
 
-      Map<Cell> &map = this->_board->getMap();
+      /*Map<Cell> &map = this->_board->getMap();
       for (int i = 0 ; i < map.h ; ++i) {
 	for (int j = 0 ; j < map.w ; ++j) {
 	  std::cout << (int)map.at(j, i).id << " ";
 	}
 	std::cout << std::endl;
       }
-      std::cout << std::endl;
+      std::cout << std::endl;*/
 
       it = this->_anims.erase(it);
     }

@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:06:55 2016 stephane galibert
-// Last update Sat Jun  4 20:50:47 2016 stephane galibert
+// Last update Sun Jun  5 13:40:28 2016 stephane galibert
 //
 
 #include "TimeOutAttr.hpp"
@@ -58,6 +58,7 @@ void bbman::TimeOutAttr::setDelta(TimeOut *out, Irrlicht &irr,
 void bbman::TimeOutAttr::setDeltaAnim(TimeOut *out, Irrlicht &irr,
 				      std::string const& value)
 {
+  (void)irr;
   if (out) {
     out->setDeltaAnim(std::atof(value.data()));
   }
@@ -75,6 +76,7 @@ void bbman::TimeOutAttr::setStep(TimeOut *out, Irrlicht &irr,
 void bbman::TimeOutAttr::setDir(TimeOut *out, Irrlicht &irr,
 				std::string const& value)
 {
+  (void)irr;
   if (out) {
     out->setDirection(static_cast<Direction>(std::atoi(value.data())));
   }
@@ -83,6 +85,7 @@ void bbman::TimeOutAttr::setDir(TimeOut *out, Irrlicht &irr,
 void bbman::TimeOutAttr::setBegin(TimeOut *out, Irrlicht &irr,
 				  std::string const& value)
 {
+  (void)irr;
   if (out) {
     irr::core::vector3d<irr::u32> pos;
     std::vector<std::string> tokens;
@@ -101,6 +104,7 @@ void bbman::TimeOutAttr::setBegin(TimeOut *out, Irrlicht &irr,
 void bbman::TimeOutAttr::setCurrent(TimeOut *out, Irrlicht &irr,
 				    std::string const& value)
 {
+  (void)irr;
   if (out) {
     irr::core::vector3d<irr::u32> pos;
     std::vector<std::string> tokens;

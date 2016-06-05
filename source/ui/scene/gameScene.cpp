@@ -81,7 +81,7 @@ void gameScene::loadScene()
 
 void gameScene::updateRuntime() {}
 
-void gameScene::manageEvent(bbman::InputListener& listener) {}
+void gameScene::manageEvent(bbman::InputListener& listener) {(void)listener;}
 
 void gameScene::displayScore(int id, int value)
 {

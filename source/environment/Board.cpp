@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sun Jun  5 00:04:09 2016 avelin_j
-// Last update Sun Jun  5 00:04:10 2016 avelin_j
+// Last update Sun Jun  5 13:37:59 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -737,9 +737,7 @@ void bbman::Board::buildBrkable(Irrlicht& irr, size_t x, size_t y)
   IBlock *block = new DestructibleBlock;
   irr::core::vector3df pos;
   irr::core::vector3df ext;
-  int random = 0;
 
-  random = this->_generator(0, 100);
   pos.X = x * this->_scale.X + (this->_scale.X / 2);
   pos.Z = y * this->_scale.Z + (this->_scale.Z / 2);
   try {

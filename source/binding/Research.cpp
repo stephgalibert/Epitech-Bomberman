@@ -72,7 +72,7 @@ irr::core::vector3d<irr::s32>const&
 bbman::Research::getNearPlayer(irr::core::vector3d<irr::s32>const& ia)
 {
   std::vector<bbman::APlayer *>const& Players = this->_board->getPlayers();
-  size_t distmin                              = 1000; // TROUVER UNE SOLUTION
+  size_t distmin                              = 1000;
 
   size_t ret;
 
@@ -149,7 +149,7 @@ bbman::APlayer * bbman::Research::getAI(int numplayer)
   bbman::APlayer *ia;
 
   for (auto& it : Players) {
-    if (it->getID() == numplayer) {
+    if (it->getID() == (size_t)numplayer) {
       ia = it;
     }
   }
@@ -165,7 +165,7 @@ bbman::Direction bbman::Research::checkNorthEast(irr::core::vector3d<irr::s32>co
 {
   Map<bbman::Cell>const& map = this->_board->getMap();
 
- if ((pos.X + j < map.w) && (pos.Z + i < map.h) &&
+  if (((int)pos.X + j < (int)map.w) && ((int)pos.Z + i < (int)map.h) &&
       (map.at(pos.X + j, pos.Z + i).id == ItemID::II_NONE)) {
     if (!this->_board->isInExplosion(
           irr::core::vector3d<irr::s32>(pos.X + j, 0, pos.Z + i))) {
@@ -184,7 +184,7 @@ bbman::Direction bbman::Research::checkSouthEast(irr::core::vector3d<irr::s32>co
 {
   Map<bbman::Cell>const& map = this->_board->getMap();
 
-  if ((pos.X + j < map.w) && (pos.Z - i > 0) &&
+  if (((int)pos.X + j < (int)map.w) && ((int)pos.Z - i > 0) &&
       (map.at(pos.X + j, pos.Z - i).id == ItemID::II_NONE)) {
     if (!this->_board->isInExplosion(
           irr::core::vector3d<irr::s32>(pos.X + j, 0, pos.Z - i))) {
@@ -203,7 +203,7 @@ bbman::Direction bbman::Research::checkNorthWest(irr::core::vector3d<irr::s32>co
 {
   Map<bbman::Cell>const& map = this->_board->getMap();
 
-  if ((pos.X - j > 0) && (pos.Z + i < map.h) &&
+  if (((int)pos.X - j > 0) && ((int)pos.Z + i < (int)map.h) &&
       (map.at(pos.X - j, pos.Z + i).id == ItemID::II_NONE)) {
     if (!this->_board->isInExplosion(
           irr::core::vector3d<irr::s32>(pos.X - j, 0, pos.Z + i))) {
@@ -222,7 +222,7 @@ bbman::Direction bbman::Research::checkSouthWest(irr::core::vector3d<irr::s32>co
 {
   Map<bbman::Cell>const& map = this->_board->getMap();
 
-  if ((pos.X - j > 0) && (pos.Z - i > 0) &&
+  if (((int)pos.X - j > 0) && ((int)pos.Z - i > 0) &&
       (map.at(pos.X - j, pos.Z - i).id == ItemID::II_NONE)) {
     if (!this->_board->isInExplosion(
           irr::core::vector3d<irr::s32>(pos.X - j, 0, pos.Z - i))) {
@@ -239,7 +239,6 @@ bbman::Direction bbman::Research::checkSouthWest(irr::core::vector3d<irr::s32>co
 
 bbman::Direction bbman::Research::findNearestSafeZone(irr::core::vector3d<irr::s32>const& pos)
 {
-  Map<bbman::Cell>const& map = this->_board->getMap();
   bbman::TrueAStar trueA;
   bbman::Direction ret;
   int dir[4] = {0,1,2,3};
