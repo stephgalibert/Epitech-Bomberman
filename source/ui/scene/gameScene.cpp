@@ -58,22 +58,22 @@ void gameScene::loadScene()
   .color(255, 75, 75)
   .at(925, 65);
 
-  this->_ui.create<text>("scoreP0")
+  this->_ui.create<text>("scoreP3") // P0
   .font(this->_ui.getFont("m36"))
   .msg("0")
   .at(150, 55);
 
-  this->_ui.create<text>("scoreP1")
+  this->_ui.create<text>("scoreP2") // P1
   .font(this->_ui.getFont("m36"))
   .msg("0")
   .at(150, 175);
 
-  this->_ui.create<text>("scoreP2")
+  this->_ui.create<text>("scoreP0") // P2
   .font(this->_ui.getFont("m36"))
   .msg("0")
   .at(1720, 55);
 
-  this->_ui.create<text>("scoreP3")
+  this->_ui.create<text>("scoreP1") // P3
   .font(this->_ui.getFont("m36"))
   .msg("0")
   .at(1720, 175);

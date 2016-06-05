@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 03:03:53 2016 stephane galibert
-// Last update Sun Jun  5 14:59:54 2016 stephane galibert
+// Last update Sun Jun  5 15:22:19 2016 stephane galibert
 //
 
 #include <string>

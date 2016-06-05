@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sun Jun  5 00:04:09 2016 avelin_j
-// Last update Sun Jun  5 13:37:59 2016 stephane galibert
+// Last update Sun Jun  5 15:23:00 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -15,7 +15,6 @@ bbman::Board::Board(void)
 {
   this->_backgroundMesh = NULL;
 
-  // la taille de la map doit être impaire
   this->_size                                  = irr::core::vector3df(19, 0, 13);
   this->_scale                                 = irr::core::vector3df(10, 10, 10);
   this->_ctor[(int)ItemID::II_BLOCK_INBRKABLE] =
@@ -208,10 +207,13 @@ bool bbman::Board::addBomb(IBomb *newBomb)
                     [&newBomb](IBomb * bomb) {
                       if (newBomb->getPosition() == bomb->getPosition())
                         return true;
-
                       return false;
                     }) == std::end(this->_bombs))
       && !isOutside(newBomb->getPosition())) {
+    irr::core::vector3d<irr::s32> const& ppos = newBomb->getPosInMap(getScale());
+    if (this->_map.at(ppos.X, ppos.Z).id == ItemID::II_BLOCK_INBRKABLE) {
+      return (false);
+    }
     this->_bombs.push_back(newBomb);
     this->_explosable.push_back(newBomb);
     return true;
