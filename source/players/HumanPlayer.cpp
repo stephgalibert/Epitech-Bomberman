@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Sun Jun  5 03:36:16 2016 stephane galibert
+// Last update Sun Jun  5 11:26:42 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -542,7 +542,7 @@ int bbman::HumanPlayer::getScoreValue(void) const
 
 std::string const& bbman::HumanPlayer::getDifficulty(void) const
 {
-
+  return (this->_difficutly);
 }
 
 void bbman::HumanPlayer::finalPosition(void)

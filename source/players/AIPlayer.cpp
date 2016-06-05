@@ -120,7 +120,7 @@ void bbman::AIPlayer::init(Irrlicht &irr, int difficulty, std::string const& col
 
     try {
       if (!SoundCache.find("death")) {
-	SoundCache.insert("death", MemoryFile("./asset/sound/deathia.wav"));
+	SoundCache.insert("death", MemoryFile("./asset/sound/death.wav"));
 	SoundCache["death"].load();
       }
       this->_sounds.addSample("death", SoundCache["death"]);

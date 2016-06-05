@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Sun Jun  5 03:35:57 2016 stephane galibert
+// Last update Sun Jun  5 11:26:11 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -106,6 +106,7 @@ namespace bbman
     int _deviceID;
     SoundBox _sounds;
     bool _final;
+    std::string _difficutly;
   };
 }
 
