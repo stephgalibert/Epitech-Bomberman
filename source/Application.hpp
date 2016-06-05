@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May  4 15:36:32 2016 stephane galibert
-// Last update Fri Jun  3 11:03:05 2016 avelin_j
+// Last update Sun Jun  5 14:43:13 2016 stephane galibert
 //
 
 #ifndef _APPLICATION_HPP_
@@ -17,6 +17,9 @@
 # include "Game.hpp"
 # include "InputListener.hpp"
 # include "ApplicationState.hpp"
+# include "SoundBox.hpp"
+# include "CacheManager.hpp"
+# include "MemoryFile.hpp"
 
 namespace bbman
 {
@@ -33,15 +36,18 @@ namespace bbman
     bool testGetClose(void) const;
     ApplicationState testGetApplicationState(void) const;
   private:
+    static CacheManager<std::string, MemoryFile> SoundCache;
+  private:
     void update_game(irr::f32 delta);
     void update_menu(irr::f32 delta);
     void goToMenu(void);
     void goToGame(void);
     Irrlicht *_irr;
-    //Menu *_menu;
     layout *_menu;
     Game *_game;
     bool _close;
+    MusicBox _musics;
+    MemoryFile _musicBackground;
     InputListener _inputListener;
     irr::core::array<irr::SJoystickInfo> _joystickInfo;
     tools::Chronometer _timer;

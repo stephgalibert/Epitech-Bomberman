@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:33:40 2016 avelin_j
-// Last update Sun Jun  5 12:37:19 2016 stephane galibert
+// Last update Sun Jun  5 14:54:33 2016 stephane galibert
 //
 
 #include "Application.hpp"
@@ -43,11 +43,23 @@ void bbman::Application::init(void)
     this->_irr->getDevice()->getCursorControl()->setVisible(true);
     this->_irr->getDevice()->activateJoysticks(this->_joystickInfo);
 
-    this->_irr->getDevice()->setWindowCaption(L"Bomberman");
+    this->_irr->getDevice()->setWindowCaption(L"Indeed - Bomberman");
     this->_menu = new layout(this->_irr->getDevice());
     this->_menu->setGamepads(this->_joystickInfo);
     tools::StaticTools::volume("music", 50);
     tools::StaticTools::volume("effect", 50);
+
+
+    this->_musicBackground.filename = "./asset/sample/12EndOfLine.wav";
+    try {
+      this->_musicBackground.load();
+      this->_musics.addSample("mbackground", this->_musicBackground);
+      this->_musics.setLoop("mbackground", true);
+      this->_musics.setVolumeBySample("mbackground", tools::StaticTools::volume("music"));
+    } catch (std::runtime_error const& e) {
+      std::cerr << e.what() << std::endl;
+  }
+
     goToMenu();
   } catch (std::runtime_error const& e) {
     throw (e);
@@ -140,6 +152,7 @@ void bbman::Application::goToMenu(void)
       delete (this->_game);
       this->_game = NULL;
     }
+    this->_musics.play("mbackground");
     this->_menu->backToMenu();
   }
 }
@@ -150,6 +163,7 @@ void bbman::Application::goToGame(void)
     this->_as = bbman::ApplicationState::AS_GAME;
     this->_game = new Game;
     try {
+      this->_musics.stop("mbackground");
       if  (this->_menu && !this->_menu->getSaveName().empty()) {
 	this->_game->init(*this->_irr, this->_menu, this->_menu->getSaveName());
 	this->_menu->resetSaveName();

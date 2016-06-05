@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:38:22 2016 avelin_j
-// Last update Sun Jun  5 13:05:52 2016 stephane galibert
+// Last update Sun Jun  5 14:46:47 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_

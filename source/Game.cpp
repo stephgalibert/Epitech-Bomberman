@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:39:40 2016 avelin_j
-// Last update Sun Jun  5 13:14:08 2016 stephane galibert
+// Last update Sun Jun  5 14:51:39 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -242,7 +242,7 @@ void bbman::Game::initCamera(bbman::Irrlicht &irr)
 
 void bbman::Game::initSound(void)
 {
-  this->_musicBackground.filename = "./asset/sample/TronLegacy.wav";
+  this->_musicBackground.filename = "./asset/sample/Derezzed.wav";
   try {
     this->_musicBackground.load();
     this->_musics.addSample("mbackground", this->_musicBackground);
