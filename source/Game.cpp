@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:39:40 2016 avelin_j
-// Last update Sun Jun  5 01:29:47 2016 stephane galibert
+// Last update Sun Jun  5 02:03:29 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -280,7 +280,7 @@ void bbman::Game::createPlayers(Irrlicht &irr)
       color = "Purple";
     if (data[i] == -1) {
       AIPlayer *ai = new AIPlayer;
-      ai->init(irr, color);
+      ai->init(irr, this->_layout->getIADifficulty(), color);
       ai->setPosition(this->_board->getSpawnPosition(i));
       this->_board->addPlayer(ai);
     } else {

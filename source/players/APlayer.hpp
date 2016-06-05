@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Tue May 24 22:28:29 2016 stephane galibert
-// Last update Sat Jun  4 18:07:46 2016 stephane galibert
+// Last update Sun Jun  5 02:02:07 2016 stephane galibert
 //
 
 #ifndef _APLAYER_HPP_
@@ -65,6 +65,7 @@ namespace bbman
     virtual int getDeviceID(void) const = 0;
     virtual void disableAnimation(void) = 0;
     virtual int getScoreValue(void) const = 0;
+    virtual std::string const& getDifficulty(void) const = 0;
     void setMood(int Mood);
     int getMood() const;
     std::string const& getUsername(void) const;
@@ -101,7 +102,7 @@ namespace bbman
       rotation = std::to_string(player.getRotation());
     }
     flux << "PID:" << player.getAPlayerID() << " " << player.getDeviceID()
-	 << " " << player.getColor() << ";name:" << username
+	 << " " << player.getColor() << " " << player.getDifficulty() << ";name:" << username
 	 << ";id:" << id << ";pos:"
 	 << position << ";score:" << score << ";alive:" << alive << ";"
 	 << "rot:" << rotation << ";"

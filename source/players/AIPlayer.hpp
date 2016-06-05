@@ -35,7 +35,7 @@ namespace bbman
     virtual ~AIPlayer(void);
     virtual size_t getAPlayerID(void) const;
     virtual void init(Irrlicht &irr, std::string const& color = "");
-    virtual void init(Irrlicht &irr, int deviceID, std::string const& color = "");
+    virtual void init(Irrlicht &irr, int difficulty, std::string const& color = "");
     virtual void update(Irrlicht &irr, irr::f32 delta);
     virtual void play(Irrlicht &irr, Board *board);
     virtual void addBomb(IBomb *bomb);
@@ -65,6 +65,7 @@ namespace bbman
     virtual int getDeviceID(void) const;
     virtual void disableAnimation(void);
     virtual int getScoreValue(void) const;
+    virtual std::string const& getDifficulty(void) const;
   private:
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:
@@ -95,8 +96,8 @@ namespace bbman
     bbman::Binding _binding;
     std::string _color;
     irr::f32 _delta;
-    int _deviceID;
     SoundBox _sounds;
+    std::string _difficulty;
   };
 }
 

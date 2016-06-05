@@ -28,7 +28,6 @@ bbman::AIPlayer::AIPlayer(void)
   this->_speed     = INITIAL_SPEED;
   this->_direction = Direction::DIR_NONE;
   this->_action = Action::ACT_NONE;
-  this->_deviceID = 0;
   this->_anim = true;
 }
 
@@ -57,7 +56,7 @@ void bbman::AIPlayer::init(bbman::Irrlicht& irr, std::string const& color)
     std::string fbx = "./asset/perso/perso.fbx";
     std::string diffuse = "./asset/perso/texture/diffuse/" + this->_color + ".png";
     this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(fbx.data()));
-    this->_binding.init("../source/binding/script.lua");
+    this->_binding.init("./asset/scriptAI/iahard.lua");
     if (this->_mesh) {
       this->_mesh->setMaterialTexture(0, irr.getTexture(diffuse.data()));
       this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
@@ -87,27 +86,47 @@ void bbman::AIPlayer::init(bbman::Irrlicht& irr, std::string const& color)
   }
 }
 
-void bbman::AIPlayer::init(bbman::Irrlicht& irr, int deviceID,
-			   std::string const& color)
+void bbman::AIPlayer::init(Irrlicht &irr, int difficulty, std::string const& color)
 {
+  IBomb *bomb = NULL;
+
   try {
     this->_color = color;
+    if (difficulty == 1)
+      this->_difficulty = "easy";
+    else if (difficulty == 2)
+      this->_difficulty = "middle";
+    else
+      this->_difficulty = "hard";
+    std::cout << "IA load: " << this->_difficulty << std::endl;
     std::string fbx = "./asset/perso/perso.fbx";
     std::string diffuse = "./asset/perso/texture/diffuse/" + this->_color + ".png";
-    this->_deviceID = deviceID;
     this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(fbx.data()));
-    this->_binding.init("../source/binding/script.lua");
+    this->_binding.init("./asset/scriptAI/ia" + this->_difficulty + ".lua");
     if (this->_mesh) {
       this->_mesh->setMaterialTexture(0, irr.getTexture(diffuse.data()));
       this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
-      this->_mesh->setScale(irr::core::vector3df(0.8f, 0.8f, 0.8f));
       this->_mesh->setAnimationSpeed(0);
+      this->_mesh->setScale(irr::core::vector3df(.8f, .8f, .8f));
       this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
     } else {
       throw(std::runtime_error("can not create ai " + std::to_string(this->_playerNum)));
     }
-    addBomb(new ExplodingBomb(this));
+    bomb = new ExplodingBomb(this);
+    bomb->setColor(color);
+    addBomb(bomb);
     this->_alive = true;
+
+    try {
+      if (!SoundCache.find("death")) {
+	SoundCache.insert("death", MemoryFile("./asset/sound/deathia.wav"));
+	SoundCache["death"].load();
+      }
+      this->_sounds.addSample("death", SoundCache["death"]);
+      this->_sounds.setVolumeBySample("death", tools::StaticTools::volume("effect"));
+    } catch (std::runtime_error const& e) {
+      std::cerr << e.what() << std::endl;
+    }
   } catch (std::runtime_error const& e) {
     throw(e);
   }
@@ -403,12 +422,12 @@ size_t bbman::AIPlayer::getPlayerNumber(void) const
 
 void bbman::AIPlayer::setDeviceID(int id)
 {
-  this->_deviceID = 0;
+  (void)id;
 }
 
 int bbman::AIPlayer::getDeviceID(void) const
 {
-  return (this->_deviceID);
+  return (0);
 }
 
 void bbman::AIPlayer::disableAnimation(void)
@@ -419,4 +438,9 @@ void bbman::AIPlayer::disableAnimation(void)
 int bbman::AIPlayer::getScoreValue(void) const
 {
   return (10);
+}
+
+std::string const& bbman::AIPlayer::getDifficulty(void) const
+{
+  return (this->_difficulty);
 }
