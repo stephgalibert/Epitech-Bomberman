@@ -10,7 +10,10 @@
 #ifndef RANKINGSCENE_HPP
 #define RANKINGSCENE_HPP
 
+#include <fstream>
 #include "ASubLayout.hpp"
+
+#define FILE_NAME "./score.txt"
 
 class rankingScene : public ASubLayout
 {
@@ -24,7 +27,8 @@ public:
   void manageEvent(bbman::InputListener& listener);
 
   void loadRessources(void);
-  void createLabel(int id, int score);
+  void createLabel(int id, const std::string &score);
+  void loadScoreFromFile(void);
 };
 
 #endif // ifndef RANKINGSCENE_HPP

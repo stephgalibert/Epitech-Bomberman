@@ -18,6 +18,8 @@
 #include "controlsScene.hpp"
 #include "lobbyScene.hpp"
 #include "creditScene.hpp"
+#include "splashArtScene.hpp"
+#include "endGameScene.hpp"
 #include "rankingScene.hpp"
 #include "replayScene.hpp"
 #include "echapScene.hpp"
@@ -52,7 +54,13 @@ public:
   void setTimerTimeout(int value);
 
   void loadHUD(void);
+  std::string const& getSaveName(void) const;
+  void resetSaveName(void);
 
+  void setDraw(void);
+  void setVictory(void);
+  void loadEndScene(void);
+  bool isInGame(void) const;
 private:
 
   void loadScene();
@@ -64,6 +72,8 @@ private:
 
   std::string _currentScene;
   irr::IrrlichtDevice *_device;
+  replayScene *_replay;
+  endGameScene *_endGame;
 };
 
 #endif // ifndef LAYOUT_HPP_

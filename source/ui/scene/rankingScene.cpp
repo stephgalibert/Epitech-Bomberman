@@ -22,11 +22,11 @@ void rankingScene::loadRessources()
   this->_ui.load(ui::FONT, MEDIAPATH "lobby/calibri26.bmp", "calibri26");
 }
 
-void rankingScene::createLabel(int id, int score)
+void rankingScene::createLabel(int id, const std::string &score)
 {
   this->_ui.create<text>("labeL" + std::to_string(id))
   .font(this->_ui.getFont("calibri26"))
-  .msg(std::to_string(score))
+  .msg(score)
   .at(575, 335 + 48 * id);
 }
 
@@ -49,9 +49,20 @@ void rankingScene::loadScene()
 
   this->_ui.create<image>("labelHighscore")
   .texture(this->_ui.getTexture("label"));
+  this->loadScoreFromFile();
+}
 
-  for (uint64_t i = 0; i < 10; i++) {
-    this->createLabel(i, 0);
+void rankingScene::loadScoreFromFile()
+{
+  std::ifstream rankingStream(FILE_NAME);
+  std::string   line;
+  int   i = 0;
+
+  if (rankingStream.is_open()) {
+    while (std::getline(rankingStream, line) && i < 10) {
+      this->createLabel(i++, line);
+    }
+    rankingStream.close();
   }
 }
 

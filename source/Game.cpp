@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:39:40 2016 avelin_j
-// Last update Sun Jun  5 03:39:35 2016 stephane galibert
+// Last update Sun Jun  5 13:14:08 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -19,6 +19,7 @@ bbman::Game::Game(void)
   this->_delta = 0;
   this->_pause = false;
   this->_delta_pause = 0;
+  this->_endscene = true;
 }
 
 bbman::Game::~Game(void)
@@ -80,6 +81,7 @@ bool bbman::Game::input(InputListener &inputListener)
     return (true);
   }
   else {
+    this->_layout->input(inputListener);
     this->_board->input(inputListener);
   }
   return (false);
@@ -100,7 +102,7 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
     }
     this->_layout->resetPauseMenu();
   } else if (this->_board->hasWinners()) {
-    // ...
+    displayEnd(0);
     APlayer *winner = this->_board->getWinner();
     irr::core::vector3df const& npos = winner->getPosition();
     cameraTargetSmoothAnimation(delta, this->_camera->getTarget(), npos);
@@ -109,9 +111,12 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
       irr::core::vector3df fpos(npos.X, npos.Y + 50, npos.Z - 60);
       cameraPositionSmoothAnimation(delta, this->_camera->getPosition(), fpos);
     }
+    if (!this->_layout->isInGame())
+      this->_leaveGame = true;
   } else if (this->_board->isNoPlayer()) {
-    std::cout << "no player left" << std::endl;
-    this->_leaveGame = true;
+    displayEnd(1);
+    if (!this->_layout->isInGame())
+      this->_leaveGame = true;
   } else {
     this->_board->update(irr, delta);
     this->_timeout->update(irr, delta);
@@ -146,6 +151,19 @@ irr::f32 bbman::Game::getDelta(void) const
 void bbman::Game::setDelta(irr::f32 delta)
 {
   this->_delta = delta;
+}
+
+void bbman::Game::displayEnd(int n)
+{
+  if (this->_endscene) {
+    this->_layout->loadEndScene();
+    if (n == 0) {
+      this->_layout->setVictory();
+    } else if (n == 1) {
+      this->_layout->setDraw();
+    }
+  }
+  this->_endscene = false;
 }
 
 void bbman::Game::cameraPositionSmoothAnimation(irr::f32 delta,
@@ -260,8 +278,7 @@ void bbman::Game::saveScore(void)
 
   HighScore::loadScoreFromFile("score.txt", ranking);
   for (auto it : players) {
-    HighScore::saveNewHighScore(ranking, std::to_string(it->getID()),
-				it->getScore());
+    HighScore::saveNewHighScore(ranking, "", it->getScore());
   }
   HighScore::saveScoreInFile("score.txt", ranking);
 }

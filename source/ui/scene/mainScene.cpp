@@ -75,7 +75,7 @@ void mainScene::createLabel()
   this->_ui.get<text>("label").setMsg("   Tips", "tips");
   this->_ui.get<text>("label").setMsg("  Credit", "credit");
   this->_ui.get<text>("label").setMsg(" Ranking", "ranking");
-  this->_ui.get<text>("label").setMsg(" Replay", "replay");
+  this->_ui.get<text>("label").setMsg("  Replay", "replay");
 }
 
 void mainScene::createAlveole(int x, int y, const std::string &name)
@@ -109,7 +109,7 @@ void mainScene::loadScene()
 
   this->_ui.create<image>("exit")
   .texture(this->_ui.getTexture("exit"))
-    .at(1810, 0); // !
+    .at(1810, 0);
 
   this->_ui["exit"].in("hover")
   .color(0, 250, 250)

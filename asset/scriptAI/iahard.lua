@@ -20,7 +20,6 @@ ai = function(id)
           retups = findPath(id, Fpowerups)
           retbox = findPath(id, Fbox)
           retsafe = findPath(id, Fsafe)
---          retplayer = findPath(id, Fplayer)
           r["move"] = retups["dir"]
           if retups["dir"] > 0 then
             if (directionIsSafe(id, retups["dir"]) == 1) then r["move"] = 0 end

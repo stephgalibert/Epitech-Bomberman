@@ -11,36 +11,47 @@
 
 layout::layout(irr::IrrlichtDevice *device)
 {
-  this->_ui           = new ui(device);
+  this->_ui          = new ui(device);
   this->_device       = device;
   this->_currentScene = "main";
   this->loadScene();
+  this->_ui->changeScene("splashArt");
 }
 
 layout::~layout() {}
 
 void layout::loadScene()
 {
-  this->_scene["default"]  = new mainScene(*this->_ui);
-  this->_scene["settings"] = new settingsScene(*this->_ui);
-  this->_scene["controls"] = new controlsScene(*this->_ui);
-  this->_echap = new echapScene(*this->_ui);
-  this->_scene["echap"] = this->_echap;
-  this->_scene["credit"]   = new creditScene(*this->_ui);
-  this->_scene["ranking"]  = new rankingScene(*this->_ui);
-  this->_scene["replay"]   = new replayScene(*this->_ui);
-  this->_scene["tips"]   = new tipsScene(*this->_ui);
-  this->_scene["lobby"]    = new lobbyScene(*this->_ui);
-  this->_game              = new gameScene(*this->_ui);
-  this->_scene["game"]     = this->_game;
+  this->_scene["default"]   = new mainScene(*this->_ui);
+  this->_scene["settings"]  = new settingsScene(*this->_ui);
+  this->_scene["controls"]  = new controlsScene(*this->_ui);
+  this->_endGame = new endGameScene(*this->_ui);
+  this->_scene["endGame"]   = this->_endGame;
+  this->_echap              = new echapScene(*this->_ui);
+  this->_scene["echap"]     = this->_echap;
+  this->_scene["credit"]    = new creditScene(*this->_ui);
+  this->_scene["ranking"]   = new rankingScene(*this->_ui);
+  this->_scene["splashArt"] = new splashArtScene(*this->_ui);
+  this->_replay = new replayScene(*this->_ui);
+  this->_scene["replay"]    = this->_replay;
+
+  this->_scene["tips"]      = new tipsScene(*this->_ui);
+  this->_scene["lobby"]     = new lobbyScene(*this->_ui);
+  this->_game               = new gameScene(*this->_ui);
+  this->_scene["game"]      = this->_game;
 }
 
 const std::string& layout::display()
 {
-  if (this->_currentScene != this->_ui->getScene()) {
-    this->_currentScene = this->_ui->getScene();
-    this->_scene[this->_currentScene]->loadRessources();
+  if (this->_currentScene == "main") {
+    this->_currentScene = "splashArt";
     this->_scene[this->_currentScene]->initScene();
+    this->_scene[this->_currentScene]->loadRessources();
+    this->_scene[this->_currentScene]->loadScene();
+  } else if (this->_currentScene != this->_ui->getScene()) {
+    this->_currentScene = this->_ui->getScene();
+    this->_scene[this->_currentScene]->initScene();
+    this->_scene[this->_currentScene]->loadRessources();
     this->_scene[this->_currentScene]->loadScene();
   }
   return this->_scene[this->_currentScene]->display();
@@ -77,10 +88,11 @@ std::vector<int>const& layout::getDevices(void) const
 
 bool layout::isGameStarted(void) const
 {
-  if (this->_scene.find(this->_currentScene) != this->_scene.cend()) {
-    return this->_scene.at(this->_currentScene)->isGameStarted();
+  if (!getSaveName().empty()) {
+    return (true);
+  } else if (this->_scene.find(this->_currentScene) != this->_scene.cend()) {
+    return (this->_scene.at(this->_currentScene)->isGameStarted());
   }
-  return false;
 }
 
 void layout::backToMenu(void)
@@ -88,6 +100,11 @@ void layout::backToMenu(void)
   this->_scene.at("lobby")->setStartGame(false);
   this->_scene.at("default")->setNextScene("default");
   this->_ui->changeScene("default");
+}
+
+bool layout::isInGame(void) const
+{
+  return (this->_currentScene != "lobby" && this->_currentScene != "default");
 }
 
 std::vector<std::pair<std::string, int> >const layout::getVolume(void) const
@@ -170,4 +187,33 @@ void layout::loadHUD(void)
   this->_scene[this->_currentScene]->loadRessources();
   this->_scene[this->_currentScene]->initScene();
   this->_scene[this->_currentScene]->loadScene();
+}
+
+void layout::setDraw(void)
+{
+  this->_endGame->setDraw();
+}
+
+void layout::setVictory(void)
+{
+  this->_endGame->setVictory();
+}
+
+void layout::loadEndScene(void)
+{
+  this->_ui->changeScene("endGame");
+  this->_currentScene = "endGame";
+  this->_scene[this->_currentScene]->loadRessources();
+  this->_scene[this->_currentScene]->initScene();
+  this->_scene[this->_currentScene]->loadScene();
+}
+
+std::string const& layout::getSaveName(void) const
+{
+  return (this->_replay->getSaveName());
+}
+
+void layout::resetSaveName(void)
+{
+  this->_replay->resetSaveName();
 }

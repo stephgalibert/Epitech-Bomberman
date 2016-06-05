@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:38:22 2016 avelin_j
-// Last update Sat Jun  4 23:39:21 2016 avelin_j
+// Last update Sun Jun  5 13:05:52 2016 stephane galibert
 //
 
 #ifndef _GAME_HPP_
@@ -57,7 +57,7 @@ namespace bbman
     void initSound(void);
     void updateBombs(Irrlicht &irr, irr::f32 delta);
     void updatePlayers(Irrlicht &irr, irr::f32 delta);
-
+    void displayEnd(int n);
     void save(std::string const& fname);
     void saveScore(void);
     void createPlayers(Irrlicht &irr);
@@ -73,6 +73,7 @@ namespace bbman
     irr::f32 _delta;
     irr::f32 _delta_pause;
     bool _pause;
+    bool _endscene;
   };
 }
 

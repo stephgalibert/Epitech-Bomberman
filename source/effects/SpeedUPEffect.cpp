@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sun Jun  5 00:02:44 2016 avelin_j
-// Last update Sun Jun  5 00:02:46 2016 avelin_j
+// Last update Sun Jun  5 11:54:23 2016 stephane galibert
 //
 
 #include "SpeedUPEffect.hpp"
@@ -20,17 +20,11 @@ bbman::SpeedUPEffect::SpeedUPEffect(bbman::APlayer *player)
 
 bbman::SpeedUPEffect::~SpeedUPEffect(void)
 {
-  /*if (this->_enabled) {
-    this->_target->setSpeed(bbman::APlayer::INITIAL_SPEED);
-    }*/
+
 }
 
 void bbman::SpeedUPEffect::update(irr::f32 delta)
 {
-  /*this->_delta += delta;
-  if (this->_delta > DURATION) {
-    this->_isFinished = true;
-    }*/
   (void)delta;
 }
 
@@ -45,7 +39,7 @@ void bbman::SpeedUPEffect::enable(void)
     this->_enabled = true;
     size_t speed = this->_target->getSpeed();
     if (speed == bbman::APlayer::INITIAL_SPEED) {
-      this->_target->setSpeed(bbman::APlayer::INITIAL_SPEED * 1.5f);
+      this->_target->setSpeed(bbman::APlayer::INITIAL_SPEED * 1.25f);
     }
   }
 }

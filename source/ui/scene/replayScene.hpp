@@ -11,6 +11,7 @@
 #define REPLAYSCENE_HPP
 
 #include "ASubLayout.hpp"
+#include "SaveInfo.hpp"
 
 class replayScene : public ASubLayout
 {
@@ -24,6 +25,12 @@ public:
   void manageEvent(bbman::InputListener &listener);
 
   void loadRessources(void);
+  std::string const& getSaveName(void) const;
+  void resetSaveName(void);
+private:
+  std::string _name;
+  bbman::SaveInfo _info;
+  bool            _hasSave;
 };
 
 #endif
