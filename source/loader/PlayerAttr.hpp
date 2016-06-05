@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:03:57 2016 stephane galibert
-// Last update Sat Jun  4 10:05:56 2016 stephane galibert
+// Last update Sun Jun  5 16:03:14 2016 stephane galibert
 //
 
 #ifndef _PLAYERATTR_HPP_
@@ -18,6 +18,7 @@
 # include <algorithm>
 # include <iterator>
 # include <sstream>
+# include <stdexcept>
 
 # include "Irrlicht.hpp"
 # include "APlayer.hpp"

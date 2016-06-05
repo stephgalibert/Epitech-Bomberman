@@ -128,8 +128,8 @@ void bbman::AIPlayer::init(Irrlicht &irr, int difficulty, std::string const& col
     } catch (std::runtime_error const& e) {
       std::cerr << e.what() << std::endl;
     }
-  } catch (std::runtime_error const& e) {
-    throw(e);
+  } catch (...) {
+    std::cerr << "lua error" << std::endl;
   }
 }
 

@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sun Jun  5 00:04:09 2016 avelin_j
-// Last update Sun Jun  5 15:23:00 2016 stephane galibert
+// Last update Sun Jun  5 16:45:32 2016 stephane galibert
 //
 
 #include "Board.hpp"
@@ -58,8 +58,12 @@ void bbman::Board::init(bbman::Irrlicht& irr)
   this->_irr = &irr;
   initMap();
   initNode();
-  initTerrain(irr);
-  initMesh(irr);
+  try {
+    initTerrain(irr);
+    initMesh(irr);
+  } catch (std::runtime_error const& e) {
+    std::cerr << e.what() << std::endl;
+  }
   this->_spawn[0] = irr::core::vector3df(170.f, 0.f, 110.f);
   this->_spawn[1] = irr::core::vector3df(170.f, 0.f, 10.f);
   this->_spawn[2] = irr::core::vector3df(10.f, 0.f, 10.f);
@@ -79,8 +83,12 @@ void bbman::Board::init(bbman::Irrlicht& irr, bbman::Loader const& loader)
   }
   this->_irr = &irr;
   initNode();
-  initTerrain(irr);
-  initMesh(irr);
+  try {
+    initTerrain(irr);
+    initMesh(irr);
+  } catch (std::runtime_error const& e) {
+    std::cerr << e.what() << std::endl;
+  }
   this->_spawn[0] = irr::core::vector3df(170.f, 0.f, 110.f);
   this->_spawn[1] = irr::core::vector3df(170.f, 0.f, 10.f);
   this->_spawn[2] = irr::core::vector3df(10.f, 0.f, 10.f);
@@ -223,13 +231,18 @@ bool bbman::Board::addBomb(IBomb *newBomb)
 
 void bbman::Board::setPosition(irr::core::vector3df const& pos)
 {
-  this->_backgroundMesh->setPosition(pos);
-  this->_backgroundMesh->updateAbsolutePosition();
+  if (this->_backgroundMesh) {
+    this->_backgroundMesh->setPosition(pos);
+    this->_backgroundMesh->updateAbsolutePosition();
+  }
 }
 
 irr::core::vector3df const& bbman::Board::getPosition(void) const
 {
-  return this->_backgroundMesh->getPosition();
+  if (this->_backgroundMesh) {
+    return this->_backgroundMesh->getPosition();
+  }
+  throw (std::runtime_error("no background"));
 }
 
 irr::core::vector3df const& bbman::Board::getSpawnPosition(size_t num) const
@@ -497,6 +510,9 @@ void bbman::Board::initTerrain(Irrlicht& irr)
 {
   std::string txt = "./asset/Ground.obj";
   this->_backgroundMesh = irr.getSmgr()->addMeshSceneNode(irr.getMesh(txt.data()));
+  if (!this->_backgroundMesh) {
+    throw (std::runtime_error("can not load ground"));
+  }
   this->_backgroundMesh->setMaterialTexture(0, irr.getTexture("./asset/Texture_ground.png"));
   this->_backgroundMesh->setMaterialTexture(1, irr.getTexture("./asset/Texture_ground_illum.png"));
   this->_backgroundMesh->setMaterialType(irr::video::EMT_LIGHTMAP_ADD);
@@ -743,7 +759,6 @@ void bbman::Board::buildBrkable(Irrlicht& irr, size_t x, size_t y)
   pos.X = x * this->_scale.X + (this->_scale.X / 2);
   pos.Z = y * this->_scale.Z + (this->_scale.Z / 2);
   try {
-
     if (x < 9 && y < 6) {
       block->init(irr, "Green");
     } else if (x > 9 && y < 6) {

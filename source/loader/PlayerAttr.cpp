@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Wed May 25 20:06:55 2016 stephane galibert
-// Last update Sun Jun  5 02:13:53 2016 stephane galibert
+// Last update Sun Jun  5 16:07:14 2016 stephane galibert
 //
 
 #include "PlayerAttr.hpp"
@@ -60,8 +60,14 @@ void bbman::PlayerAttr::setPlayerID(APlayer **player, Irrlicht &irr,
   if (tokens.size() > 0) {
     if (tokens[0] == "1") {
       *player = new HumanPlayer;
-      (*player)->init(irr, (tokens.size() > 1) ? std::stoi(tokens[1]) : 0,
-		      (tokens.size() > 2) ? tokens[2] : "");
+      try {
+	(*player)->init(irr, (tokens.size() > 1) ? std::stoi(tokens[1]) : 0,
+			(tokens.size() > 2) ? tokens[2] : "");
+      } catch (std::runtime_error const& e) {
+	std::cerr << e.what() << std::endl;
+	delete (*player);
+	*player = NULL;
+      }
     }
     else if (tokens[0] == "0") {
       *player = new AIPlayer;
@@ -73,7 +79,13 @@ void bbman::PlayerAttr::setPlayerID(APlayer **player, Irrlicht &irr,
 	difficulty = 2;
       else if (tok == "hard")
 	difficulty = 3;
-      (*player)->init(irr, difficulty, (tokens.size() > 2) ? tokens[2] : "");
+      try {
+	(*player)->init(irr, difficulty, (tokens.size() > 2) ? tokens[2] : "");
+      } catch (std::runtime_error const& e) {
+	std::cerr << e.what() << std::endl;
+	delete (*player);
+	(*player) = NULL;
+      }
     }
   }
 }

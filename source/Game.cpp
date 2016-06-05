@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:39:40 2016 avelin_j
-// Last update Sun Jun  5 14:51:39 2016 stephane galibert
+// Last update Sun Jun  5 16:43:38 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -234,10 +234,17 @@ void bbman::Game::initCamera(bbman::Irrlicht &irr)
 {
   irr::core::vector3df pos;
 
-  pos = this->_board->getPosition();
-  this->_camera = irr.getSmgr()->addCameraSceneNode();
-  this->_camera->setTarget(irr::core::vector3df(pos.X, pos.Y, pos.Z));
-  this->_camera->setPosition(irr::core::vector3df(pos.X, pos.Y + 120, 10));
+  try {
+    pos = this->_board->getPosition();
+    this->_camera = irr.getSmgr()->addCameraSceneNode();
+    this->_camera->setTarget(irr::core::vector3df(pos.X, pos.Y, pos.Z));
+    this->_camera->setPosition(irr::core::vector3df(pos.X, pos.Y + 120, 10));
+  } catch (std::runtime_error const& e) {
+    std::cerr << e.what() << std::endl;
+    this->_camera = irr.getSmgr()->addCameraSceneNode();
+    this->_camera->setTarget(irr::core::vector3df(90, 0, 60));
+    this->_camera->setPosition(irr::core::vector3df(60, 120, 10));
+  }
 }
 
 void bbman::Game::initSound(void)
@@ -299,14 +306,24 @@ void bbman::Game::createPlayers(Irrlicht &irr)
       color = "Purple";
     if (data[i] == -1) {
       AIPlayer *ai = new AIPlayer;
-      ai->init(irr, this->_layout->getIADifficulty(), color);
-      ai->setPosition(this->_board->getSpawnPosition(i));
-      this->_board->addPlayer(ai);
+      try {
+	ai->init(irr, this->_layout->getIADifficulty(), color);
+	ai->setPosition(this->_board->getSpawnPosition(i));
+	this->_board->addPlayer(ai);
+      } catch (std::runtime_error const& e) {
+	std::cerr << e.what() << std::endl;
+	delete (ai);
+      }
     } else {
       HumanPlayer *p1 = new HumanPlayer;
-      p1->init(irr, data[i], color);
-      p1->setPosition(this->_board->getSpawnPosition(i));
-      this->_board->addPlayer(p1);
+      try {
+	p1->init(irr, data[i], color);
+	p1->setPosition(this->_board->getSpawnPosition(i));
+	this->_board->addPlayer(p1);
+      } catch (std::runtime_error const& e) {
+	std::cerr << e.what() << std::endl;
+	delete (p1);
+      }
     }
   }
 }

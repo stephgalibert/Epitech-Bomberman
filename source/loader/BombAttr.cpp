@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Thu May 26 11:32:16 2016 stephane galibert
-// Last update Sun Jun  5 13:39:03 2016 stephane galibert
+// Last update Sun Jun  5 16:09:04 2016 stephane galibert
 //
 
 #include "BombAttr.hpp"
@@ -58,7 +58,13 @@ void bbman::BombAttr::setBombID(IBomb **bomb, std::vector<APlayer *> &player,
   if (tokens.size() > 0) {
     if (tokens[0] == "1") {
       *bomb = new ExplodingBomb(NULL);
-      (*bomb)->init(irr, (tokens.size() > 1) ? tokens[1] : "");
+      try {
+	(*bomb)->init(irr, (tokens.size() > 1) ? tokens[1] : "");
+      } catch (std::runtime_error const& e) {
+	std::cerr << e.what() << std::endl;
+	delete (*bomb);
+	*bomb = NULL;
+      }
     }
   }
 }

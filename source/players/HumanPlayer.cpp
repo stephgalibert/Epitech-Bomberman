@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Sun Jun  5 15:19:51 2016 stephane galibert
+// Last update Sun Jun  5 16:23:45 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -457,32 +457,32 @@ void bbman::HumanPlayer::deviceJoystick1(bbman::InputListener &listener)
 
 void bbman::HumanPlayer::deviceJoystick2(bbman::InputListener &listener)
 {
-    irr::SEvent::SJoystickEvent const& joy = listener.getJoystickState(1);
-    irr::f32 moveH = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_X] / 32767.f;
-    irr::f32 moveV = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_Y] / 32767.f;
-    if (std::fabs(moveH) < 0.50f) {
-      moveH = 0.f;
-    }
-    if (std::fabs(moveV) < 0.50f) {
-      moveV = 0.f;
-    }
+  irr::SEvent::SJoystickEvent const& joy = listener.getJoystickState(1);
+  irr::f32 moveH = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_X] / 32767.f;
+  irr::f32 moveV = joy.Axis[irr::SEvent::SJoystickEvent::AXIS_Y] / 32767.f;
+  if (std::fabs(moveH) < 0.50f) {
+    moveH = 0.f;
+  }
+  if (std::fabs(moveV) < 0.50f) {
+    moveV = 0.f;
+  }
 
-    if(moveV < 0.f) {
-      this->_direction = Direction::DIR_NORTH;
-    }
-    else if (moveV > 0.f) {
-      this->_direction = Direction::DIR_SOUTH;
-    }
-    else if (moveH < 0.f) {
-      this->_direction = Direction::DIR_WEST;
-    }
-    else if (moveH > 0.f) {
-      this->_direction = Direction::DIR_EAST;
-    }
+  if(moveV < 0.f) {
+    this->_direction = Direction::DIR_NORTH;
+  }
+  else if (moveV > 0.f) {
+    this->_direction = Direction::DIR_SOUTH;
+  }
+  else if (moveH < 0.f) {
+    this->_direction = Direction::DIR_WEST;
+  }
+  else if (moveH > 0.f) {
+    this->_direction = Direction::DIR_EAST;
+  }
 
-    if (joy.IsButtonPressed(1)) {
-      this->_action |= Action::ACT_BOMB;
-    }
+  if (joy.IsButtonPressed(1)) {
+    this->_action |= Action::ACT_BOMB;
+  }
 }
 
 void bbman::HumanPlayer::initPlayer(bbman::Irrlicht &irr)

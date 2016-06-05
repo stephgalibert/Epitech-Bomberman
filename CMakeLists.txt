@@ -23,6 +23,7 @@ add_compile_options(-std=c++11)
 add_compile_options(-Wall)
 add_compile_options(-Wextra)
 add_compile_options(-Werror)
+add_compile_options(-g)
 endif (UNIX)
 # configure a header file to pass some of the CMake settings to the source code
 configure_file (

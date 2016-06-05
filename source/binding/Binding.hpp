@@ -11,6 +11,7 @@
 
 #include <string>
 #include <iostream>
+#include <stdexcept>
 
 extern "C" {
 # include "lua.h"

@@ -8,12 +8,6 @@
 
 #include "Binding.hpp"
 
-/* Add function C++ to LUA */
-/* getGlobalNamespace(this->luaState).addFunction("nom de fonction", fonction);*/
-/* get function LUA to C++ */
-/* LuaRef function = getGlobal(this->luaState, "nom de fonction") */
-
-
 bbman::Binding::Binding(void)
 {
 
@@ -49,7 +43,7 @@ void bbman::Binding::init(const std::string &scriptName)
     .addFunction("iAmSafe", iAmSafe)
     .addFunction("directionIsSafe", directionIsSafe);
   }
-  catch (...){
-    std::cerr << "Erreur : Binding problem." << std::endl;
+  catch (luabridge::LuaException const& e) {
+    throw (e);
   }
 }

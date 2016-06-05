@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:59:35 2016 avelin_j
-// Last update Sun Jun  5 00:00:06 2016 avelin_j
+// Last update Sun Jun  5 16:08:00 2016 stephane galibert
 //
 
 #include "ExplodingBomb.hpp"
@@ -75,7 +75,7 @@ void bbman::ExplodingBomb::init(bbman::Irrlicht &irr, std::string const& color)
     this->_cbeam = new CenterBeam(irr, getRange());
     this->_cbeam->init(irr, color);
   } catch (std::runtime_error const& e) {
-    std::cerr << e.what() << std::endl;
+    throw (e);
   }
 }
 
@@ -185,19 +185,12 @@ void bbman::ExplodingBomb::initMesh(bbman::Irrlicht &irr)
 {
   std::string txt = "./asset/bomb/bomb.obj";
   std::string txtobj = "./asset/pillier/Texture_pillier_" + this->_color + ".png";
-  //std::string light = "./asset/pillier/Texture_pillier_Selfillum_" + _color + ".png";
-  //std::string alpha = "./asset/pillier/Texture_pillier_alpha_" + this->_color + ".png";
 
   this->_mesh = irr.getSmgr()->addMeshSceneNode(irr.getMesh(txt.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setMaterialTexture(0, irr.getTexture(txtobj.data()));
-    //this->_mesh->setMaterialTexture(1, irr.getTexture(light.data()));
-    //this->_mesh->setMaterialTexture(2, irr.getTexture(alpha.data()));
-    //this->_mesh->setMaterialTexture(2, irr.getTexture(alpha.data()));
     this->_mesh->setScale(irr::core::vector3df(1.8f, 1.8f, 1.8f));
-
-    //this->_mesh->setMaterialType(irr::video::EMT_LIGHTMAP_ADD);
   }
   else {
     throw (std::runtime_error("can not create exploding bomb"));
