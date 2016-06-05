@@ -1,11 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
   <Product Id="*" Name="Bomberman" Language="1033" Version="1.0.0.0" Manufacturer="Indeed Studio" UpgradeCode="75cdaecd-94e8-42d3-a0c6-b5203967a816">
-    <Package InstallerVersion="301" Compressed="yes" InstallScope="perMachine" />
-
+    <Package InstallerVersion="301" Compressed="yes" InstallPrivileges="elevated" InstallScope="perMachine" />
     <MajorUpgrade DowngradeErrorMessage="A newer version of [ProductName] is already installed." />
     <MediaTemplate />
-
+    <Property Id="MSIUSEREALADMINDETECTION" Value="1" />
     <Icon Id="icon.ico" SourceFile="../asset/installer/bomberman-icon.ico"/>
     <Property Id="ARPPRODUCTICON" Value="icon.ico" />
 

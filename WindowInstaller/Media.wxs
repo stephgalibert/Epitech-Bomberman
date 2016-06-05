@@ -2,778 +2,778 @@
 <Wix xmlns="http://schemas.microsoft.com/wix/2006/wi">
     <Fragment>
         <DirectoryRef Id="ASSETFOLDER">
-            <Component Id="cmp08D011F84926850A8E96AF0522D39D57" Guid="{F6D9D3D6-9557-4557-8AEB-EC5AF95A3EAF}">
+            <Component Id="cmp08D011F84926850A8E96AF0522D39D57" Guid="{4F6FCD30-644B-44F2-AC63-FD3400654B86}">
                 <File Id="fil78B7469E0E3A96F2BF04659442673764" KeyPath="yes" Source="$(env.mediaBomberman)\bomb2_normals.png" />
             </Component>
-            <Component Id="cmp55B3BC554391CFC345AF579405EFB6F7" Guid="{F5ED90D0-69DA-4A28-82F3-AB53E4FC88DE}">
+            <Component Id="cmp55B3BC554391CFC345AF579405EFB6F7" Guid="{2FF81FC5-8372-47E7-832B-74FE4493F381}">
                 <File Id="filEC45B55EE074E4BB48A6E8EFC6DFB790" KeyPath="yes" Source="$(env.mediaBomberman)\Ground.obj" />
             </Component>
-            <Component Id="cmpC3F549C48181D05D8B801BA756D476AF" Guid="{8C45FF63-4AC7-44F3-9B02-33D5AA4C7B40}">
+            <Component Id="cmpC3F549C48181D05D8B801BA756D476AF" Guid="{37ECC1EB-31DB-4561-9666-2CD926111CC4}">
                 <File Id="fil72FED7D735C60C423E2774DFB70C4180" KeyPath="yes" Source="$(env.mediaBomberman)\Texture_ground.png" />
             </Component>
-            <Component Id="cmpE723F3129D3FFE96C3CE98CA31AC915B" Guid="{23D884B6-8CE4-45B5-855D-DA4DCC47D7E1}">
+            <Component Id="cmpE723F3129D3FFE96C3CE98CA31AC915B" Guid="{323D39D0-78EA-4177-A45D-0A9B79652D02}">
                 <File Id="fil4D65B7090B3AA4BEF2E01AE993B8086E" KeyPath="yes" Source="$(env.mediaBomberman)\Texture_ground_illum.png" />
             </Component>
             <Directory Id="dir4EE7BC0439824FEB6DE350906CFA74C7" Name="Beam">
-                <Component Id="cmpCB3B4B431FA6DABA9EE77E28B89E6292" Guid="{B2F8FED6-0530-4FC2-8595-BE1B681F55C0}">
+                <Component Id="cmpCB3B4B431FA6DABA9EE77E28B89E6292" Guid="{14FFF5BC-CEF2-4F13-BD74-479EC90C1774}">
                     <File Id="fil8E6F9743EA708B45E7504279CBF8A3DD" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamBlue1.png" />
                 </Component>
-                <Component Id="cmp7B80B5D6B52F78B79A69942CAC79ADAC" Guid="{243502C5-0BD0-4C69-8318-C6B86033350B}">
+                <Component Id="cmp7B80B5D6B52F78B79A69942CAC79ADAC" Guid="{EE958D7A-EE63-4F28-B6D9-6BAC4C0BDAC2}">
                     <File Id="fil424C17512C44EC7629DB02BA06338EAF" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamBlue2.png" />
                 </Component>
-                <Component Id="cmp00647E1FF9359F15A8EF347CB0B92083" Guid="{4C92E819-BEED-4ED2-8DFE-EDE455FFF015}">
+                <Component Id="cmp00647E1FF9359F15A8EF347CB0B92083" Guid="{272E63A0-566E-41BE-92AF-D073BE4E18A1}">
                     <File Id="filF44E35D725E76FE0647E353E03DDFC33" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamBlue3.png" />
                 </Component>
-                <Component Id="cmp1BCFCA2FF6FBD60085A478EBB180E121" Guid="{1DE83291-BB4B-4DC2-B3D2-1AAF22F7727A}">
+                <Component Id="cmp1BCFCA2FF6FBD60085A478EBB180E121" Guid="{43B368B7-F1AE-4CC8-999E-492D84EA58F2}">
                     <File Id="filEFE8E6FFB65B0B6650509ACD30BDD90B" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamBlue4.png" />
                 </Component>
-                <Component Id="cmp263F6EA71B520A393EBF6B295E0371A2" Guid="{DA555213-B500-4644-885D-F7055E54F4AA}">
+                <Component Id="cmp263F6EA71B520A393EBF6B295E0371A2" Guid="{1632A871-3C60-413C-A6DC-160E3D9EB32C}">
                     <File Id="filB6BFEDD171060A851D1BE8195FC35CF7" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamBlue5.png" />
                 </Component>
-                <Component Id="cmp2D27690196EC21CB828E9E628D54298F" Guid="{FAD10F08-E182-47B2-A88C-9C554862CDCE}">
+                <Component Id="cmp2D27690196EC21CB828E9E628D54298F" Guid="{C21EDF29-63BA-4E4D-AAC4-AD55C383261D}">
                     <File Id="fil79B565FB8FDC041163266F8F8EBE284B" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamBlue6.png" />
                 </Component>
-                <Component Id="cmpAD12F6418339E52DEF742102565F75B1" Guid="{96D48A27-41A9-4898-9D05-874360886AC3}">
+                <Component Id="cmpAD12F6418339E52DEF742102565F75B1" Guid="{57D5DD12-8D7B-44E3-B995-3E98741BD9CD}">
                     <File Id="fil0A9349309765003DD72E3C55ED175A1A" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamBlue7.png" />
                 </Component>
-                <Component Id="cmp6FF868CBEA27E0B70170BC49272B36F9" Guid="{52C3454A-876A-4ED1-A64E-CC99C73D0383}">
+                <Component Id="cmp6FF868CBEA27E0B70170BC49272B36F9" Guid="{79E6200A-7EEE-420A-A65B-3F3C32CF076F}">
                     <File Id="fil51FE663CB4085F1A18C4C5572B5C6FFA" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamGreen1.png" />
                 </Component>
-                <Component Id="cmpC852C14CE515E833C88699CA76629EF1" Guid="{8CFEF332-AA7E-4FB2-BAD6-747ECB214F38}">
+                <Component Id="cmpC852C14CE515E833C88699CA76629EF1" Guid="{0B127573-A342-4902-80AB-7A1BD3F86CBC}">
                     <File Id="fil1C0D4FE33443077E1A4393D83B7C47EE" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamGreen2.png" />
                 </Component>
-                <Component Id="cmpA7577097B100E8EF25FA6337ACFE610B" Guid="{8843E65B-71C1-4264-941A-1DA8A493AEB4}">
+                <Component Id="cmpA7577097B100E8EF25FA6337ACFE610B" Guid="{5A6012D3-0C34-4E5E-A13D-86E13B72E35F}">
                     <File Id="fil9727DDB30D8FA9E2E519354F9902DAFA" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamGreen3.png" />
                 </Component>
-                <Component Id="cmpF269CA1BEB09774338387A3587F78AE7" Guid="{82B965D8-762F-479E-ACB5-61C4903306FF}">
+                <Component Id="cmpF269CA1BEB09774338387A3587F78AE7" Guid="{34E77492-DB59-4BE1-BB61-A47E805EBF54}">
                     <File Id="fil6A5B0DD6043DA31CF7FF64449D75D95C" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamGreen4.png" />
                 </Component>
-                <Component Id="cmp2B82CA9350B910628440D44A21AA2F24" Guid="{E4320874-EB49-4F32-82F4-C905B21DFCF3}">
+                <Component Id="cmp2B82CA9350B910628440D44A21AA2F24" Guid="{6646363D-D2D1-4226-B151-7340E4BE4E81}">
                     <File Id="filFCA8EB757156F948E7F43E6288A1C511" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamGreen5.png" />
                 </Component>
-                <Component Id="cmp3427C6BCA397E065A00D5D43B0D59470" Guid="{16D4BC6E-896D-4563-848C-E4A84A88CC62}">
+                <Component Id="cmp3427C6BCA397E065A00D5D43B0D59470" Guid="{A6781079-E90A-4B1C-AD6E-DA51188528F9}">
                     <File Id="filAF2F7E5E5CE38A38D810C025C57C1F9B" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamGreen6.png" />
                 </Component>
-                <Component Id="cmpF235EB70D0078612ED9CFCE8D8C7147E" Guid="{039BB442-A63C-4663-B585-6DD0F1095EC6}">
+                <Component Id="cmpF235EB70D0078612ED9CFCE8D8C7147E" Guid="{E8E16FFD-2AD4-4057-90B1-A613C4342A30}">
                     <File Id="fil1CE3EF43171DC792FA4B4943F53DFF1E" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamGreen7.png" />
                 </Component>
-                <Component Id="cmp55D1CB7CC835A2C6CD996B3098BA4392" Guid="{B5FAA35B-BEFB-41D1-99B9-E4F4E86439CC}">
+                <Component Id="cmp55D1CB7CC835A2C6CD996B3098BA4392" Guid="{CEB44E4B-9DE5-436F-B5DE-9AC22574FB31}">
                     <File Id="filAB13E02C7C810F931F495551ACC385CF" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamOrange1.png" />
                 </Component>
-                <Component Id="cmp8DDEEA4954109DD6CFBF0F6366736C54" Guid="{37005887-821C-4BF4-9D4D-BCCE3813241E}">
+                <Component Id="cmp8DDEEA4954109DD6CFBF0F6366736C54" Guid="{FDEA6AAD-70C6-49D9-A449-A51E3CB0F092}">
                     <File Id="filDD660139E7508D4FDACC7F5C3303E68A" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamOrange2.png" />
                 </Component>
-                <Component Id="cmpA5206900DE1D833FB08ABC52934DD50E" Guid="{9B4599F3-61B1-4536-8003-B1E4F172CAD8}">
+                <Component Id="cmpA5206900DE1D833FB08ABC52934DD50E" Guid="{6479BE45-E736-4CF3-8D8E-9FB36C4430CC}">
                     <File Id="fil2A7BB577CFBB1BF5267A4D83C83A7B80" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamOrange3.png" />
                 </Component>
-                <Component Id="cmp6CC19043B5B777E718D6D602BD759C00" Guid="{5A8B4B87-DE7A-4BCA-A4E0-7CC3A2B41EA7}">
+                <Component Id="cmp6CC19043B5B777E718D6D602BD759C00" Guid="{B78C9E08-7260-49B6-A65D-D19225F0EEE0}">
                     <File Id="filE6E1655CFBE70A90651979C36D84513C" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamOrange4.png" />
                 </Component>
-                <Component Id="cmp3A7D40B96A191287F3C4F1923998B0B2" Guid="{BEF92A9C-F4BF-42CA-883E-B7980B88A174}">
+                <Component Id="cmp3A7D40B96A191287F3C4F1923998B0B2" Guid="{1F99712B-9CF4-4E88-AD46-CB7CAADE88A6}">
                     <File Id="fil38FB37F0CA11AD3087417F0612D7794A" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamOrange5.png" />
                 </Component>
-                <Component Id="cmpF84C7D55488B15DB3BF947ABEDF2426C" Guid="{32AB7CA3-5172-4251-9D16-0025F51567D4}">
+                <Component Id="cmpF84C7D55488B15DB3BF947ABEDF2426C" Guid="{0EF8E748-6480-4014-A05D-051E371B3DB8}">
                     <File Id="filD53C89BAA279F073EFCEB54EFE9C6A69" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamOrange6.png" />
                 </Component>
-                <Component Id="cmpC07584E1A21EAB73958A474298B70929" Guid="{288103F3-C79C-41A7-A565-46EBDC697D63}">
+                <Component Id="cmpC07584E1A21EAB73958A474298B70929" Guid="{2F851EA9-5299-4C92-B44C-FCBF26D909B8}">
                     <File Id="filD7EE73878559AD659964D425AC8BD58A" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamOrange7.png" />
                 </Component>
-                <Component Id="cmpE7244B3909B075B8DF0EE9A955453D03" Guid="{1AABF8A4-27F8-4EF8-9A1B-E1C4CAD09F0E}">
+                <Component Id="cmpE7244B3909B075B8DF0EE9A955453D03" Guid="{DAA73F06-9CE3-41E3-A6B1-C1BDE7A6DCBC}">
                     <File Id="fil81C4A8E6CD1DB5CC527FEA482E14242D" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamPurple1.png" />
                 </Component>
-                <Component Id="cmp14C307F36F93CCF3888FE6CEEF578A19" Guid="{03165729-0B9A-428C-9BC1-1798E50FF50F}">
+                <Component Id="cmp14C307F36F93CCF3888FE6CEEF578A19" Guid="{BB685194-340A-4B48-BF9A-BC6F35E94F16}">
                     <File Id="fil0B97ACAA37721BED6363CF9764D2D828" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamPurple2.png" />
                 </Component>
-                <Component Id="cmp0B7BBEE699347E3C9131EBE7DEF93082" Guid="{B31FF8E3-DD09-4021-8BA1-EDDBEAD757ED}">
+                <Component Id="cmp0B7BBEE699347E3C9131EBE7DEF93082" Guid="{FDB6BF1B-1776-4C22-8FCA-DC9CAA9E94DF}">
                     <File Id="fil0FC1AF39735061CD5D27969942704521" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamPurple3.png" />
                 </Component>
-                <Component Id="cmpAB81DA0FBD1E6E11BB3216D111404491" Guid="{09071D18-1016-4660-9BE6-AEC80062CCBF}">
+                <Component Id="cmpAB81DA0FBD1E6E11BB3216D111404491" Guid="{C5E5E018-478F-4525-B420-ABD91FAE783A}">
                     <File Id="fil97815A7B05BD9C0A0199F7A0A59CB38F" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamPurple4.png" />
                 </Component>
-                <Component Id="cmpF8D946EB77E0191FF603728E9C2E2AFA" Guid="{879BF0A7-F29E-4107-9071-8837646AC214}">
+                <Component Id="cmpF8D946EB77E0191FF603728E9C2E2AFA" Guid="{1A37B4B6-275F-44BF-8A06-6C047E14853E}">
                     <File Id="fil5CCF4A1202B91FF1318305AB26278E6E" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamPurple5.png" />
                 </Component>
-                <Component Id="cmp7DC14C868D4DF039CCC64613F173803D" Guid="{8973111A-E432-45A0-8613-6A8ECBEB82D9}">
+                <Component Id="cmp7DC14C868D4DF039CCC64613F173803D" Guid="{24611146-76F1-4092-A779-233B2E03C543}">
                     <File Id="filE52277F2F686AA5896C383948AC71931" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamPurple6.png" />
                 </Component>
-                <Component Id="cmpC6690E6FE6882F8CEB49E8F39FFC39C4" Guid="{1212D711-9E9A-4798-8E70-88375DD6F8E9}">
+                <Component Id="cmpC6690E6FE6882F8CEB49E8F39FFC39C4" Guid="{B95DDBFF-9EAD-4F66-BE05-7559C5BEF327}">
                     <File Id="filA86F16EC3EA238F1EEF47591DA21454F" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\hbeamPurple7.png" />
                 </Component>
-                <Component Id="cmp812717857F379D3725D848086FE87B11" Guid="{8BC49D53-355F-44EC-AA2B-F664C86690A1}">
+                <Component Id="cmp812717857F379D3725D848086FE87B11" Guid="{7213EE70-BB27-47F2-ABE2-1D662748988C}">
                     <File Id="fil81EA2CA4C7731EDF7FE176DAF04AB870" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamBlue1.png" />
                 </Component>
-                <Component Id="cmp635C864B6051A8280F0CDB2861A61D26" Guid="{BF58C71F-5FDB-480C-AB3C-41B9E2CCE04A}">
+                <Component Id="cmp635C864B6051A8280F0CDB2861A61D26" Guid="{4A824ED7-9440-4835-81F3-AB9D5DF07B60}">
                     <File Id="filC90BBD6F25023E5C428B2DF7E28D9EAD" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamBlue2.png" />
                 </Component>
-                <Component Id="cmp03E9AF78F86C2138DD5EB38523AEE5F7" Guid="{A9E6842D-76D7-4B28-A27B-676B525E973D}">
+                <Component Id="cmp03E9AF78F86C2138DD5EB38523AEE5F7" Guid="{AB867C95-22A7-4246-A3B0-11E71F3D14A3}">
                     <File Id="fil487C9147E4C54C4AE72F7E9E3DB5C062" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamBlue3.png" />
                 </Component>
-                <Component Id="cmpFA7A10F655A2A553DBB4EC3692D16505" Guid="{AD04ED30-3B72-42F5-9AC7-E9F65320BC90}">
+                <Component Id="cmpFA7A10F655A2A553DBB4EC3692D16505" Guid="{EC383A30-032D-465B-B1ED-238DB7FCA692}">
                     <File Id="filCE996DA1CC41552D9183C132B4971386" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamBlue4.png" />
                 </Component>
-                <Component Id="cmpE2533A159541DDEA0E525DBFF3C1C1E4" Guid="{0048E591-887E-4692-949D-0FE79A0700B6}">
+                <Component Id="cmpE2533A159541DDEA0E525DBFF3C1C1E4" Guid="{99043F09-6267-47CA-99E0-2E49F2BC404C}">
                     <File Id="filFE65086611F342F6B53333A4518ADD33" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamBlue5.png" />
                 </Component>
-                <Component Id="cmp6B4F86039720EEAA671B1321BB71416E" Guid="{02CBD5AD-4FDB-4312-8572-A0A2C76FF2BF}">
+                <Component Id="cmp6B4F86039720EEAA671B1321BB71416E" Guid="{EF18DED2-2863-4632-90D5-9D50428C4713}">
                     <File Id="filA5E484F65494346C79D9C9C69D62B0F0" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamBlue6.png" />
                 </Component>
-                <Component Id="cmpBD0171736F8A371F7A30AA066E27D13E" Guid="{BDEBA692-4D05-4556-A1BE-C01868700D01}">
+                <Component Id="cmpBD0171736F8A371F7A30AA066E27D13E" Guid="{A08A9B40-F1F9-4DBE-8EA3-659CF5603696}">
                     <File Id="fil9E7BAB6E3E995703080455123F730E88" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamBlue7.png" />
                 </Component>
-                <Component Id="cmp7D56A5E80CF071E544E2946C78FA92A6" Guid="{127CD697-FC7D-4A0F-A905-A30F797DD87E}">
+                <Component Id="cmp7D56A5E80CF071E544E2946C78FA92A6" Guid="{D0B43492-F0C6-4EAC-BE90-FB3C988703ED}">
                     <File Id="filCD6A0CB95DB2DB9FB6F50DB1C7315AD8" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamGreen1.png" />
                 </Component>
-                <Component Id="cmp259345CD100CE3734CCE02D8AE9D526D" Guid="{9F803722-7CAB-43BD-AA49-FF1E77C63581}">
+                <Component Id="cmp259345CD100CE3734CCE02D8AE9D526D" Guid="{2EC128A1-B3E5-41C0-84D6-58E2DCEDAD4D}">
                     <File Id="fil858DF84CE6E153BD48382757A711E125" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamGreen2.png" />
                 </Component>
-                <Component Id="cmpA3DC69F3B4278254B2F5604186D5C95F" Guid="{1F2DBCF2-9E61-4E0D-89F6-AB1E42D3FCBD}">
+                <Component Id="cmpA3DC69F3B4278254B2F5604186D5C95F" Guid="{428F7AD4-8F5B-4683-A625-42C2A6F5697C}">
                     <File Id="filAFBAB3046C32556A822FCDC9E98F717E" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamGreen3.png" />
                 </Component>
-                <Component Id="cmp6DCCD660A49A95DC08E2551093C3E500" Guid="{892C7F2F-F817-457D-8FF8-77E2954C4E10}">
+                <Component Id="cmp6DCCD660A49A95DC08E2551093C3E500" Guid="{5E8E1618-8C47-4547-8304-7322B33CA6FE}">
                     <File Id="fil586B64E498DC4E89D958D9C3FFE0457F" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamGreen4.png" />
                 </Component>
-                <Component Id="cmp64181B563B34BB27B66F0A8C4D0F2E11" Guid="{78B5723A-C67E-441B-8C12-29EE3C6D7102}">
+                <Component Id="cmp64181B563B34BB27B66F0A8C4D0F2E11" Guid="{3079CF55-C6EE-462A-93C4-E575A19A88D9}">
                     <File Id="fil9C7F6781C260C0C02DC8763C4829FEB7" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamGreen5.png" />
                 </Component>
-                <Component Id="cmp92CFE6C9C15A0C1FDA0D777FE731DADE" Guid="{B377A923-232F-46A4-A66D-56DFBAF67C9A}">
+                <Component Id="cmp92CFE6C9C15A0C1FDA0D777FE731DADE" Guid="{49AB1044-C5B2-4083-A8A5-F5BE61FB29B8}">
                     <File Id="fil433947230BCFA12EB98B4A2C743FD927" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamGreen6.png" />
                 </Component>
-                <Component Id="cmp5392C06D62E21F96C7F7370C67FAB676" Guid="{AB2B4295-0649-4848-B862-38F0B5E6072A}">
+                <Component Id="cmp5392C06D62E21F96C7F7370C67FAB676" Guid="{A159A7C1-E0F5-4343-9A5A-9A8A74FF7AAE}">
                     <File Id="filE9585D79C73997C1BB6DE6610577848C" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamGreen7.png" />
                 </Component>
-                <Component Id="cmpE6460401D1108F154D6950D7AA18395E" Guid="{E7C43BCC-611B-4114-ADA6-33B8CC3FFE2E}">
+                <Component Id="cmpE6460401D1108F154D6950D7AA18395E" Guid="{392008B9-3FF3-4E89-8B40-D0805BC9C8F1}">
                     <File Id="fil9CC07D6F719A08F2E83F1A90AC62FFCD" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamOrange1.png" />
                 </Component>
-                <Component Id="cmpF7DAD4E484D4EF923123E33BAA0B92E6" Guid="{FF86B918-D74B-4F2C-892B-42D3A0A30E40}">
+                <Component Id="cmpF7DAD4E484D4EF923123E33BAA0B92E6" Guid="{D746789E-D5A5-4101-929C-4C0D849645F3}">
                     <File Id="filC10216DF38F95E3D5593C885CEBF2EE9" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamOrange2.png" />
                 </Component>
-                <Component Id="cmp4A6278B45124D741BE5A4C09A9C80DEA" Guid="{A85E3A92-C070-4A5F-8890-27BF1CCBBDAC}">
+                <Component Id="cmp4A6278B45124D741BE5A4C09A9C80DEA" Guid="{EF7A4EA7-56CD-4B33-A64D-EE60ECF522BF}">
                     <File Id="filEF6A13FFE87323AE6C93FBA147074824" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamOrange3.png" />
                 </Component>
-                <Component Id="cmp1D53074990FBAF5D554FD0A0815D5C53" Guid="{C9C6CB11-2CD0-4939-AAED-118C933B7549}">
+                <Component Id="cmp1D53074990FBAF5D554FD0A0815D5C53" Guid="{CCF41288-9D78-4BE8-98BE-C659C0D7FE71}">
                     <File Id="fil88C46B92B58500C545F4AE73416856B8" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamOrange4.png" />
                 </Component>
-                <Component Id="cmp2679F2DB7464C6D4F698DCEBC91B72CF" Guid="{E5D7E51B-4F22-424B-96D9-B9DF764C15F4}">
+                <Component Id="cmp2679F2DB7464C6D4F698DCEBC91B72CF" Guid="{0D99BD81-C81C-40A1-B40C-769E2968ECF4}">
                     <File Id="fil64626B8A190627657E6AD4B3CBEBA6A6" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamOrange5.png" />
                 </Component>
-                <Component Id="cmp684356B185B01468A0B7A241472588C5" Guid="{FB2FC4D6-3C58-42F2-BC96-53160247280C}">
+                <Component Id="cmp684356B185B01468A0B7A241472588C5" Guid="{AA5DA0F5-96B1-4331-B614-067090263F76}">
                     <File Id="fil957539C5FB8A972FFACF6A1E59200291" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamOrange6.png" />
                 </Component>
-                <Component Id="cmp483145BAEA782598E32ECA666ABD982E" Guid="{AB356C3B-574B-4957-97E3-61FC366C9D3B}">
+                <Component Id="cmp483145BAEA782598E32ECA666ABD982E" Guid="{2F2C88A8-E67C-43F4-81FA-47580530C91A}">
                     <File Id="filCDD655AFE80042F2D12CEA4BF3016680" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamOrange7.png" />
                 </Component>
-                <Component Id="cmpD9BDD09D9326F25531BE90B8121A5D17" Guid="{C32003A7-B1F1-41F6-9781-A5E709A6A783}">
+                <Component Id="cmpD9BDD09D9326F25531BE90B8121A5D17" Guid="{62D0A376-F4A7-41C6-9211-D655251B64FA}">
                     <File Id="fil5E3EEB83463CB8969F8A678A9B66ED92" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamPurple1.png" />
                 </Component>
-                <Component Id="cmp3CFA329B57E142F08F1614B783AB2A28" Guid="{348B14A7-AC2A-489F-976E-CCC9CFCFA363}">
+                <Component Id="cmp3CFA329B57E142F08F1614B783AB2A28" Guid="{E2AC3789-6C94-4B36-9547-9CBFFA414DB9}">
                     <File Id="fil7EECF765500EA92700C1C943A8085606" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamPurple2.png" />
                 </Component>
-                <Component Id="cmp3F96AAA884A9A68ED60608F50899DF46" Guid="{5BD8A13C-C152-43A1-97B1-C84D50798DFB}">
+                <Component Id="cmp3F96AAA884A9A68ED60608F50899DF46" Guid="{1F690EBE-BAF3-44AC-842D-8D4A47BCE7D7}">
                     <File Id="filCFD8261B72BF8FE8B3C0545BFBB8A82A" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamPurple3.png" />
                 </Component>
-                <Component Id="cmp888C1AEC1A2814F4907122EF2CF87846" Guid="{75687C24-6ECA-4245-A9AC-9BD6A5F6FAA6}">
+                <Component Id="cmp888C1AEC1A2814F4907122EF2CF87846" Guid="{AED373F5-B21A-4238-97DF-72F663C8F559}">
                     <File Id="fil89945FCB8ED1BDA72C043CBB1D0C969C" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamPurple4.png" />
                 </Component>
-                <Component Id="cmp30B826B2EE787F872738D7CDE36E56A5" Guid="{97BD9344-CBC6-4B7D-9CA2-A572D4F12624}">
+                <Component Id="cmp30B826B2EE787F872738D7CDE36E56A5" Guid="{69D35889-7B35-496C-8653-3C9101D11CCC}">
                     <File Id="fil585B69882CDB2013B6808539727209AE" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamPurple5.png" />
                 </Component>
-                <Component Id="cmp01125F700A54610BEBD4968A1CF91070" Guid="{28877C2D-2F88-4922-A016-026539C06FCF}">
+                <Component Id="cmp01125F700A54610BEBD4968A1CF91070" Guid="{38E62954-C672-4C57-8E2E-4BF2B6AC786C}">
                     <File Id="fil9E2E8161C637B08BE2F8B6FB0105914B" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamPurple6.png" />
                 </Component>
-                <Component Id="cmp9653716C5F866DA25439B9D21AE5A07A" Guid="{0E62A1E2-9621-4C65-9336-F207D26AF509}">
+                <Component Id="cmp9653716C5F866DA25439B9D21AE5A07A" Guid="{D8738E51-7F17-4472-8738-D1B909F5E5AA}">
                     <File Id="fil7534020D629C2E8873CF128199B2AF44" KeyPath="yes" Source="$(env.mediaBomberman)\Beam\vbeamPurple7.png" />
                 </Component>
             </Directory>
             <Directory Id="dir8DEE9424E8496C09E632BB821C64C010" Name="bomb">
-                <Component Id="cmp25A553AB43236B166FE894764067651D" Guid="{CBBE88BC-CC31-4308-827E-34EFEC6D75DF}">
+                <Component Id="cmp25A553AB43236B166FE894764067651D" Guid="{1F1EE684-8A7D-4130-8156-B7AC56E5CA5F}">
                     <File Id="filB5B1B33A6A782B803B6F89CE240B8CF2" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\bomb.obj" />
                 </Component>
                 <Directory Id="dir62E29E868B2AB063A54F57CBE7D3E29A" Name="Bomb">
-                    <Component Id="cmpD7A65B11420414D84793070832A54D2D" Guid="{FB218ECD-2998-43EF-B0DE-C0A5B65242EC}">
+                    <Component Id="cmpD7A65B11420414D84793070832A54D2D" Guid="{9CC5DA06-A1CC-4939-9877-F424FEEF9AA4}">
                         <File Id="fil315E69CD5537525E721EE9C7D2F69049" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombBlue1.png" />
                     </Component>
-                    <Component Id="cmp511CFFB13EBEDE43E97BF30B3D2784C7" Guid="{00CEDE36-521B-4173-B77C-9C132CECA2CE}">
+                    <Component Id="cmp511CFFB13EBEDE43E97BF30B3D2784C7" Guid="{64B7950E-51AE-4080-880A-9450957D485C}">
                         <File Id="filA7CFE8EF042D429B8E18305FE776F140" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombBlue2.png" />
                     </Component>
-                    <Component Id="cmp0D13BEB9409C92A5739E14D2CFE124F8" Guid="{58CA703A-C4F0-47B6-B011-7FE4C3A4EEDF}">
+                    <Component Id="cmp0D13BEB9409C92A5739E14D2CFE124F8" Guid="{A818213F-DB1E-47A5-A5C2-854CF41363D7}">
                         <File Id="fil16D583473E0B0DA81F423DDDACC3EAE8" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombBlue3.png" />
                     </Component>
-                    <Component Id="cmp41248BB70398E9910C47E8C9D428AC09" Guid="{3C20396B-5F80-450F-ABFE-B8EFA0A38AF3}">
+                    <Component Id="cmp41248BB70398E9910C47E8C9D428AC09" Guid="{3C039274-05FC-4CCB-B5BC-50C3BBC478A5}">
                         <File Id="fil4227621BFBE3794CCE0800B3C7E795B7" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombBlue4.png" />
                     </Component>
-                    <Component Id="cmp47B30F3EC13294B844F940C561FDBEE5" Guid="{7F50255B-39A6-4496-99E8-0E2ED43475BA}">
+                    <Component Id="cmp47B30F3EC13294B844F940C561FDBEE5" Guid="{E093CEF6-7F2B-4443-BD53-AFB2BFF1BDB6}">
                         <File Id="fil2AC1AA3FDB2CDBED847FF6A9085AC767" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombBlue5.png" />
                     </Component>
-                    <Component Id="cmpF850DEDD25E54D9FC8D071CA0F9E184D" Guid="{45FA8ECE-0FE5-4593-B283-A86B33B256AC}">
+                    <Component Id="cmpF850DEDD25E54D9FC8D071CA0F9E184D" Guid="{4769987A-2B8F-4DE7-8A24-BA4A919B6950}">
                         <File Id="fil2741FE0CEC754907A782950E81EC3D8D" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombBlue6.png" />
                     </Component>
-                    <Component Id="cmpB4FAA342E1BC4B5CB0A7AA3C8700299A" Guid="{C3D37AF6-FDE8-4717-9B54-A3802F11CFBD}">
+                    <Component Id="cmpB4FAA342E1BC4B5CB0A7AA3C8700299A" Guid="{C478B1AE-EC54-48D0-B371-491EB81141BB}">
                         <File Id="filF2783F06642319D02AC415E0671ED88D" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombBlue7.png" />
                     </Component>
-                    <Component Id="cmpADBD75DB2FB52D2EA29D7CA2D61C575C" Guid="{758231E5-BA82-454B-8547-FAADD8557C10}">
+                    <Component Id="cmpADBD75DB2FB52D2EA29D7CA2D61C575C" Guid="{A31EC5EB-4362-40BA-A235-74E7934AFE34}">
                         <File Id="fil375E7348782FD4E65D174ED45637D42D" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombGreen1.png" />
                     </Component>
-                    <Component Id="cmp02BB3E4A3B3D4C1AB1A4B257B04D8C78" Guid="{0F58E8BF-74C8-4076-9AD5-E9E3F8300EF5}">
+                    <Component Id="cmp02BB3E4A3B3D4C1AB1A4B257B04D8C78" Guid="{271DA9ED-B5AE-48A3-B508-F938A4874162}">
                         <File Id="fil60C5AC3977CF1DEBF96F81BC65566DC1" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombGreen2.png" />
                     </Component>
-                    <Component Id="cmp116EE6712A63F2160F6E0ACD3B6F6234" Guid="{79999986-D4AE-4091-83DC-9A9124E30475}">
+                    <Component Id="cmp116EE6712A63F2160F6E0ACD3B6F6234" Guid="{01E57198-DA99-4932-8648-2B535F970FA3}">
                         <File Id="filDB5586DFCE7BA590E766B4AD5A0E0C54" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombGreen3.png" />
                     </Component>
-                    <Component Id="cmpFDAD69722DF4276F05C0D8D7B0B9FF73" Guid="{5C133311-C1EF-4BF7-987A-04D3DB17A7A4}">
+                    <Component Id="cmpFDAD69722DF4276F05C0D8D7B0B9FF73" Guid="{9D3CAFBE-FDBD-4E2B-B394-4EF0CDCCCBD7}">
                         <File Id="filFA81FEB609897FA2D175E271BC6663B9" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombGreen4.png" />
                     </Component>
-                    <Component Id="cmp93C051B9B8E6B4198D145969EBCDC9FD" Guid="{1752DCF7-E323-47A9-8398-995FB8FEDF13}">
+                    <Component Id="cmp93C051B9B8E6B4198D145969EBCDC9FD" Guid="{6AFDD6C1-B82D-4A73-ADD3-41D4357D7849}">
                         <File Id="fil20DDDCB1BE9FC02F22C4083F51AF1E02" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombGreen5.png" />
                     </Component>
-                    <Component Id="cmp2EA5E5A34CD1267031856DB3570503CB" Guid="{BB1AE7A9-A549-4ACB-89BA-8C94C2A8DD69}">
+                    <Component Id="cmp2EA5E5A34CD1267031856DB3570503CB" Guid="{29BF37AA-06C8-4926-9670-0B10DB4CD4A9}">
                         <File Id="filF1A6365844A546E55F0E21A2FE506E7D" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombGreen6.png" />
                     </Component>
-                    <Component Id="cmp85ED3BEEB169981A57957E7303654E23" Guid="{1EEE86DF-68AF-43E2-957F-2AFAD2E8573A}">
+                    <Component Id="cmp85ED3BEEB169981A57957E7303654E23" Guid="{3AC1E5DD-F281-4E67-ACF7-61D8111B4E78}">
                         <File Id="fil919A8DD3EE5EEFEE9D4C6B287FFAEF6E" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombGreen7.png" />
                     </Component>
-                    <Component Id="cmp28D618D4A1564D8A1F79CEDB7B27237D" Guid="{13FD371A-CF01-43E9-AA23-AD19BC400306}">
+                    <Component Id="cmp28D618D4A1564D8A1F79CEDB7B27237D" Guid="{340A8CB5-F9E7-4410-B9CC-526DE51BFC89}">
                         <File Id="filF3B3B4ED5FC9FF6B17E854A29BC3D19F" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombOrange1.png" />
                     </Component>
-                    <Component Id="cmp360D761FBE00365980360B62A9FB5C4E" Guid="{41939C32-0E67-4EAA-982C-05CA9198EBF0}">
+                    <Component Id="cmp360D761FBE00365980360B62A9FB5C4E" Guid="{DB7D0185-A84F-4B22-A1D4-9C1F3105B6E9}">
                         <File Id="filD972D751B458B110307AE6D062DA9F1C" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombOrange2.png" />
                     </Component>
-                    <Component Id="cmpEC32E64F347AB430BF9C699103EFEFF9" Guid="{B4186DF4-035F-4F7C-89AA-4A9DA042E918}">
+                    <Component Id="cmpEC32E64F347AB430BF9C699103EFEFF9" Guid="{B682E993-949F-4AEF-B06F-5981CC73C8FF}">
                         <File Id="fil102E6C24543F7D1DDAAB223A30181940" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombOrange3.png" />
                     </Component>
-                    <Component Id="cmp0D9915044DBD0AD4623C14A6D6117115" Guid="{74E76C00-06FB-44CF-A21F-78599A7383BF}">
+                    <Component Id="cmp0D9915044DBD0AD4623C14A6D6117115" Guid="{43990130-1C0E-40F0-830E-F90F6667A1DF}">
                         <File Id="filC4E0DB475EEE21663D732F04BA137B9A" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombOrange4.png" />
                     </Component>
-                    <Component Id="cmp54721D48D11AB2658C0F1798727120A5" Guid="{1227C1BA-1294-41D8-A632-25F515D37221}">
+                    <Component Id="cmp54721D48D11AB2658C0F1798727120A5" Guid="{5C116D93-FE0E-479C-A146-87429DB127BC}">
                         <File Id="filD0AA299F9633511897ACD97209FED5B7" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombOrange5.png" />
                     </Component>
-                    <Component Id="cmp6B25CC8D69E3EFB8F8191CBDCEA3C220" Guid="{735610EE-19B0-4597-A417-B630490814EA}">
+                    <Component Id="cmp6B25CC8D69E3EFB8F8191CBDCEA3C220" Guid="{BAB8B4EC-1A23-437B-8E6A-45663AE763A5}">
                         <File Id="filF212C5E2E385E9F88FA2B59AAF0B11EC" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombOrange6.png" />
                     </Component>
-                    <Component Id="cmpFE0397A2D80C6E066BFA678AD5779FBA" Guid="{D32778C8-610E-4298-8621-E9D27BE0DCAD}">
+                    <Component Id="cmpFE0397A2D80C6E066BFA678AD5779FBA" Guid="{7CB6AB35-6F07-4A03-87B3-1D9F27A1F655}">
                         <File Id="filEAE4B92503548B9BD5A60457969F6F12" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombOrange7.png" />
                     </Component>
-                    <Component Id="cmpDE8D3B18E02D41E6E90FC0D06D964533" Guid="{7664A1D8-614E-4FC2-8528-B8764D0B37C0}">
+                    <Component Id="cmpDE8D3B18E02D41E6E90FC0D06D964533" Guid="{D3687302-B3FB-4401-BED4-CA7470BDF0DC}">
                         <File Id="fil1BA13F39176AE40AA066B3684E26B9AE" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombPurple1.png" />
                     </Component>
-                    <Component Id="cmp410310C57677486AD7B4C70F7894207B" Guid="{BF831F39-635B-4FEE-8A17-8F8D98D3C1E7}">
+                    <Component Id="cmp410310C57677486AD7B4C70F7894207B" Guid="{61C82165-95EC-4011-972F-D4064A91AFFB}">
                         <File Id="fil4BAF23885FB62F1DB7FB51A7C15C4A76" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombPurple2.png" />
                     </Component>
-                    <Component Id="cmp3459482AA0E3EA2EA2E04EE67CEFC804" Guid="{E4AD2B08-EC0E-4F4B-AB96-716C078DB283}">
+                    <Component Id="cmp3459482AA0E3EA2EA2E04EE67CEFC804" Guid="{4E907881-9FB4-466C-BBF3-C73DE212C50F}">
                         <File Id="fil5A4886806FA1D9635A8C951E93A51628" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombPurple3.png" />
                     </Component>
-                    <Component Id="cmp4EA8FE94277C307CD7C593A0A84B21E1" Guid="{0BCE4B23-F665-4EAE-AF9D-7D0216820628}">
+                    <Component Id="cmp4EA8FE94277C307CD7C593A0A84B21E1" Guid="{46F04C06-046F-44A6-98DF-4D84046E1BE2}">
                         <File Id="fil98F8292C7EFEA35BCD488BBAA0182306" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombPurple4.png" />
                     </Component>
-                    <Component Id="cmpDF25F9846DC8DCDC232F691682EDE10F" Guid="{91B3DD51-C61C-47A4-BB09-1488EA7D3AA3}">
+                    <Component Id="cmpDF25F9846DC8DCDC232F691682EDE10F" Guid="{B2851787-C433-4275-BFC9-811070CAC0D0}">
                         <File Id="fil2E38F904BCCE655A166E2FADE27B4E5E" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombPurple5.png" />
                     </Component>
-                    <Component Id="cmp057C8DC2ADE1700B5ADEDA24B3CC64D3" Guid="{00D82001-A061-4DF1-BDB5-83412521D569}">
+                    <Component Id="cmp057C8DC2ADE1700B5ADEDA24B3CC64D3" Guid="{A6401A71-7EE8-45AE-910A-20F18D99A246}">
                         <File Id="filA2754D27C0C2E77B8FA3889B75C723B2" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombPurple6.png" />
                     </Component>
-                    <Component Id="cmpCBAF57F4DDCC2B30F0DFAE1597F58F2B" Guid="{235D0368-CFBB-489C-8D1E-CE5E21C83A16}">
+                    <Component Id="cmpCBAF57F4DDCC2B30F0DFAE1597F58F2B" Guid="{B2C98900-93E7-4461-9824-3C5BB8154CCB}">
                         <File Id="filACDA64493C7093D187845B6AD05FA350" KeyPath="yes" Source="$(env.mediaBomberman)\bomb\Bomb\bombPurple7.png" />
                     </Component>
                 </Directory>
             </Directory>
             <Directory Id="dirD004F430E041BA694BA850E52A2FE296" Name="cube">
-                <Component Id="cmp2C37C691638D73C4454B1E070B2E971E" Guid="{050D25E0-A803-4243-8675-F6B803C3EBA4}">
+                <Component Id="cmp2C37C691638D73C4454B1E070B2E971E" Guid="{17B83D0D-F9D4-4770-A97A-1B830A071DDD}">
                     <File Id="fil7A09E0B0B8983EE541CAC04678F3C96A" KeyPath="yes" Source="$(env.mediaBomberman)\cube\indCube.png" />
                 </Component>
-                <Component Id="cmpB35C37A66AD167B973DC539AAD5A6D49" Guid="{81B46BA0-6069-4C24-A901-F8FA58B55375}">
+                <Component Id="cmpB35C37A66AD167B973DC539AAD5A6D49" Guid="{366E6714-01DE-4D36-8286-B442D6EBB5EE}">
                     <File Id="fil4E13FCAC48BD4970FAC5A509854200A7" KeyPath="yes" Source="$(env.mediaBomberman)\cube\indCubeBlue.png" />
                 </Component>
-                <Component Id="cmp5CC91DBC6A373C7EBAEF5DD82024799A" Guid="{4FF6B216-51E2-4A04-9BB6-2FAC95F9D0C5}">
+                <Component Id="cmp5CC91DBC6A373C7EBAEF5DD82024799A" Guid="{CE1A5099-8732-48A2-B754-D4835734FBFF}">
                     <File Id="fil62FFC44EE3E61B75AE33DE9A5DE4DCF4" KeyPath="yes" Source="$(env.mediaBomberman)\cube\indCubeGreen.png" />
                 </Component>
-                <Component Id="cmp72BB28E73A152D4C43418D9CE758DE05" Guid="{110D2BD3-AAEA-4AD7-A6CC-A61251EE35F8}">
+                <Component Id="cmp72BB28E73A152D4C43418D9CE758DE05" Guid="{C6A7F142-A883-4678-9350-A88E8FDB20FA}">
                     <File Id="filD0562F053A21196A9C006BD2E7AF881D" KeyPath="yes" Source="$(env.mediaBomberman)\cube\indCubeGrey.png" />
                 </Component>
-                <Component Id="cmp0ED09DB24744AFB967A3D1DE14346FCF" Guid="{E48B6FB5-0E64-46FD-850A-C83B987C7EB3}">
+                <Component Id="cmp0ED09DB24744AFB967A3D1DE14346FCF" Guid="{A47D273F-12BC-476B-AB53-40AD1B08A224}">
                     <File Id="fil9EF6278293612160DC429EF7AB6BEFA3" KeyPath="yes" Source="$(env.mediaBomberman)\cube\indCubeOrange.png" />
                 </Component>
-                <Component Id="cmp394DF4C438D4A130D3DCE2CCA2A004EB" Guid="{12FAF419-E17A-4C9D-A006-98073916745E}">
+                <Component Id="cmp394DF4C438D4A130D3DCE2CCA2A004EB" Guid="{A215E9F3-5705-44A7-8269-E1D6E58CA21C}">
                     <File Id="fil1DF1CE1C79650C25DA6824B764081F69" KeyPath="yes" Source="$(env.mediaBomberman)\cube\indCubePurple.png" />
                 </Component>
-                <Component Id="cmpA72662B86F944B7F5457D6F39C31C83A" Guid="{32FC40A9-4F38-4CE2-8E95-4406A8AD7438}">
+                <Component Id="cmpA72662B86F944B7F5457D6F39C31C83A" Guid="{6DAC6DBF-1383-4362-8EBD-1700F02E5963}">
                     <File Id="filFDE9538BD24DCCE06EC8691A8C0BBBB3" KeyPath="yes" Source="$(env.mediaBomberman)\cube\indCubeWhite.png" />
                 </Component>
-                <Component Id="cmpD54AE84FA357E706A92799F5C5BFC527" Guid="{B98084F2-A041-4BA1-8F7A-AF93B7542DAF}">
+                <Component Id="cmpD54AE84FA357E706A92799F5C5BFC527" Guid="{16312366-895E-49DE-988B-8721D503CED0}">
                     <File Id="fil6051FA053F257A8B9A2CA85694935C9E" KeyPath="yes" Source="$(env.mediaBomberman)\cube\Texture_cube_Blue.png" />
                 </Component>
-                <Component Id="cmp2175FFEB58E40CE68081BACAB93418A6" Guid="{B74E7C8C-B4EC-49D5-9449-81EE6F388051}">
+                <Component Id="cmp2175FFEB58E40CE68081BACAB93418A6" Guid="{E620B09C-E478-4060-A2B2-BC2CF8B8FE20}">
                     <File Id="fil96EA24F78AB3621445B0942C38DC2257" KeyPath="yes" Source="$(env.mediaBomberman)\cube\Texture_cube_Green.png" />
                 </Component>
-                <Component Id="cmp902DA5F4487CD0EEB3EFCA6F1EB88732" Guid="{A7E771E6-2350-4F6E-ADB6-5BBA95594245}">
+                <Component Id="cmp902DA5F4487CD0EEB3EFCA6F1EB88732" Guid="{83691883-7BEC-4F34-8A89-135A1153412F}">
                     <File Id="filA4568735A5A9C05CDF2E1D7B8ABEA7E9" KeyPath="yes" Source="$(env.mediaBomberman)\cube\Texture_cube_Orange.png" />
                 </Component>
-                <Component Id="cmp221031986603D2E9022C95083A8DEBCA" Guid="{9BEF1955-A49A-4E93-A7A7-0E47C4D23485}">
+                <Component Id="cmp221031986603D2E9022C95083A8DEBCA" Guid="{64DA50A2-D65D-4903-9C3C-2523382D1651}">
                     <File Id="fil56A30B12D22788E727216680B07321BE" KeyPath="yes" Source="$(env.mediaBomberman)\cube\Texture_cube_Purple.png" />
                 </Component>
-                <Component Id="cmpC0642D8F248F856BB5718CF89970586E" Guid="{126ADC32-FD90-455D-8A1D-5F8FF4FFFE2C}">
+                <Component Id="cmpC0642D8F248F856BB5718CF89970586E" Guid="{1BE532DB-BBE0-48B1-B7CB-0BF64293A59A}">
                     <File Id="fil9CDF464E562DA9F55F812AC990EE7678" KeyPath="yes" Source="$(env.mediaBomberman)\cube\Texture_cube_red.png" />
                 </Component>
-                <Component Id="cmpA31519A715E2EB86C4779C68CD7DDE56" Guid="{FA07771E-47EA-4A1E-94D7-0ACDFAFC1974}">
+                <Component Id="cmpA31519A715E2EB86C4779C68CD7DDE56" Guid="{FD040695-2F50-4DCE-9D6A-35FE8E545CFD}">
                     <File Id="filEAD07CD0D1419851207FD137DF520553" KeyPath="yes" Source="$(env.mediaBomberman)\cube\Texture_cube_White.png" />
                 </Component>
             </Directory>
             <Directory Id="dir084F6C6CA8A2ED78F645AC18B0E07ABF" Name="installer">
-                <Component Id="cmp0AAD2998AD6B6A4F6FC441838EC1F03F" Guid="{586FD5C1-2C5F-4805-B385-9B1790A62458}">
+                <Component Id="cmp0AAD2998AD6B6A4F6FC441838EC1F03F" Guid="{E998B791-20CC-4A4E-800B-66A5EB72AD7A}">
                     <File Id="fil3207A3E20286C196AB7BA743709CFF15" KeyPath="yes" Source="$(env.mediaBomberman)\installer\bomberman-icon.ico" />
                 </Component>
-                <Component Id="cmp119EDE78890C6EFA436AA125F1ED00B3" Guid="{932C7A7C-4B14-452D-A5FB-4384386CA3E7}">
+                <Component Id="cmp119EDE78890C6EFA436AA125F1ED00B3" Guid="{B20D363C-A19D-4B56-97AE-8E0F177727A1}">
                     <File Id="fil3D648DE6410A2E3554E5251449C08B9C" KeyPath="yes" Source="$(env.mediaBomberman)\installer\bomberman-logo.jpg" />
                 </Component>
-                <Component Id="cmp7BA5FD329BC8633149BC3F692039286E" Guid="{7F09E8EC-B8D5-4D6B-A7A4-1F5B8ED18318}">
+                <Component Id="cmp7BA5FD329BC8633149BC3F692039286E" Guid="{CA4F09E4-B0F7-410B-9F09-1EFA01516D48}">
                     <File Id="fil49490C37D4EE7F0B0D9ACF4D6B84E054" KeyPath="yes" Source="$(env.mediaBomberman)\installer\license.rtf" />
                 </Component>
-                <Component Id="cmp6A5C3EDDC4287044F753102DFC6D3FE1" Guid="{B147300E-9978-4108-A7C1-45E1584B16DE}">
+                <Component Id="cmp6A5C3EDDC4287044F753102DFC6D3FE1" Guid="{5F6BBDB5-1FF0-47F4-9A8A-60E76CDD25DE}">
                     <File Id="filA74DB380B8ECF765168309A00040BC96" KeyPath="yes" Source="$(env.mediaBomberman)\installer\license.txt" />
                 </Component>
             </Directory>
             <Directory Id="dir124E2D9A7F84476BA7BB7ED65AC1ED13" Name="media">
-                <Component Id="cmp981B183AE103DEFC4B6241D68A1D857B" Guid="{3CCCA76E-C096-4C00-8978-AB5AC25E1DE7}">
+                <Component Id="cmp981B183AE103DEFC4B6241D68A1D857B" Guid="{ED1396FF-E4B0-43C7-A964-F079AE12ACBA}">
                     <File Id="filC5C46A2C2F8CCE3B558215DF6E983806" KeyPath="yes" Source="$(env.mediaBomberman)\media\fire.bmp" />
                 </Component>
             </Directory>
             <Directory Id="dir8EADCA2E8990FD573BA98069C56596F8" Name="Particles">
-                <Component Id="cmp466ED0EEB05CEB20EC1C4340971DF7FF" Guid="{05BB2F5B-999D-4E87-96C0-D034CD1A0959}">
+                <Component Id="cmp466ED0EEB05CEB20EC1C4340971DF7FF" Guid="{DC1D2777-03BC-4BCE-AA70-76791C6108A0}">
                     <File Id="filBB0C48CF83A3D3289290D1ADB5B42BD6" KeyPath="yes" Source="$(env.mediaBomberman)\Particles\particleBlue.png" />
                 </Component>
-                <Component Id="cmpD0D0115D8B187F41FF3B95712ED0ECC3" Guid="{077F2721-D23A-40F1-AF28-751379E613E9}">
+                <Component Id="cmpD0D0115D8B187F41FF3B95712ED0ECC3" Guid="{B4C83E2E-6184-4E27-B025-ED21691D5769}">
                     <File Id="fil2BBA54CF7A5CB15E2593B5C05A3B6774" KeyPath="yes" Source="$(env.mediaBomberman)\Particles\particleGreen.png" />
                 </Component>
-                <Component Id="cmpDD3E8C7DFCCD012453B9BEB61452791F" Guid="{8977779A-E8EE-418E-8B23-FC19F45D4D31}">
+                <Component Id="cmpDD3E8C7DFCCD012453B9BEB61452791F" Guid="{457B3875-AC4A-4BE2-9B1A-F908D6786420}">
                     <File Id="filB7E54F12D65709E9D41372CDC5B12C6D" KeyPath="yes" Source="$(env.mediaBomberman)\Particles\particleOrange.png" />
                 </Component>
-                <Component Id="cmp9C52653798690AD2CF307983329E24DC" Guid="{5EC5C99A-88C6-47EC-AE8E-D6A4943D4625}">
+                <Component Id="cmp9C52653798690AD2CF307983329E24DC" Guid="{3E14400E-5C0E-4588-B504-D31988C5F0FC}">
                     <File Id="filFC7DDB1386D3745CBCFC7FA6D0467ABE" KeyPath="yes" Source="$(env.mediaBomberman)\Particles\particlePurple.png" />
                 </Component>
-                <Component Id="cmpC771E44E82790BB63AB2E43604E8B7D6" Guid="{48A9C863-7378-40B8-A327-FD50D9650545}">
+                <Component Id="cmpC771E44E82790BB63AB2E43604E8B7D6" Guid="{71DEB4D7-B03A-4817-9C30-E778399FAC93}">
                     <File Id="filB538A6E481BC0E89CFDF8EC1498BC10E" KeyPath="yes" Source="$(env.mediaBomberman)\Particles\particleWhite.png" />
                 </Component>
             </Directory>
             <Directory Id="dirF9B4DFF18C2EF56AA067A8BC094CCB0A" Name="perso">
-                <Component Id="cmpD6CAFA97FBBC64B14C66B27460CBEF70" Guid="{E5A060BD-4EC1-4428-8E2E-6DF6E5305C9E}">
+                <Component Id="cmpD6CAFA97FBBC64B14C66B27460CBEF70" Guid="{5EF5D7F6-5B35-4B55-B845-9049963C06A0}">
                     <File Id="filD9C0B3DC50AECBEC03982B16790A2CC7" KeyPath="yes" Source="$(env.mediaBomberman)\perso\perso.fbx" />
                 </Component>
                 <Directory Id="dir0925327A07DA85895C63703AC90635E3" Name="texture">
                     <Directory Id="dir01C3C156CB97478F3EF63E319EEDB3F8" Name="diffuse">
-                        <Component Id="cmp51E112FBE60E4233E48A5E5DE2B92040" Guid="{0399B8A9-8EB8-4F0C-9C75-290AD20E0707}">
+                        <Component Id="cmp51E112FBE60E4233E48A5E5DE2B92040" Guid="{86B79624-4094-4B14-8A17-05648F2EDC83}">
                             <File Id="filDE22180B0330CCE0C30D2BC752972F6F" KeyPath="yes" Source="$(env.mediaBomberman)\perso\texture\diffuse\Blue.png" />
                         </Component>
-                        <Component Id="cmpDDE4103392FC39F033AA17F74337B4E6" Guid="{9A9174BB-E766-47BF-9E3B-CF130A7DBC35}">
+                        <Component Id="cmpDDE4103392FC39F033AA17F74337B4E6" Guid="{8BA257DC-D3C5-4056-9604-F5D9F903F945}">
                             <File Id="fil72C1F2FB8EA57427DC0579429FD6A6B0" KeyPath="yes" Source="$(env.mediaBomberman)\perso\texture\diffuse\Green.png" />
                         </Component>
-                        <Component Id="cmp4ABC0317E52AAB60BFC22EAC58E72D18" Guid="{E5B05D94-16BA-4EAE-A797-8BA11109CF73}">
+                        <Component Id="cmp4ABC0317E52AAB60BFC22EAC58E72D18" Guid="{6DFC16D8-0537-424A-B239-B00849D0D26E}">
                             <File Id="fil5D92FB26FC02F1DB54ACC68AB6E7036E" KeyPath="yes" Source="$(env.mediaBomberman)\perso\texture\diffuse\Orange.png" />
                         </Component>
-                        <Component Id="cmpBE0C2CD61ED42930B49AB0E2CF68B7AA" Guid="{3D497999-354F-4110-8B97-1CEA40E51AD4}">
+                        <Component Id="cmpBE0C2CD61ED42930B49AB0E2CF68B7AA" Guid="{E3759A4D-8743-4F5B-A382-D56892ADA537}">
                             <File Id="fil5A2BA91FC7392A726B25A803AB9E9939" KeyPath="yes" Source="$(env.mediaBomberman)\perso\texture\diffuse\Purple.png" />
                         </Component>
                     </Directory>
                     <Directory Id="dir81B1F9DA8F226BC2374CA1FC7DE803DD" Name="illum">
-                        <Component Id="cmp124013D98E4F271ECBE86009635B5D04" Guid="{4A508303-0206-4524-9A48-CBF282BC8B67}">
+                        <Component Id="cmp124013D98E4F271ECBE86009635B5D04" Guid="{EF460634-CDF2-42EA-A612-67773D50C32B}">
                             <File Id="filBAE4DF59F69B18BC59B9EBBC184C514E" KeyPath="yes" Source="$(env.mediaBomberman)\perso\texture\illum\Blue.png" />
                         </Component>
-                        <Component Id="cmp701346B2B8D8DC70E34B06EAA0D7D8A8" Guid="{DB79E45B-7570-4072-8A5B-7D6D6D603D61}">
+                        <Component Id="cmp701346B2B8D8DC70E34B06EAA0D7D8A8" Guid="{3E1DA3E4-B89A-4BFA-B09E-03D50C5CB570}">
                             <File Id="filE55D5F216E8AF0694E585D2898BD093C" KeyPath="yes" Source="$(env.mediaBomberman)\perso\texture\illum\Green.png" />
                         </Component>
-                        <Component Id="cmp6BF1E4CDFAA6015C9A0FD2D9FC0F67F9" Guid="{5F99EAAF-036B-49FD-A999-44E24C1763F3}">
+                        <Component Id="cmp6BF1E4CDFAA6015C9A0FD2D9FC0F67F9" Guid="{F319F801-358B-458E-BEB2-713081C1B7A1}">
                             <File Id="filA18C72AA32184996C54C8155F5E95155" KeyPath="yes" Source="$(env.mediaBomberman)\perso\texture\illum\Orange.png" />
                         </Component>
-                        <Component Id="cmpF7613346F3B97EEC22B39E020B0EBDE4" Guid="{71AD6174-0EDC-464C-881C-66D03B4CF92E}">
+                        <Component Id="cmpF7613346F3B97EEC22B39E020B0EBDE4" Guid="{F9757666-9F96-47C3-BC9E-83501AB04AA3}">
                             <File Id="fil2355068F9BC69B15E37E5AB68E3DD9D1" KeyPath="yes" Source="$(env.mediaBomberman)\perso\texture\illum\Purple.png" />
                         </Component>
                     </Directory>
                     <Directory Id="dir0BAA89F30864B64FA2B5A5A83D3DFBA8" Name="normal">
-                        <Component Id="cmp3A92E6A42C5B4B82EB646F2DE1724CDD" Guid="{9F29B47C-8C87-4C10-BE24-6FB3AF1FFE8C}">
+                        <Component Id="cmp3A92E6A42C5B4B82EB646F2DE1724CDD" Guid="{159D90F0-EE26-4F0C-B4A6-F5E95CCA54FA}">
                             <File Id="filE729BA485A37C88DDE09AB2F1A21CD31" KeyPath="yes" Source="$(env.mediaBomberman)\perso\texture\normal\normal.png" />
                         </Component>
                     </Directory>
                 </Directory>
             </Directory>
             <Directory Id="dir0C728094897019857540F11EFF0AA702" Name="pillier">
-                <Component Id="cmp1ED010E6F5474334178C735C9539A8D3" Guid="{B5CE9763-F36F-40C4-9AA4-A34967B5B5F2}">
+                <Component Id="cmp1ED010E6F5474334178C735C9539A8D3" Guid="{64855279-04A2-4DA2-BBA7-C5CA0B500C41}">
                     <File Id="filE81FB2C655C70F20235ED365B64C23F6" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\pillar.obj" />
                 </Component>
-                <Component Id="cmp38C0035B774B2AADE3EC92C49F308F34" Guid="{90975538-714F-4E1D-BBC5-88CB32705C7A}">
+                <Component Id="cmp38C0035B774B2AADE3EC92C49F308F34" Guid="{6A47FC36-1905-464D-84CB-5461F03B45FD}">
                     <File Id="fil55980849EA8F483F254620331726A353" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_alpha_Blue.png" />
                 </Component>
-                <Component Id="cmp1AFAF3471A32FD60EF623C9CA4F53E02" Guid="{B00BD415-7791-496C-B1EB-951F99099DD7}">
+                <Component Id="cmp1AFAF3471A32FD60EF623C9CA4F53E02" Guid="{768E3457-56D1-4098-B88F-718E67585E55}">
                     <File Id="fil727E029A281F2AF242E6918AE0D98E08" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_alpha_Green.png" />
                 </Component>
-                <Component Id="cmp073DB7FB8E0910AD02DC0BC28E7DAED1" Guid="{106965FA-1AEC-479C-A1D1-E5422EC0F44C}">
+                <Component Id="cmp073DB7FB8E0910AD02DC0BC28E7DAED1" Guid="{8974DB42-5087-411E-B027-B94F716C635A}">
                     <File Id="filCD06220B2A63BD20498FFB48FB87E4A7" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_alpha_Orange.png" />
                 </Component>
-                <Component Id="cmpB161CA8618AB577654596DA4198C3A28" Guid="{48B50780-8D58-4ECC-80AA-037280F11BA7}">
+                <Component Id="cmpB161CA8618AB577654596DA4198C3A28" Guid="{F5591A11-8678-4BFD-8C67-619954E7EEE4}">
                     <File Id="fil7EEDC7E28911FCE2A5F0A6CB97D5A87F" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_alpha_Purple.png" />
                 </Component>
-                <Component Id="cmpE9DEBE9DE6C5B502BA4DFE4A2B1BC1AE" Guid="{D296308B-A493-498A-A1E0-4167E5573949}">
+                <Component Id="cmpE9DEBE9DE6C5B502BA4DFE4A2B1BC1AE" Guid="{3EB1EA0D-99B6-472A-A692-C3AAE29D72F1}">
                     <File Id="filC2AA789B85FFD1913CF32EB22079DD48" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_Blue.png" />
                 </Component>
-                <Component Id="cmp0851D2DC5438BE36F08DC77A37CFC3B2" Guid="{79EB3D1F-75B1-4712-9E94-FCFBD9526E0F}">
+                <Component Id="cmp0851D2DC5438BE36F08DC77A37CFC3B2" Guid="{3FCDCFFE-45FC-4AEC-9A27-9B3FC28A07AA}">
                     <File Id="fil5DDF604D82FFCD88D8D4CB7CCAEB107D" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_Green.png" />
                 </Component>
-                <Component Id="cmp1CBC52EF8908E092D9332C3CEFB0B617" Guid="{2A15EA2F-F004-441A-9F28-FB8ED49BA0AE}">
+                <Component Id="cmp1CBC52EF8908E092D9332C3CEFB0B617" Guid="{6CEEE427-C05F-4D21-A36F-E62597E1CED9}">
                     <File Id="fil5597AFCBB5BC78168E5FBE15AB46D3F4" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_Orange.png" />
                 </Component>
-                <Component Id="cmpD7A69302578DFE62AF51DDAA9463C315" Guid="{C53CAA9C-C3B3-403C-A370-623A425DA087}">
+                <Component Id="cmpD7A69302578DFE62AF51DDAA9463C315" Guid="{A1F29043-B6E1-4BE1-AE06-2A11FFAC3653}">
                     <File Id="fil10D30C4ABA9FC7622E96E18574E3ED7D" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_Purple.png" />
                 </Component>
-                <Component Id="cmp946A303D5B47691A4BD193037315EE17" Guid="{AA0BCE4D-7CDD-428F-8D9E-3F767F240A77}">
+                <Component Id="cmp946A303D5B47691A4BD193037315EE17" Guid="{0AE283B7-45E4-4B3B-9537-D995654669C1}">
                     <File Id="filA83C75D2FF5E551268E5130A0F94F932" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_Selfillum_Blue.png" />
                 </Component>
-                <Component Id="cmp6CC06561EF88B1CA7FB09306CD376A24" Guid="{C8E6D743-195F-47BD-9181-3388637AB04E}">
+                <Component Id="cmp6CC06561EF88B1CA7FB09306CD376A24" Guid="{D7A89104-E69F-459C-B4E5-3B9CCFE10204}">
                     <File Id="fil4A69E29C5DDDBCE0F323A4E3CE754D07" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_Selfillum_Green.png" />
                 </Component>
-                <Component Id="cmp6B9C7230718ABF27F03DFD17651F4470" Guid="{3712CB25-156A-4664-9FDC-9326BCEF66E6}">
+                <Component Id="cmp6B9C7230718ABF27F03DFD17651F4470" Guid="{2F53D5C0-765C-4FB1-AE3B-FB2F46F70D35}">
                     <File Id="fil37131615A8A57837FFA67C74826A9B22" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_Selfillum_Orange.png" />
                 </Component>
-                <Component Id="cmp06B1FA9EC5DDAD4651CA7F087E7B9E09" Guid="{B06B8F42-8C52-4E79-9FD4-B3E89534F316}">
+                <Component Id="cmp06B1FA9EC5DDAD4651CA7F087E7B9E09" Guid="{790BA6AC-D2BA-4C73-965B-A1DEB3F21B3E}">
                     <File Id="filED2D65C12AEB05C2C7F61152F7CC5DFB" KeyPath="yes" Source="$(env.mediaBomberman)\pillier\Texture_pillier_Selfillum_Purple.png" />
                 </Component>
             </Directory>
             <Directory Id="dir1996C027828E516346CABEFB18E2F253" Name="powerup">
-                <Component Id="cmp01F3012E6A37612506B5172C7584D761" Guid="{6E7D0437-EF60-499D-B92C-53FB1A3A90E8}">
+                <Component Id="cmp01F3012E6A37612506B5172C7584D761" Guid="{8D321C41-2D28-4D46-8E87-FAC32F7B1DB7}">
                     <File Id="fil99254F61B4C5F2A904C97D126DF7E77C" KeyPath="yes" Source="$(env.mediaBomberman)\powerup\powerUpBomb.obj" />
                 </Component>
-                <Component Id="cmp75E0376AC3BFD7E34725D21220FA54E0" Guid="{CE2E3615-1A2D-4968-8BAF-0CEE2665BB5B}">
+                <Component Id="cmp75E0376AC3BFD7E34725D21220FA54E0" Guid="{A3E79420-B238-4D22-B0ED-F8D5D9E6F182}">
                     <File Id="fil1EB8F31102691775B8523E6960F03DE7" KeyPath="yes" Source="$(env.mediaBomberman)\powerup\powerUpP.obj" />
                 </Component>
-                <Component Id="cmpE919FE33C7E3DD92053BB1DA1FCB5084" Guid="{DD7A6525-02C8-4F30-A398-BF647EB727FD}">
+                <Component Id="cmpE919FE33C7E3DD92053BB1DA1FCB5084" Guid="{EA6BB1E8-5B1C-4290-AB0C-8643699FB63A}">
                     <File Id="filFF036265FD96FD3891C87E9CCF47FB4E" KeyPath="yes" Source="$(env.mediaBomberman)\powerup\powerUpSpeed.obj" />
                 </Component>
             </Directory>
             <Directory Id="dir7ECB86C403F426750B9D9031C76D1478" Name="sample">
-                <Component Id="cmpBC5173928BEA253474C654105DFB1A8F" Guid="{AEA118B6-982D-453F-BD51-54B3CCF0B87C}">
+                <Component Id="cmpBC5173928BEA253474C654105DFB1A8F" Guid="{764A8FDC-0E11-49A2-9C69-FEBC4B161889}">
                     <File Id="filF476335B5DDE28CF45D8347F414D9DBD" KeyPath="yes" Source="$(env.mediaBomberman)\sample\12EndOfLine.wav" />
                 </Component>
-                <Component Id="cmp29029919EFEC27B4BAB3B21346572CA4" Guid="{C26EFA58-B29E-476C-9BD3-74A49A05C4C4}">
+                <Component Id="cmp29029919EFEC27B4BAB3B21346572CA4" Guid="{F0B55906-DE5E-47D9-84F6-8365DA9CF7DD}">
                     <File Id="fil3C456737E3FC774A8B81A2DBDE81AC99" KeyPath="yes" Source="$(env.mediaBomberman)\sample\Derezzed.wav" />
                 </Component>
-                <Component Id="cmpC554E0C7442DCB5F1591269217D81128" Guid="{4F3FB20D-E240-46C7-B6AD-5389A5DA49E4}">
+                <Component Id="cmpC554E0C7442DCB5F1591269217D81128" Guid="{17A06554-3081-4C91-8DF9-9C0C24CCDC11}">
                     <File Id="filD75BF466B328D63F7354DD61E38DC2EF" KeyPath="yes" Source="$(env.mediaBomberman)\sample\TronLegacy.wav" />
                 </Component>
             </Directory>
             <Directory Id="dirBDF4E3D752878AC5BBADE637CA295A6D" Name="scriptAI">
-                <Component Id="cmp8D2FDFAE86758ECDFBDAEC20F9FD7BFC" Guid="{679A90D3-6BF7-4AA3-A973-1C8C22B58ADB}">
+                <Component Id="cmp8D2FDFAE86758ECDFBDAEC20F9FD7BFC" Guid="{912C990E-8A3E-407B-868C-17DFC1260538}">
                     <File Id="fil2CC4DCE27BB4DC5E30ADF8371009CF08" KeyPath="yes" Source="$(env.mediaBomberman)\scriptAI\iaeasy.lua" />
                 </Component>
-                <Component Id="cmp0EDC8D5DCC9DE0CA6399D7495BCE39A4" Guid="{D1A44CBC-EAD1-4539-B499-1160E1E4A75C}">
+                <Component Id="cmp0EDC8D5DCC9DE0CA6399D7495BCE39A4" Guid="{554FEEF7-127F-4F11-BB17-55185F7B99E8}">
                     <File Id="fil567C87A33E935815214D636B0CD32FDC" KeyPath="yes" Source="$(env.mediaBomberman)\scriptAI\iahard.lua" />
                 </Component>
-                <Component Id="cmp3991E502F718DA44C0D0EE52601EF19E" Guid="{E0FF917E-94BA-4C2E-B03A-D2621E1CCF08}">
+                <Component Id="cmp3991E502F718DA44C0D0EE52601EF19E" Guid="{8EF7BF10-003E-47C1-ADF7-829366E93020}">
                     <File Id="fil4B8DC5AAA0DAD4BA60E9DFA0DFA58C63" KeyPath="yes" Source="$(env.mediaBomberman)\scriptAI\iamiddle.lua" />
                 </Component>
             </Directory>
             <Directory Id="dir34934BD9B15EC7E4A49192DA1B3614C2" Name="sound">
-                <Component Id="cmp82E8B1E25B8822F380372A4BCD203245" Guid="{DF3B28EF-844F-4167-8AD0-6DE21AFFB9A1}">
+                <Component Id="cmp82E8B1E25B8822F380372A4BCD203245" Guid="{1471DA60-8B38-49EC-BA9F-88D628E16C48}">
                     <File Id="fil6F9210DE9639BCEE0F38FB027CD74828" KeyPath="yes" Source="$(env.mediaBomberman)\sound\death.wav" />
                 </Component>
-                <Component Id="cmp9828249B0C5457293ACDC0A2ACB8FAD5" Guid="{E7D4D129-06D2-459D-A25B-518F4F2A1C3E}">
+                <Component Id="cmp9828249B0C5457293ACDC0A2ACB8FAD5" Guid="{F6C7C686-7229-4C1C-A758-5141A8BC880C}">
                     <File Id="fil2FD4E42C91FEE010601B16959306EC08" KeyPath="yes" Source="$(env.mediaBomberman)\sound\explosion.wav" />
                 </Component>
             </Directory>
             <Directory Id="dirDFEB1C348D3B9D57AAA074530405F67F" Name="texture">
                 <Directory Id="dir76ED906C6AC570C1AFC4B35D9D16D594" Name="diffuse">
-                    <Component Id="cmp2B2FBEC9C96B453E4D0CB608D24E5BA9" Guid="{1F9EC331-2AC3-431D-85B1-89DC70BD6AFE}">
+                    <Component Id="cmp2B2FBEC9C96B453E4D0CB608D24E5BA9" Guid="{D113CBE2-8903-4B84-BC27-862A8ABB5FC8}">
                         <File Id="fil0B88014D6BE2E3EB9D23AD4E47D0CF49" KeyPath="yes" Source="$(env.mediaBomberman)\texture\diffuse\text_perso_blue.png" />
                     </Component>
-                    <Component Id="cmpDC9CE4B80C83EA21F723A79607EBDBDF" Guid="{DF9954D5-7C4F-4114-92DC-BD6066D22ACE}">
+                    <Component Id="cmpDC9CE4B80C83EA21F723A79607EBDBDF" Guid="{3B8AF3FF-8AF1-4110-B020-12DF49CA50C8}">
                         <File Id="filC75C8A968FF1D1DBE16AC7FFC7ABC307" KeyPath="yes" Source="$(env.mediaBomberman)\texture\diffuse\text_perso_green.png" />
                     </Component>
-                    <Component Id="cmp52F58EF1E02450F35BDDACA435A43B4A" Guid="{A5F7B7E2-73CD-44FC-95BD-6C067B334501}">
+                    <Component Id="cmp52F58EF1E02450F35BDDACA435A43B4A" Guid="{306AB9E0-D772-410D-956E-E18EFAE70DAC}">
                         <File Id="fil902671AA089DDD7D0BA7E9883A39D305" KeyPath="yes" Source="$(env.mediaBomberman)\texture\diffuse\text_perso_orange.png" />
                     </Component>
-                    <Component Id="cmp0197C9DF1AB9CFDA5B9B3E238E7D4751" Guid="{801792AC-FF85-473C-9957-EAE74EBDAB1D}">
+                    <Component Id="cmp0197C9DF1AB9CFDA5B9B3E238E7D4751" Guid="{E09DBEF0-0B2A-4CCC-9EFB-704AA6F0161D}">
                         <File Id="filB0746A5A79A55A661516FC833E6095DD" KeyPath="yes" Source="$(env.mediaBomberman)\texture\diffuse\text_perso_purple.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dir4018190D699640842AB586C752D29696" Name="iridescent map">
                     <Directory Id="dir96BA861354B71103A573C34B7A786D19" Name="png">
-                        <Component Id="cmp28C8A29FE4AC84099DC9EF516B144301" Guid="{0E041F24-BFF6-4348-8A55-8DEF3EABF9DE}">
+                        <Component Id="cmp28C8A29FE4AC84099DC9EF516B144301" Guid="{6C1E3608-D6D6-4642-BE59-8D350143E9CB}">
                             <File Id="fil206553C9038B1ADAD59DD4717E08C281" KeyPath="yes" Source="$(env.mediaBomberman)\texture\iridescent map\png\bleu.png" />
                         </Component>
-                        <Component Id="cmp63420E028FC2944F75731104C3AF6907" Guid="{4EA90604-B68D-47CE-BD42-550D337AABEE}">
+                        <Component Id="cmp63420E028FC2944F75731104C3AF6907" Guid="{72EBFB69-93F4-4C4A-BACA-6F301767A994}">
                             <File Id="filC0B4E2DF9FDFAB3B48300AC0E356E0B4" KeyPath="yes" Source="$(env.mediaBomberman)\texture\iridescent map\png\orange iridescent.png" />
                         </Component>
-                        <Component Id="cmp389F84869050F505D4DE93AAAA3B98E4" Guid="{620071C3-9A18-4039-A577-3223A399384F}">
+                        <Component Id="cmp389F84869050F505D4DE93AAAA3B98E4" Guid="{65116636-8165-4B42-A88A-C2822FBFED37}">
                             <File Id="fil39129CDFA3780B555CB1BC888A9B59A6" KeyPath="yes" Source="$(env.mediaBomberman)\texture\iridescent map\png\vert iridescent.png" />
                         </Component>
-                        <Component Id="cmp959D05DB373FF975ECA1A6CD1F5152C3" Guid="{6CABECAA-D9F8-4F0C-9320-16ED1F7B6EED}">
+                        <Component Id="cmp959D05DB373FF975ECA1A6CD1F5152C3" Guid="{10862744-84EC-4EA7-9FA3-07BED395CD42}">
                             <File Id="filFC7733500245DEE7C909A3688095CDDF" KeyPath="yes" Source="$(env.mediaBomberman)\texture\iridescent map\png\violet iridescent.png" />
                         </Component>
                     </Directory>
                     <Directory Id="dir05C5EBFAF79D5F967C5AF1DCB96DA661" Name="psd">
-                        <Component Id="cmpBCBD2E16C45BCC199258EE0CDC615729" Guid="{AB8DA89B-A90C-4F34-9509-62495DD43DEB}">
+                        <Component Id="cmpBCBD2E16C45BCC199258EE0CDC615729" Guid="{C1533A91-8386-4E7D-B584-E2ACD2CC76CF}">
                             <File Id="filA1A41D1DE2495750D5201939F84BF5C8" KeyPath="yes" Source="$(env.mediaBomberman)\texture\iridescent map\psd\orange iridescent.psd" />
                         </Component>
                     </Directory>
                 </Directory>
                 <Directory Id="dir54B97B1FBDC2CE64CD77488D609F83A7" Name="normal map">
-                    <Component Id="cmpC3A3D36AC4F185AA6875D633EA8C4C27" Guid="{5567B5D3-4917-4AF4-9E70-F8A71FA9763A}">
+                    <Component Id="cmpC3A3D36AC4F185AA6875D633EA8C4C27" Guid="{9287557C-9470-43FF-91AE-AE2FF9E8C1A3}">
                         <File Id="filF1E6F98A501234C9748F3FF68F631471" KeyPath="yes" Source="$(env.mediaBomberman)\texture\normal map\normal_map_ perso_normals.png" />
                     </Component>
-                    <Component Id="cmp43296A03218EA1B29CE536BC545F73E7" Guid="{F140C227-5C54-484B-ADCD-93CCBB747D3D}">
+                    <Component Id="cmp43296A03218EA1B29CE536BC545F73E7" Guid="{4362D243-4721-4C17-A2EE-66DF4776668F}">
                         <File Id="fil0BEF5839EEF5F74E6FD4918FE8EF25E1" KeyPath="yes" Source="$(env.mediaBomberman)\texture\normal map\normal_map_ perso_normals.psd" />
                     </Component>
                 </Directory>
             </Directory>
             <Directory Id="dirBA0BA54EF9C47B2EC6FAAAF4BFEB3408" Name="ui">
                 <Directory Id="dir5BDFF04638BE376C111A989528068820" Name="controls">
-                    <Component Id="cmp21E29112FA7E1A2B11FA328AE46FB8BA" Guid="{46C4F5CF-6583-4BC0-BE9D-1B40A1487AF2}">
+                    <Component Id="cmp21E29112FA7E1A2B11FA328AE46FB8BA" Guid="{00B8CE97-E584-4207-BDEC-C130A4E5A478}">
                         <File Id="filFD6CE5C73315171236453F68040DF058" KeyPath="yes" Source="$(env.mediaBomberman)\ui\controls\back.png" />
                     </Component>
-                    <Component Id="cmpE550DA6F8957B274DD23F7DBA114B30F" Guid="{B77DF85F-92C5-4526-92D6-D64788CEC484}">
+                    <Component Id="cmpE550DA6F8957B274DD23F7DBA114B30F" Guid="{7DA64B2B-7173-415F-AB01-9501972A626C}">
                         <File Id="filD18355812E62B064B2D30BADE45CA0B6" KeyPath="yes" Source="$(env.mediaBomberman)\ui\controls\controls.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dir3D988C768BF6351298DAB52254BAF09C" Name="credit">
-                    <Component Id="cmp7E7B6616A0B0595DCF0A8795A2B7B9AC" Guid="{32A8F2EA-8C9E-4329-ABEE-E9A7CE8EA894}">
+                    <Component Id="cmp7E7B6616A0B0595DCF0A8795A2B7B9AC" Guid="{368FC719-FB3C-4D2B-979C-ED3298AB17F6}">
                         <File Id="fil58B107B56DFBEDCC9ADC88AAB5666708" KeyPath="yes" Source="$(env.mediaBomberman)\ui\credit\credits.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dir981811DE88B865EABA4DC817F601202F" Name="echap">
-                    <Component Id="cmp7C463A7AD73041F91FB3CC8655D4E9CD" Guid="{3FFF8004-2DDB-46B2-BBC4-EAB148C4DC3F}">
+                    <Component Id="cmp7C463A7AD73041F91FB3CC8655D4E9CD" Guid="{102C0610-EAF0-40E5-8437-8BBE59CA3068}">
                         <File Id="fil09AEE06A5FA16568667ADF88CF00EAEF" KeyPath="yes" Source="$(env.mediaBomberman)\ui\echap\labelPause.png" />
                     </Component>
-                    <Component Id="cmpB0B6C5EFEF17FDBE0A053814029423B5" Guid="{4EE685CB-7D30-49C0-86F9-29DEAD91E9DA}">
+                    <Component Id="cmpB0B6C5EFEF17FDBE0A053814029423B5" Guid="{9E593BE8-5335-4279-8066-25BCA4A2C649}">
                         <File Id="filDF654D57E0F1BBEDF16B291C829082B4" KeyPath="yes" Source="$(env.mediaBomberman)\ui\echap\menu.png" />
                     </Component>
-                    <Component Id="cmp94A4F291EF959D68207A50C9EA44799C" Guid="{AE0B015E-2645-41A7-8E04-00A1F9DDB7E7}">
+                    <Component Id="cmp94A4F291EF959D68207A50C9EA44799C" Guid="{6699C8F5-364B-4AEA-8E1B-2306842CC334}">
                         <File Id="filF9EF36E1C055454C6DE1D0E06190D5AE" KeyPath="yes" Source="$(env.mediaBomberman)\ui\echap\resume.png" />
                     </Component>
-                    <Component Id="cmp809E295A2E206793AAA2BB36630B33DB" Guid="{BC3DF915-3869-4385-9A10-724371425864}">
+                    <Component Id="cmp809E295A2E206793AAA2BB36630B33DB" Guid="{9AC59F73-3C78-4366-8E45-39ED1B7EFD2E}">
                         <File Id="fil597C3E965049BE6ABEBC7A62B365957A" KeyPath="yes" Source="$(env.mediaBomberman)\ui\echap\save.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dirE5608B511AAA3CC8241545D62388A54C" Name="endgame">
-                    <Component Id="cmpE692647E047621D762A9FD8129EBBEA1" Guid="{6CDA0AAB-3975-4B77-82D2-F53E3FE13155}">
+                    <Component Id="cmpE692647E047621D762A9FD8129EBBEA1" Guid="{0DE289E9-8D1C-48C7-8D64-D494DD69178A}">
                         <File Id="fil904D1A507893AC58B4005274F3F07578" KeyPath="yes" Source="$(env.mediaBomberman)\ui\endgame\draw.png" />
                     </Component>
-                    <Component Id="cmpA61AE65D4001A0972170FE3A803B494D" Guid="{D52C5C35-7F01-419A-9830-250368A7847E}">
+                    <Component Id="cmpA61AE65D4001A0972170FE3A803B494D" Guid="{59656212-38DC-4A98-A63D-D7578C067798}">
                         <File Id="fil76E7D57E2D4D205A49F036AE91159114" KeyPath="yes" Source="$(env.mediaBomberman)\ui\endgame\menu.png" />
                     </Component>
-                    <Component Id="cmpCE23F6B7961A424428AD4EBC69A23194" Guid="{0BDADD1A-9075-44E1-A36E-70824004560F}">
+                    <Component Id="cmpCE23F6B7961A424428AD4EBC69A23194" Guid="{9D5E3696-F8EC-4D6E-A720-E3F04C3EBC8F}">
                         <File Id="fil206628609F5E8253DB2E2321E37A20CF" KeyPath="yes" Source="$(env.mediaBomberman)\ui\endgame\replay.png" />
                     </Component>
-                    <Component Id="cmp6546E0B2B0908B503C86918B04519C54" Guid="{21FAD2F0-C8B6-4C87-9F4E-01B3F177C438}">
+                    <Component Id="cmp6546E0B2B0908B503C86918B04519C54" Guid="{A72BB019-BDE4-4599-A0BB-8DDAA51EDD61}">
                         <File Id="fil75C89BA71B6651EE33A74C843C361875" KeyPath="yes" Source="$(env.mediaBomberman)\ui\endgame\victory.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dirCA23913BD3CDFBECA7B2FF2F5EC4A5C5" Name="hud">
-                    <Component Id="cmp58DD4AF8CB9BA517E3114D75EAD42E26" Guid="{0F19F744-C08F-4462-A089-6247FAF9078E}">
+                    <Component Id="cmp58DD4AF8CB9BA517E3114D75EAD42E26" Guid="{EA7B1259-2F56-472E-867A-E078393C3433}">
                         <File Id="fil5FA6BF0A4A85F8C2AB20982C08B3DBAB" KeyPath="yes" Source="$(env.mediaBomberman)\ui\hud\bleu.png" />
                     </Component>
-                    <Component Id="cmpEDC3C0D1CC141BF816CDEEB417E57D20" Guid="{B034A769-4867-481D-B0E4-8F8366D1B8A1}">
+                    <Component Id="cmpEDC3C0D1CC141BF816CDEEB417E57D20" Guid="{D58A5C5E-0945-45C0-97A3-1CB982BD0B4B}">
                         <File Id="filBEC289EEE276299EE838463244D3C13B" KeyPath="yes" Source="$(env.mediaBomberman)\ui\hud\green.png" />
                     </Component>
-                    <Component Id="cmp5D60A491B3F78FF588F5CF7F0E4DE5A5" Guid="{7787A5B9-EDED-43C4-BC8B-06230BDB34CA}">
+                    <Component Id="cmp5D60A491B3F78FF588F5CF7F0E4DE5A5" Guid="{E792FC31-5281-4FF1-B4C9-73B266A4913E}">
                         <File Id="fil284D40B6A9AE4FF08FB0AFCE6E919939" KeyPath="yes" Source="$(env.mediaBomberman)\ui\hud\megatron26.bmp" />
                     </Component>
-                    <Component Id="cmp9AC99F159AE6A3A4F7883371E5040A5A" Guid="{8AC7692D-AAB0-4939-BBF8-36DC3659C27A}">
+                    <Component Id="cmp9AC99F159AE6A3A4F7883371E5040A5A" Guid="{8CE9C160-57B6-460F-A01C-32DD4FAD4B00}">
                         <File Id="fil608A058C7FA981EE26395B0657072A10" KeyPath="yes" Source="$(env.mediaBomberman)\ui\hud\megatron36.bmp" />
                     </Component>
-                    <Component Id="cmpEEF5F49DAC498F38784FBA17661C7439" Guid="{346E79E7-2594-4175-9C74-18C133608190}">
+                    <Component Id="cmpEEF5F49DAC498F38784FBA17661C7439" Guid="{62A9DBAF-B1A5-40E6-8C2B-945C147DC2BB}">
                         <File Id="fil751833B0E88D54569302B9432563BA0B" KeyPath="yes" Source="$(env.mediaBomberman)\ui\hud\megatronC20.bmp" />
                     </Component>
-                    <Component Id="cmp643CFD3730CAD26566BADCB4AF85E237" Guid="{15B30C2A-2DA9-4D73-9A5E-48EA3E77D433}">
+                    <Component Id="cmp643CFD3730CAD26566BADCB4AF85E237" Guid="{198921AD-354E-4FF2-9082-F0A82E8A90B1}">
                         <File Id="fil1D3BEA7D5AAD27441F0F9F92464E0F32" KeyPath="yes" Source="$(env.mediaBomberman)\ui\hud\megatronC48.bmp" />
                     </Component>
-                    <Component Id="cmp7E39E3933C09A962D41719920AF57B84" Guid="{40EF1E5E-30F4-4259-AAFA-1EF1AAAF79B7}">
+                    <Component Id="cmp7E39E3933C09A962D41719920AF57B84" Guid="{62245E3E-D707-4934-9C7A-D66B4BDE520A}">
                         <File Id="filDEE6873D4AB2BD949878BCCBCE94DA39" KeyPath="yes" Source="$(env.mediaBomberman)\ui\hud\orange.png" />
                     </Component>
-                    <Component Id="cmp399A765BF574E944070E4BD03B545529" Guid="{9C6D102C-2473-43A0-83F3-ACB0D31C8547}">
+                    <Component Id="cmp399A765BF574E944070E4BD03B545529" Guid="{2C9FC712-14CD-4427-91F6-67280D57EE5C}">
                         <File Id="fil37A35ACF582727340EF8D411E8B21E3A" KeyPath="yes" Source="$(env.mediaBomberman)\ui\hud\purple.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dir05448A67E8DE4DD2A448C425986FE6AB" Name="lobby">
-                    <Component Id="cmpC3506B134E00FC7A93C50E28C252C5FE" Guid="{C6D0FDE1-15F6-4BF1-BB9B-7BB9A4C843F4}">
+                    <Component Id="cmpC3506B134E00FC7A93C50E28C252C5FE" Guid="{913C0122-684B-4B6F-B5C5-1650D05A1A27}">
                         <File Id="filA6BDDF68CCB96E7EB3B4A338C901E8D3" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\bleu.png" />
                     </Component>
-                    <Component Id="cmp03CE14F8910BEAA0C5CDA84F92A0AA2B" Guid="{ACA53EE5-4877-411C-9E47-41A978BC042A}">
+                    <Component Id="cmp03CE14F8910BEAA0C5CDA84F92A0AA2B" Guid="{2F9063FE-0711-4709-A2E8-8B3B97BE3089}">
                         <File Id="filE1CFC134B097EE191C57BA43F550BDD9" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\buttonDown.png" />
                     </Component>
-                    <Component Id="cmpEF14D0D15EDA3337B4824F935826B315" Guid="{AB8A1D59-0B8B-4A9F-AD8B-6F981A468C5E}">
+                    <Component Id="cmpEF14D0D15EDA3337B4824F935826B315" Guid="{AAFDF9B9-1CD4-4330-8360-1199EFA2B692}">
                         <File Id="fil355C0BBBBF895A8D207598AAD9F0780A" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\buttonUp.png" />
                     </Component>
-                    <Component Id="cmp15697EFD6347D8261916F18800E8238A" Guid="{E6016A4F-E423-4045-A5C2-2EE9A2E58147}">
+                    <Component Id="cmp15697EFD6347D8261916F18800E8238A" Guid="{B054FAE1-C9AF-42A8-B42B-455EA5E5135A}">
                         <File Id="fil6AC3204FD44D4F3906C9F94A89AE0368" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\calibri26.bmp" />
                     </Component>
-                    <Component Id="cmp2C25E8E284352619A20EFD2CA2B9A58C" Guid="{1828B0E2-B47D-4169-B226-1E375B6282D8}">
+                    <Component Id="cmp2C25E8E284352619A20EFD2CA2B9A58C" Guid="{C2D21558-B3DE-4F71-A392-818A5BC3B431}">
                         <File Id="fil126A196D60AD13463B1FA325D1216D68" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\calibri32.bmp" />
                     </Component>
-                    <Component Id="cmpD4CFBA83966A33657D28F60E7A1CD119" Guid="{66A173A9-F8EA-45E8-8E62-D9E116046F74}">
+                    <Component Id="cmpD4CFBA83966A33657D28F60E7A1CD119" Guid="{0D1BE890-47F4-4C07-8AB7-BFE435966260}">
                         <File Id="filF30351869D14C1BD17281BB8F67A6BD4" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\green.png" />
                     </Component>
-                    <Component Id="cmp56E66073FD9AE339D441DF7A692D8423" Guid="{A1404882-47EA-462A-A5FA-7941D461BF8A}">
+                    <Component Id="cmp56E66073FD9AE339D441DF7A692D8423" Guid="{C431E842-8161-4679-A418-B59493766B2C}">
                         <File Id="fil58764E837E54AC737B08148738E31F83" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\labelControler.png" />
                     </Component>
-                    <Component Id="cmp3C841B08DD8274C5E1B94F6609DF0B8B" Guid="{52CC9769-B1EA-4F77-983B-6B90C5A7FB02}">
+                    <Component Id="cmp3C841B08DD8274C5E1B94F6609DF0B8B" Guid="{7C0DD1DB-FF21-4968-B898-89C2F87D1978}">
                         <File Id="filCB3191327853E84DCBDD3C3351E0151C" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\labelPerso.png" />
                     </Component>
-                    <Component Id="cmp6A9F8AEB5283DF109029275F197EA63A" Guid="{A1F080AD-D794-49AB-8636-AE0320D8C9C6}">
+                    <Component Id="cmp6A9F8AEB5283DF109029275F197EA63A" Guid="{55CE16E5-03F5-4F3C-B427-8C34F89C3AA3}">
                         <File Id="fil9E263DD0943B1772A304087BC9D68E87" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\orange.png" />
                     </Component>
-                    <Component Id="cmp33966B6E512EF7671459A8F24B94A02A" Guid="{FA928197-12CA-4E34-930C-23788CE64C4C}">
+                    <Component Id="cmp33966B6E512EF7671459A8F24B94A02A" Guid="{55E25BF8-070A-4CED-A272-9291572FD863}">
                         <File Id="fil2FFD1C98787379D21F82A44BCCA671CB" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\perso.png" />
                     </Component>
-                    <Component Id="cmpEF78EBC598670E3B715AEEC46581CCE8" Guid="{37514336-02D3-4E7F-AC3F-AEB3C7B84AAC}">
+                    <Component Id="cmpEF78EBC598670E3B715AEEC46581CCE8" Guid="{EF5173E1-F5F6-4FC9-87B1-40A63C3F292C}">
                         <File Id="filAE0B35982BEBFEC2FAF60583A229980C" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\playButton.png" />
                     </Component>
-                    <Component Id="cmpDF814790E3CC52A5BCD96A94AFB05804" Guid="{6950B791-DE1D-429E-B0FC-74DC7D232CFD}">
+                    <Component Id="cmpDF814790E3CC52A5BCD96A94AFB05804" Guid="{2EA499F0-FFE5-4C5E-8461-1AE5E39954DE}">
                         <File Id="fil8F7425C9E504FEB08E3B000CADDC68BF" KeyPath="yes" Source="$(env.mediaBomberman)\ui\lobby\purple.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dirEED93391C4BA8413F6CBADD9A1C4A870" Name="main">
-                    <Component Id="cmp9572781F1EAD9CCD7E627605CB671961" Guid="{01CA86A7-FC97-41E9-A3D7-F6A940019C29}">
+                    <Component Id="cmp9572781F1EAD9CCD7E627605CB671961" Guid="{F67B2BCA-6E3D-45B3-AD10-22A72A0C2328}">
                         <File Id="fil633802EE59906A7E01318E758193DA41" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\alveole.png" />
                     </Component>
-                    <Component Id="cmpA02AAB9DC26AEB070F63EFA539E57D5E" Guid="{94E79FC3-D75C-4D5A-A5C4-4DA54E1BE5F6}">
+                    <Component Id="cmpA02AAB9DC26AEB070F63EFA539E57D5E" Guid="{62B8273F-3B58-4938-9521-DBFFE6434FD3}">
                         <File Id="fil237D1C96B605E51B75678DBD95E5C6A1" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\astuce.png" />
                     </Component>
-                    <Component Id="cmp7B230F39E0702032B756B1C98F4A4E1C" Guid="{47E03282-A545-49BB-B444-9F0B2B606AA6}">
+                    <Component Id="cmp7B230F39E0702032B756B1C98F4A4E1C" Guid="{33818BA8-BA64-4F4B-BEE7-36710473FA8C}">
                         <File Id="filB1754066B9FD3A2C8FF6466A9E73FD6B" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\credit.png" />
                     </Component>
-                    <Component Id="cmpAB36B16D7AB888DD236B3D3BDDE211B1" Guid="{04CF932F-3F4F-46AC-9567-56927311D1C8}">
+                    <Component Id="cmpAB36B16D7AB888DD236B3D3BDDE211B1" Guid="{58518966-FB9C-4A71-B894-CE9BD4203FF0}">
                         <File Id="filC0896F28B86F402004C4A5DC5B7114EA" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\exit.png" />
                     </Component>
-                    <Component Id="cmpD302AD49D9D8313290E7664080293362" Guid="{3D877A12-1B49-467A-BF90-F484D9607224}">
+                    <Component Id="cmpD302AD49D9D8313290E7664080293362" Guid="{242D9B73-6551-4F0E-9113-B44D4C94624B}">
                         <File Id="fil6448AB0395EF1F6E9CAAEA5DC0E9802A" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\gamepad.png" />
                     </Component>
-                    <Component Id="cmpAA0457E6E386F85E4B12A0EA7793F408" Guid="{91CE41CD-E5C7-447A-9DDF-5E7EC3A50AEC}">
+                    <Component Id="cmpAA0457E6E386F85E4B12A0EA7793F408" Guid="{EE33F946-5680-4C21-9760-439227FFCA45}">
                         <File Id="filCE5882B9F41250BC5DE1517F842407A1" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\pause.png" />
                     </Component>
-                    <Component Id="cmpC4F875F2C2EB44130F8C53F7C940D69C" Guid="{CDA3A859-E807-481D-93CC-255EF1471F72}">
+                    <Component Id="cmpC4F875F2C2EB44130F8C53F7C940D69C" Guid="{BE1D5835-8820-40FC-8F0A-1EAC77AE193B}">
                         <File Id="filF6B202F0B2C8E2209B8B0DB49EAB093E" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\play.png" />
                     </Component>
-                    <Component Id="cmpFDAEB2E2074F6BD24B578200D2A907A5" Guid="{43917ACE-D75B-46A3-8C69-42933ED871FF}">
+                    <Component Id="cmpFDAEB2E2074F6BD24B578200D2A907A5" Guid="{63A6BD8F-226A-459E-AE22-86D79F5FED47}">
                         <File Id="fil4467AF6C3B35F2377A5D2BB99C9B50D9" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\rank.png" />
                     </Component>
-                    <Component Id="cmpD4D4962C73DE2D5AEA2F0A71A138BD25" Guid="{50421C00-A1E0-428B-B38E-3032315D7003}">
+                    <Component Id="cmpD4D4962C73DE2D5AEA2F0A71A138BD25" Guid="{95177A97-E5CB-4429-ADEB-4872DE38803F}">
                         <File Id="filF7C17694CA1DC34AACFEE88EADBD0CB5" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\settings.png" />
                     </Component>
-                    <Component Id="cmp5C4CF6CFE4B9AD699F08ECAF4722D993" Guid="{94B964F4-4325-4DC0-8E8E-10F87D5C9CFF}">
+                    <Component Id="cmp5C4CF6CFE4B9AD699F08ECAF4722D993" Guid="{51279FA9-B93A-4B3E-A3AA-ED3DE8BEE0A7}">
                         <File Id="fil4AE922C0C4321222F884AFC3D9E97F9D" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\tron36.bmp" />
                     </Component>
-                    <Component Id="cmpAE45DA56582EE48338CAFA94B908757D" Guid="{CF9AC998-C78C-4724-B22C-5151990C2C3C}">
+                    <Component Id="cmpAE45DA56582EE48338CAFA94B908757D" Guid="{A9BE7EB9-A95F-4822-B3AC-19D5F59F0412}">
                         <File Id="fil88E61D680480278DD7604CFB1040D39B" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\tron36.png" />
                     </Component>
-                    <Component Id="cmpCC4D9C550A1FD5B11F5BA6484B5B65AE" Guid="{FAEE64C1-FD8D-4084-BBB4-A6BFDC558E87}">
+                    <Component Id="cmpCC4D9C550A1FD5B11F5BA6484B5B65AE" Guid="{5E8E86C5-564C-4105-9CF0-105AE58DF5E8}">
                         <File Id="filB62118FFDAE8E58AEE79BBEB85317D24" KeyPath="yes" Source="$(env.mediaBomberman)\ui\main\tron48.bmp" />
                     </Component>
                 </Directory>
                 <Directory Id="dir6F17082B3D65C991B9AE3DDC64920CB3" Name="mode">
-                    <Component Id="cmp41F26679ABB8E2E84A0ADB97ABD98768" Guid="{E4A09DA3-587E-4633-8218-34EB42EBDECB}">
+                    <Component Id="cmp41F26679ABB8E2E84A0ADB97ABD98768" Guid="{07BFBBE8-2657-4E34-816B-A29BD2C6B313}">
                         <File Id="fil214DE87F54A0FBE4D17390AF5596D290" KeyPath="yes" Source="$(env.mediaBomberman)\ui\mode\back.png" />
                     </Component>
-                    <Component Id="cmp52587346A7465F128641E469E32DD6C6" Guid="{98786F2C-EED3-472D-BBFC-18D89693DC3C}">
+                    <Component Id="cmp52587346A7465F128641E469E32DD6C6" Guid="{77AB2166-64A8-4A1B-B1A2-74C69A000CE0}">
                         <File Id="filC579C3C1613D48F46A5742EF7D45EE47" KeyPath="yes" Source="$(env.mediaBomberman)\ui\mode\background.png" />
                     </Component>
-                    <Component Id="cmpE6BA4EF91C49F23525562F8CEA8CCB1F" Guid="{75960D25-1AE8-481C-B91B-A86EDB1C9ED2}">
+                    <Component Id="cmpE6BA4EF91C49F23525562F8CEA8CCB1F" Guid="{26331F69-AA53-4678-A229-B9284368016A}">
                         <File Id="fil07F9E3CA4A88AA6B655D30446FF6EB16" KeyPath="yes" Source="$(env.mediaBomberman)\ui\mode\label_back.png" />
                     </Component>
-                    <Component Id="cmpE330F894DB1F4FC0735A5C97CD924B36" Guid="{213D5F89-D9D5-458B-B734-1898815B8766}">
+                    <Component Id="cmpE330F894DB1F4FC0735A5C97CD924B36" Guid="{98D28D18-7963-4B24-8E45-C46603B04862}">
                         <File Id="filCEEA10A1306B5B6FB886F34AE00A2460" KeyPath="yes" Source="$(env.mediaBomberman)\ui\mode\label_mode.png" />
                     </Component>
-                    <Component Id="cmp8D80576C2940F5331B8FFD2948EC5D9E" Guid="{864BEB16-1AE6-46AF-8B26-540BE5193CF1}">
+                    <Component Id="cmp8D80576C2940F5331B8FFD2948EC5D9E" Guid="{95B9B775-6B6D-474B-AB6B-28C732D20453}">
                         <File Id="fil36F62AF6B8AC25DAA94A88B69E9511C6" KeyPath="yes" Source="$(env.mediaBomberman)\ui\mode\multi.png" />
                     </Component>
-                    <Component Id="cmpF40200F5550DEB3ED7475386159ADC28" Guid="{68F19787-8798-4150-9ECA-E960CAA4BC7C}">
+                    <Component Id="cmpF40200F5550DEB3ED7475386159ADC28" Guid="{6923F6F4-6C46-4C6B-8327-846DB180B415}">
                         <File Id="filF5F57378E9E5DD134B06A02D14672E2C" KeyPath="yes" Source="$(env.mediaBomberman)\ui\mode\solo.png" />
                     </Component>
-                    <Component Id="cmpE5B48CF145FABD08A9A151EC54E7715D" Guid="{973EA398-3735-4C3F-8DD0-227F6EF02326}">
+                    <Component Id="cmpE5B48CF145FABD08A9A151EC54E7715D" Guid="{8013AAC1-382A-44B3-BC4E-F543EC6F9520}">
                         <File Id="fil91834CD380E6D7B4385D44558F423219" KeyPath="yes" Source="$(env.mediaBomberman)\ui\mode\title.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dir585D165B9DBAA86F7F3482887A87DABA" Name="ranking">
-                    <Component Id="cmp3EF8DB7B1E1444DB1686F22595D6AA31" Guid="{3D80DFC5-003E-4365-A42F-F557C326FF86}">
+                    <Component Id="cmp3EF8DB7B1E1444DB1686F22595D6AA31" Guid="{3692B158-E336-41F4-915D-F82DB767E4E2}">
                         <File Id="fil275754EE2FA03337406B696D72F7F81B" KeyPath="yes" Source="$(env.mediaBomberman)\ui\ranking\highscores.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dirC9F863BA9207E7E9CD48BB2C439C473F" Name="replay">
-                    <Component Id="cmp59C15CD61B19A4667FECB428F17ED598" Guid="{FB3A78DE-FB1D-4055-BBA4-7EE8A8CC9F49}">
+                    <Component Id="cmp59C15CD61B19A4667FECB428F17ED598" Guid="{9D821E32-B5BF-4072-856A-31ED086CA7F5}">
                         <File Id="fil70B6A25ECC162A070D9FCA256F9217CC" KeyPath="yes" Source="$(env.mediaBomberman)\ui\replay\button.png" />
                     </Component>
-                    <Component Id="cmp9599A25FE1211BB563AB0ACE5D6D6CB5" Guid="{1E3E43A1-225C-4E24-9870-214A0FEAC868}">
+                    <Component Id="cmp9599A25FE1211BB563AB0ACE5D6D6CB5" Guid="{2E413361-7C8D-4F80-B0FA-EBF365E43D36}">
                         <File Id="fil1A509F810E7CE59651C10B4C8E401EAE" KeyPath="yes" Source="$(env.mediaBomberman)\ui\replay\main.png" />
                     </Component>
-                    <Component Id="cmp86B75E3204C3E61963E54251E07DB67C" Guid="{37A7CC70-070C-4288-9FC9-3071FFF0C971}">
+                    <Component Id="cmp86B75E3204C3E61963E54251E07DB67C" Guid="{9FA9BA7A-C335-478B-8D2C-EC1A1D26B3A8}">
                         <File Id="filDE7FB907E7972BA4EE31D6C6A44D989C" KeyPath="yes" Source="$(env.mediaBomberman)\ui\replay\nosave.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dir4698F671D01F63ACACB5BF74F0DF47CC" Name="settings">
-                    <Component Id="cmpE4F2C2F5BABA690B1D3834DD9DB4A03E" Guid="{FE833B41-9A54-4B82-B20F-89D58E66DCF4}">
+                    <Component Id="cmpE4F2C2F5BABA690B1D3834DD9DB4A03E" Guid="{869F629B-FB24-4AB6-87F7-43AA1897F498}">
                         <File Id="filDD1E45211B036C9F77A45592653BE6F1" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\100.png" />
                     </Component>
-                    <Component Id="cmp6CE17F1FCBADB49A308508AA9D6F2029" Guid="{4B0E571A-51E6-4B6F-B33A-F38ACCAD90FE}">
+                    <Component Id="cmp6CE17F1FCBADB49A308508AA9D6F2029" Guid="{F78ECF9F-EB3C-4D20-968D-8089D5A38061}">
                         <File Id="fil5DE8A623D24C293C5D132E42E5BA3113" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\25.png" />
                     </Component>
-                    <Component Id="cmpC435506B96C6A88D43C791573ECDBA50" Guid="{9DA73045-B85F-4F40-9EAF-1CBB9E8838D2}">
+                    <Component Id="cmpC435506B96C6A88D43C791573ECDBA50" Guid="{1B06BEF0-7586-434E-A5BF-957A34B9F3FD}">
                         <File Id="fil83C509D9D1703E0FDF57CC5840F366A1" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\50.png" />
                     </Component>
-                    <Component Id="cmp05B9D67286F83C165978456E6350141B" Guid="{8C359AE7-A164-43C4-993A-B7113614F74A}">
+                    <Component Id="cmp05B9D67286F83C165978456E6350141B" Guid="{9FA03AC9-A059-492B-BDFB-437944430A0F}">
                         <File Id="fil9F652C2ADFD3ACC2B46D2AA29A8756C1" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\75.png" />
                     </Component>
-                    <Component Id="cmp45F5ACE5D6ECAE224E44A92A6E0FB284" Guid="{4890753E-473C-40F4-ACC1-14359B937AB7}">
+                    <Component Id="cmp45F5ACE5D6ECAE224E44A92A6E0FB284" Guid="{B1480C1A-5177-47D2-99CB-6F16487BE548}">
                         <File Id="fil8898ED8360A604A2F807C0A78E08432E" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\background.png" />
                     </Component>
-                    <Component Id="cmpED57EDC01F58D362A33565516615FD3F" Guid="{1635C62D-AB0E-4964-A416-D1B0B9F0DC7F}">
+                    <Component Id="cmpED57EDC01F58D362A33565516615FD3F" Guid="{4644C226-21CF-4718-AF91-7B7E3C21CD4C}">
                         <File Id="fil0358B3909A05AB33BCF1151A15CE489B" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\easy.png" />
                     </Component>
-                    <Component Id="cmpBE7EC90AD85AD9A51753BDF3C0E80200" Guid="{83F4F1F2-F01A-4069-A630-013FAD5923D7}">
+                    <Component Id="cmpBE7EC90AD85AD9A51753BDF3C0E80200" Guid="{398ECC25-D234-4444-8D2F-AF59B4FCAAA3}">
                         <File Id="fil4ECD0AB3C1C19FE109D8FDAA0720C5DC" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\easySelected.png" />
                     </Component>
-                    <Component Id="cmpBEA082136045B99FE56304A99BC448E6" Guid="{2BBAC05D-6F06-4A9F-AC47-879AD35AC3FF}">
+                    <Component Id="cmpBEA082136045B99FE56304A99BC448E6" Guid="{D94BC713-CF39-46C3-BC87-BED385BE76EE}">
                         <File Id="fil32817C1E2E89270EDB69442BC0DAE308" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\effect.png" />
                     </Component>
-                    <Component Id="cmp7F43D30907E7984A47D67D2742046DE4" Guid="{CFCA83C3-78EC-4D68-B91D-EE11481D431F}">
+                    <Component Id="cmp7F43D30907E7984A47D67D2742046DE4" Guid="{B1BF5792-D232-4097-B9E9-A3F365EFB94B}">
                         <File Id="fil6A9310C45EE3990DA0AD58AEFE780F01" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\forbidden.png" />
                     </Component>
-                    <Component Id="cmp0B81999A9EC1DE6A244D459830FB8E37" Guid="{61511EF2-0D68-42DF-9B36-35CCE55A6292}">
+                    <Component Id="cmp0B81999A9EC1DE6A244D459830FB8E37" Guid="{A5FE8382-7949-4A38-9651-23DB09991179}">
                         <File Id="fil3AE49EECC728879682B6F8697D408E01" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\hard.png" />
                     </Component>
-                    <Component Id="cmp1C69502DBA592E87AD6F0E6D2C5633B3" Guid="{14D45463-F393-48B8-A8BE-56749E52AF68}">
+                    <Component Id="cmp1C69502DBA592E87AD6F0E6D2C5633B3" Guid="{AD4E46E4-385A-4707-8A42-05DEBA6B5626}">
                         <File Id="filA38DB943758942E54AFF1B9FAD9F7500" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\hardSelected.png" />
                     </Component>
-                    <Component Id="cmpBBB29A6642B9C4CD77D109581BB374AE" Guid="{5447E564-B662-4C83-B01B-87B31A4B2619}">
+                    <Component Id="cmpBBB29A6642B9C4CD77D109581BB374AE" Guid="{3C592E7A-17C3-4702-9A76-BEB060C41C6B}">
                         <File Id="fil250BD489CED8CB58211F89D7066B2454" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\medium.png" />
                     </Component>
-                    <Component Id="cmp38A9C0E1E0B06057E5ED138F7DC0ABF3" Guid="{7E9D8FCE-F6AA-4385-BEBF-D620664C51CA}">
+                    <Component Id="cmp38A9C0E1E0B06057E5ED138F7DC0ABF3" Guid="{64C933F0-4211-4876-8BA2-67625B8AC1DA}">
                         <File Id="filC7B9AA2BF217FB8F254443AAC917122A" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\mediumSelected.png" />
                     </Component>
-                    <Component Id="cmp68A667BD2535AF32A7F5206191545A3A" Guid="{ED95ECB2-449E-478C-AA58-CEBFF51AC2A7}">
+                    <Component Id="cmp68A667BD2535AF32A7F5206191545A3A" Guid="{43B501B5-9F98-48D3-8079-7B0A0EB3BC26}">
                         <File Id="filAC8161F78C55EC91C27E52AC5801E000" KeyPath="yes" Source="$(env.mediaBomberman)\ui\settings\music.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dir55034593B5EA74FB8FA7D6E6129815BF" Name="splashArt">
-                    <Component Id="cmpE7E3D901EEF4D8E914F034356520ADF1" Guid="{5B0C881B-CC8D-4D5B-AF62-5E9B623120C5}">
+                    <Component Id="cmpE7E3D901EEF4D8E914F034356520ADF1" Guid="{CB7459B7-6E06-4B3E-B1B7-82A133E97243}">
                         <File Id="filE2FCD32C587F84BEA7FB16AA0AB95B8F" KeyPath="yes" Source="$(env.mediaBomberman)\ui\splashArt\logo.png" />
                     </Component>
                 </Directory>
                 <Directory Id="dir683F73CF22AC8529A3EA75C206D094C5" Name="tips">
-                    <Component Id="cmp628C2F3BB5CD668F3D2347D3E338F8DD" Guid="{EB4AC378-41FD-4415-B349-3E00FF529B97}">
+                    <Component Id="cmp628C2F3BB5CD668F3D2347D3E338F8DD" Guid="{EE7439A7-F526-4A53-846A-DCA9119F6E81}">
                         <File Id="fil0B7B81BCA268A83F941D890D2A516552" KeyPath="yes" Source="$(env.mediaBomberman)\ui\tips\tips.png" />
                     </Component>
                 </Directory>
             </Directory>
             <Directory Id="dirD50F77216395DD2E0D6CE6D151DEED50" Name="wall">
-                <Component Id="cmp3D50223B20BE282312443F1AEC9E3080" Guid="{A9FD17D1-EC2C-4B17-8A4B-263005C0D94F}">
+                <Component Id="cmp3D50223B20BE282312443F1AEC9E3080" Guid="{7A5F3858-5996-4F4F-862E-D35771BB0C34}">
                     <File Id="fil321D9A32B3DBD41C64E899D863055C4D" KeyPath="yes" Source="$(env.mediaBomberman)\wall\Mur1.obj" />
                 </Component>
-                <Component Id="cmp35968F27F1D6E06E853941E749AC30E2" Guid="{FEFBBDBE-C806-472F-A9FF-0EB77A06F07C}">
+                <Component Id="cmp35968F27F1D6E06E853941E749AC30E2" Guid="{85A8F950-9C91-40B1-857A-00D4CE3DD637}">
                     <File Id="fil63495AA732CC0BDF4CF271FC8AED6AB7" KeyPath="yes" Source="$(env.mediaBomberman)\wall\Mur2.obj" />
                 </Component>
-                <Component Id="cmp6E79CB14E868A07B745AD479AC23BAFD" Guid="{973EED1A-94E2-47CB-81A5-92BCF5B52AD4}">
+                <Component Id="cmp6E79CB14E868A07B745AD479AC23BAFD" Guid="{65C24151-DE68-4594-9ED0-C81CF02B4769}">
                     <File Id="filA8125735177AFE739D5264F363490F5E" KeyPath="yes" Source="$(env.mediaBomberman)\wall\Mur3.obj" />
                 </Component>
-                <Component Id="cmp9D5C597731B49CFFBBECF283D62FFB1C" Guid="{1EFC0439-4D5E-471A-907D-238C92C75DD3}">
+                <Component Id="cmp9D5C597731B49CFFBBECF283D62FFB1C" Guid="{A432456D-5444-4F42-940B-AAC4FEA08B18}">
                     <File Id="fil9139E816C31ADC6DA3B0BAC50D385AA3" KeyPath="yes" Source="$(env.mediaBomberman)\wall\Walls_alpha.png" />
                 </Component>
-                <Component Id="cmpD04C3C165F2AC1D8DDA3F31BF7FE1124" Guid="{13092648-FE15-465F-9E9D-BF8931271D67}">
+                <Component Id="cmpD04C3C165F2AC1D8DDA3F31BF7FE1124" Guid="{294A71D9-F20D-4B8D-AA34-2EE453B745B2}">
                     <File Id="fil60E06097608BA9FCCBA417B869560ED2" KeyPath="yes" Source="$(env.mediaBomberman)\wall\Walls_diffuse.png" />
                 </Component>
-                <Component Id="cmp939BDFA91A71ECF097062197CE205FFF" Guid="{3581A313-6884-41A7-AEA6-A7FFAD96340E}">
+                <Component Id="cmp939BDFA91A71ECF097062197CE205FFF" Guid="{347E233B-E6DF-4809-B269-47E2360802EF}">
                     <File Id="filAE78901EBF6634038114458EB3661D0B" KeyPath="yes" Source="$(env.mediaBomberman)\wall\Walls_illum.png" />
                 </Component>
             </Directory>
