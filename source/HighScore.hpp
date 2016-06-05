@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sat Jun  4 21:07:56 2016 stephane galibert
-// Last update Sat Jun  4 21:23:09 2016 stephane galibert
+// Last update Sun Jun  5 16:52:56 2016 stephane galibert
 //
 
 #ifndef _HIGHT_SCORE_HPP_
@@ -17,6 +17,7 @@
 #include <fstream>
 #include <sstream>
 #include <algorithm>
+#include <functional>
 
 namespace bbman
 {

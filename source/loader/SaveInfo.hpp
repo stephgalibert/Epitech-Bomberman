@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Sun Jun  5 00:58:04 2016 stephane galibert
-// Last update Sun Jun  5 01:25:50 2016 stephane galibert
+// Last update Sun Jun  5 16:52:25 2016 stephane galibert
 //
 
 #ifndef _SAVEINFO_HPP_
@@ -16,6 +16,7 @@
 # include <fstream>
 # include <map>
 # include <functional>
+# include <string>
 
 namespace bbman
 {
