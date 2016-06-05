@@ -1,3 +1,0 @@
-D:\Code Project\bomberman\WindowInstaller\bin\Release\cab1.cab
-D:\Code Project\bomberman\WindowInstaller\bin\Release\gameInstaller.msi
-D:\Code Project\bomberman\WindowInstaller\bin\Release\gameInstaller.wixpdb
