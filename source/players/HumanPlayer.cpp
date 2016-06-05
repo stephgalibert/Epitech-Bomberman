@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:58 2016 stephane galibert
-// Last update Sat Jun  4 14:57:25 2016 stephane galibert
+// Last update Sun Jun  5 03:36:16 2016 stephane galibert
 //
 
 #include "HumanPlayer.hpp"
@@ -41,6 +41,7 @@ bbman::HumanPlayer::HumanPlayer(void)
   this->_prevDirection = Direction::DIR_NONE;
   this->_explosion = NULL;
   this->_deviceID = 0;
+  this->_final = true;
 }
 
 size_t bbman::HumanPlayer::getAPlayerID(void) const
@@ -211,8 +212,6 @@ void bbman::HumanPlayer::explode(Board *board)
   if (this->_alive) {
     this->_alive = false;
     this->_mesh->setVisible(false);
-    std::cerr << "player " + std::to_string(this->_playerNum) + " died" << std::endl;
-
     try {
       this->_sounds.play("death");
     } catch (std::runtime_error const& e) {
@@ -493,23 +492,13 @@ void bbman::HumanPlayer::initPlayer(bbman::Irrlicht &irr)
   std::string iri = "asset/perso/texture/illum/" + this->_color + ".png";
   std::string normal = "./asset/perso/texture/normal/normal.png";
 
-  /*this->_mesh = irr.getSmgr()->getMesh(fbx.data());
-  irr::scene::IMesh *tangent = irr.getSmgr()->getMeshManipulator()->
-  createMeshWithTangents(this->_nodeMesh->getMesh(0));
-  this->_node = smgr->addMeshSceneNode(tangentMesh);
-  this->_node->setMaterialTexture(0, driver->getTexture(normal.data()));
-  this->_node->setMaterialTexture(1, texture);*/
-
   this->_mesh = irr.getSmgr()->addAnimatedMeshSceneNode(irr.getMesh(fbx.data()));
   if (this->_mesh) {
     this->_mesh->setMaterialTexture(0, irr.getTexture(diffuse.data()));
-    //this->_mesh->setMaterialTexture(1, texture);
-
     this->_mesh->setMaterialFlag(irr::video::EMF_LIGHTING, false);
     this->_mesh->setAnimationSpeed(0);
     this->_mesh->setScale(irr::core::vector3df(0.8f, 0.8f, 0.8f));
     this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
-    //this->_mesh->setMaterialType(irr::video::EMT_NORMAL_MAP_SOLID);
   }
   else {
     throw (std::runtime_error("can not create player " + std::to_string(this->_playerNum)));
@@ -549,4 +538,20 @@ void bbman::HumanPlayer::disableAnimation(void)
 int bbman::HumanPlayer::getScoreValue(void) const
 {
   return (10);
+}
+
+std::string const& bbman::HumanPlayer::getDifficulty(void) const
+{
+
+}
+
+void bbman::HumanPlayer::finalPosition(void)
+{
+  if (this->_alive && this->_final) {
+    this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
+    this->_mesh->setFrameLoop(1, 51);
+    this->_mesh->setAnimationSpeed(30);
+    this->_isRunning = false;
+    this->_final = false;
+  }
 }

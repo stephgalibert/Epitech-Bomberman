@@ -5,7 +5,7 @@
 // Login   <avelin_j@epitech.net>
 //
 // Started on  Sat Jun  4 23:39:40 2016 avelin_j
-// Last update Sun Jun  5 02:03:29 2016 stephane galibert
+// Last update Sun Jun  5 03:39:35 2016 stephane galibert
 //
 
 #include "Game.hpp"
@@ -105,6 +105,7 @@ void bbman::Game::update(bbman::Irrlicht &irr, irr::f32 delta)
     irr::core::vector3df const& npos = winner->getPosition();
     cameraTargetSmoothAnimation(delta, this->_camera->getTarget(), npos);
     if (this->_camera->getTarget() == winner->getPosition()) {
+      winner->finalPosition();
       irr::core::vector3df fpos(npos.X, npos.Y + 50, npos.Z - 60);
       cameraPositionSmoothAnimation(delta, this->_camera->getPosition(), fpos);
     }
@@ -257,8 +258,9 @@ void bbman::Game::saveScore(void)
   std::vector<HighScore> ranking;
   std::vector<APlayer *> const& players = this->_board->getPlayers();
 
+  HighScore::loadScoreFromFile("score.txt", ranking);
   for (auto it : players) {
-    HighScore::saveNewHighScore(ranking, "Player" + std::to_string(it->getID()),
+    HighScore::saveNewHighScore(ranking, std::to_string(it->getID()),
 				it->getScore());
   }
   HighScore::saveScoreInFile("score.txt", ranking);

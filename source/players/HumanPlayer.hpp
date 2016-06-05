@@ -5,7 +5,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 17:39:17 2016 stephane galibert
-// Last update Sun Jun  5 02:01:37 2016 stephane galibert
+// Last update Sun Jun  5 03:35:57 2016 stephane galibert
 //
 
 #ifndef _HUMANPLAYER_HPP_
@@ -67,7 +67,8 @@ namespace bbman
     virtual int getDeviceID(void) const;
     virtual void disableAnimation(void);
     virtual int getScoreValue(void) const;
-    virtual std::string const& getDifficulty(void) const {}
+    virtual std::string const& getDifficulty(void) const;
+    virtual void finalPosition(void);
   private:
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:
@@ -104,6 +105,7 @@ namespace bbman
     irr::f32 _delta;
     int _deviceID;
     SoundBox _sounds;
+    bool _final;
   };
 }
 

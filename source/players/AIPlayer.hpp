@@ -66,6 +66,7 @@ namespace bbman
     virtual void disableAnimation(void);
     virtual int getScoreValue(void) const;
     virtual std::string const& getDifficulty(void) const;
+    virtual void finalPosition(void);
   private:
     static CacheManager<std::string, MemoryFile> SoundCache;
   private:
@@ -98,6 +99,7 @@ namespace bbman
     irr::f32 _delta;
     SoundBox _sounds;
     std::string _difficulty;
+    bool _final;
   };
 }
 

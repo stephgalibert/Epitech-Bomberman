@@ -29,6 +29,7 @@ bbman::AIPlayer::AIPlayer(void)
   this->_direction = Direction::DIR_NONE;
   this->_action = Action::ACT_NONE;
   this->_anim = true;
+  this->_final = true;
 }
 
 size_t bbman::AIPlayer::getAPlayerID(void) const
@@ -243,7 +244,6 @@ void bbman::AIPlayer::explode(Board *board)
     } catch (std::runtime_error const& e) {
       std::cerr << e.what() << std::endl;
     }
-    std::cerr << "ia" << getID() << "died" << std::endl;
   }
 }
 
@@ -443,4 +443,15 @@ int bbman::AIPlayer::getScoreValue(void) const
 std::string const& bbman::AIPlayer::getDifficulty(void) const
 {
   return (this->_difficulty);
+}
+
+void bbman::AIPlayer::finalPosition(void)
+{
+  if (this->_alive && this->_final) {
+    this->_mesh->setRotation(irr::core::vector3df(0, 180, 0));
+    this->_mesh->setFrameLoop(1, 51);
+    this->_mesh->setAnimationSpeed(30);
+    this->_isRunning = false;
+    this->_final = false;
+  }
 }
