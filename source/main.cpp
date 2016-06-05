@@ -6,7 +6,7 @@
 // Login   <galibe_s@epitech.net>
 //
 // Started on  Fri May  6 03:03:53 2016 stephane galibert
-// Last update Sun Jun  5 13:27:13 2016 stephane galibert
+// Last update Sun Jun  5 14:59:54 2016 stephane galibert
 //
 
 #include <string>
@@ -18,7 +18,11 @@
   #include "gtest.h"
 #endif
 
+#ifdef START_GTEST
+int main(int argc, char **argv)
+#else
 int main(void)
+#endif
 {
   bbman::Application appli;
 
