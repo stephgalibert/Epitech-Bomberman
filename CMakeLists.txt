@@ -130,7 +130,7 @@ if (UNIX)
   )
   file(COPY ${PROJECT_SOURCE_DIR}/asset DESTINATION ${PROJECT_SOURCE_DIR}/build)
   # override install path if it has not been explicitly specified
-  set (CMAKE_INSTALL_PREFIX "../")
+  # set (CMAKE_INSTALL_PREFIX "../")
 endif (UNIX)
 
 # add window libraries to the executable
